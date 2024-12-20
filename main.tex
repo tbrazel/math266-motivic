@@ -1,4 +1,6 @@
 \documentclass[11pt,openany]{book}
+\usepackage[utf8]{inputenc} % usually not needed (loaded by default)
+% \usepackage[T1]{fontenc}
 \usepackage[page,toc,titletoc,title]{appendix}
 \usepackage{minitoc}
 % Bibliography stuff
@@ -22,6 +24,9 @@
 \providecommand{\MW}{\mathrm{MW}}
 \providecommand{\Bez}{\mathrm{B\acute{e}z}}
 \providecommand{\aff}{\mathrm{aff}}
+\providecommand{\HA}{\mathrm{HA}}
+\providecommand{\cn}{\mathrm{cn}}
+
 \let\smashprod\wedge
 
 \providecommand{\KM}{\mathbf{K}^\mathrm{M}}
@@ -38,8 +43,13 @@
 
 \maketitle
 
-
+% TOC at the top just shows sections
 \setcounter{tocdepth}{1}
+
+% Minitocs for each chapter show subsections as well
+\setcounter{minitocdepth}{2}
+
+
 \tableofcontents{}
  
 
@@ -51,15 +61,33 @@
 
 \section*{About these notes}
 
-These are notes for a topics class taught at Harvard in Fall 2024. Notes are being updated twice a week with new lectures. Please send any and all changes to
+These are notes for a topics class taught at Harvard in Fall 2024. The most recent version can be found on GitHub, where \textbf{I highly encourage you to submit edits and suggestions}:
 \begin{center}
     \href{https://github.com/tbrazel/math266-motivic}{https://github.com/tbrazel/math266-motivic}
 \end{center}
-Thank you to Merrick Cai, Juan Fernando Valdes, Jake Levinson, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, and Natalie Stewart for valuable changes and suggestions.
+
+\textbf{What isn't in these notes?} A ton of core principles in motivic homotopy theory, for instance: purity, six functors formalism, the motivic complexes $\Z(q)$,... Despite the concise title, these notes are not intended to be a sprawling survey of all techniques in motivic homotopy theory, but rather a geodesic towards the motivic obstruction that allows us to talk about classification of torsors over smooth affine varieties. To that end, these notes shouldn't be viewed as a supplement to Morel's book or even a replacement for it. Rather it is a primer for people interested in the Asok--Fasel--et. al. program of research.
+
+To that end, we treat the classification of torsors as \textit{motivation} for constructing motivic spaces. It is important to note that this is very ahistorical, and is done only for pedagogical reasons. Although affine representability was one of the key early results explored by Morel, motivic spaces and spectra were developed in order to house theories such as algebraic $K$-theory, Bloch's higher Chow groups, and to grow new theories such as algebraic cobordism. We chose this route for a few reasons:
+\begin{enumerate}
+    \item The Fall 2024 Thursday seminar is on the Wilson space hypothesis, so we're hoping this class will contrast nicely and provide some foundational background in techniques in motivic obstruction theory.
+    \item In order to tailor the course to a broader audience, we'd like to unify the class around a key question which has general appeal, so we've picked the classification of torsors over affine varieties using motivic methods as such a question. This has certain advantages, for instance we can pause in the sheaf topos and discuss classifying torsors there before building motivic spaces --- this vista is useful to people across many fields.
+\end{enumerate}
+
+\textbf{Why did you spend so long on X if you're trying to get to affine representability?} Perhaps the most mathematical mathematician, guided by pure force of will, can teach towards a singular goal, each word building towards this grand horizon. I haven't had the pleasure of meeting this person. The rest of us are tempted by the many sprawling inviting tangents that open their doors to us along the way, and what you're reading is my ambling path.
+
+\textbf{What background is assumed?} We're assuming a strong handle of algebraic geometry and category theory, and a fair bit of familiarity with commutative algebra and homotopy theory. We'll see very quickly that $\infty$-categories (and/or model categories) are needed in order to develop the setting in which we wish to work. We've elected to take the $\infty$-categorical approach, since it streamlines many of the constructions and key ideas, at the cost of being a high technical investment; for this reason we've done our best to make the $\infty$-categorical machinery easy to black box. The reader should be aware that while the categorical language will be heavy in the first half of these notes, it will quickly fade into the background as we become familiar with the ambient setting we're working in and can set our focus towards computations.
+
+
+
+
+\section*{Acknowledgements}
+
+Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, and Natalie Stewart for valuable changes and suggestions to these notes.
 
 Thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering random motivic questions.
 
-Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maxmilien P\'eroux for letting be bother them about technical non-motivic questions.
+Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting be bother them about technical non-motivic questions.
 
 
 \section{Introduction}
@@ -82,15 +110,24 @@ After taking $\Spec$ everywhere, this becomes
 \begin{align*}
     \Hom_\Sch(\Spec(R),\mathbb{G}_m) \to \Hom_\Sch(\Spec(R[t]),\mathbb{G}_m).
 \end{align*}
-We therefore might rephrase \autoref{eqn:units-rings} as saying that $\Hom_{\Sch}(-,\mathbb{G}_m)$ is \textit{$\A^1$-invariant}, at least when we plug in something reduced.
+We therefore might rephrase \autoref{eqn:units-rings} as saying that the representable functor $\Hom_{\Sch}(-,\mathbb{G}_m)$ is \textit{$\A^1$-invariant}, at least when we plug in something reduced.
 \end{example}
 
 \begin{example} Let $k$ be a field. Then the functor $k \to k[t_1, \ldots, t_n]$ induces an extension of scalars map
-\begin{align*}
+\begin{equation}\label{eqn:extn-scalars}
+\begin{aligned}
     \Mod_k &\to \Mod_{k[t_1, \ldots, t_n]} \\
     M &\mapsto M \otimes_k k[t_1, \ldots, t_n].
-\end{align*}
+\end{aligned}
+\end{equation}
 \textbf{Serre's Problem}: Is every finitely generated $k[t_1, \ldots, t_n]$-module free?
+
+We can rephrase this in a few ways:
+\begin{enumerate}
+    \item Is the functor
+\end{enumerate}
+
+
 
 Recall finitely generated projective $R$-modules are the same as ``algebraic vector bundles'' over $\Spec(R)$, so we're asking whether every algebraic vector bundle on $\A^n_k$ is trivial.
 
@@ -183,43 +220,21 @@ Therefore any homotopy invariant functor out of spaces provides another example 
 \end{align*}
 \end{example}
 
+These observations lead to the following curiosity:
 
-\textbf{Q}: Can we build a homotopy theory of algebraic varieties in which the affine line $\A^1$ plays the role that the interval $[0,1]$ plays in classical topology?
+\textbf{Motivational question}: Can we build a homotopy theory of algebraic varieties in which the affine line $\A^1$ plays the role that the interval $[0,1]$ plays in classical topology?
 
-\textbf{A}: Yes! This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homotopy theory}. This dates back to Morel and Voevodsky's seminal work in 1999, but many ideas date back to work of Karoubi--Villamayor, Jardine, Weibel in the 1980's, work of Brown, Gersten, Illusie and Joyal in the 1970's, and of Quillen and Grothendieck in the 1960's.
+This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homotopy theory}. This dates back to Morel and Voevodsky's seminal work in 1999, but many ideas date back to work of Karoubi--Villamayor, Jardine, Weibel in the 1980's, work of Brown, Gersten, Illusie and Joyal in the 1970's, and of Quillen and Grothendieck in the 1960's.
 
-\textbf{Q}: What can we do with motivic homotopy theory?
+% \textbf{Q}: What can we do with motivic homotopy theory?
 
-\textbf{A}: Motivic homotopy theory blends algebraic geometry and topology in a beautiful way, allowing us to do many things. A short list is:
-\begin{itemize}
-    \item we obtain a natural home for these kinds of $\A^1$-invariant cohomology theories of varieties, and can study them in a method analogous to algebraic topology (e.g. we can classify cohomology operations, use fiber sequences to carry out computations, unify various spectral sequences, etc.)
-    \item we have access to obstruction theory for classifying torsors over affine varieties --- recent success in this direction is Asok--Bachmann--Hopkins' resolution of Murthy's conjecture
-    \item we can eliminate differentials in the Adams spectral sequence via looking at their motivic depth (citation needed)
-\end{itemize}
+% \textbf{A}: Motivic homotopy theory blends algebraic geometry and topology in a beautiful way, allowing us to do many things. A short list is:
+% \begin{itemize}
+%     \item we obtain a natural home for these kinds of $\A^1$-invariant cohomology theories of varieties, and can study them in a method analogous to algebraic topology (e.g. we can classify cohomology operations, use fiber sequences to carry out computations, unify various spectral sequences, etc.)
+%     \item we have access to obstruction theory for classifying torsors over affine varieties --- recent success in this direction is Asok--Bachmann--Hopkins' resolution of Murthy's conjecture \cite{Freudenthal}
+%     \item we can eliminate differentials in the Adams spectral sequence via looking at their motivic depth (citation needed)
+% \end{itemize}
 
-\textbf{Q}: What techniques will we learn in this class?
-
-\textbf{A}: We should be able to do the following things:
-\begin{itemize}
-    \item learn descent and torsors more thoroughly, and unify perspectives on sheaves and stacks using higher categorical language
-    \item work with $\infty$-categories at a very basic level
-    \item learn how to work with motivic spaces and do computations
-    \item learn motivic obstruction theory and its applications
-\end{itemize}
-
-\subsection{A bit more about these notes}
-
-\begin{remark} \textit{(Transparency about pedagogy)} We're going to place affine representability on the horizon and keep our eyes fixed on it in order to motivate the category of motivic spaces. This is of course ahistorical--- although affine representability was one of the key early results explored by Morel, motivic spaces and spectra were developed in order to house theories such as algebraic $K$-theory, Bloch's higher Chow groups, and to grow new theories such as algebraic cobordism. We chose this route for a few reasons:
-\begin{enumerate}
-    \item The Fall 2024 Thursday seminar is on the motivic Steenrod algebra, so we're hoping this class will contrast nicely and provide some foundational background in techniques in motivic obstruction theory.
-    \item In order to tailor the course to a broader audience, we'd like to unify the class around a key question which has general appeal, so we've picked the classification of torsors over affine varieties using motivic methods as such a question. This has certain advantages, for instance we can pause in the sheaf topos and discuss classifying torsors there before building motivic spaces --- this vista is useful to people across many fields.
-
-    \item This forces us to spend a bit longer on descent and torsors, two words which strike fear in the heart of many, and are worth investing some more time in.
-\end{enumerate}
-\end{remark}
-
-\begin{remark} \textit{(On background)} We're assuming a strong handle of algebraic geometry and category theory, and a fair bit of familiarity with commutative algebra and homotopy theory. We'll see very quickly that $\infty$-categories (and/or model categories) are needed in order to develop the setting in which we wish to work. We've elected to take the $\infty$-categorical approach, since it streamlines many of the constructions and key ideas, at the cost of being a high technical investment; for this reason we've done our best to make the $\infty$-categorical machinery easy to black box. The reader should be aware that while the categorical language will be heavy in the first half of these notes, it will quickly fade into the background as we become familiar with the ambient setting we're working in and can set our focus towards computations.
-\end{remark}
 
 \chapter{Torsors}
 \minitoc
@@ -1815,9 +1830,12 @@ A way to say this is that ``$\infty$-connective morphisms are homotopy equivalen
 \end{theorem}
 
 Truncation and connectivity fit into fiber sequences
-\begin{align*}
-    \tau_{>n} \to \id \to \tau_{\le n},
-\end{align*}
+\begin{equation}\label{eqn:truncation-connectivity-fiber-seq}
+\begin{aligned}
+    \tau_{>n} \to \id \to \tau_{\le n}
+\end{aligned}
+\end{equation}
+%
 which allow us to form Postnikov towers out of objects of $\infty$-topoi:
 \[ \begin{tikzcd}
     & \tau_{\le n X}\dar \\
@@ -2009,10 +2027,10 @@ We have a strengthening of conditions here, but we notice that in the context of
 A \textit{vector bundle torsor} is an affine map $Y \to X$ which is a torsor for an algebraic vector bundle $E \to X$. Explicitly, $Y \to X$ is a Zariski locally trivial affine morphism with fibers isomorphic to affine space.
 \end{definition}
 
-\begin{example} If $X = \Spec(A)$ is an affine scheme, then algebraic vector bundle torsors over $X$ are the same as vector bundles over $X$.
+\begin{example} If $X = \Spec(A)$ is an affine scheme, then algebraic vector bundle torsors over $X$ are the same as vector bundles over $X$.\footnote{%
+Question - can we find an illuminating example of a non-affine $X$ for which vector bundle torsors and vector bundles don't agree?}
 \end{example}
 
-todo - find an example of a non-affine $X$ for which vector bundle torsors and vector bundles don't agree
 
 \begin{notation} Let $\Sm_S$ denote the category of smooth $S$-schemes of finite type over $S$. The finite type assumption is needed in order to guarantee that $\Sm_S$ is essentially small (see \autoref{thm:finite-type-schemes-essentially-small}).
 \end{notation}
@@ -2594,8 +2612,14 @@ For the backwards direction, this condition on homotopy groups unwinds to tell u
 \end{terminology}
 
 
-\begin{example} We have that $S^{i+j,j}$ is $\A^1$-$(i-1)$-connected (see \cite[2.4.5]{AO-contractible}). In particular it depends only on the number of copies of $S^{1,0}$ and not on the number of copies of $\mathbb{G}_m$.
+\begin{example}\label{exa:connectivity-motivic-spheres} 
+We have that $S^{i+j,j}$ is $\A^1$-$(i-1)$-connected (see \cite[2.4.5]{AO-contractible}). In particular it depends only on the number of copies of $S^{1,0}$ and not on the number of copies of $\mathbb{G}_m$.
 \end{example}
+
+\begin{example}\label{exa:connectivity-punctured-affine-space}
+As a particular example, when $i=d-1$ and $j=d$, we obtain that punctured affine space $\A^d\minus\{0\} = S^{2d-1,d}$ is $\A^1$-$(d-2)$-connected. 
+\end{example}
+
 
 % \subsection{Testing $\A^1$-connectedness}
 
@@ -3380,9 +3404,6 @@ This extends to a pullback of unramified sheaves of groups.
     is the 2-torsion in the Brauer group.
 \end{enumerate}
 \end{example}
-
-
-
 
 
 
@@ -5204,6 +5225,895 @@ Recall the Nishida nilpotence theorem in classical homotopy theory.
 
 Note that $\eta \in \pi_{1,1} \mathbbm{1}$ in motivic homotopy. This is \textbf{not} nilpotent! Multiplication by $\eta$ induces an isomorphism $\KMW_{-n} \to \KMW_{-n-1}$ for any $n>0$. Moreover, $\eta$ is not the only non-nilpotent element -- see \cite{GuillouIsaksen} for more details.
 
+\section{Stable motivic homotopy theory}
+
+(This section was very directly inspired by Tom Bachmann and Viktor Burghardt's lectures at IWOAT 2024).
+
+Recall we've seen that $\Spc(k)_\ast$ is a symmetric monoidal presentable $\infty$-category. Thinking about this as analogous to pointed spaces, we want to develop a notion of \textit{spectra}, where $\A^1$-invariant cohomology theories of schemes will be representable.
+
+\subsection{Motivation: from spaces to spectra}
+
+Suppose we are starting with the $\infty$-category of spaces, and we're wanting to build spectra, which will be some home for things like stable homotopy groups, $\Z$-graded cohomology theories, etc. How do we do it?
+
+The naive way was to consider what are called \textit{sequential spectra}, being sequences of spaces $\left\{ X_n \right\}_{n \ge 0}$ and bonding maps $\Sigma X_n \to X_{n+1}$. We might want a few things to be preserved under this construction:
+\begin{enumerate}
+    \item $\mathcal{S}$ was \textit{presentable}, and we would like spectra to have the same property
+    \item $\mathcal{S}$ has a symmetric monoidal structure, and we'd like spectra to have one as well.
+\end{enumerate}
+
+Historically, this latter point was the hardest to achieve. Endowing spectra with a model structure dates back to work of Bousfield and Friedlander, however inducing a well-behaved smash product is difficult. This is the main reason for the development of models of spectra like symmetric and orthogonal spectra. While these model structures are important to know for explicit computations, we will be content here with endowing spectra with a presentably symmetric monoidal structure.
+
+Recall $\Pr^L$ is the category of presentable $\infty$-categories and left adjoints between them. It admits a symmetric monoidal structure, due to Lurie, so that $\CAlg(\Pr^L)$ consists of \textit{presentably symmetric monoidal} $\infty$-categories. Informally these are categories which are both presentable and symmetric monoidal, and these structures behave well with each other. Explicitly, it means the tensor product preserves colimits in each variable.
+
+We might define spectra naively to be the colimit
+\begin{align*}
+    \Sp^\mathbb{N}(\mathscr{C},f) := \colim \left( \mathcal{S}_\ast \xto{\Sigma} \mathcal{S}_\ast \xto{\Sigma} \cdots \right).
+\end{align*}
+We could try to compute this colimit in $\Pr^L$, however we note that $\Pr^L \subseteq \Cat_\infty$ isn't necessarily closed under colimits. There is an infamous trick to get around this.
+
+\begin{proposition} Suppose $\mathscr{C} \in\Pr^L$ and $f \colon \mathscr{C} \to \mathscr{C}$ is an endomorphism of $\mathscr{C}$ in $\Pr^L$. Then the colimit
+\begin{align*}
+    \colim \left( \mathscr{C} \xto{f} \mathscr{C} \xto{f} \cdots \right)
+\end{align*}
+is canonically equivalent to the limit
+\begin{align*}
+    \lim \left( \cdots \xto{g} \mathscr{C} \xto{g} \mathscr{C} \right)
+\end{align*}
+where $f \dashv g$.
+\end{proposition}
+\begin{proof}[Sketch] The equivalence between $\Pr^L$ and $\Pr^R$ is in \cite[5.5.3.4]{HTT}, and we use the crucial fact that $\Pr^R \subseteq \Cat_\infty$ preserves limits \cite[5.5.3.18]{HTT}.
+\end{proof}
+
+\begin{definition} If $\mathscr{C}$ is presentable, then the $\infty$-category of \textit{spectrum objects} is the limit
+\begin{align*}
+    \Sp(\mathscr{C}) = \lim \left( \cdots \mathscr{C} \xto{\Omega} \mathscr{C} \xto{\Omega} \mathscr{C} \right).
+\end{align*}
+\end{definition}
+
+A special case comes when $\Sigma$ is given by smashing with a particular object. We've seen this statement earlier, when we cooked up a symmetric monoidal structure on homotopy modules.
+
+\begin{theorem} (Robalo) For $\mathscr{C}$ a presentably symmetric monoidal category, and $X \in \mathscr{C}$, there is a functor
+\begin{align*}
+    \Sp^\mathbb{N}(\mathscr{C}, X \otimes -) \to \mathscr{C}[X^{-1}]
+\end{align*}
+which is an equivalence if $X$ is symmetric.
+\end{theorem}
+
+\begin{example} The 1-sphere $S^1 \in \mathcal{S}$ is symmetric, since the cyclic permutation
+\begin{align*}
+    (1\ 2\ 3) \colon S^3 \to S^3
+\end{align*}
+is homotopic to the identity.
+\end{example}
+
+\begin{corollary} We have that the category of spectra is a presentably symmetric monoidal category, equivalently presented in any of the three ways:
+\begin{align*}
+    \Sp &= \mathcal{S}_\ast[(S^1)^{-1}] \\
+    &= \colim_{\Pr^L} \left( \mathcal{S}_\ast \xto{\Sigma} \mathcal{S}_\ast \xto{\Sigma} \cdots \right) \\
+    &= \text{lim}_{\Cat_\infty} \left( \cdots \xto{\Omega} \mathcal{S}_\ast \xto{\Omega} \mathcal{S}_\ast \right).
+\end{align*}
+\end{corollary}
+
+
+
+\subsection{Spectrum objects}
+
+Let $\mathscr{C}$ be a pointed $\infty$-category with finite limits (in particular it has pullbacks and a terminal object). Then the $\infty$-category of \textit{spectrum objects} in $\mathscr{C}$, denoted $\Sp(\mathscr{C})$, is the limit
+\begin{align*}
+    \Sp(\mathscr{C}) = \lim \left( \cdots \mathscr{C} \xto{\Omega} \mathscr{C} \xto{\Omega} \mathscr{C} \right).
+\end{align*}
+%
+Objects in $\Sp(\mathscr{C})$ are given by sequences $(X_n)_{n\ge0}$ where we have structure maps which are equivalences
+\begin{align*}
+    X_n \xto{\sim} \Omega X_{n+1}.
+\end{align*}
+%
+There is an obvious functor $\Omega^\infty \colon\Sp(\mathscr{C}) \to \mathscr{C}$ given by sending $(X_n)_{n\ge0}$ to $X_0$. If $\mathscr{C}$ is presentable, then $\Stab(\mathscr{C})$ will be as well by construction. Hence since $\Omega^\infty$ is limit-preserving, it admits a left adjoint
+\begin{align*}
+    \Sigma^\infty \colon \mathscr{C} \rightleftarrows \Sp(\mathscr{C}) \noloc \Omega^\infty.
+\end{align*}
+%
+
+The mapping spaces $\Map_{\Stab(\mathscr{C})}(E_\bullet, F_\bullet)$ are by definition the limit
+\begin{align*}
+    \Map_{\Stab(\mathscr{C})}(E_\bullet,F_\bullet) = \lim \Hom_\mathscr{C}(E_n, F_n),
+\end{align*}
+where the maps in the limit are given by looping and using the structure maps
+\begin{align*}
+    \Map_\mathscr{C}(E_{n+1}, F_{n+1}) \xto{\Omega} \Map_{\mathscr{C}}(\Omega E_{n+1}, \Omega F_{n+1}) \cong \Map_{\mathscr{C}}(E_n, F_n).
+\end{align*}
+%
+
+\begin{remark} This category $\Sp(\mathscr{C})$ has a universal property, in that it is the \textit{stabilization} of $\mathscr{C}$. In particular a category $\mathscr{C}$ is stable if and only if $\Omega^\infty \colon \Sp(\mathscr{C}) \to \mathscr{C}$ is an equivalence of categories \cite[1.4.2.21]{HA}. See \cite[\S1.4.2]{HA} for more details on this construction.
+\end{remark}
+
+
+
+\begin{example} The classical category of spectra $\Sp$ is the category of spectrum objects in $\mathcal{S}$.
+\end{example}
+
+Given our category of presheaves $\PSh(\Sm_k)$, we can stabilize it and we obtain $\Fun(\Sm_k^\op, \Sp)$, i.e. presheaves of spectra. It turns out the descent properties descent through stabilization, in other words the stabilization of $\PSh(\Sm_k)$ is exactly Nisnevich sheaves of spectra. We denote this by
+%
+\begin{align*}
+    \Sp(k) := \Sp \left( \Shv_\Nis(\Sm_k) \right) = \Shv_\Nis(\Sm_k; \Sp).
+\end{align*}
+%
+\subsection{Sheaves of spectra}
+
+A sequence of objects in the sheaf category give rise to a spectrum if they deloop to one another.
+
+\begin{example} For any Nisnevich sheaf of abelian groups $A$, we have an object $HA \in \Sp(k)$ given by the Eilenberg--MacLane spaces $\left\{ K(A,n) \right\}_{n\ge0}$. 
+\end{example}
+
+\begin{proposition}\label{prop:cohom-representable-in-sheaves-of-spectra} 
+Cohomology is representable in the sense that for any $X \in \Sm_k$ and any sheaf of abelian groups $A$ we have that
+\begin{align*}
+    H^n_\Nis(X,A) = \left[ \Sigma^\infty \Sigma^n X_+, \HA \right]_{\Sp(k)}.
+\end{align*}
+\end{proposition}
+
+
+We can define $\pi_n$ of a spectrum $E$ to be the sheafification of the presheaf of abelian groups
+\begin{align*}
+    U \mapsto \left[ \Sigma^\infty \Sigma^n U_+, E \right]_{\Sp(k)}.
+\end{align*}
+%
+
+\begin{example} We have that $\pi_n \HA$ is zero except in $n=0$ when it is $A$.
+\end{example}
+
+\begin{remark} This category admits a $t$-structure, whose heart is precisely equivalent to $\Ab(\Shv_\Nis(\Sm_k)_{\le 0})$, the sheaves of abelian groups.
+\end{remark}
+
+
+\subsection{$\A^1$-invariant sheaves of spectra}
+
+\begin{definition} We say that $E \in \Sp(k)$ is $\A^1$\textit{-invariant} if for every $X \in \Sm_k$ the projection $X \times \A^1 \to X$ induces an equivalence
+\begin{align*}
+    E(X \times \A^1) \xto{\sim} E(X).
+\end{align*}
+\end{definition}
+
+\begin{proposition} We denote by $\SH_{S^1}(k) \subseteq \Sp(k)$ the category of $\A^1$-invariant sheaves of spectra. This is an accessible subcategory, hence the inclusion admits a left adjoint.
+\end{proposition}
+
+\begin{remark} This is poor notation --- technically $\SH_{S^1}(k)$ should denote the \textit{homotopy category}, rather than the $\infty$-category itself. This is a pervasive notational inconsistency in the literature. This is denoted by $\SH^{S^1}(k)$ in \cite[3.2.1]{Morel-pi0}.
+\end{remark}
+
+The category $\SH^{S^1}(k)$ admits a \textit{homotopy $t$-structure} with heart given by strictly invariant sheaves of abelian groups.
+
+\subsection{Motivic spectra}
+
+The category of motivic spectra is defined to be
+\begin{align*}
+    \SH(k) := \Spc(k)_\ast \left[ (\P^1)^{-1} \right].
+\end{align*}
+By the result of Robalo, it suffices to argue that $\P^1$ is symmetric in order to deduce formal properties about this category.
+
+\begin{proposition} We have that $\P^1$ is symmetric, therefore $\SH(k)$ is presentably symmetric monoidal.
+\end{proposition}
+\begin{proof} By identifying $\P^1 = \A^1/(\A^1-0)$, we can identify
+\begin{align*}
+    (\P^1)^{\otimes3} \simeq \A^3 / (\A^3-0),
+\end{align*}
+and the cyclic permutation $(1\ 2\ 3)$ corresponds to the matrix
+\begin{align*}
+    \begin{pmatrix} 0 & 0 & 1 \\
+    1 & 0 & 0  \\
+    0 & 1 & 0\end{pmatrix}.
+\end{align*}
+This is the product of elementary matrices, each of which is $\A^1$-homotopic to the identity.
+\end{proof}
+
+Say $A$ is a sheaf of abelian groups. How would we build $HA$ as a spectrum here? We begin with $K(A,0) = A$. To be the zeroth space of a spectrum, we need some $K(A',1)$ so that $K(A,0) \to \Omega^{2,1}K(A',1)$ is an equivalence. The $S^1$-loop space decreases the topological index, while the $\mathbb{G}_m$-loop space contracts the sheaf, so we get that $(A')_{-1} = A$. We see that $A$ will yield an Eilenberg--MacLane spectrum if:
+\begin{enumerate}
+    \item $A$ admits infinitely many deloopings
+    \item all the deloopings are strongly invariant.
+\end{enumerate}
+In other words we need $A$ to be a \textit{homotopy module}. We collect this discussion into a proposition for convenience.
+
+\begin{proposition} Any \textit{homotopy module} $A_\ast$ gives rise to an Eilenberg--MacLane spectrum $HA_\ast \in \SH(k)$.
+\end{proposition}
+
+This correspondence identifies the heart of the homotopy $t$-structure on motivic spectra with homotopy modules
+\begin{align*}
+    \SH(k)^\heart \simeq \HM(k).
+\end{align*}
+%
+
+\subsection{Cohomology and stable homotopy groups}
+
+By a completely analogous argument to \autoref{prop:cohom-representable-in-sheaves-of-spectra}, we have for any $X\in \Sm_k$ and $A \in \HM(k)$:
+\begin{align*}
+    H^n_\Nis(X, A_{-k}) &= \left[ \Sigma^\infty \Sigma^{n+k,k}X_+, \HA \right]_{\SH(k)}.
+\end{align*}
+%
+Similarly we can define stable homotopy groups which are bigraded via the following definition.
+
+\begin{definition} For $a,b\in \Z$ and $E \in \SH(k)$, we define $\pi_{a,b}(E)$ to be the sheaf attached to the presheaf
+\begin{align*}
+    U &\mapsto \left[ \Sigma^\infty \Sigma^{a,b} U_+, E \right]_{\SH(k)}.
+\end{align*}
+\end{definition}
+
+\section{Representability of algebraic $K$-theory}
+
+\begin{goal} We want to show that algebraic $K$-theory is represented by a motivic spectrum $\KGL$.
+\end{goal}
+
+\subsection{What is group completion?}
+
+Recall if $(M,\amalg)$ is a commutative monoid, its \textit{group completion} is the universal group receiving a monoid map from $M$. This is often denoted $M^\gp$ or classically $K(M)$.
+
+\begin{definition} If $\mathscr{C}$ is any $\infty$-category with finite limits, then a \textit{commutative monoid} is precisely a product preserving functor
+\begin{align*}
+    \CMon(\mathscr{C}) = \Fun^\times(\Span(\Fin), \mathscr{C}).
+\end{align*}
+\end{definition}
+We recover the monoid structure by considering certain spans. Let $\underline{n}$ denote a finite set with $n$ elements, then the span $\underline{2} = \underline{2} \to \underline{1}$ induces $M \times M \to M$, while $\emptyset \from \emptyset \to \underline{1}$ yields the unit $\ast \to M$. Larger spans encode various combinations of multiplications and identities, and the data of an $\infty$-functor $\Span(\Fin) \to \mathscr{C}$ imposes all the associativity and unitality conditions.
+
+Consider a distinguished span $\underline{2} \from \underline{3} \to \underline{2}$ of the form
+\[ \begin{tikzcd}
+     & {\{x,y,z\}}\ar[dl,"f" above left]\ar[dr,"g" above right]  & \\
+    {\left\{ m_1,m_2 \right\}} &  & {\left\{ a,b \right\}\}},
+\end{tikzcd} \]
+where $f(x)=m_1$ and $f(y)=f(z)=m_2$, and $g(x)=g(y)=a$ and $g(z)=b$. As a monoid map, this is of the shape
+\begin{align*}
+    M \times M &\to M \times M \\
+    (m_1,m_2) &\mapsto \left( m_1 + m_2, m_2 \right).
+\end{align*}
+The preimage of $(0,m)$ will be $(-m,m)$, so we see that the above is an abelian group if and only if this map is an equivalence
+
+
+\begin{definition} We define the subcategory of \textit{abelian group objects}
+\begin{align*}
+    \Ab(\mathscr{C}) \subseteq \CMon(\mathscr{C})
+\end{align*}
+to be the full subcategory on which the distinguished span $\underline{2} \from \underline{3} \to \underline{2}$ is an equivalence.
+\end{definition}
+
+Group completion is about exhibiting an inverse to this.
+
+\begin{proposition} Suppose $\mathscr{C}$ is presentable.
+\begin{enumerate}
+    \item Both $\CMon(\mathscr{C})$ and $\Ab(\mathscr{C})$ are presentable
+    \item The inclusion $\Ab(\mathscr{C}) \subseteq \CMon(\mathscr{C})$ preserves all limits and filtered colimits, and hence admits a left adjoint.
+\end{enumerate}
+\end{proposition}
+
+We denote by
+\begin{align*}
+    (-)^\gp \colon \CMon(\mathscr{C}) \to \Ab(\mathscr{C})
+\end{align*}
+the group completion which is left adjoint to the inclusion.
+
+\begin{proposition} If $F \colon \mathscr{C} \to \mathscr{D}$ preserves finite products, then it preserves commutative monoids and abelian group objects, inducing a commutative diagram
+\[\begin{tikzcd}
+    \CMon(\mathscr{C})\rar\dar["{(-)^\gp}" left] & \CMon(\mathscr{D})\dar["{(-)^\gp}" right]\\
+    \Ab(\mathscr{C})\rar & \Ab(\mathscr{D}).
+\end{tikzcd} \]
+\end{proposition}
+
+
+\begin{example} If $\mathscr{C} = \Set$, then this is classical group completion.
+\end{example}
+
+A primary case of interest is when $\mathscr{C} = \mathcal{S}$ is the category of spaces. In this case if $M$ is a commutative monoid, it will be a commutative group if and only if it is a loop space. There is a natural candidate for the delooping of $M$, namely $BM$. There is a natural map
+\begin{align*}
+    M \to \Omega BM,
+\end{align*}
+which can be studied at the level of homology \cite{McDuffSegal,Nikolaus-gp}.
+
+\begin{definition} Take a collection of generators for $\pi_0 M$, and denote by
+\begin{align*}
+    M_\infty
+\end{align*}
+the colimit of multiplying by finite subsets of the generators infinitely many times. In nice settings, this is precisely $M \left[ \pi_0(M)^{-1} \right]$.
+\end{definition}
+
+Since every element in $\pi_0(M)$ is invertible in $B\Omega M$, the universal map factors as
+\[ \begin{tikzcd}
+    M\ar[rr]\ar[dr] &  & \Omega B M\\
+     & M_\infty\ar[ur] & 
+\end{tikzcd} \]
+
+\begin{theorem} The map
+\begin{align*}
+    M_\infty \to \Omega BM = M^\gp
+\end{align*}
+is a plus construction (see \cite[Theorem~9]{Nikolaus-gp}, also Randal-Williams).
+\end{theorem}
+
+There is a natural map
+\begin{align*}
+    B\Sigma_n \to (M^{\times n})_{h\Sigma_n} \to M,
+\end{align*}
+inducing a homomorphisms $\Sigma_n \to \pi_1(M)$.
+
+\begin{theorem} \cite[Prop.~6]{Nikolaus-gp}
+The following are equivalent:
+\begin{enumerate}
+    \item The natural map $M_\infty \to M^\gp$ is an equivalence (i.e. $M_\infty$ \textit{is} the group completion of $M$)
+    \item The cyclic permutation $(1\ 2\ 3)$ lies in the kernel
+    \begin{align*}
+        \Sigma_3 \to \pi_1(M) \to \pi_1(M_\infty).
+    \end{align*} 
+\end{enumerate}
+\end{theorem}
+
+\subsection{Algebraic $K$-theory}
+
+The nerve provides an inclusion
+\begin{align*}
+    \Grpd \hookto \mathcal{S},
+\end{align*}
+which preserves finite products, and hence preserves commutative monoid objects.
+
+\begin{definition} For a ring $R$, we define $K(R) \in \Ab(\mathcal{S})$ to be the group completion of the monoid of finitely generated projective $R$-modules $\Vect(R)$ under direct sum.
+\end{definition}
+
+Note that $\Vect(-)$ satisfies Nisnevich descent, hence it gives a sheaf of groupoids (a stack):
+\begin{align*}
+    \Vect(-) \colon \Sm_k^\op \to \Grpd \subseteq \mathcal{S}.
+\end{align*}
+%
+Recall that finitely generated projective $R$-modules of rank $n$ are classified by homotopy classes of maps into $\BGL_n$ in the sheaf topos, hence there is an equivalence of stacks
+\begin{align*}
+    \amalg_{n=0}^\infty \BGL_n \to \Vect.
+\end{align*}
+%
+Since each of $\BGL_n$ is connected, we have that $\pi_0 \left( \amalg_{n\ge0} \BGL_n \right) = \mathbb{N}$. So to create $\Vect_\infty$, we have to take the colimit of ``multiplication by 1.'' This is exactly given by the shift map
+\begin{align*}
+    \amalg_{n\ge0} \BGL_n\xto{\text{+1}} \amalg_{n\ge 1} \BGL_n \subseteq \amalg_{n\ge 0}\BGL_n,
+\end{align*}
+induced by adding a free vector bundle of rank one: $\BGL_n \to \BGL_{n+1}$.
+
+\begin{proposition} We have that
+\begin{align*}
+    \Vect_\infty = \Z \times \BGL.
+\end{align*}
+\end{proposition}
+\begin{proof} We can pull the disjoint union out of the colimit, and we get
+\begin{align*}
+    &\colim \left( \amalg_{n\ge0} \BGL_n\xto{\text{+1}} \amalg_{n\ge0} \BGL_n\xto{\text{+1}}\cdots \right) \\
+    &= \amalg_{n\in \Z} \colim \left( \BGL_n \to \BGL_{n+1} \to \cdots \right) \\
+    &= \Z \times \BGL.
+\end{align*}
+\end{proof}
+
+Since $K = \Vect^\gp$, the factorization $\Vect \to \Vect_\infty \to \Vect^\gp$ is of the form
+\[ \begin{tikzcd}
+    \Vect\ar[rr]\ar[dr] &  & K\\
+     & \Z \times \BGL\ar[ur] &
+\end{tikzcd} \]
+
+\begin{theorem} We have that $\Z \times \BGL \to K$ is a motivic equivalence.
+\end{theorem}
+\begin{proof} Since $L_\mot$ preserves finite products, it clearly preserves commutative monoids, and will preserve group objects since it preserves equivalences. It also preserves colimits, so we can commute $L_\mot$ with both $(-)_\infty$ and $(-)^\gp$. We are trying to show $\Vect_\infty \to \Vect^\gp$ is a motivic equivalence, and commuting past $L_\mot$, we see this is equivalent to showing that $L_\mot \Vect$ satisfies the properties of the theorem above.
+
+The cyclic condition reduces to checking that $\begin{pmatrix} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}$ acts trivially on $\O^{\oplus3}$ after motivic localization, which is immediate.
+\end{proof}
+
+
+We have seen above that $\Vect^\gp$ is represented by a motivic space $\Z \times \BGL$. This corresponds to what we were calling $K$-theory, but should really be called \textit{connective} $K$-theory.
+
+\begin{notation} We denote by $K^\cn = \tau_{\ge 0} K$ the connective cover of $K$-theory.
+\end{notation}
+
+We'll show algebraic $K$-theory is a Nisnevich sheaf, but first we provide a more general description of algebraic $K$-theory of a scheme $X$.
+
+\subsection{Interlude: perfect complexes}
+
+
+
+\subsection{Algebraic $K$-theory as a Nisnevich sheaf}
+
+We'd like to argue that (non-connective) algebraic $K$-theory is a Nisnevich sheaf of spectra. For this, a more general perspective is helpful.
+
+\begin{theorem} (Thomason--Trobaugh) Algebraic $K$-theory is a Nisnevich sheaf of spectra.
+\end{theorem}
+
+Given a distinguished Nisnevich square of the form
+\[ \begin{tikzcd}
+    W\rar\dar\pb & V\dar\\
+    U\rar & X,
+\end{tikzcd} \]
+we want to argue that $K$ maps it to a homotopy pullback square of spectra.
+
+Given a scheme $X$, we can form its $\infty$-category of perfect complexes of $\O_X$-modules $\Perf(X)$. This is a stable $\infty$-category, giving a functor
+\begin{align*}
+    \Sm_k^\op \to \Cat_\infty^\st.
+\end{align*}
+%
+This is an fppf sheaf (reference needed). In particular we get a pullback square
+\[ \begin{tikzcd}
+    \Perf(X)\rar\dar\pb & \Perf(U)\dar\\
+    \Perf(V)\rar & \Perf(W).
+\end{tikzcd} \]
+We want to say that $K(-)$ preserves this pullback square. To make this more clear, we look at the cofibers of the induced maps.
+
+\begin{notation} If $U \hookto X$ is an open immersion with closed complement $Z$, we denote by $\Perf(Z\text{ on }X)$ the cofiber
+\begin{align*}
+    \Perf(Z\text{ on }X) \to \Perf(X) \to \Perf(U),
+\end{align*}
+which is precisely the perfect complexes on $X$ which are supported on $Z$.
+\end{notation}
+
+\begin{example} If $U = D(f) \subseteq X = \Spec(R)$, then there is an exact sequence
+\begin{align*}
+    \Perf(\Spec(R) \text{ on } V(f)) \to \Perf(R) \to \Perf(R_f),
+\end{align*}
+where the former is $f$-torsion modules on $R$.
+\end{example}
+
+So altogether we get a diagram
+\[ \begin{tikzcd}
+    \Perf(X\text{ on }Z)\rar\dar["\cong" left] & \Perf(X)\rar\dar\pb & \Perf(U)\dar\\
+    \Perf(W\text{ on Z})\rar & \Perf(V)\rar & \Perf(W).
+\end{tikzcd} \]
+To show $K$ preserves the pullback square, it suffices to show that it preserves cofiber sequences (modulo some subtlety about what precisely that is). This follows from algebraic $K$-theory, viewed as a functor
+\begin{align*}
+    K \colon \Cat_\infty^\st \to \Sp
+\end{align*}
+being \textit{localizing}.
+
+\begin{corollary} Any localizing invariant is a Nisnevich sheaf.
+\end{corollary}
+
+\subsection{Algebraic $K$-theory as $\A^1$-invariant}
+
+\begin{theorem} \cite[p.~38]{Quillen} (Quillen) If $R$ is a regular Noetherian ring, the map $R \to R[t]$ induces an equivalence
+\begin{align*}
+    K(R) \xto{\sim} K(R[t]).
+\end{align*}
+\end{theorem}
+
+\begin{theorem} \cite[6.8]{TT} If $X$ is a regular Noetherian scheme, then the projection map $X \times \A^1 \to X$ induces an equivalence
+\begin{align*}
+    K(X) \xto{\sim} K(X \times \A^1).
+\end{align*}
+\end{theorem}
+
+Since every smooth finite scheme over a regular Noetherian scheme is itself regular and Noetherian, we get that $K$ is $\A^1$-invariant over $\Sm_S$ for any $S$ regular and Noetherian.
+
+\subsection{Algebraic $K$-theory spectrum}
+
+
+We have that $K \in \Sp_{\A^1}(k)$ is $\A^1$-invariant by the fundamental theorem of algebraic $K$-theory. Thus to produce a spectrum, we just have to give bonding maps for the projective line. This is an immediate consequence of the projective bundle formula. From this we obtain $\KGL \in \SH(k)$ given by $\left\{ \BGL \times \Z, \BGL \times \Z, \ldots \right\}$.
+
+
+\begin{corollary} \cite[6.15]{AE}
+We have that
+\begin{align*}
+    \pi_i \BGL_n = K_i
+\end{align*}
+for $2\le i\le n-1$.
+\end{corollary}
+
+
+\section{Obstruction theory}
+
+We will carry out some basic obstruction theory computations with an eye towards classifying $\GL_n$-torsors. 
+
+\subsection{Postnikov towers, basic theory}
+
+Let $X \in \Shv_\Nis(\Sm_k)$ be a space in the sheaf topos. Then we recall its \textit{Postnikov tower} is of the form
+\begin{align*}
+    \tau_{\le n+1} X\to \tau_{\le n} X\to \cdots \to \tau_{\le 0}X,
+\end{align*}
+and as we are working over a field, the sheaf topos is hypercomplete, meaning
+\begin{align*}
+    X = \tau_{\le \infty} X = \lim_n \tau_{\le n}.
+\end{align*}
+%
+\begin{proposition} If $X$ is a pointed connected sheaf, we have fiber sequences of the form
+\begin{align*}
+    K(\pi_{n+1} X, n+1) \to \tau_{\le n+1} X \xto{f_n} \tau_{\le n} X.
+\end{align*}
+\end{proposition}
+\begin{proof} By \autoref{eqn:truncation-connectivity-fiber-seq}, we can apply the truncation fiber sequence to $\tau_{\le n+1} X$, and we get
+\begin{align*}
+    \tau_{\ge n+1} \tau_{\le n+1}X \to \tau_{\le n+1} X \to \tau_{\le n} \tau_{\le n+1} X,
+\end{align*}
+which is of the form above.
+\end{proof}
+
+We can ask whether $f_i$ is a \textit{principal} fibration, in that it is pulled back by a map into a classifying space. This turns out to almost be true, it is what is called a \textit{twisted principal fibration}.
+
+\begin{definition} \cite[B.2]{Morel}
+If $G$ is a sheaf of groups and $M$ is a sheaf of $G$-modules, we define the \textit{twisted Eilenberg--MacLane space} $K^G(M,n)$ to be the balanced product
+\begin{align*}
+    EG \times_G K(M,n).
+\end{align*}
+\end{definition}
+
+\begin{proposition} Twisted Eilenberg MacLane spaces have the following properties
+\begin{enumerate}
+    \item If $M$ and $G$ are strongly $\A^1$-invariant and $n\ge 2$, we have a fiber sequence \cite[4.17]{ABH-nilpotent}
+    \begin{align*}
+        K(M,n) \to K^G(M,n) \to BG.
+    \end{align*}
+    
+    \item Twisted Eilenberg--MacLane spaces represent cohomology with twisted coefficients
+    \begin{align*}
+        \left[ X, K^G(M,n) \right] = H^n(X,M(G)).
+    \end{align*}
+\end{enumerate}
+\end{proposition}
+
+
+\begin{proposition} (see \cite[6.1]{AF3}) If $X$ is a pointed connected motivic space, then $f_n \colon \tau_{\le n+1} X \to \tau_{\le n} X$ is a twisted $\A^1$-principal fibration, classified by a map
+\[\begin{tikzcd}
+    \tau_{\le n+1}X\rar\dar["f_n" left]\pb & B\pi_1(X)\dar\\
+    \tau_{\le n} X\rar["k_n" below] & {K^{\pi_1(X)}(\pi_{n+1}X, n+2)}.
+\end{tikzcd} \]
+\end{proposition}
+This latter map is called a $k$\textit{-invariant}.
+
+
+\begin{example} Suppose we're trying to cook up a map $X \to Y$. Then we can inductively define maps $X \to \tau_{\ge n}Y$, and show they lift along the $f_n$'s. In particular, we get a unique lift
+\[ \begin{tikzcd}
+     & \tau_{\le n+1}Y\dar["f_n" right]\\
+    X\rar\ar[ur,dashed] & \tau_{\le n}Y
+\end{tikzcd} \]
+if and only if the composite
+\begin{align*}
+    X \to \tau_{\le n}Y \xto{k_n} K^{\pi_1(Y)}\left( \pi_{n+1}Y, n+2 \right).
+\end{align*}
+vanishes. In other words, we get \textit{obstructions to lifting} lying in
+\begin{align*}
+    H^{n+2}(X, \pi_{n+1}(Y) \left( \pi_1(Y) \right)).
+\end{align*}
+\end{example}
+
+
+\begin{theorem} If $X$ has Krull dimension $d$, then any map $X \to Y$ is uniquely determined by $X \to \tau_{\le d-1}Y$.
+\end{theorem}
+\begin{proof} The Nisnevich cohomological dimension is bounded above by the Krull dimension, so $H^{k}(X,A) = 0$ for any $k>d$ and any sheaf of abelian groups $A$. In particular, $k_{d-1}$ and higher are trivial, so any map $X \to \tau_{\le d-1} Y$ lifts to $\tau_{\le d} Y$, and then all the way to $Y$.
+\end{proof}
+
+
+
+
+\begin{remark} Constructing a map $X \to Y$ by lifting up the Postnikov tower of $Y$ can be thought of as a \textit{relative} lift, by asking to lift along the map
+\[\begin{tikzcd}
+     & Y\dar\\
+    X\rar\ar[ur,dashed] & \ast.
+\end{tikzcd} \]
+More generally, given a map $Y \to Z$, we can break the lifting problem
+\[ \begin{tikzcd}
+     & Y\dar\\
+    X\rar\ar[ur,dashed] & Z
+\end{tikzcd} \]
+into a sequence of analogous stages. This relative situation is often called the \textit{Postnikov--Moore tower} attached to the map $Y \xto{f} Z$. Its theory is outlined in \cite[\S B]{Morel}.
+\end{remark}
+
+The key point is that if $f\colon Y \to Z$ is a fibration with fiber $F$, then the $k$-invariants for lifting $X \to Z$ along $f$ are valued in Eilenberg--MacLane spaces for the homotopy sheaves of $F$.
+
+
+
+A key application of this is the classification of torsors.
+
+
+
+\subsection{Grassmannians}
+
+Recall for any rank $r$ and number $n$, we have a scheme $\Gr(r,n) \in \Sm_\Z$. As a functor $\Sm_\Z^{\aff,\op} \to \Set$, it sends $R$ to the collection of epimorphisms of the form
+\begin{align*}
+    R^{\oplus n} \tto P,
+\end{align*}
+where $P$ is a projective module of rank $r$ over $R$. In other words, a map
+\begin{align*}
+    \Spec(R) \to \Gr_{r,n}
+\end{align*}
+classifies a finitely generated projective $R$-module $P$ of rank $r$, with $n$ generators.
+
+\begin{theorem} (Serre) If $R$ is a Noetherian ring, there is a bijection between algebraic vector bundles on $\Spec(R)$ and finitely generated projective $R$-modules.
+\end{theorem}
+
+From this perspective, we might ask for some algebraic version of a Pontryagin--Steenrod theorem, i.e. we might want some infinite Grassmannian for which homotopy classes of maps into it will classify algebraic vector bundles. The following result is a step in this direction.
+
+\begin{definition} Let $\Gr(r,\infty)$ denote the colimit $\colim_n \Gr(r,n)$, considered as a presheaf.
+\end{definition}
+
+\begin{proposition} (Morel--Voevodsky)
+There is an equivalence of motivic spaces $\Gr(r,\infty) \simeq \BGL_r$.
+\end{proposition}
+
+The following result is the strongest current version of an algebraic Pontryagin--Steenrod theorem.
+
+\begin{theorem} (Affine representability) If $X \in \Sm_k^\aff$ is any affine, then there is a bijection
+\begin{align*}
+    \left[ X, \BGL_r \right]_{\A^1} \cong \Vect_r^\alg(X)^{\simeq}
+\end{align*}
+between $\A^1$-homotopy classes of maps $X \to \BGL_r$ and rank $r$ algebraic vector bundles over $X$ up to isomorphism.
+\end{theorem}
+
+So if $R$ is a smooth affine $k$-algebra, \textit{every} finitely generated projective module over $R$ is classified by a map $\Spec(R) \to \BGL_r$. Moreover we have access to obstruction theory in order to study them.
+
+Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel.
+
+\subsection{Rank two oriented bundles}
+
+The short exact sequence of groups
+\begin{align*}
+    \SL_n \to \GL_n \xto{\det} \mathbb{G}_m
+\end{align*}
+gives rise to a fiber sequence
+\begin{align*}
+    \BSL_n \to \BGL_n \to B \mathbb{G}_m.
+\end{align*}
+In particular, if $X$ is affine, the composite
+\begin{align*}
+    X \to \BGL_n \xto{\det} B \mathbb{G}_m = \P^\infty
+\end{align*}
+is exactly the first Chern class $c_1 \in \Pic(X)$. Hence $\SL_n$-torsors are algebraic vector bundles with $c_1 = 0$.
+
+\begin{theorem} If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2, then a rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
+\end{theorem}
+\begin{proof} We can analyze the Postnikov tower for $\BSL_2$. We have that $\pi_1(\BSL_2) = \ast$, so the first nontrivial stage occurs at degree 2, which is $\tau_{\le 2}\BSL_2 = K(\KMW_2,2)$. Since $X$ has Krull dimension two, we have that
+\begin{align*}
+    \left[ X,\BSL_2 \right] \cong \left[ X,\tau_{\le 2}\BSL_2 \right] = \left[ X, K(\KMW_2,2) \right] = \CHW^2(X).
+\end{align*}
+We can now ask to what extent this is determined by $c_2$. There is a universal $c_2$ map
+\begin{align*}
+    \BSL_2 \to K(\KM_2,2),
+\end{align*}
+which comes from the natural map $\KMW_2 \to \KM_2$ after 2-truncation. From the fiber sequence
+\begin{align*}
+    0 \to \mathbf{I}^3 \to \KMW_2 \to \KM_2 \to 0,
+\end{align*}
+we get part of a long exact sequence
+\begin{align*}
+    \cdots \to H^2(X,\mathbf{I}^3) \to H^2(X,\KMW_2) \to \CH^2(X) \to 0.
+\end{align*}
+So the number of algebraic vector bundles over $X$ with fixed $c_2$ is acted upon transitively by $H^2(X,\mathbf{I}^3)$. If $k = \bar{k}$, this set vanishes \cite[5.1]{AF3}. If $k$ is not algebraically closed, $H^2(X,\mathbf{I}^3)$ need not vanish, and it may in fact contain more data governing the structure of algebraic vector bundles. 
+\end{proof}
+
+\begin{example} (Fasel) Over the algebraic 2-sphere, there are infinitely many non-isomorphic rank two algebraic vector bundles with vanishing $c_1$ and $c_2$.
+\end{example}
+
+\subsection{The Swan--Forster theorem}
+
+This section is from soon-to-appear work of Asok, Opie, Shin and Syed.
+
+Suppose we're given a vector bundle of rank $r$ over a smooth affine $d$-fold $X$. This is classified by a map
+\begin{align*}
+    X \to \BGL_r = \Gr(r,\infty).
+\end{align*}
+%
+We can ask -- \textit{how many generators do we need to describe each module of rank $r$ over $X$}? In other words, where do the obstructions live to lifting
+\[ \begin{tikzcd}
+     & {\Gr(r,N)}\dar\\
+    X\rar\ar[ur,dashed] & {\Gr(r,\infty)}.
+\end{tikzcd} \]
+%
+Our intuition might be that once $N$ is large enough, we can obtain all rank $r$ finitely generated projective modules over $X$ via maps $X \to \Gr(r,N)$. We can make this precise with algebraic representability and motivic obstruction theory.
+
+\begin{proposition} The stabilization map
+\begin{align*}
+    \Gr(r,N) \to \Gr(r,N+1)
+\end{align*}
+is $N-r$-connective. That is, its fiber has homotopy sheaves vanishing in degrees below $N-r$.
+\end{proposition}
+
+\begin{theorem} If $A$ is a smooth $k$-algebra of dimension $d$, then every finitely generated projective $A$-module of rank $r$ needs at most $r+d$ generators.
+\end{theorem}
+\begin{proof} We want to study the lifting problem
+\[ \begin{tikzcd}
+     & {\Gr(r,N)}\dar\\
+    X\rar\ar[ur,dashed] & {\Gr(r,\infty).}
+\end{tikzcd} \]
+Let $F$ denote the fiber
+\begin{align*}
+    F \to \Gr(r,N) \to \Gr(r,\infty).
+\end{align*}
+Then the $k$-invariants are valued in
+\begin{align*}
+    H^{t+2}(X, \pi_{t+1}F).
+\end{align*}
+Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note that $\pi_t F = 0$ for $t \le N-r-1$. So we obtain vanishing in the range
+\begin{align*}
+    d-1 \le t \le N-r-1.
+\end{align*}
+If $N \ge r+d$, then all the $k$-invariants vanish, and there are no obstructions to lifting!
+\end{proof}
+
+\begin{remark} The more general result can be found in \cite{Swan67}.
+\end{remark}
+
+
+
+\subsection{Fiber sequences involving $\BGL_r$}
+
+\begin{proposition} There is an $\A^1$-fiber sequence
+\begin{align*}
+    \GL_{r-1} \to \GL_r \to \A^r\minus 0,
+\end{align*}
+where the rightmost map sends an $r \times r$ matrix to its last column.
+\end{proposition}
+
+\begin{corollary} We obtain an $\A^1$-fiber sequence by delooping
+\begin{align*}
+    \A^r\minus 0 \to \BGL_{r-1} \to \BGL_r.
+\end{align*}
+\end{corollary}
+
+Now suppose we have some $X \in \Sm_k^\aff$, and we have a rank $r$ vector bundle over it. When does it split off a trivial summand? In other words when does it admit a lift of the form:
+\[ \begin{tikzcd}
+     & \BGL_{r-1}\dar\\
+    X\rar\ar[ur,dashed] & \BGL_r.
+\end{tikzcd} \]
+%
+
+\begin{theorem} (Murthy, 1994) If $X$ is a smooth affine $r$-fold over an algebraically closed field $k = \bar{k}$, then an algebraic vector bundle $E \to X$ of rank $r$ splits off a trivial rank one summand if and only if the top Chern class $c_r(E) \in \CH^r(X)$ is zero.
+\end{theorem}
+\begin{proof} The $k$-invariants are valued in
+\begin{align*}
+    k_t \in H^{t+2}(X, \pi_{t+1}(\A^r\minus 0)).
+\end{align*}
+This vanishes for $t\ge r-1$, and $\pi_{t+1}(\A^r\minus 0)$ is zero for $t \le r-3$, since the first nonvanishing homotopy sheaf of $\A^r\minus 0$ is $\pi_{r-1}(\A^2\minus 0)$. Hence there is only one nonvanishing $k$-invariant, which is
+\begin{align*}
+    k_{r-2} \in H^{r}(X, \pi_{r-1}(\A^r\minus 0)) = H^r(X,\KMW_r) = \CHW^r(X).
+\end{align*}
+%
+Again we have an exact sequence
+\begin{align*}
+    \cdots \to H^r(X,\mathbf{I}^{r+1}) \to \CHW^r(X) \to \CH^r(X) \to 0,
+\end{align*}
+and $H^r(X,\mathbf{I}^{r+1}) = 0$ over an algebraically closed field.
+\end{proof}
+
+Over algebraically closed field, the difficulty of these sorts of splitting problems is governed by the \textit{corank} of the associated bundle.
+
+\begin{definition} If $E \to X$ is an algebraic vector bundle of rank $r$ over a $d$-dimensional variety, we say its \textit{corank} is the quantity $d-r$.
+\end{definition}
+
+A famous result called \textit{Serre splitting} says that splitting problems are trivial in negative corank.
+
+\begin{theorem} \textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-modulesprojectifs}.
+\end{theorem}
+
+Murthy's theorem can be rephrased as ``over an algebraically closed field, corank zero bundles split if and only if their top Chern class vanishes.''
+
+\begin{remark} (Historical background) For $r=d=2$, this was proven by Murthy and Swan \cite{MurthySwan}. Murthy and Mohan Kumar showed this for $r=d=3$ in \cite{KumarMurthy}, and finally Murthy proved the general result \cite{Murthy94}.
+\end{remark}
+
+The complexity of studying these sorts of splitting problems is governed by two factors:
+\begin{enumerate}
+    \item the 2-cohomological dimension of the base field
+    \item the \textit{corank} of the bundle.
+\end{enumerate}
+
+The next interesting case to study is corank one. Murthy conjectured essentially that an analogous result holds.
+
+\begin{conjecture} (Murthy, 1999) Over an algebraically closed field, if $X$ is a smooth affine variety of dimension $d$,\footnote{Note that this conjecture only makes sense when $d\ge 2$. If $d=1$, then a corank one bundle is rank zero and cannot split any further.} then a corank one bundle $E \to X$ splits if and only if its top Chern class $c_{d-1}(E)$ is zero.
+\end{conjecture}
+
+A quarter of a century later, this is now a theorem in characteristic zero.
+
+\begin{theorem} \cite[Theorem~3]{Freudenthal} (Asok--Bachmann--Hopkins) Murthy's splitting conjecture holds in characteristic zero.
+\end{theorem}
+
+The source of the assumption on the characteristic is essentially the same as in the work on the motivic Wilson space hypothesis we've been discussing in the Thursday seminar --- the existence of workable models for motivic Eilenberg--MacLane spaces due to Voevodsky.
+
+Our goal here is to give a rough explanation of how the characteristic zero Murthy's conjecture is resolved in this paper, and how it follows from the primary result of that paper, which is a $\P^1$-Freudenthal suspension theorem.
+
+\subsection{Murthy's splitting conjecture: the $k$-invariants}
+
+Recall by \autoref{} we have a fiber sequence
+\begin{align*}
+    S^{2d-1,d} \to \BGL_{d-1} \to \BGL_d.
+\end{align*}
+If $X$ has dimension $d+1$, then this is the lifting problem we're interested in studying:
+\[ \begin{tikzcd}
+     & \BGL_{d-1}\dar\\
+    X\rar["E" below]\ar[ur,dashed] & \BGL_d.
+\end{tikzcd} \]
+%
+The $k$-invariants as we have seen live in the (twisted) homology of the fiber, where the twist is by $\pi_1(\BGL_d)$, giving $\det E$. That is, our $k$-invariants are
+\begin{align*}
+    k_t \in H^{t+2}(X,\pi_{t+1}(S^{2d-1,d})(\det E)).
+\end{align*}
+%
+So we have that
+\begin{itemize}
+    \item $k_d$ and the higher $k$-invariants are all zero since $\dim(X) = d+1$
+    \item $k_{d-3}$ and the lower $k$-invariants are zero because of the connectivity of $S^{2d-1,d}$ (\todo check the numbers here)
+\end{itemize}
+So we have two interesting obstruction classes:
+\begin{enumerate}
+    \item the \textit{primary obstruction} $k_{d-2}$, which can be identified with the \textit{Euler class} of the bundle
+    \begin{align*}
+        k_{d-2}(E) = e(E) \in H^d(X,\pi_{d-1}(S^{2d-1,d})(\det E))
+    \end{align*}
+    \item the \textit{secondary obstruction} $k_{d-1}$, which is denoted by $o_2(E)$ in \cite{Freudenthal}:
+    \begin{align*}
+        k_{d-1}(E) = o_2(E) \in H^{d+1}(X,\pi_{d}(S^{2d-1,d})(\det E)).
+    \end{align*}
+\end{enumerate}
+Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{3.18.2}), we get that
+\begin{align*}
+    \pi_n S^{2d-1,d} = \begin{cases} 0 & n\le d-2 \\ \KMW_d & n=d-1 \\ \text{mostly unknown} & n\ge d-2.\end{cases}
+\end{align*}
+We now see that the primary obstruction is a bit easier to manage.
+
+\begin{proposition} \cite[6.3.1]{AF-splitting}
+For a corank one bundle over an algebraically closed field, its Euler class is zero if and only if its top Chern class is zero.
+\end{proposition}
+\begin{proof} We can leverage the (twisted) short exact sequence
+\begin{align*}
+    0 \to \mathbf{I}^{d+1}(\det E) \to \KMW_d(\det E) \to \KM_d \to 0,
+\end{align*}
+and we get a long exact sequence, sending $e(E)\mapsto c_{d-1}(E)$:
+\begin{align*}
+    \cdots \to H^d(X, \mathbf{I}^{d+1}(\det E)) \to H^d(X, \KMW_d(\det E)) \to H^d(X, \KM_d) \to H^{d+1}(X, \mathbf{I}^{d+1}(\det E)) \to \cdots 
+\end{align*}
+The content of this proposition is then the vanishing of these $\mathbf{I}^j$ cohomology groups in the long exact sequence. This vanishing is proven in \cite[5.2]{AF3}, where the algebraic closure of the field is used. Note that this vanishing only holds for $\dim(X) \ge 2$, but this is the scope of Murthy's conjecture.
+\end{proof}
+
+Hence proving Murthy's conjecture reduces to showing the secondary obstruction vanishes. 
+The hard part about this obstruction is that it is valued in $\pi_{d,0}(S^{2d-1,d})$. 
+We understand a bit about the first stable homotopy groups of motivic spheres by \cite{RSO}. Unfortunately, however, our sheaf of study lies outside the stable range.
+
+The issue then comes from understanding the stabilization map, and we note this is a $\P^1$-\textit{stabilization}!
+
+
+\subsection{$\P^1$-Freudenthal suspension}
+
+The Freudenthal suspension theorem we have seen deals with suspending by the simplicial sphere $S^1$. It is really barely motivic in flavor, it's just the classical (sheaf topos) Freudenthal suspension theorem, combined with the unstable connectivity theorem which tells us how connectivity statements behave under motivic localization. As the projective line has motivic weight, people have long been interested in proving a $\P^1$ (or equivalently a $\mathbb{G}_m$) Freudenthal suspension theorem.
+
+The first thing is to come up with a more refined notion of connectivity.
+
+\begin{definition} We say $X$ is $S^{p,q}$-\textit{null} if $\pi_n(X)_{-q} = 0$ for all $n \ge p-q$.
+\end{definition}
+
+Equivalently, there is a notion of unstable localization at spaces, due to Dror, and $X$ is $S^{p,q}$-null if $X \to L_{p,q}X$ is an equivalence.
+
+\begin{definition} We denote by $O(A)$ the collection of \textit{weakly $A$-cellular} spaces, meaning those spaces $X$ for which $L_A X\simeq \ast$.
+\end{definition}
+
+There is a universal process called \textit{cellularization}, denoted $\tau_{\ge(p,q)}(-)$. This has the universal property that $\Map(X,Y) \cong \Map(X,\tau_{\ge(p,q)}Y)$ if $X \in O(S^{p,q})$.
+
+
+\begin{example} If $A = S^{n,0}$, then $X$ is $S^{n,0}$-null if and only if it is $(n-1)$-truncated. $X \in O(S^{n,0})$ if and only if $X$ is $(n-1)$-connected.
+\end{example}
+
+\begin{theorem} (Motivic Freudenthal) If $X \in O(S^{2n,n})$ for $n\ge2$ and $k$ of characteristic zero, then the fiber of
+\begin{align*}
+    X \to \Omega^{2,1}\Sigma^{2,1}X
+\end{align*}
+is in $O(S^{4n-1,2n})$.
+\end{theorem}
+
+As an application, we can consider $X = S^{2d-1,d}$, and apply $\pi_d$ to get
+\begin{align*}
+    \pi_d(S^{2d-1,d}) \to \pi_d(\Omega^{2,1}S^{2d+1,d+1}) = \pi_{d+1}(S^{2d+1,d+1})_{-1},
+\end{align*}
+where the latter sheaf is in the stable range, and hence understandable by \cite{RSO}.
+
+\begin{theorem} \cite[7.2.1]{Freudenthal} For $d\ge4$ there is an exact sequence of sheaves
+\begin{align*}
+    0 \to \KM_{d+2}/24 \to \pi_d(S^{2d-1,d}) \to \pi_d(\tau_{\ge(2d-1,d)}\Omega^{2d,d}O) \to 0.
+\end{align*}
+\end{theorem}
+\begin{proof} Uses the main theorem of \cite{RSO} together with the motivic Freudenthal theorem to say something about stabilization.
+\end{proof}
+
+Hence we get a sequence
+\begin{align*}
+    \cdots \to H^{d+1}(X,\KM_{d+2}/24) \to H^{d+1}(X, \pi_d(S^{2d-1,d})) \to H^{d+1}(X, \pi_d(\tau_{\ge(2d-1,d)}\Omega^{2d,d}O)) \to \cdots 
+\end{align*}
+If $k$ is algebraically closed, and $X$ is a $(d+1)$-fold as assumed, we have that $\KM_{d+2}/24 = 0$. We have that the map
+\begin{align*}
+    \pi_d(\tau_{\ge(2d-1,d)}\Omega^{2d,d}O) \to \pi_d(\Omega^{2d,d}O)
+\end{align*}
+is an isomorphism after $d-3$ contractions, hence their $d+1$st cohomology groups agree. It suffices to argue then that $H^{d+1}(X,\pi_d(\Omega^{2d,d}O)) = 0$. By analysis of the Gersten resolution, we see this group is a quotient of $\CH^{d+1}(X)/2$:
+\begin{align*}
+    \CH^{d+1}(X)/2 \tto H^{d+1}(X, \pi_d(\Omega^{2d,d}O)).
+\end{align*}
+Note that $\CH^{d+1}(X)$ will be divisible coprime to the characteristic, hence $\CH^{d+1}(X)/2$ is zero.
+
 
 \chapter{Appendices}
 
@@ -5211,4 +6121,4 @@ Note that $\eta \in \pi_{1,1} \mathbbm{1}$ in motivic homotopy. This is \textbf{
 
 
 \printbibliography
-\end{document}
+\end{document}exa:connectivity-motivic-spheres

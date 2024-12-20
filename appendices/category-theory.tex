@@ -166,4 +166,216 @@ The category of finite type $S$-schemes is essentially small.
 \begin{remark} The category of all $S$-schemes is not essentially small.
 \end{remark}
 
+\section{Bonus: on localizing invariants}
+
+
+
+\subsection{Idempotent-completion (for 1-categories)}
+
+Suppose we are given a strict retract diagram
+\[ \begin{tikzcd}
+    Y\rar["i" above]\ar[dr,"\id" below left] & X\dar["r" right]\\
+     & Y.
+\end{tikzcd} \]
+Then we have that $f := i\circ r \colon X \to X$ is an idempotent endomorphism of $X$, since $f\circ f = f$. This establishes a correspondence between isomorphism classes of retractive $X$-objects and idempotent endomorphisms of $X$:
+\begin{equation}\label{eqn:retractive-objects-to-idempotents}
+\begin{aligned}
+    \ob \left(\mathscr{C}_{X // X}\right)^{\simeq} &\to \left\{ f\in \End_\mathscr{C}(X) \colon f^2 = f \right\} \\
+    (Y,i,r) &\mapsto \left[X \xto{i\circ r} X\right].
+\end{aligned}
+\end{equation}
+%
+\begin{proposition} The map in \autoref{eqn:retractive-objects-to-idempotents} is always injective.
+\end{proposition}
+\begin{proof} Suppose we have another idempotent
+\[ \begin{tikzcd}
+    Z\rar["\iota" above]\ar[dr,"\id" below left] & X\dar["\rho" right]\\
+     & Z,
+\end{tikzcd} \]
+so that $\iota\rho = ir$. Then we claim $Z$ and $Y$ are isomorphic as retractive $X$-objects. Indeed we see that
+\begin{align*}
+    Y \xto{i} X \xto{\rho} Z
+\end{align*}
+admits an inverse $Z\xto{\iota} X \xto{r} Y$, since $(\rho i)(r\iota) = \rho(ir)\iota = \rho\iota\rho\iota = \id$, and vice versa. In particular the diagram commutes
+\[ \begin{tikzcd}
+     & Z\dar["\iota"]\ar[dr,"\id" above right] & \\
+     Y\rar["i" above]\ar[dr,"\id" below left]\ar[ur,"\rho\circ i" above left,"\sim" below right] & X\dar["r" right]\rar["\rho"] & Z\\
+     & Y\ar[ur,"\rho\circ i" below right,"\sim" above left]\end{tikzcd} \]
+Which exhibits $Y$ and $Z$ as isomorphic in the category $\mathscr{C}_{X//X}$ of retractive $X$-objects.
+\end{proof}
+
+
+\begin{proposition} If $\mathscr{C}$ admits equalizers, then $Y$ can be recovered from the associated idempotent as the equalizer:
+\begin{align*}
+    Y = \eq (\id, i\circ r \colon X \rightrightarrows X).
+\end{align*}
+\end{proposition}
+\begin{proof} We claim this rectangle is a pullback:
+\[ \begin{tikzcd}
+    Y\dar["i" left]\ar[rr,"i" above] &  & X\dar["\id" right]\\
+    X\rar["r" below] & Y\rar["i" below] & X\\
+\end{tikzcd} \]
+Indeed suppose $h \colon Z \to X$ satisfies $h = irh$. Then the diagram commutes:
+\[ \begin{tikzcd}
+Z\ar[ddr,"h" below left, bend right=5]\ar[drrr,"h" above right, bend left=5]\ar[dr,dashed,"hr" above right] & \\
+    & Y\dar["i" left]\ar[rr,"i" above] &  & X\dar["\id" right]\\
+    & X\rar["r" below] & Y\rar["i" below] & X.
+\end{tikzcd} \]
+\end{proof}
+
+\begin{definition} We say that a 1-category $\mathscr{C}$ is \textit{idempotent complete} if for every object $X \in \mathscr{C}$, the correspondence between retractive objects and idempotent morphisms in \autoref{eqn:retractive-objects-to-idempotents} is a bijection.
+\end{definition}
+
+\begin{example} If $\mathscr{C}$ admits equalizers, it is idempotent complete.
+\end{example}
+
+\begin{proposition} Let $\mathscr{C} \subseteq \mathscr{D}$ be a full subcategory which is idempotent complete. Then it is closed under retracts in $\mathscr{D}$.
+\end{proposition}
+\begin{proof} Let $d \xto{i} c \xto{r} d$ be a retract of $c$ which lies in $\mathscr{D}$. Then $i\circ r \colon c \to c$ lies in $\mathscr{C}$ since it is a full subcategory, and since it is idempotent complete, we obtain that $(d,i,r) \in \mathscr{C}_{c // c}$, hence $d\in \mathscr{C}$.
+\end{proof}
+
+\begin{example} The category of free finitely generated $R$-modules is not idempotent complete.
+\end{example}
+\begin{proof} Let $P$ be a finitely generated projective $R$-module. Then it is a summand in a free $R$-module, i.e. $P \oplus Q \cong R^n$, and the combination of the inclusion and projection off the direct sum yields the identity:
+\begin{align*}
+    P \hookto R^n \to P.
+\end{align*}
+Hence $P$ is a retract of $R^n$. Considering the category of finitely generated free $R$-modules as a full subcategory of $\Mod_R$, we then observe it isn't closed under retracts, and hence isn't idempotent complete.
+\end{proof}
+
+
+\section{Idempotent completion, $\infty$-categorically}
+
+The main distinction between idempotents in 1-categories versus $\infty$-categories is that being an idempotent in a 1-category is a \textit{property}, whereas in an $\infty$-category it is a \textit{structure} (witnessing idempotence requires additional data). This has various consequences, in particular that the admission of finite (co)limits is no longer sufficient to guarantee idempotent completeness.
+
+\begin{example} \cite[4.4.5.1]{HTT} Let $C_\bullet(R)$ denote the category of bounded chain complexes of finitely generated free $R$-modules. Then $C_\bullet(R)$ is a stable $\infty$-category, but is only idempotent complete if every finitely generated projective $R$-module is stably free (if $K_0(R) = \Z$).
+\end{example}
+
+\begin{definition} \cite[4.4.5.3]{HTT} The simplicial set $\Idem$ is defined by the property that it has exactly one non-degenerate simplex in each dimension, and any face of any non-degenerate simplex is non-degenerate.
+\end{definition}
+
+So if $\Idem \to \mathscr{C}$ is a map of simplicial sets, it picks out a morphism $f$ in degree 1, and in degree 2 witnesses the composite
+\[ \begin{tikzcd}
+     & \bullet\ar[dr,"f" above right] & \\
+    \bullet\ar[rr,"f" below]\ar[ur,"f" above left] &  & \bullet.
+\end{tikzcd} \]
+The higher data witnesses higher coherence. So we say an \textit{idempotent} in an $\infty$-category $\mathscr{C}$ is a map of simplicial sets $\Idem \to \mathscr{C}$ \cite[4.4.5.4]{HTT}.
+
+\begin{definition} An $\infty$-category $\mathscr{C}$ is \textit{idempotent complete} if any idempotent $F \colon \Idem \to \mathscr{C}$ admits a colimit.
+\end{definition}
+
+Not every $\infty$-category is idempotent complete, but any category can be completed to one which is. This process is called \textit{idempotent completion} --- we say $f \colon \mathscr{C} \to \mathscr{D}$ is an \textit{idempotent completion} if (\cite[5.1.4.1]{HTT})
+\begin{enumerate}
+    \item $\mathscr{D}$ is idempotent complete
+    \item $f$ is fully faithful
+    \item every object in $\mathscr{D}$ is a retract of something in the image of $\mathscr{C}$.
+\end{enumerate}
+
+\begin{proposition} \cite[5.1.4.2,~5.4.2.4]{HTT} Every $\infty$-category admits an idempotent completion, given by
+\begin{align*}
+    \Idem(\mathscr{C}) := \Ind(\mathscr{C})^\omega.
+\end{align*}
+\end{proposition}
+\begin{proof} Assume $\mathscr{C}$ is small without loss of generality (changing universes). Consider the Yoneda embedding $y \colon \mathscr{C} \to \Pre(\mathscr{C})$, and let $\mathscr{C}'$ denote the closure of $y(\mathscr{C})$ under retracts. More explicitly, if $\kappa$ is a regular cardinal, then we take $\Ind_\kappa(\mathscr{C})^\kappa$.
+\end{proof}
+
+Let $\Cat_\infty^\vee \subseteq \Cat_\infty$ be the full subcategory of idempotent-complete categories. Then this inclusion admits a left adjoint, given by idempotent completion \cite[5.4.2.18]{HTT}.
+
+\begin{proposition} A small $\infty$-category is accessible if and only if it is idempotent complete \cite[5.4.3.?]{HTT}.
+\end{proposition}
+
+We denote by
+\begin{align*}
+    \Cat_\infty^\perf := \Cat_\infty^\st \cap \Cat_\infty^\vee,
+\end{align*}
+the category of idempotent complete stable $\infty$-categories (and exact functors). Then idempotent completion descends to an adjunction
+\begin{align*}
+    \Idem \colon \Cat_\infty^\st &\to \Cat_\infty^\perf.
+\end{align*}
+
+
+\subsection{Presentably symmetric monoidal categories}
+
+
+
+\begin{definition} A \textit{presentably symmetric monoidal category} is any object in $\CAlg(\Pr^L, \otimes)$. This is the same as a symmetric monoidal $\infty$-category in which the tensor product
+\begin{align*}
+    \mathscr{C} \times \mathscr{C} \xto{\otimes} \mathscr{C}
+\end{align*}
+preserves colimits in each variable.
+\end{definition}
+
+\begin{proposition} % Freudenthal 2.2.2
+If $\mathscr{C} \in \CAlg(\Pr^L)$ is presentably symmetric monoidal, and $S \subseteq \mathscr{C}$ is a set of objects, we can universally invert tensoring with each $x\in \mathscr{C}$, giving a new presentably symmetric monoidal category $\mathscr{C}[S^{-1}]$ with the obvious universal property. See Robalo 2.1
+\end{proposition}
+
+\begin{notation} We denote by $\Pr_\st^L \subseteq \Pr^L$ the full subcategory of stable categories.
+\end{notation}
+
+\begin{proposition} \textit{(Properties of $\Pr^L_\st$)}
+\begin{enumerate}
+    \item The category $\Pr^L_\st$ is symmetric monoidal, with unit $\Sp$ the category of spectra
+    \item The Eilenberg--Watts theorem gives an equivalence
+    \begin{align*}
+        \Sp &\cong \Fun^L(\Sp,\Sp) \\
+        X &\mapsto X \otimes-.
+    \end{align*}
+    \item If $\mathscr{C} \in \Pr^L_\st$ is dualizable, then its trace
+    \begin{align*}
+        \Sp \to \mathscr{C}^\vee \otimes \mathscr{C} \to \mathscr{C} \otimes \mathscr{C}^\vee \to \Sp
+    \end{align*}
+    is a spectrum (by Eilenberg--Watts), which is $\THH(\mathscr{C})$.
+\end{enumerate}
+\end{proposition}
+
+
+\begin{notation} We denote by $\Cat^\perf \subseteq \Cat^\ex$ the full subcategory of idempotent-complete categories. This is part of an adjunction
+\begin{align*}
+    \Idem(-) \colon \Cat^\ex \leftrightarrows \Cat^\perf \colon \text{inclusion}.
+\end{align*}
+\end{notation}
+
+Given a cardinal $\omega$, taking ind-completion or compact objects gives an equivalence
+\begin{align*}
+    \Ind \colon \Cat_\infty^\perf \overset{\sim}{\leftrightarrows} \mathrm{Pr}^L_{\st,\omega} \colon (-)^\omega
+\end{align*}
+In particular the unit $\id \to \Ind(-)^\omega$ is an equivalence because this is exactly idempotent completion. The counit being an equivalence is precisely that the category is accessible (generated by its compact objects under accessible colimits).
+
+
+\begin{definition} An exact functor $F \colon \mathscr{C} \to \mathscr{D}$ of presentable stable categories is called \textit{strongly continuous} if either of the equivalent conditions hold:
+\begin{enumerate}
+    \item The right adjoint $F \dashv G$ is continuous
+    \item The right adjoint to $F$ admits a further right adjoint.
+\end{enumerate}
+Denote by $\Fun^{LL}(\mathscr{C},\mathscr{D})$ the category of strongly continuous functors. We denote by $\Pr_\st^{LL} \subseteq \Pr_\st^L$ the subcategory on the same objects but with only strongly continuous morphisms.
+\end{definition}
+
+
+
+
+
+\begin{definition} We denote by $\Cat^\dual \subseteq \Pr^L_\st$ the (not full) subcategory of dualizable categories and strongly continuous functors. Or equivalently $\Cat_\dual \subseteq \Pr_\st^{LL}$ the full subcategory on dualizable categories.
+\end{definition}
+
+\begin{theorem} (Efimov) A presentable stable $\infty$-category is dualizable if and only if it is flat in $\Pr^L_\st$, meaning $\mathscr{C} \otimes -$ preserves fully faithful functors.
+\end{theorem}
+
+
+\begin{remark} By \cite[5.4.3.6]{HTT}, a small $\infty$-cat is accessible if and only if it is idempotent complete.\footnote{Idempotent complete has a number of definitions, in particular it implies that idempotent endomorphisms $f \colon X \to X$ (i.e. $f\circ f = f$) correspond bijectively to retracts of $X$, i.e. composites $Y \hookto X \to Y$. If $\mathscr{C}$ is idempotent complete then it is closed under retracts (\todo check this).} so finitely generated free $R$-modules fail to contain retracts (projectives) so they're not idempotent complete and hence not accessible.
+\end{remark}
+
+\subsection{Exact sequences in $\Cat_\infty^\perf$}
+
+\begin{definition}\label{def:exact-sequence-PrLst}
+\cite[5.8]{BGT} A sequence
+\begin{align*}
+    \mathcal{A} \to \mathcal{B} \to \mathcal{C}
+\end{align*}
+in $\Pr^L_\st$ is \textit{exact} if
+\begin{enumerate}
+    \item the composite is zero
+    \item $\mathcal{A} \to \mathcal{B}$ is fully faithful
+    \item the map $\mathcal{B}/\mathcal{A} \to \mathcal{C}$ is an equivalence.
+\end{enumerate}
+\end{definition}
 
