@@ -4,6 +4,7 @@
 *.alg
 *.aux
 *.bbl
+*.bbl-SAVE-ERROR
 *.bcf
 *.blg
 *.brf
