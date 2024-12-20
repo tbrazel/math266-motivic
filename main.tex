@@ -3,6 +3,12 @@
 % \usepackage[T1]{fontenc}
 \usepackage[page,toc,titletoc,title]{appendix}
 \usepackage{minitoc}
+% to remove useless warning messages from minitoc
+\usepackage{silence}
+\WarningFilter{minitoc(hints)}{W0023}
+\WarningFilter{minitoc(hints)}{W0024}
+\WarningFilter{minitoc(hints)}{W0028}
+\WarningFilter{minitoc(hints)}{W0030}
 % Bibliography stuff
 \usepackage[doi=false,isbn=false,url=false,style=alphabetic]{biblatex}
 \bibliography{citations.bib}
@@ -4656,7 +4662,8 @@ We say that $Y \in \Sm_k$ is \textit{$\A^1$-rigid} if $h_Y$ is $\A^1$-invariant.
 
 In general this is rare. Recently, it has been observed that it is much more common for representable presheaves (and motivic spaces) to be $\A^1$-invariant on affines.
 
-\begin{definition} We say that a simplicial presheaf $F \in \PSh(\Sm_k)$ is \textit{$\A^1$-naive} if the induced map
+\begin{definition}\label{def:a1-naive}
+We say that a simplicial presheaf $F \in \PSh(\Sm_k)$ is \textit{$\A^1$-naive} if the induced map
 \begin{align*}
     (L_{\A^1}F)(U) \to (L_\mot F)(U)
 \end{align*}
@@ -4863,6 +4870,7 @@ In motivic homotopy theory, the first nonvanishing homotopy sheaf of $\Sigma^{n-
 We can identify many groups now just using contraction:
 
 \begin{corollary} We have a canonical isomorphism
+\label{cor:pi_n_Sph_KMW}
 \begin{align*}
     \pi_n \left( S^{n+i,i} \right) \cong \KMW_i,
 \end{align*}
@@ -5934,6 +5942,7 @@ where the rightmost map sends an $r \times r$ matrix to its last column.
 \end{proposition}
 
 \begin{corollary} We obtain an $\A^1$-fiber sequence by delooping
+\label{cor:BGL_deloop_fiber}
 \begin{align*}
     \A^r\minus 0 \to \BGL_{r-1} \to \BGL_r.
 \end{align*}
@@ -6001,7 +6010,7 @@ Our goal here is to give a rough explanation of how the characteristic zero Murt
 
 \subsection{Murthy's splitting conjecture: the $k$-invariants}
 
-Recall by \autoref{} we have a fiber sequence
+Recall by \autoref{cor:BGL_deloop_fiber} we have a fiber sequence
 \begin{align*}
     S^{2d-1,d} \to \BGL_{d-1} \to \BGL_d.
 \end{align*}
@@ -6032,7 +6041,7 @@ So we have two interesting obstruction classes:
         k_{d-1}(E) = o_2(E) \in H^{d+1}(X,\pi_{d}(S^{2d-1,d})(\det E)).
     \end{align*}
 \end{enumerate}
-Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{3.18.2}), we get that
+Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{cor:pi_n_Sph_KMW}), we get that
 \begin{align*}
     \pi_n S^{2d-1,d} = \begin{cases} 0 & n\le d-2 \\ \KMW_d & n=d-1 \\ \text{mostly unknown} & n\ge d-2.\end{cases}
 \end{align*}
@@ -6118,6 +6127,8 @@ Note that $\CH^{d+1}(X)$ will be divisible coprime to the characteristic, hence 
 \chapter{Appendices}
 
 \include{appendices/betti realization/howard}
+
+\include{appendices/hamilton}
 
 
 \printbibliography
