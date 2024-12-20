@@ -44,14 +44,6 @@
 \def\customcitecolor{darkred}
 \def\customlinkcolor{darkred}
 
-% Hyperref settings
-\usepackage[%
-    colorlinks,
-    citecolor=\customcitecolor,%
-    linkcolor=\customlinkcolor,%
-    urlcolor=\customlinkcolor%
-]{hyperref}
-
 % Removes vertical spacing around aligned environments
 \usepackage{etoolbox}
 \newcommand{\zerodisplayskips}{%
@@ -101,3 +93,12 @@
 \renewcommand{\labelitemi}{$\triangleright$}
 \let\emptyset\varnothing
 
+\usepackage{quiver}
+
+% Hyperref settings
+\usepackage[%
+    colorlinks,
+    citecolor=\customcitecolor,%
+    linkcolor=\customlinkcolor,%
+    urlcolor=\customlinkcolor%
+]{hyperref}

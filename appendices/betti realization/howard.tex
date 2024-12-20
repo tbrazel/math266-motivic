@@ -1,0 +1,126 @@
+\providecommand{\Be}{\mathrm{Be}}
+\providecommand{\Loop}{\Omega}
+\providecommand{\Smash}{\wedge}
+\providecommand{\Sph}{\mathbb{S}}
+\providecommand{\triv}{\mathrm{triv}}
+\providecommand{\isom}{\simeq}
+\providecommand{\GeomFix}{\Phi}
+
+\providecommand{\SHRcell}{\SH_{\mathrm{cell}} (\R)}
+\providecommand{\SpCt}{\Sp^{C_2}}
+\providecommand{\BeCt}{\Be^{C_2}}
+\providecommand{\pcomp}{_p^{\wedge}}
+\providecommand{\pBeCt}{\widehat{\Be}_p^{C_2}}
+\providecommand{\pSHRcell}{\SHRcell\pcomp}
+\providecommand{\pSpCt}{(\SpCt)\pcomp}
+
+\newcommand{\defas}[1]{\textit{#1}}
+
+\section{Howard Beck: Real Betti realization}
+In this section, we cover an interesting connection between motivic homotopy theory and $ C_2 $-equivariant homotopy theory, following the works of \cite{Bachmann-betti} and \cite{BehrensShah-C2betti}.
+We will assume comfort with the language and notation of equivariant (stable) homotopy theory -- for a somewhat old-school but still sufficient (and way too extensive for our purposes here) reference, see \cite{GreenleesMay}.
+
+\subsection{Introduction}
+We start with the Betti realization functor, which associates to a smooth scheme over $ \C $ a topological space given by its $ \C $-points, endowed with the complex analytic topology:
+\begin{align*}
+\Be: \Sm_\C &\to \Top \\
+Z &\mapsto Z(\C)
+\end{align*}
+We may similar form a $ C_2 $-Betti realization, that takes a smooth scheme over $ \R $ and sends it also to its $ \C $-points.
+However, here we get a $ C_2 $-action via complex conjugation, so we actually get a map into $ C_2 $-equivariant topological spaces:
+\begin{align*}
+\BeCt: \Sm_\R &\to \Top^{C_2} \\
+Z &\mapsto \{C_2 \curvearrowright Z(\C) \}
+\end{align*}
+
+We will soon pass to the stable setting, but we should first fix notation.
+We formed the stable motivic homotopy category $ \SH(\R) $ by inverting the loop functor $ \Loop^{2, 1} $ corresponding to $ \P_1 $ which has the effect of inverting all loop functors $ \Loop^{i, j} $ with respect to all motivic spheres $ S^{i, j} $.
+Equivariantly, we form genuine $ C_2 $-spectra by inverting loop functors for all representation spheres $ S^\rho $, where $ \rho $ is a finite-dimensional, continuous, real, orthogonal representation of $ C_2 $.
+We may similarly only invert the loop functor $ \Loop^{\triv + \sigma} $, where $ \triv $ is the one-dimensional trivial representation and $ \sigma $ is the sign representation.
+Doing so will also invert all loop functors, which are given by $ \Loop^{(\triv)i + (\sigma)j} $.
+The upshot is that we may view motivic spectra in $ \SH(\R) $ or equivariant spectra in $ \SpCt $ as being either mono- or bi-graded.
+\\
+
+Our convention will be to take the bi-graded approach, and then have to make a choice about indexing.
+It is not difficult to see that we may take $ C_2 $-Betti realization on the space level of our spectra, and we get a functor:
+$$ \BeCt: \SH(\R) \to \SpCt $$
+Using our convention for bigrading of motivic spheres, $ C_2 $-Betti realization will send the motivic sphere spectra $ \Sph^{i, j} $ to the genuine $ C_2 $-equivariant sphere spectra $ \Sph_{C_2}^{(i-j)\triv + j \sigma} $.
+Therefore, we will choose to the $ \RO(C_2) $ bigrading where $ (i, j) $ corresponds to $ (\triv)i + (\sigma - \triv)j $, since we allow virtual representations such as $ \sigma - 1 $.
+\\
+
+We have an inclusion map $ S^{0, 0} = {\pm 1} \hookrightarrow \Gm = S^{1, 1} $.
+By stabilizing and desuspending in both dimensions, we get a map $ \rho: \Sph^{-1, -1} \to \Sph^{0, 0} $.
+Work by \cite{Bachmann-betti} showed that $ C_2 $-Betti realization acts like $ \rho $-localization:
+\begin{theorem}[\cite{Bachmann-betti}, Proposition 31 -- as interpreted by \cite{BehrensShah-C2betti}, Theorem 1.5]
+$ \BeCt $ induces an equivalence of $ \infty $-categories $ \SH(\R)[\rho^{-1}] \isom \Sp $:
+\[\begin{tikzcd}
+	{\SH(\R)} & {\Sp} \\
+	{\SH(\R) [\rho^{-1}]}
+	\arrow["{\BeCt}", from=1-1, to=1-2]
+	\arrow["{\text{loc}}"', from=1-1, to=2-1]
+	\arrow["\simeq", from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{theorem}
+Our goal is to find a similar statement that localizes $ \SH(\R) $ into $ \SpCt $.
+This will be slightly too much to ask for, but we do get such a phenomenon when we $ p $-complete everything and restrict ourselves to cellular motivic spectra.
+By $ X $ cellular -- or $ X \in \SHRcell $ -- we mean that we may construct $ X $ using motivic sphere spectra via cofiber sequences and filtered homotopy colimits.
+We may then take $ p $-completed Betti realization:
+\[\begin{tikzcd}
+	\pSHRcell & \SpCt && \pSpCt
+	\arrow["\BeCt", from=1-1, to=1-2]
+	\arrow["\pBeCt"', curve={height=12pt}, from=1-1, to=1-4]
+	\arrow["{p\text{-completion}}", from=1-2, to=1-4]
+\end{tikzcd}\]
+The main result of \cite{BehrensShah-C2betti} is the following:
+\begin{theorem}[\cite{BehrensShah-C2betti}, Theorem 1.12]
+$ p $-completed cellular $ C_2$-Betti realization -- $ \pBeCt $ -- is a localization functor.
+\end{theorem}
+
+\subsection{Isotropy Separation}
+In order to prove the theorem, we will consider different ``parts" of $ X $ via the isotropy separation square.
+For a genuine $ G $-spectrum, we have the following definitions:
+\begin{definition}
+$ X^h $ is the \defas{homotopy completion} of $ X $, given by:
+$$ X^h = \Map_\ast^{G} ((EG)_+, X) $$
+We similarly define the \defas{geometric localization} $ X^\GeomFix $ as:
+$$ X^\GeomFix = X \Smash \widetilde{EG} $$
+where $ \widetilde{EG} $ is the cofiber of the isotropy separation sequence:
+$$ EG_+ \to S^0 \to \widetilde{EG} $$
+and the \defas{equivariant Tate spectrum} $ X^t $ as:
+$$ X^t = (Y^h)^\GeomFix $$
+\end{definition}
+Note that after taking $ G $-fixed points, we recover the homotopy fixed points, geometric fixed points, and Tate fixed points.
+\\
+
+These constructions fit into the \defas{isotropy separation square}, a homotopy pullback diagram:
+\[\begin{tikzcd}
+	X & {X^\GeomFix} \\
+	{X^h} & {X^t}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+Bachmann's work has already done a lot for us, as it describes geometric localization of $ \BeCt(X) $ as $ \rho$-localization.
+In doing this, we are identifying $ \Sp $ with geometrically local $ C_2 $-spectra $ \Sp^{\GeomFix C_2} $, and this identification is an isomorphism given by taking $ C_2 $-geometric fixed points.
+If we can also describe homotopy completion of $ \BeCt(X) $ as a localization, then we may apply some higher algebra nonsense and learn that $ \BeCt(X) $ itself is a localization.
+We will not be able to achieve this, but we do get it after $ p $-completion at any prime for cellular motivic spectra.
+\\
+
+The correct localizing behavior for homotopy completion is given as follows.
+We know by [TODO] that:
+$$ \pi_{\ast, \ast}^\C (H \F_p)_\C \isom \F_p[\tau] $$
+where $ (H \F_p)_K $ is the mod $ p $ motivic Eilenberg-MacLane spectrum.
+We may view $ \tau $ as a homotopy class of maps from $ \Sph^{0, -1} \to (H \F_p)_K \isom (\Sph^{0, 0})\pcomp $.
+In this case, we have the following localization:
+\begin{theorem}[\cite{BehrensShah-C2betti}, Theorem 1.11]
+$ p $-complete $ C_2 $-Betti realization provides a localization of $ p $-complete cellular real motivic spectra into homotopy complete genuine $ C_2 $-spectra, by inverting $ \tau $ after $ \rho $-completion:
+\[\begin{tikzcd}
+	{\SHRcell_p^{\wedge}} & {\Sp^{hC_2}} \\
+	{\SHRcell_{p, \rho}^\wedge [\tau^{-1}]}
+	\arrow["\pBeCt", from=1-1, to=1-2]
+	\arrow["{\rho \text{-completion, } \tau\text{-localization}}"', from=1-1, to=2-1]
+	\arrow["\isom"', from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{theorem}

@@ -3,6 +3,12 @@
 % \usepackage[T1]{fontenc}
 \usepackage[page,toc,titletoc,title]{appendix}
 \usepackage{minitoc}
+% to remove useless warning messages from minitoc
+\usepackage{silence}
+\WarningFilter{minitoc(hints)}{W0023}
+\WarningFilter{minitoc(hints)}{W0024}
+\WarningFilter{minitoc(hints)}{W0028}
+\WarningFilter{minitoc(hints)}{W0030}
 % Bibliography stuff
 \usepackage[doi=false,isbn=false,url=false,style=alphabetic]{biblatex}
 \bibliography{citations.bib}
@@ -2516,7 +2522,7 @@ The cofibers of the vertical maps are equivalent, yielding
 
 
 
-\section{$\A^1$-homotopy classes of maps}
+\section{\texorpdfstring{$\A^1$}{A\^{}1}-homotopy classes of maps}
 
 Given two simplicial presheaves $F,G \in \PSh(\Sm_S)$, by abuse of notation we denote by $\left[ F,G \right]_{\A^1}$ homotopy classes of maps of their associated motivic localizations
 \begin{align*}
@@ -2637,7 +2643,7 @@ As a particular example, when $i=d-1$ and $j=d$, we obtain that punctured affine
 
 
 
-\section{Strong and strict $\A^1$-invariance}
+\section{Strong and strict \texorpdfstring{$\A^1$}{A\^{}1}-invariance}
 
 \begin{goal} 
 We have seen that in order to check a map is a motivic equivalence, it suffices to look at homotopy sheaves. We'd therefore like to better understand when homotopy sheaves are equivalent. It turns out homotopy sheaves (for $n\ge 2$) are a prototypical example of a particularly nice class of sheaves of abelian groups called \textit{strictly invariant} sheaves. These have nice properties that make them easier to work with.
@@ -2883,7 +2889,7 @@ is an equivalence.
 \end{corollary}
 
 
-\section{Milnor $K$-theory}
+\section{Milnor \texorpdfstring{$K$}{K}-theory}
 
 By \autoref{thm:restriction-to-Fk}, we can define unramified sheaves of abelian groups via their values on fields. In the following few sections we provide some examples.
 
@@ -3015,7 +3021,7 @@ We will see later that the sheaf cohomology of $\KM_n$ computes the Chow groups 
 which is an isomorphism for $n\le 2$. (For $n=0,1$ this is easy, for $n=2$ this is \textit{Matsumoto's theorem}).
 \end{proposition}
 
-\section{Milnor--Witt $K$-theory} We refer the reader to \cite{Deglise,Carlier} for more in-depth discussions of what's found here.
+\section{Milnor--Witt \texorpdfstring{$K$}{K}-theory} We refer the reader to \cite{Deglise,Carlier} for more in-depth discussions of what's found here.
 
 \begin{definition}\label{def:MW} 
 \textit{Milnor--Witt $K$-theory} of a field $F$ is defined to be the graded algebra $K_\ast^\MW(F)$ defined by symbols $[a]\in K_1^{\MW}(F)$ for $a\in F^\times$ and $\eta \in K_{-1}^\MW(F)$, modulo the relations:
@@ -4210,7 +4216,7 @@ We have to check this is well-defined, i.e. that if we have $\alpha,\beta\in \GW
 
 
 
-\section{The fundamental group of $\P^1$}
+\section{The fundamental group of \texorpdfstring{$\P^1$}{P\^{}1}}
 
 Our goal is to compute $\pi_1^{\A^1}(\P^1)$. Recall we have
 \begin{align*}
@@ -4864,6 +4870,7 @@ In motivic homotopy theory, the first nonvanishing homotopy sheaf of $\Sigma^{n-
 We can identify many groups now just using contraction:
 
 \begin{corollary} We have a canonical isomorphism
+\label{cor:pi_n_Sph_KMW}
 \begin{align*}
     \pi_n \left( S^{n+i,i} \right) \cong \KMW_i,
 \end{align*}
@@ -5437,7 +5444,7 @@ Similarly we can define stable homotopy groups which are bigraded via the follow
 \end{align*}
 \end{definition}
 
-\section{Representability of algebraic $K$-theory}
+\section{Representability of algebraic \texorpdfstring{$K$}{K}-theory}
 
 \begin{goal} We want to show that algebraic $K$-theory is represented by a motivic spectrum $\KGL$.
 \end{goal}
@@ -5935,6 +5942,7 @@ where the rightmost map sends an $r \times r$ matrix to its last column.
 \end{proposition}
 
 \begin{corollary} We obtain an $\A^1$-fiber sequence by delooping
+\label{cor:BGL_deloop_fiber}
 \begin{align*}
     \A^r\minus 0 \to \BGL_{r-1} \to \BGL_r.
 \end{align*}
@@ -6002,7 +6010,7 @@ Our goal here is to give a rough explanation of how the characteristic zero Murt
 
 \subsection{Murthy's splitting conjecture: the $k$-invariants}
 
-Recall by \autoref{} we have a fiber sequence
+Recall by \autoref{cor:BGL_deloop_fiber} we have a fiber sequence
 \begin{align*}
     S^{2d-1,d} \to \BGL_{d-1} \to \BGL_d.
 \end{align*}
@@ -6033,7 +6041,7 @@ So we have two interesting obstruction classes:
         k_{d-1}(E) = o_2(E) \in H^{d+1}(X,\pi_{d}(S^{2d-1,d})(\det E)).
     \end{align*}
 \end{enumerate}
-Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{3.18.2}), we get that
+Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{cor:pi_n_Sph_KMW}), we get that
 \begin{align*}
     \pi_n S^{2d-1,d} = \begin{cases} 0 & n\le d-2 \\ \KMW_d & n=d-1 \\ \text{mostly unknown} & n\ge d-2.\end{cases}
 \end{align*}
@@ -6120,7 +6128,6 @@ Note that $\CH^{d+1}(X)$ will be divisible coprime to the characteristic, hence 
 
 \include{appendices/howard}
 \include{appendices/jonathan}
-
 \include{appendices/hamilton}
 
 
