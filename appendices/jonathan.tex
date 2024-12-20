@@ -1,0 +1,353 @@
+\def\St{\mathrm{St}}
+
+\section{Jonathan Buchanan: Matsumoto's Theorem}
+The goal of this appendix is to prove the following:
+\begin{theorem}[Matsumoto's Theorem]
+    \label{thm:matsumoto}
+    If $F$ is a field, there is an isomorphism $K_2^M(F) \to K_2(F)$ from Milnor K-theory to Quillen K-theory.
+\end{theorem}
+Note that this is the $n = 2$ case of Proposition \ref{prop:symbol_map}.
+
+\subsection{An Algebraic Description of $K_2$}
+A reference for the material in this section is \cite{Kbook}, especially III.5 and IV.1. From now on, we will use $K_i$ and $K_i^M$ to denote $K_i(F)$ and $K_i^M(F)$, respectively. Also, $\SL_n$ and $\GL_n$ will denote $\SL_n(F)$ and $\GL_n(F)$. We will also write all groups, including abelian groups, multiplicatively, unless otherwise stated.
+
+\begin{definition}
+    A group $G$ is \textbf{perfect} if $G$ is equal to its commutator subgroup $[G, G]$.
+\end{definition}
+\begin{example}
+    The commutator subgroup of $\GL_n$ (assume $n \geq 3$) is $\SL_n \subset \GL_n$, and $\SL_n$ is perfect.
+\end{example}
+
+Recall that we defined
+\[
+    K_n = \pi_n(\Vect^\gp).
+\]
+To understand these groups for low $n$, let $M = \Vect$ considered as a commutative monoid in spaces. Then there is a map $M_\infty \to M^\gp$ that is a plus construction. It is then easy to understand $K_n$ for $n = 0, 1$ using this fact.
+\begin{proposition}
+    We have
+    \begin{align*}
+        K_0 & \cong \Z, \\
+        K_1 & \cong F^\times.
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    Since $\Vect^\gp$ and $\Vect_\infty$ have the same $H_0$,
+    \[
+        K_0 = \pi_0(\Vect^\gp) \cong \pi_0(\Vect_\infty) \cong \Z.
+    \]
+    Because $\Vect^\gp$ has abelian fundamental group, and $\Vect_\infty \to \Vect^\gp$ is a plus construction
+    \[
+        K_1 = \pi_1(\Vect^\gp) \cong H_1(\Vect^\gp ; \Z) \cong H_1(\Vect_\infty ; \Z) \cong \pi_1(\Vect_\infty)^\ab \cong GL^\ab.
+    \]
+    And $GL^\ab \cong \GL / \SL \cong F^\times$.
+\end{proof}
+It is harder to compute the higher groups because the plus construction alters the homotopy groups in a more complicated way for $n \geq 2$, but there is still a convenient algebraic description when $n = 2$. If we form the homotopy fiber $X$ of $\Vect_\infty \to \Vect^\gp$, then we get a long exact sequence of homotopy groups
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-5, to=1-6]
+        \pi_2(\Vect_\infty) & K_2 & \pi_1(X) & \pi_1(\Vect_\infty) & K_1 & \pi_0(X)
+    \end{tikzcd}
+\]
+But $\pi_2(\Vect_\infty)$ is zero because $\pi_2(\Vect_\infty) \cong \pi_2(\BGL) \cong 0$. Also, the map $\pi_1(\Vect_\infty) \to \pi_1(\Vect^\gp) = K_1$ is abelianization, and therefore surjective. Hence we have an exact sequence
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \arrow[from=1-5, to=1-6]
+        1 & K_2 & \pi_1(X) & \GL & F^\times & 1
+    \end{tikzcd}
+\]
+It is a general fact that for the long exact sequence of a fibration like this, the image of the map $K_2 \to \pi_1(X)$ is in the center. So we get a central extension
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        1 & K_2 & \pi_1(X) & \SL & 1
+    \end{tikzcd}
+\]
+The fiber $X$ has the homology of a point because $\Vect_\infty \to \Vect^\gp$ is a plus construction. It follows that $G = \pi_1(X)$ is perfect because its abelianization vanishes. Take the map $X \to BG$ and let $Y$ be the homotopy fiber. Then $Y$ is the universal cover of $X$, and we get a Serre spectral sequence $E_{p, q}^2 \cong H_p(BG ; H_q(Y;\Z)) \cong H_p(G ; H_q(Y;\Z))$ converging to $H_{p+q}(X;\Z)$. But for $H_2(X;\Z)$ to vanish, every term of total degree two in the spectral sequence eventually needs to be killed. But $E_{2, 0}^2 \cong H_2(G;\Z)$ must be killed by the differential $d_2$ since all other differentials vanish by degree reasons, and this differential lands in $E_{0, 1}^2 \cong 0$ because $Y$ is simply connected. So $H_2(G;\Z) \cong 0$. So, we have the following:
+\begin{proposition}
+    There is a central extension
+    \[
+        \begin{tikzcd}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=1-4, to=1-5]
+            1 & K_2 & H & \SL & 1
+        \end{tikzcd}
+    \]
+    such that $H$ is perfect and $H_2(F ; \Z) \cong 0$.
+\end{proposition}
+
+It turns out that this is enough to completely characterize $H \to \SL$ (and therefore $K_2$).
+
+\begin{definition}
+    A \textbf{universal central extension} of a group $G$ is an initial object in the category of central extensions of $G$, i.e. a central extension $\phi : X \to G$ such that for any other central extension $\psi : Y \to G$, there is a unique map $f : X \to Y$ such that $\phi = \psi f$.
+\end{definition}
+Here is the main result characterizing universal central extensions:
+\begin{theorem}
+    The following are equivalent:
+    \begin{itemize}
+        \item $X \to G$ is a universal central extension.
+        \item $H_1(X ; \Z) \cong H_2(X ; \Z) \cong 0$.
+        \item $X$ is a perfect group and every central extension of $X$ splits.
+    \end{itemize}
+\end{theorem}
+From this, we easily obtain the following algebraic characterization of $K_2$:
+\begin{corollary}
+    The perfect group $H$ is the universal central extension of $\SL$ and $K_2$ is the kernel.
+\end{corollary}
+
+\subsection{The Steinberg Group and $K_2$}
+The material in the following two sections comes from Chapters 5, 8, 9, 10, and 11 of \cite{MilnorK}.
+
+To get closer to our goal, we should try to write down a universal central extension of $\SL$.
+\begin{definition}
+    For $n \geq 3$, the \textbf{Steinberg group} is the group $\St_n$ generated by the symbols $x_{ij}^a$, where $a \in F$ and $1 \leq i, j \leq n$ are distinct, subject to the relations $x_{ij}^a x_{ij}^b = x_{ij}^{a + b}$, $[x_{ij}^a, x_{jk}^b] = x_{ik}^{ab}$ if $i \neq k$, and $[x_{ij}^a, x_{k\ell}^b] = 1$ if $j \neq k$ and $i \neq \ell$.
+\end{definition}
+There is a unique map $\St_n \to \St_{n + k}$ with $x_{ij}^a \mapsto x_{ij}^a$, so we can let $\St := \colim (\St_3 \to \St_4 \to \St_5 \to \ldots)$. It is easy to see that $\St$ is the group generated by the symbols $x_{ij}^a$, where $a \in F$ and $i$ and $j$ are distinct positive integers, subject to relations of the form above. The Steinberg group models some of the algebra of elementary matrices:
+\begin{lemma}
+    There are maps from $\St_n$ to $\SL_n$ defined by sending $x_{ij}^a$ to the elementary matrix that has $1$s on the diagonal and a single nonzero off-diagonal entry at $(i, j)$ equal to $a$.
+\end{lemma}
+
+There are surjective maps from $\St_n$ to $\SL_n$ defined by sending $x_{ij}^a$ to the elementary matrix in $\SL_n$ that has $1$s on the diagonal, $a$ in the $ij$th place, and zeroes everywhere else, since the elementary matrices satisfy the relations above. It is easy to see that these maps are compatible as we increase the dimension, so that we get a map $\St \to \SL$ between the colimits.
+
+\begin{theorem}
+    The map $\St \to \SL$ is a universal central extension for $\SL$, and the kernel is exactly the center of $\St$.
+\end{theorem}
+\begin{proof}
+    First, we need to show that $\St \to \SL$ is a central extension. If $x$ is in the kernel, we need to show it commutes with every $x_{ij}^a$. Let $n$ be sufficiently large so that $x \in \St_{n - 1}$. Let $P$ be the subgroup of $\St_n$ generated by $x_{in}^a$ for $i < n$ and $a \in F$. By the first and third class of relations of the Steinberg group, we see that $P$ is commutative and every element can be written uniquely as $x_{1n}^{a_1} \ldots x_{(n - 1)n}^{a_{n - 1}}$. So $P$ maps injectively into $\SL_n$. Also, $x_{ij}^a P x_{ij}^{-1} \subseteq P$ if $i, j < n$, so $x P x^{-1} \subseteq P$. But then $x$ commutes with every element of $P$, since $P$ is mapped injectively to $\SL_n$. So $x$ commutes with every $x_{in}^a$ where $i < n$. Using an automorphism of $\St$, we see that $x$ also commutes with every $x_{nj}^a$ for $j < n$. Hence $x$ commutes with $[x_{in}^a, x_{nj}^1] = x_{ij}^a$ if $i, j < n$. But $n$ was just some sufficiently large number, so $x$ commutes with every generator of $\St$.
+
+    All of the center is in the kernel because $\St \to \SL$ is surjective and $\SL$ has trivial center, because if a matrix in $\SL$ is in the center, then it will be a multiple of the identity, and the only such matrix in $\SL$ is the identity.
+
+
+    Then, we need to show that $\St$ is perfect. This is easy, because $[\St, \St]$ is a subgroup of $\St$ and each generator $x_{ij}^a$ can be written as the commutator $[x_{ik}^a, x_{kj}^1] = x_{ij}^a$, where $k$ is some index distinct from $i$ and $j$.
+
+    Finally, we must show that every central extension of $\St$ splits. Suppose we have a central extension
+    \[
+        \begin{tikzcd}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow["{f}", from=1-3, to=1-4]
+            \arrow[from=1-4, to=1-5]
+            1 & K & G & \St & 1
+        \end{tikzcd}
+    \]
+    To split the map $f$, we need to find elements $s_{ij}^a \in G$ satisfying the relations of the Steinberg group such that $f(s_{ij}^a) = x_{ij}^a$. Given $x_{ij}^a$, let $y_{ij}^a \in G$ map to $x_{ij}^a$. Then let $s_{ij}^a = [y_{ik}^1, y_{kj}^a]$ where $k$ is distinct from $i$ and $j$. Clearly this does not depend on the choice of $y_{ik}^1$ and $y_{kj}^a$, since any other choices would differ by an element of $K$, and this element would not change the commutator because $K$ is in the center of $G$.
+    
+    If $j \neq k$ and $i \neq \ell$, let $h$ be an index distinct from $i$, $j$, $k$, and $\ell$. By the Steinberg relations, $[y_{ih}^1, y_{k\ell}^b], [y_{hj}^a, y_{k\ell}^b] \in K$ are in the center, so $[y_{ih}^1, y_{hj}^a]$ commutes with $y_{k\ell}^b$, since moving $y_{k\ell}^b$ past each factor in $[y_{ih}^1, y_{jh}^a]$ introduces $[y_{ih}^1, y_{k\ell}^b]$ or $[y_{hj}^a, y_{k\ell}^b]$ or their inverses exactly once, and since these are central, they all cancel. Hence $[y_{ij}^a, y_{k\ell}^b] = 1$, since $y_{ij}^a$ differs from $[y_{ih}^1, y_{hj}^a]$ by an element of $K$. So we have the third Steinberg relation:
+    \begin{align*}
+        [s_{ij}^a, s_{k\ell}^b] & = [[y_{ih}^1, y_{hj}^a], [y_{kg}^1, y_{g\ell}^b]] \\
+        & = [y_{ij}^a, y_{k\ell}^b] \\
+        & = 1
+    \end{align*}
+    when $i \neq \ell$ and $j \neq k$.
+
+    Now we recall some general group theory facts. If we let $X'' = [[X, X], [X, X]]$, where $X$ is some group and $x, y, z \in X$, then there is a Jacobi identity $[x, [y, z]][y, [z, x]][z, [x, y]] \in X''$. Also $[x, y][x, z] = [x, yz][y, [z, x]]$.
+
+    If $i$, $j$, $k$, and $\ell$ are all distinct, let $X$ be the subgroup of $G$ generated by $y_{\ell i}^1$, $y_{ij}^a$, and $y_{jk}^b$. Then the commutator subgroup $[X, X]$ of $X$ is generated by elements mapping to $x_{\ell j}^a$, $x_{ik}^{ab}$, and $x_{\ell k}^{ab}$, and so $X''$ is the trivial group. Since $y_{\ell i}^1$ and $y_{jk}^b$ commute, the Jacobi identity implies
+    \[
+        [[y_{\ell i}^1, y_{ij}^a], y_{jk}^b] = [y_{\ell i}^1, [y_{ij}^a, y_{jk}^b]].
+    \]
+    Using the Steinberg relations, this is the same as
+    \[
+        [y_{\ell j}^a, y_{jk}^b] = [y_{\ell i}^1, y_{ik}^{ab}].
+    \]
+    If we let $a = 1$, we see that
+    \[
+        s_{\ell k}^b = [y_{\ell i}^1, y_{i k}^b].
+    \]
+    So the second Steinberg relation is true because
+    \begin{align*}
+        [s_{ij}^a, s_{jk}^b] & = [[y_{ik}^1, y_{kj}^a], [y_{j\ell}^1, y_{\ell k}^b]] \\
+        & = [y_{ij}^a, y_{jk}^b] \\
+        & = s_{ik}^{ab}
+    \end{align*}
+    if $i \neq \ell$. And finally, the first Steinberg relation follows because
+    \begin{align*}
+        s_{ij}^a s_{ij}^b & = [y_{ik}^1, y_{kj}^a][y_{ik}^1, y_{kj}^b] \\
+        & = [y_{ik}^1, y_{kj}^a y_{kj}^b] [y_{kj}^a, [y_{kj}^b, y_{ik}^1]] \\
+        & = [y_{ik}^1, y_{kj}^{a + b}] [y_{kj}^a, [y_{kj}^b, y_{ik}^1]] \\
+        & = s_{ij}^{a + b} [y_{kj}^a, [y_{kj}^b, y_{ik}^1]] \\
+        & = s_{ij}^{a + b}.
+    \end{align*}
+\end{proof}
+A slight modification of this proof shows that $\St_n \to \SL_n$ is a universal central extension whenever $n \geq 5$.
+
+\begin{corollary}
+    The kernel of $\St \to \SL$ is isomorphic to $K_2$.
+\end{corollary}
+
+\subsection{Matsumoto's Theorem}
+Proving Matsumoto's theorem now just amounts to describing the kernel of the map $\St \to \SL$. 
+\begin{definition}
+    If $A$ is an abelian group (with composition written as multiplication), a \textbf{Steinberg symbol} valued in $A$ is a map $c : F^\times \times F^\times \to A$ that preserves multiplication in each variable separately and satisfies the identity $c(x,1-x) = 1$.
+\end{definition}
+Said differently, a Steinberg symbol is a group homomorphism $F^\times \otimes F^\times \to A$ satisfying $x \otimes (1 - x) \mapsto 1$ for all $x \in F^\times$ not equal to $1$.
+Here are some of the algebraic properties of Steinberg symbols. For any $a, b \in F^\times$:
+\begin{itemize}
+    \item $c(a, 1) = c(1, a) = 1$.
+    \item $c(a, b) = c(b, a)^{-1}$.
+    \item $c(a, -a) = 1$.
+\end{itemize}
+The following Steinberg symbol will be central to the proof of Matsumoto's theorem:
+\begin{example}
+    \label{ex:st_sym}
+    There is a Steinberg symbol $\{ -, - \}$ with values in $K_2$. If $a, b \in F^\times$, consider the matrices
+    \[
+        A =
+        \begin{bmatrix}
+            a & 0 & 0 \\
+            0 & a^{-1} & 0 \\
+            0 & 0 & 1
+        \end{bmatrix}, \
+        B =
+        \begin{bmatrix}
+            b & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & b^{-1}
+        \end{bmatrix}.
+    \]
+    These lie in $\SL_3$, so can be lifted to elements $\tilde{A}, \tilde{B} \in \St_3$. We then let $\{ a, b \}$ be the commutator of $\tilde{A}$ and $\tilde{B}$, so that $\{ a, b \} = \tilde{A} \tilde{B} \tilde{A}^{-1} \tilde{B}^{-1}$. We have $\{ a, b \} \in K_2$ because $A$ and $B$ commute. The choice of representatives $\tilde{A}$ and $\tilde{B}$ do not matter because any other choices would differ by elements of $K_2$, which is the center, so the commutator is not affected.
+\end{example}
+This Steinberg symbol has some particularly nice properties:
+\begin{lemma}
+    The subgroup $K_2 \subseteq \St$ is generated by $\{ a, b \}$ as $a$ and $b$ range over $F^\times$.
+\end{lemma}
+\begin{lemma}
+    \label{lem:k2_ff}
+    The Steinberg symbols $\{ a, b \}$ are all trivial when $F$ is a finite field.
+\end{lemma}
+\begin{corollary}
+    When $F$ is a finite field, $K_2 = 1$.
+\end{corollary}
+See Corollary 9.9 and Corollary 9.13 in \cite{MilnorK}.
+
+Matsumoto's theorem hinges on the following result:
+\begin{proposition}
+    \label{prop:matsumoto_ext}
+    If $c$ is a Steinberg symbol with values in $A$, there are central extensions $G \to \SL_n$ with kernel $A$, for $n \geq 3$, such that if $\tilde{C}, \tilde{D} \in G$ map to diagonal matrices with entries $c_1, \ldots, c_n$ and $d_1, \ldots, d_n$, respectively, then the commutator of $\tilde{C}$ and $\tilde{D}$ lies in $A$ and is $c(c_1, d_1) \ldots c(c_n, d_n)$. As $n$ varies, these extensions are compatible with the maps $\SL_n \to \SL_{n + 1}$.
+\end{proposition}
+The proof of this is quite technical and involved, so we will only sketch the main ideas. The extension is built in stages over subgroups of $\SL_n$. First, we get a central extension
+\[
+\begin{tikzcd}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{\phi}", from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+    1 & A & H & D_n & 1
+\end{tikzcd}
+\]
+where $D_n \subseteq \SL_n$ is the subgroup of diagonal matrices, $H$ is defined as the set $D \times A$ with the group operation $(A, a)(B, b) = \left( AB, ab \prod_{i \geq j} c(A_{ii}, B_{jj}) \right)$, and $\phi$ is the projection onto $D_n$. The proposition will be true if this extension is $G \times_{\SL_n} D_n$ (and the extensions $G$ are compatible as $n$ varies), since commutators in $H$ have the desired form.
+
+The next stage of the extension is built over the subgroup of monomial matrices in $\SL_n$. Recall that a \textbf{monomial matrix} is a matrix with one nonzero entry in every column and row. Let $M_0 \subseteq \SL_n$ be the subgroup consisting of monomial matrices where all entries are $0$ or $\pm 1$. If $c(-1, -1) = 1 \in A$, let $W_0 = M_0$. Note that this must be the case if $F$ has positive characteristic, by Lemma \ref{lem:k2_ff}. If $c(-1, -1) = -1$, then $F$ has characteristic zero, and we let $W_0$ be the subgroup of $\St_n$ that is the preimage of $M_0 \subseteq \SL_n$. In either case, we get a map $\phi_0 : W_0 \to M_0$ (the identity or the restriction of $\St_n \to \SL_n$). The reason we do this is so that we can identify a certain subgroup of $W_0$ with a subgroup of $H$ and this will be necessary for the relations to work out.
+
+Now we set up this identification. If $i \neq j$, and $a \in F^\times$, let $d_{ij}^a$ be the diagonal matrix with $a$ at the $i$th diagonal entry and $a^{-1}$ at the $j$th and all other diagonal entries equal to $1$. If $i < j$, let $h_{ij}^a = (d_{ij}^a, 1)$, and if $i > j$, let $h_{ij}^a = (d_{ij}^a, c(a, a))$. These elements satisfy the identities $h_{ji}^a = (h_{ij}^a)^{-1} = (h_{ik}^a)^{-1} (h_{kj}^a)^{-1}$ and $h_{ij}^a h_{ij}^b = c(a, b) h_{ij}^{ab}$. If we let $H_0 \subseteq H$ be the subgroup generated by the elements $h_{ij}^{-1}$, it is isomorphic to either the subgroup of $M_0$ generated by $d_{ij}^{-1}$ in the case $W_0 = M_0$, or the subgroup of $W_0 \subseteq \St_n$ generated by $(x_{ij}^{-1} x_{ji}^1 x_{ij}^{-1})^2$.
+
+Every monomial matrix can be written uniquely as a product $PD$ where $P$ is a permutation matrix and $D$ is a diagonal matrix.
+\begin{lemma}
+    \label{lem:monomial_action}
+    For any monomial matrix $PD$, where $P$ corresponds to $\sigma \in S_n$ and the diagonal entries of $D$ are $d_1, \ldots, d_n$, there is a unique automorphism of $H$ that acts trivially on $A \subseteq H$ and satisfies $h_{ij}^a \mapsto c(d_id_j^{-1}, a) h_{\sigma(i)\sigma(j)}^a$. If $P = 1$, this automorphism is the inner automorphism $x \mapsto yxy^{-1}$ whenever $\phi(y) = D$. The map assigning this automorphism to each monomial matrix is a homomorphism from the group of monomial matrices to the automorphism group of $H$.
+\end{lemma}
+
+Then $W$ is defined to be the quotient of $H \times W_0$ by the equivalence relation identifying $(xy, z)$ and $(x, yz)$ for $y \in H_0$. The product of $W$ is defined to be $[x, y][z, w] = [x(yzy^{-1}), yw]$, where $yzy^{-1}$ denotes the action of the automorphism induced by $y \in W_0$ of Lemma \ref{lem:monomial_action} on $x \in H$. This is indeed a group law, and we get a central extension of the desired form
+\[
+\begin{tikzcd}
+    \arrow[from=1-1, to=1-2]
+    \arrow[from=1-2, to=1-3]
+    \arrow["{\phi}", from=1-3, to=1-4]
+    \arrow[from=1-4, to=1-5]
+    1 & A & W & M_n & 1
+\end{tikzcd}
+\]
+compatible with the previous stage by mapping $[x, y]$ to $\phi(x)\phi_0(y)$.
+
+Finally, the extension is constructed over $\SL_n$ as follows. Let $m_i^a$ be the monomial matrix with $a$ as the $(i, i + 1)$th entry, $-a^{-1}$ as the $(i + 1, i)$th entry, and $1$ on each diagonal entry that is not the $i$th or $(i + 1)$th entry. The following properties of $\SL_n$ will be important:
+\begin{lemma}
+    Any matrix $x \in \SL_n$ can be written as $y\rho(x)z$ where $y$ and $z$ are upper triangular matrices and $\rho(x)$ is a monomial matrix, with $\rho(x)$ being the unique monomial matrix having this property. The map $\rho : \SL_n \to M_n$ satisfies the properties:
+    \begin{itemize}
+        \item $\rho(dx) = d\rho(x)$ and $\rho(xd) = \rho(x)d$ whenever $d$ is diagonal.
+        \item $\rho(m_i(1)x)$ is either $m_i(1)\rho(x)$ or $d_{i, i+1}(a)^{-1}\rho(x)$ for some unique $a \in F^\times$.
+        \item $\rho(xm_i(-1))$ is either $\rho(x)m_i(-1)$ or $\rho(x)d_{i, i +1}(a)$ for a unique $a \in F^\times$.
+    \end{itemize}
+\end{lemma}
+
+Let $X$ be the pullback (of sets)
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["{\phi}", from=1-2, to=2-2]
+        \arrow["{\rho}", from=2-1, to=2-2]
+        X & W \\
+        \SL_n & M_n
+    \end{tikzcd}
+\]
+and let $G$ be the subgroup of permutations of $X$ generated by the permutations $\lambda(h)(x, w) = (\phi(h)x, hw)$ for $h \in H$, $\mu(t)(x, w) = (tx, w)$ for $t$ an upper triangular matrix, and $\eta_i$, where $\eta_i(x, w)$ is $(m_i(1)x, w_{i, i+1}(1)w)$ if $\rho(m_i(1)x) = m_i(1)\rho(x)$ and $(m_i(1)x, (h_{i, i + 1}^a)^{-1}w$ if $\rho(m_i(1)x) = d_{i, i+1}(a)^{-1} \rho(s)$. Here $w_{ij}^a = x_{ij}^a x_{ji}^{-a^{-1}} x_{ij}^a \in \St_n$. Then these generators endow $G$ with the following property that allows us to prove it is the desired extension:
+\begin{lemma}
+    The action of $G$ on $X$ is simply transitive.
+\end{lemma}
+From this we get a homomorphism $\phi : G \to \SL_n$ defined by sending $\sigma \in G$ to the unique $\phi(\sigma) \in \SL_n$ such that $\sigma$ acts on the first factor of pairs in $X$ by left multiplication by $\phi(\sigma)$. This exists because such an element of $\SL_n$ exists for all the generators of $G$. This is a surjective homomorphism since the action is transitive, and the kernel is $A$, because if $\sigma$ is in the kernel, then $\sigma(x, w) = (x, w_0)$ for every $(x, w) \in X$. But $\rho(w) = \rho(w_0)$, so $w_0 = aw$ for some $a \in A$, and therefore $\sigma = \lambda(a)$ because the action of $G$ on $X$ is simply transitive. Hence we have the desired central extension
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow["{\phi}", from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        1 & A & G & \SL_n & 1
+    \end{tikzcd}
+\]
+
+\begin{proof}[Proof of Theorem \ref{thm:matsumoto}]
+    There is a ``universal Steinberg symbol'' $c : F^\times \times F^\times \to A$, where $A$ is the quotient of the group $F^\times \otimes F^\times$ by the subgroup generated by all elements of the form $x \otimes (1 - x)$. It is easy to see that the target of the universal Steinberg symbol is $K_2^M$. The Steinberg symbol $\{ -, - \}$ is classified by a map $\phi : A \to K_2$ taking $c(a, b)$ to $\{ a, b \}$. Form the central extension
+    \[
+        \begin{tikzcd}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=1-4, to=1-5]
+            1 & A & G & \SL & 1
+        \end{tikzcd}
+    \]
+    of Proposition \ref{prop:matsumoto_ext}. Then by the universal property of $\St$, there is a unique map $\psi : \St \to G$ making the diagram
+    \[
+        \begin{tikzcd}
+            \arrow[from=1-1, to=1-2]
+            \arrow["{\psi}", from=1-1, to=2-1]
+            \arrow["{\mathrm{id}}", from=1-2, to=2-2]
+            \arrow[from=2-1, to=2-2]
+            \St & \SL \\
+            G & \SL
+        \end{tikzcd}
+    \]
+    commute. Also $K_2$ gets mapped to $A$, since $K_2$ is the kernel of $\St \to \SL$. For $a, b \in F^\times$, if we consider the elements $\tilde{A}, \tilde{B} \in \St$ as in Example \ref{ex:st_sym}, we see that by Proposition \ref{prop:matsumoto_ext} that $\psi$ must map their commutator $\{ a, b \} \in K_2$ to the commutator of $\psi(\tilde{A})$ and $\psi(\tilde{B})$ in $G$. Upon taking the commutator, we see that $\psi(\{ a, b \}) = c(a, b)c(a^{-1}, 1)c(1, b^{-1}) = c(a,b)$. But $K_2$ is generated by elements of the form $\{ a, b \}$, so $\phi$ and $\psi$ are inverses, and therefore we get an isomorphism $K_2 \cong A \cong K_2^M$.
+\end{proof}
+
+The statement of Proposition \ref{prop:symbol_map} was a little more precise than what we have proved. There, we stated that there is a \emph{symbol map} $K_n^M \to K_n$ defined for all $n \geq 0$ and it is an isomorphism in degrees $n \in \{ 0, 1, 2 \}$. This is defined using the ring structure on $K_\bullet$, which we have not defined, but since $K_\bullet^M$ is a graded-commutative ring generated in degree one, such a map arises from a map $K_1^M \to K_1$ and taking products. And the product $K_1 \otimes K_1 \to K_2$ corresponds to the Steinberg symbol $\{ -, - \}$ we introduced above, so the map $K_2^M \to K_2$ in our proof of Matsumoto's theorem is indeed the symbol map.
+
+Recall that \emph{Gersten's conjecture} (Corollary \ref{cor:gersten_conj}) states
+\[
+    H^n(X, \mathbf{K}_n^M) \cong H^n(X, \mathbf{K}_n) \cong \mathrm{CH}^n(X)
+\]
+for smooth $k$-schemes $X$. This followed from inspecting the Rost-Schmidt complexes calculating these cohomology groups and the isomorphism $K_n^M(F) \cong K_n(F)$ for $n = 0, 1$. Using Matsumoto's theorem and the Rost-Schmidt complex at
+\[
+    \begin{tikzcd}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-2, to=1-3]
+        \arrow[from=1-3, to=1-4]
+        \arrow[from=1-4, to=1-5]
+        \ldots & \bigoplus_{x \in X^{(n - 2)}} K_2^M(\kappa(x)) & \bigoplus_{x \in X^{(n - 1)}} K_1^M(\kappa(x)) & \bigoplus_{x \in X^{(n)}} K_0^M(\kappa(x)) & 0
+    \end{tikzcd}
+\]
+it follows that $H^{n - 1}(X, \mathbf{K}_n^M) \cong H^{n - 1}(X, \mathbf{K}_n)$ as well.
+
+With the exception of the sketch of the proof of Matsumoto's theorem, most constructions involving $K_2$ and Steinberg groups that we outlined here work over general rings. Details of this can be found in \cite{Kbook} and \cite{MilnorK}. There is also a proof of the theorem relying heavily on group homology given in \cite{Hutchinson}
