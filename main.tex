@@ -72,15 +72,13 @@ These are notes for a topics class taught at Harvard in Fall 2024. The most rece
     \href{https://github.com/tbrazel/math266-motivic}{https://github.com/tbrazel/math266-motivic}
 \end{center}
 
-\textbf{What isn't in these notes?} A ton of core principles in motivic homotopy theory, for instance: purity, six functors formalism, the motivic complexes $\Z(q)$,... Despite the concise title, these notes are not intended to be a sprawling survey of all techniques in motivic homotopy theory, but rather a geodesic towards the motivic obstruction that allows us to talk about classification of torsors over smooth affine varieties. To that end, these notes shouldn't be viewed as a supplement to Morel's book or even a replacement for it. Rather it is a primer for people interested in the Asok--Fasel--et. al. program of research.
+\textbf{What isn't in these notes?} A ton of core principles in motivic homotopy theory, for instance: purity, six functors formalism, the motivic complexes $\Z(q)$,... Despite the concise title, these notes are not intended to be a sprawling survey of all techniques in motivic homotopy theory, but rather a geodesic towards the motivic obstruction theory that allows us to talk about classification of torsors over smooth affine varieties. To that end, these notes shouldn't be viewed as a supplement to Morel's book or even a replacement for it. Rather it is a primer for people interested in the Asok--Fasel--et. al. program of research.
 
 To that end, we treat the classification of torsors as \textit{motivation} for constructing motivic spaces. It is important to note that this is very ahistorical, and is done only for pedagogical reasons. Although affine representability was one of the key early results explored by Morel, motivic spaces and spectra were developed in order to house theories such as algebraic $K$-theory, Bloch's higher Chow groups, and to grow new theories such as algebraic cobordism. We chose this route for a few reasons:
 \begin{enumerate}
     \item The Fall 2024 Thursday seminar is on the Wilson space hypothesis, so we're hoping this class will contrast nicely and provide some foundational background in techniques in motivic obstruction theory.
     \item In order to tailor the course to a broader audience, we'd like to unify the class around a key question which has general appeal, so we've picked the classification of torsors over affine varieties using motivic methods as such a question. This has certain advantages, for instance we can pause in the sheaf topos and discuss classifying torsors there before building motivic spaces --- this vista is useful to people across many fields.
 \end{enumerate}
-
-\textbf{Why did you spend so long on X if you're trying to get to affine representability?} Perhaps the most mathematical mathematician, guided by pure force of will, can teach towards a singular goal, each word building towards this grand horizon. I haven't had the pleasure of meeting this person. The rest of us are tempted by the many sprawling inviting tangents that open their doors to us along the way, and what you're reading is my ambling path.
 
 \textbf{What background is assumed?} We're assuming a strong handle of algebraic geometry and category theory, and a fair bit of familiarity with commutative algebra and homotopy theory. We'll see very quickly that $\infty$-categories (and/or model categories) are needed in order to develop the setting in which we wish to work. We've elected to take the $\infty$-categorical approach, since it streamlines many of the constructions and key ideas, at the cost of being a high technical investment; for this reason we've done our best to make the $\infty$-categorical machinery easy to black box. The reader should be aware that while the categorical language will be heavy in the first half of these notes, it will quickly fade into the background as we become familiar with the ambient setting we're working in and can set our focus towards computations.
 
@@ -249,8 +247,7 @@ This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homot
 \begin{assumption} For this lecture, every time we say ``cover'' you can assume we are working with Zariski covers, or even open covers of topological spaces, since the intuition will be the same and the results here will be mostly identical. If you know about other topologies, the statements here work for any site. We will go into sheaves and sites more next week, when we will remark that everything here works for other nice sites (\'etale, Nisnevich, flat, etc.).
 \end{assumption}
 
-\begin{definition} Let $G$ be a group. Then a $G$-set $X$ is called a \textit{torsor} if its $G$-action is simple and transitive. Equivalently, the map
-
+\begin{definition} Let $G$ be a group. Then a $G$-set $X$ is called a (left) $G$-\textit{torsor} if its $G$-action is simple and transitive. Equivalently, if the action map
 \begin{equation}\label{eqn:torsor-G-set}
 \begin{aligned}
     G \times X &\to X \times X \\
@@ -260,7 +257,8 @@ This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homot
 is a bijection.
 \end{definition}
 
-Note there are two types of $G$-torsors --- sets of the form $G/e$, and the empty set. Depending on the convention, we might want to exclude the case of the empty set by including $X \ne \emptyset$ in the definition.
+
+Observe that there are two types of $G$-torsors --- sets of the form $G/e$, and the empty set. Depending on the convention, we might want to exclude the case of the empty set by including $X \ne \emptyset$ in the definition.
 
 \begin{intuition} A $G$-torsor is like a group $G$ which has remembered its multiplication but forgotten its identity. Any choice of basepoint $x\in X$ yields a canonical bijection $G \xto{\sim} X$ by sending $g \mapsto g\cdot x$.
 \end{intuition}
@@ -269,7 +267,7 @@ Note there are two types of $G$-torsors --- sets of the form $G/e$, and the empt
 \end{example}
 
 
-Let's try to extend this definition to the setting where $G$ isn't a single group, but a \textit{sheaf of groups} $\mathcal{G}$ on a site. What is the appropriate analogue of a torsor in this setting? By abuse of notation we will also call this a \textit{torsor}.
+Let's try to extend this definition to the setting where $G$ isn't a single group, but a \textit{sheaf of groups} $\mathcal{G}$ on a site. What is the appropriate analogue of a torsor in this setting? By abuse of terminology we will also call this a \textit{torsor}.
 
 \begin{definition}\label{def:torsor} 
 \cite[03AH]{Stacks} Let $\mathcal{G}$ be a sheaf of groups on $X$, and let $\Shv_\mathcal{G}(X)$ denote the category of $\mathcal{G}$-sheaves, meaning sheaves of sets equipped with a $\mathcal{G}$-action, and equivariant morphisms between them. We define the category of $\mathcal{G}$\textit{-torsors} $\Tors_\mathcal{G}(X) \subseteq \Shv_\mathcal{G}(X)$ to be the full subcategory on those $\mathcal{F}$ so that
@@ -284,14 +282,14 @@ Let's try to extend this definition to the setting where $G$ isn't a single grou
 \end{enumerate}
 \end{definition}
 
-\begin{terminology} The choice of topology comes into play in that second point. If $\mathcal{F} \in \Shv_{\mathcal{G}}(X)$, we say it is $\tau$\textit{-locally trivial} if $\mathcal{G}$ is a $\tau$-sheaf of groups, $\mathcal{F}$ is a $\tau$-sheaf of sets, and point (2) holds for any $\tau$-cover.
+\begin{terminology} The choice of topology comes into play in that second point. If $\mathcal{F} \in \Shv_{\mathcal{G}}(X)$, we say it is $\tau$\textit{-locally trivial} if $\mathcal{G}$ is a $\tau$-sheaf of groups, $\mathcal{F}$ is a $\tau$-sheaf of sets, and the cover in point (2) is a $\tau$-cover.
 \end{terminology}
 
 
 \begin{example} The sheaf $\mathcal{G}$, acting on itself by scaling, is called the \textit{trivial} $\mathcal{G}$-torsor.
 \end{example}
 
-\begin{example} For any group scheme $G$, we will refer to $G$\textit{-torsors}, mean torsors the representable functor $\Hom(-,G)$.
+\begin{example} For any group scheme $G$, we will refer to $G$\textit{-torsors}, by which we mean torsors for the representable functor $\Hom(-,G)$.
 \end{example}
 
 \begin{proposition}\label{prop:torsor-trivial-iff-global-section} 
@@ -345,7 +343,7 @@ Recall if $\mathscr{F}$ is a sheaf of sets, this means for every cover $\left\{ 
 \end{align*}
 This first map is a monomorphism (injection) because it is an equalizer. This means that if $x,y \in \mathcal{F}(U)$ are equal in $\mathcal{F}(U_i)$ for each $i$, then they are equal in $\mathcal{F}(U)$. In other words, the map ``reflects equality'' --- this is literally just what it means for something to be an injection.
 
-Let's suppose now that $\mathcal{F}(U)$ is a \textit{category} for every $U$. We'll define this concretely soon once we have more machinery, but for now let's just pretend that we know what this means --- it means we can glue objects and morphisms along covers. Consider the analogous restriction functor:
+Let's suppose now that $\mathcal{F}(U)$ is a \textit{category} for every $U$, and that $\mathcal{F}$ is a ``\textit{sheaf of categories}'' (we'll define this concretely soon once we have more machinery, but for now let's just pretend that we know what this means --- it means we can glue objects and morphisms along covers). Consider the analogous restriction functor:
 \begin{align*}
     \mathcal{F}(U) &\to \prod \mathcal{F}(U_i) \\
     x &\mapsto \left( x|_{U_i} \right)_i.
@@ -589,7 +587,7 @@ A big example comes from quotienting out by a compact subgroup:
     S^n \to \BO(n) \to \BO(n+1).
 \end{align*}
 \end{example}
-This is how Bott periodicity is proved.
+This is how Bott periodicity is proven.
 
 
 
@@ -918,7 +916,7 @@ This notion makes sense for maps between simplicial objects in any category, and
 \begin{remark} We can study simplicial sets up to homotopy or spaces up to homotopy, and in a sense that can be made precise, these are essentially the same theory.
 \end{remark}
 
-\begin{remark} Historically this connection between simplicial sets and spaces was part of a research program which used to be called ``combinatorial homotopy theory,'' led by Kan in the 1950's. % Goerss--Jardine p2
+\begin{remark} This connection between simplicial sets and spaces emerged initially in a research program which used to be called ``combinatorial homotopy theory,'' led by Kan in the 1950's. % Goerss--Jardine p2
 \end{remark}
 
 
@@ -942,7 +940,7 @@ and this assignment is surjective.
 N(\mathcal{U})= & \coprod_i U_i\dar\rar & \coprod_{i,j} U_{ij}\lar[shift left]\lar[shift right]\dar & \cdots \\
     BG= & \ast\rar & G \lar[shift left]\lar[shift right] & \cdots 
 \end{tikzcd} \]
-On 0-simplices, there is no data, and on 1-simplices, we are obtaining elements we will call $(g_{ij} \in \Hom(U_{ij},G))$. For each $i$, the degeneracy maps require the following diagram to commute.
+On 0-simplices, there is no data, and on 1-simplices, we are obtaining elements we will call $g_{ij} \in \Hom(U_{ij},G)$. For each $i$, the degeneracy maps require the following diagram to commute.
 \[ \begin{tikzcd}
     U_{i}\rar["s_0"]\dar & U_{ii}\dar["g_{ii}" right] & \\
     \ast\rar["e" below] & G,
@@ -1036,7 +1034,7 @@ Last week we asked for a universal space $BG$ so that homotopy classes of maps $
     \item In $\mathscr{C}$, we have that $X \simeq N(\mathcal{U})$, i.e. a variety is equivalent to the \v{C}ech nerve of any cover over it, so that up to homotopy, we can classify torsors via maps $X \to B_\bullet G$.
 \end{enumerate}
 
-Let's preview how this is going to go --- the category $\Var_k$ of $k$-varieties doesn't support a nice homotopy theory, nor does simplicial varieties $\Fun(\DDelta^\op, \Var_k)$. So what we could do instead is replace each variety by its representable presheaf (functor of points, for the algebraic geometers). The Yoneda embedding $\Var_k \to \Fun(\Var_k^\op,\Set)$ then induces a functor
+Let's preview how this is going to go --- the category $\Var_k$ of $k$-varieties doesn't support a nice homotopy theory, nor does simplicial varieties $\Fun(\DDelta^\op, \Var_k)$. So what we could do instead is replace each variety by its representable presheaf. The Yoneda embedding $\Var_k \to \Fun(\Var_k^\op,\Set)$ then induces a functor
 \begin{align*}
     \Fun(\DDelta^\op, \Var_k) \to \Fun(\DDelta^\op, \Fun(\Var_k^\op,\Set).
 \end{align*}
@@ -1105,7 +1103,8 @@ For more topologies see \href{https://pbelmans.ncag.info/topologies-comparison/}
 \begin{question} If $t \le \tau$ then what is the difference between $t$-torsors and $\tau$-torsors?
 \end{question}
 
-Let's break this into two parts
+Let's answer this as two subquestions: when are $t$-torsors $\tau$-torsors, and when are $\tau$-torsors $t$-torsors?
+
 
 \subsection{Torsors in finer topologies}
 
@@ -1615,7 +1614,7 @@ We will call these squares \textit{distinguished Zariski squares}.
 where $i$ is an open immersion, $p$ is \'etale, and $p$ restricts to an isomorphism $p^{-1}(X-U)\to X-U$.
 \end{example}
 
-\begin{example}\label{ex:affine-distinguished-nisnevich-square} \textit{(Affine distinguished Nisnevich square)}. Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $h\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
+\begin{example}\label{ex:affine-distinguished-nisnevich-square} \textit{(Affine distinguished Nisnevich square)}. Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $x\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
 \[ \begin{tikzcd}
     \Spec(S_{f(x)})\rar\dar\pb & \Spec(S)\dar\\
     \Spec(R_f)\rar & \Spec(R).
@@ -3716,6 +3715,14 @@ If $G$ is a strongly $\A^1$-invariant sheaf of groups, then
 is trivial for each $F/k$ finitely generated. By adjunction and representability of cohomology, this is asking whether $H^1(\mathbb{G}_m(F), G)$ is trivial. We can pass to the Zariski site by some formal nice properties of strongly invariant sheaves of groups (c.f. \cite[2.24]{Morel}), and then we can conclude by an argument involving 1-cocycles (see e.g. \cite[4.2]{bachmannstrongly}).
 \end{proof}
 
+We'll need the following result a few times, so let's include it.
+
+\begin{theorem}\label{thm:cd-krull-dim-inequality}
+\cite[3.6.5]{Tohoku}
+The cohomological dimension of a scheme $X$ is bounded above by its Krull dimension.\footnote{%
+In the Tohoku paper this is phrased in the Zariski site. It's certainly still true in the Nisnevich site, but we should cite a more general fact here.}
+\end{theorem}
+
 
 \begin{corollary}\label{cor:strongly-invt-contraction} 
 \begin{enumerate}
@@ -5775,9 +5782,10 @@ vanishes. In other words, we get \textit{obstructions to lifting} lying in
 \end{example}
 
 
-\begin{theorem} If $X$ has Krull dimension $d$, then any map $X \to Y$ is uniquely determined by $X \to \tau_{\le d-1}Y$.
+\begin{theorem}\label{thm:krull-dim-postnikov-truncation} 
+If $X$ has Krull dimension $d$, then any map $X \to Y$ is uniquely determined by $X \to \tau_{\le d-1}Y$.
 \end{theorem}
-\begin{proof} The Nisnevich cohomological dimension is bounded above by the Krull dimension, so $H^{k}(X,A) = 0$ for any $k>d$ and any sheaf of abelian groups $A$. In particular, $k_{d-1}$ and higher are trivial, so any map $X \to \tau_{\le d-1} Y$ lifts to $\tau_{\le d} Y$, and then all the way to $Y$.
+\begin{proof} The Nisnevich cohomological dimension is bounded above by the Krull dimension (\autoref{thm:cd-krull-dim-inequality}), so $H^{k}(X,A) = 0$ for any $k>d$ and any sheaf of abelian groups $A$. In particular, $k_{d-1}$ and higher are trivial, so any map $X \to \tau_{\le d-1} Y$ lifts to $\tau_{\le d} Y$, and then all the way to $Y$.
 \end{proof}
 
 
@@ -5859,7 +5867,7 @@ is exactly the first Chern class $c_1 \in \Pic(X)$. Hence $\SL_n$-torsors are al
 
 \begin{theorem} If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2, then a rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
 \end{theorem}
-\begin{proof} We can analyze the Postnikov tower for $\BSL_2$. We have that $\pi_1(\BSL_2) = \ast$, so the first nontrivial stage occurs at degree 2, which is $\tau_{\le 2}\BSL_2 = K(\KMW_2,2)$. Since $X$ has Krull dimension two, we have that
+\begin{proof} We can analyze the Postnikov tower for $\BSL_2$. We have that $\pi_1(\BSL_2) = \ast$, so the first nontrivial stage occurs at degree 2, which is $\tau_{\le 2}\BSL_2 = K(\KMW_2,2)$. Since $X$ has Krull dimension two, we have by \autoref{thm:krull-dim-postnikov-truncation} that
 \begin{align*}
     \left[ X,\BSL_2 \right] \cong \left[ X,\tau_{\le 2}\BSL_2 \right] = \left[ X, K(\KMW_2,2) \right] = \CHW^2(X).
 \end{align*}
