@@ -41,6 +41,8 @@
 
 \newcommand{\Pfister}[1]{\left\langle\! \left\langle #1 \right\rangle\! \right\rangle}
 
+%\usepackage{showkeys}
+
 \fancyfoot[C]{\thepage}
 \begin{document}
 \dominitoc
@@ -2622,7 +2624,7 @@ We have that $S^{i+j,j}$ is $\A^1$-$(i-1)$-connected (see \cite[2.4.5]{AO-contra
 \end{example}
 
 \begin{example}\label{exa:connectivity-punctured-affine-space}
-As a particular example, when $i=d-1$ and $j=d$, we obtain that punctured affine space $\A^d\minus\{0\} = S^{2d-1,d}$ is $\A^1$-$(d-2)$-connected. 
+As a particular example, when $i=r-1$ and $j=r$, we obtain that punctured affine space $\A^r\minus\{0\} = S^{2r-1,r}$ is $\A^1$-$(r-2)$-connected. 
 \end{example}
 
 
@@ -5749,9 +5751,9 @@ If $G$ is a sheaf of groups and $M$ is a sheaf of $G$-modules, we define the \te
         K(M,n) \to K^G(M,n) \to BG.
     \end{align*}
     
-    \item Twisted Eilenberg--MacLane spaces represent cohomology with twisted coefficients
+    \item Twisted Eilenberg--MacLane spaces represent cohomology with twisted coefficients in the slice category over $BG$:
     \begin{align*}
-        \left[ X, K^G(M,n) \right] = H^n(X,M(G)).
+        \left[ X, K^G(M,n) \right]_{\Spc(k)/BG} = H^n(X,M(G)).
     \end{align*}
 \end{enumerate}
 \end{proposition}
@@ -5808,7 +5810,7 @@ The key point is that if $f\colon Y \to Z$ is a fibration with fiber $F$, then t
 
 
 
-A key application of this is the classification of torsors.
+Our primary application of this is the classification of torsors.
 
 
 
@@ -5824,7 +5826,7 @@ where $P$ is a projective module of rank $r$ over $R$. In other words, a map
 \end{align*}
 classifies a finitely generated projective $R$-module $P$ of rank $r$, with $n$ generators.
 
-\begin{theorem} (Serre) If $R$ is a Noetherian ring, there is a bijection between algebraic vector bundles on $\Spec(R)$ and finitely generated projective $R$-modules.
+\begin{theorem} \textit{(Serre correspondence; \cite[II\S4]{FAC})} If $R$ is a Noetherian ring, there is a bijection between algebraic vector bundles on $\Spec(R)$ and finitely generated projective $R$-modules.
 \end{theorem}
 
 From this perspective, we might ask for some algebraic version of a Pontryagin--Steenrod theorem, i.e. we might want some infinite Grassmannian for which homotopy classes of maps into it will classify algebraic vector bundles. The following result is a step in this direction.
@@ -5832,22 +5834,33 @@ From this perspective, we might ask for some algebraic version of a Pontryagin--
 \begin{definition} Let $\Gr(r,\infty)$ denote the colimit $\colim_n \Gr(r,n)$, considered as a presheaf.
 \end{definition}
 
-\begin{proposition} (Morel--Voevodsky)
-There is an equivalence of motivic spaces $\Gr(r,\infty) \simeq \BGL_r$.
+\begin{proposition} \cite[p.138]{MV}
+There is a canonical equivalence of motivic spaces $\BGL_r \simeq \Gr(r,\infty)$.
 \end{proposition}
 
 The following result is the strongest current version of an algebraic Pontryagin--Steenrod theorem.
 
-\begin{theorem} (Affine representability) If $X \in \Sm_k^\aff$ is any affine, then there is a bijection
+\begin{theorem} \textit{(Affine representability)} \cite{AHW1} If $X \in \Sm_k^\aff$ is any smooth affine $k$-scheme, then there is a bijection
 \begin{align*}
     \left[ X, \BGL_r \right]_{\A^1} \cong \Vect_r^\alg(X)^{\simeq}
 \end{align*}
 between $\A^1$-homotopy classes of maps $X \to \BGL_r$ and rank $r$ algebraic vector bundles over $X$ up to isomorphism.
 \end{theorem}
 
+\begin{remark} Some remarks on affine representability:
+\begin{enumerate}
+    \item This is the $\GL_n$ version of a much more general theorem, see \cite{AHW1,AHW2,AHW3}
+    \item This was first proven by Morel in the case where $k$ is a perfect field\footnote{Potentially Morel's proof only works when $k$ is infinite? See the footnote on \cite[p.~1925]{AHW1}.} and $r\ne 2$ \cite[8.1(3)]{Morel}
+    \item We can weaken the hypothesis that $k$ is a field, and let it be any ring satisfying Bass--Quillen (in \cite{AHW1} they say $k$ can be a Dedekind domain with perfect residue fields, we could potentially let $k$ be locally ind-smooth over such rings, see e.g. \cite[4.2.12]{AHW2}).
+\end{enumerate}
+
+\end{remark}
+
+
+
 So if $R$ is a smooth affine $k$-algebra, \textit{every} finitely generated projective module over $R$ is classified by a map $\Spec(R) \to \BGL_r$. Moreover we have access to obstruction theory in order to study them.
 
-Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel.
+Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel}.
 
 \subsection{Rank two oriented bundles}
 
@@ -5913,7 +5926,8 @@ Our intuition might be that once $N$ is large enough, we can obtain all rank $r$
 is $N-r$-connective. That is, its fiber has homotopy sheaves vanishing in degrees below $N-r$.
 \end{proposition}
 
-\begin{theorem} If $A$ is a smooth $k$-algebra of dimension $d$, then every finitely generated projective $A$-module of rank $r$ needs at most $r+d$ generators.
+\begin{theorem}\label{thm:motivic-Swan-Forster} 
+\textit{(Motivic Swan--Forster)} If $A$ is a smooth $k$-algebra of cohomological dimension $\le d$, then every finitely generated projective $A$-module of rank $r$ needs at most $r+d$ generators.
 \end{theorem}
 \begin{proof} We want to study the lifting problem
 \[ \begin{tikzcd}
@@ -5935,7 +5949,7 @@ Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note 
 If $N \ge r+d$, then all the $k$-invariants vanish, and there are no obstructions to lifting!
 \end{proof}
 
-\begin{remark} The more general result can be found in \cite{Swan67}.
+\begin{remark} A more general result can be found in \cite{Swan67} (although it should be noted, analogous to the comparison between Serre splitting and motivic Serre splitting which we will soon discuss, the motivic version of Swan--Forster is a strictly stronger result in the geometric setting of smooth affine $k$-algebras).
 \end{remark}
 
 
@@ -5951,9 +5965,11 @@ where the rightmost map sends an $r \times r$ matrix to its last column.
 
 \begin{corollary} We obtain an $\A^1$-fiber sequence by delooping
 \label{cor:BGL_deloop_fiber}
-\begin{align*}
-    \A^r\minus 0 \to \BGL_{r-1} \to \BGL_r.
-\end{align*}
+\begin{equation}\label{eqn:fiber-stabilization-BGLr}
+\begin{aligned}
+    S^{2r-1,r} \to \BGL_{r-1} \to \BGL_r.
+\end{aligned}
+\end{equation}
 \end{corollary}
 
 Now suppose we have some $X \in \Sm_k^\aff$, and we have a rank $r$ vector bundle over it. When does it split off a trivial summand? In other words when does it admit a lift of the form:
@@ -5962,34 +5978,58 @@ Now suppose we have some $X \in \Sm_k^\aff$, and we have a rank $r$ vector bundl
     X\rar\ar[ur,dashed] & \BGL_r.
 \end{tikzcd} \]
 %
-
-\begin{theorem} (Murthy, 1994) If $X$ is a smooth affine $r$-fold over an algebraically closed field $k = \bar{k}$, then an algebraic vector bundle $E \to X$ of rank $r$ splits off a trivial rank one summand if and only if the top Chern class $c_r(E) \in \CH^r(X)$ is zero.
-\end{theorem}
-\begin{proof} The $k$-invariants are valued in
-\begin{align*}
-    k_t \in H^{t+2}(X, \pi_{t+1}(\A^r\minus 0)).
-\end{align*}
-This vanishes for $t\ge r-1$, and $\pi_{t+1}(\A^r\minus 0)$ is zero for $t \le r-3$, since the first nonvanishing homotopy sheaf of $\A^r\minus 0$ is $\pi_{r-1}(\A^2\minus 0)$. Hence there is only one nonvanishing $k$-invariant, which is
-\begin{align*}
-    k_{r-2} \in H^{r}(X, \pi_{r-1}(\A^r\minus 0)) = H^r(X,\KMW_r) = \CHW^r(X).
-\end{align*}
-%
-Again we have an exact sequence
-\begin{align*}
-    \cdots \to H^r(X,\mathbf{I}^{r+1}) \to \CHW^r(X) \to \CH^r(X) \to 0,
-\end{align*}
-and $H^r(X,\mathbf{I}^{r+1}) = 0$ over an algebraically closed field.
-\end{proof}
-
 Over algebraically closed field, the difficulty of these sorts of splitting problems is governed by the \textit{corank} of the associated bundle.
 
 \begin{definition} If $E \to X$ is an algebraic vector bundle of rank $r$ over a $d$-dimensional variety, we say its \textit{corank} is the quantity $d-r$.
 \end{definition}
 
+
 A famous result called \textit{Serre splitting} says that splitting problems are trivial in negative corank.
 
-\begin{theorem} \textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-modulesprojectifs}.
+\begin{theorem}\label{thm:Serre-splitting} 
+\textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-modulesprojectifs}.
 \end{theorem}
+
+This can actually be strengthened in the geometric setting, where $R$ is a smooth $k$-algebra, following the discussion in \cite[4.2.1]{AF-survey}. This proof is independent of the original proof of Serre splitting, and there are concrete examples of varieties for which we can deduce splitting via the stronger version of the theorem that cannot be seen if we use the version of Serre splitting in \autoref{thm:Serre-splitting} (see for instance \cite[3.3.6,~3.5.4]{AF-survey}). Following \cite[Theorem~1]{AF-survey} we call this \textit{motivic Serre splitting}.
+
+\begin{theorem} \textit{(Motivic Serre splitting)} Let $X = \Spec(R)\in \Sm_k^\aff$ be of \textit{Nisnevich cohomological dimension} $d$, and let $M$ be any finitely generated projective $R$-module. If $\text{rank}(M) > d$, then $M$ splits.
+\end{theorem}
+\begin{proof} This follows by direct analysis of the Moore--Postnikov tower for the splitting problem
+\[ \begin{tikzcd}
+     & \BGL_{r-1}\dar\\
+    X\rar\ar[ur,dashed] & \BGL_r.
+\end{tikzcd} \]
+Via the fiber sequence \autoref{eqn:fiber-stabilization-BGLr}, the $k$-invariants are given by
+\begin{align*}
+    k_t \in H^{t+2}(X, \pi_{t+1}(S^{2r-1,r})(\det)).
+\end{align*}
+These vanish for $t+1\le r-2$ via the $\A^1$-connectivity of $S^{2r-1,r}$ (\autoref{exa:connectivity-punctured-affine-space}), and the $k$-invariants also vanish for $t+2 \ge d+1$ by consideration of the cohomological dimension of $X$. Combining these bounds, we see that the $k$-invariants vanish in the range
+\begin{align*}
+    d-1 \le t \le r-2.
+\end{align*}
+Hence if $r>d$ then all the $k$-invariants vanish and there is no obstruction to splitting.
+\end{proof}
+
+\begin{theorem} (Murthy, 1994) If $X$ is a smooth affine $r$-fold over an algebraically closed field $k = \bar{k}$, then an algebraic vector bundle $E \to X$ of rank $r$ splits off a trivial rank one summand if and only if the top Chern class $c_r(E) \in \CH^r(X)$ is zero.
+\end{theorem}
+\begin{proof} The $k$-invariants are valued in
+\begin{align*}
+    k_t \in H^{t+2}(X, \pi_{t+1}(\A^r\minus 0)(\det E)).
+\end{align*}
+This vanishes for $t\ge r-1$, and $\pi_{t+1}(\A^r\minus 0)$ is zero for $t \le r-3$, since the first nonvanishing homotopy sheaf of $\A^r\minus 0$ is $\pi_{r-1}(\A^2\minus 0)$. Hence there is only one nonvanishing $k$-invariant, which is
+\begin{align*}
+    k_{r-2} \in H^{r}(X, \pi_{r-1}(\A^r\minus 0)(\det E)) = H^r(X,\KMW_r(\det)) = \CHW^r(X,\det).
+\end{align*}
+%
+Again we have an exact sequence
+\begin{align*}
+    \cdots \to H^r(X,\mathbf{I}^{r+1}(\det)) \to \CHW^r(X,\det) \to \CH^r(X) \to 0,
+\end{align*}
+and $H^r(X,\mathbf{I}^{r+1}) = 0$ over an algebraically closed field.
+\end{proof}
+
+
+
 
 Murthy's theorem can be rephrased as ``over an algebraically closed field, corank zero bundles split if and only if their top Chern class vanishes.''
 
@@ -6133,6 +6173,8 @@ Note that $\CH^{d+1}(X)$ will be divisible coprime to the characteristic, hence 
 
 
 \chapter{Appendices}
+Appendices were written by students in the course and cover some additional topics we didn't have a chance to get to over the course of the semester.
+
 
 \include{appendices/jonathan}
 \include{appendices/hamilton}

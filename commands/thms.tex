@@ -46,7 +46,9 @@
 %                  *** End of hyperref stuff ***
 
 \theoremstyle{definition}
-\newtheorem{theorem}{Theorem}[section]
+
+\numberwithin{equation}{subsection} % make equations follow subsection
+\newtheorem{theorem}[equation]{Theorem}
 \newtheorem{answer}[theorem]{Answer}
 \newtheorem{assumption}[theorem]{Assumption}
 \newtheorem{claim}[theorem]{Claim}
