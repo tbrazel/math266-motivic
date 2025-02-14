@@ -10,8 +10,18 @@
 \WarningFilter{minitoc(hints)}{W0028}
 \WarningFilter{minitoc(hints)}{W0030}
 % Bibliography stuff
-\usepackage[doi=false,isbn=false,url=false,style=alphabetic]{biblatex}
+\usepackage[%
+    hyperref,
+    doi=false,
+    isbn=false,
+    url=false,
+    backend=biber,
+    backref,
+    backrefstyle=none,
+    style=alphabetic%
+]{biblatex}
 \bibliography{citations.bib}
+\bibliography{zotero.bib}
 \DeclareFieldFormat{postnote}{#1}
 \DeclareFieldFormat{multipostnote}{#1}
 
@@ -41,7 +51,13 @@
 
 \newcommand{\Pfister}[1]{\left\langle\! \left\langle #1 \right\rangle\! \right\rangle}
 
-%\usepackage{showkeys}
+% Custom quote block command
+\usepackage{epigraph}
+\newcommand{\quoteblock}[2]{\epigraph{\itshape#1}{#2}}
+
+
+\usepackage[notref]{showkeys}
+
 
 \fancyfoot[C]{\thepage}
 \begin{document}
@@ -150,7 +166,7 @@ is essentially surjective? \textit{Still open}.
 
 \textbf{Fundamental Theorem of Algebraic $K$-Theory} (Quillen): For $R$ regular Noetherian, we have that $R \to R[t]$ induces an equivalence\footnote{%
 So Bass--Quillen is really a question about \textit{unstable} modules.}\footnote{%
-The statement for $K_0$ is originally due to Grothendieck \cite[5.6.1.3]{Aravind}. The statement for $K_1$ is due to Bass--Heller--Swan \cite[5.8.2.1]{Aravind}.
+The statement for $K_0$ is originally due to Grothendieck \cite[5.6.1.3]{Asok-A1AG}. The statement for $K_1$ is due to Bass--Heller--Swan \cite[5.8.2.1]{Asok-A1AG}.
 }
 \begin{align*}
     K(R) \xto{\sim} K(R[t]).
@@ -165,7 +181,7 @@ In other words $K$-theory is \textit{$\A^1$-invariant} for regular Noetherian ri
 \end{example}
 
 \begin{example} Let $X = \Spec(R)$ where $R$ is normal and Noetherian.\footnote{%
-We can get away with weaker assumptions on this, for example in \cite[3.7.13]{Aravind} it is only assumed that $R$ is a locally factorial Noetherian normal domain.
+We can get away with weaker assumptions on this, for example in \cite[3.7.13]{Asok-A1AG} it is only assumed that $R$ is a locally factorial Noetherian normal domain.
 }
 Then every line bundle on $X \times \A^1$ is extended from a line bundle on $X$, in other words $X \times \A^1 \to X$ induces an isomorphism
 \begin{align*}
@@ -179,7 +195,7 @@ Then every line bundle on $X \times \A^1$ is extended from a line bundle on $X$,
 
 
 
-\begin{example} \cite[3.7.1.5]{Aravind}
+\begin{example} \cite[3.7.1.5]{Asok-A1AG}
 Check this doesn't hold for all rings, for example $R = k[x,y]/(y^2-x^3)$.\footnote{%
 More generally if $A$ is reduced, Noetherian, and has a finite normalization, then its Picard group will be $\A^1$-invariant if and only if $A$ is seminormal \cite[3.6]{Traverso}.
 }
@@ -237,7 +253,7 @@ This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homot
 % \textbf{A}: Motivic homotopy theory blends algebraic geometry and topology in a beautiful way, allowing us to do many things. A short list is:
 % \begin{itemize}
 %     \item we obtain a natural home for these kinds of $\A^1$-invariant cohomology theories of varieties, and can study them in a method analogous to algebraic topology (e.g. we can classify cohomology operations, use fiber sequences to carry out computations, unify various spectral sequences, etc.)
-%     \item we have access to obstruction theory for classifying torsors over affine varieties --- recent success in this direction is Asok--Bachmann--Hopkins' resolution of Murthy's conjecture \cite{Freudenthal}
+%     \item we have access to obstruction theory for classifying torsors over affine varieties --- recent success in this direction is Asok--Bachmann--Hopkins' resolution of Murthy's conjecture \cite{ABH-Freudenthal}
 %     \item we can eliminate differentials in the Adams spectral sequence via looking at their motivic depth (citation needed)
 % \end{itemize}
 
@@ -2921,7 +2937,7 @@ By \autoref{thm:restriction-to-Fk}, we can define unramified sheaves of abelian 
 
 \subsection{Basic symbol algebra in $K_\ast^M$}
 
-Much of this can be found in \cite[\S7.1]{GS}.
+Much of this can be found in \cite[\S7.1]{GilleSzamuely}.
 
 
 An immediate corollary of bilinearity of symbols is the following:
@@ -2992,12 +3008,13 @@ We have that $K_n^M(\mathbb{F}_q) =0$ for $n\ge 2$.
 \begin{align*}
     0 &= \left\{ 1,x \right\} = \left\{ x^{2^m-1},x \right\} = \left( 2^m-1 \right)\left\{ x,x \right\},
 \end{align*}
-which concludes the proof. If $q$ has odd exponential characteristic, we can find two non-squares in $\mathbb{F}_q$ which sum to 1 (c.f. \cite[1.3.6]{GS}). This gives us $x^k + x^\ell = 1$ for $k,\ell$ odd. Hence we get
+which concludes the proof. If $q$ has odd exponential characteristic, we can find two non-squares in $\mathbb{F}_q$ which sum to 1 (c.f. \cite[1.3.6]{GilleSzamuely}). This gives us $x^k + x^\ell = 1$ for $k,\ell$ odd. Hence we get
 \begin{align*}
     0 = \left\{ x^k,x^\ell \right\} = (k+ \ell) \left\{ x,x \right\},
 \end{align*}
 and we are done.
 \end{proof}
+
 
 
 \begin{example} \cite[III.7.2]{Kbook}
@@ -3022,7 +3039,7 @@ We will see later that the sheaf cohomology of $\KM_n$ computes the Chow groups 
 which is an isomorphism for $n\le 2$. (For $n=0,1$ this is easy, for $n=2$ this is \textit{Matsumoto's theorem}).
 \end{proposition}
 
-\section{Milnor--Witt \texorpdfstring{$K$}{K}-theory} We refer the reader to \cite{Deglise,Carlier} for more in-depth discussions of what's found here.
+\section{Milnor--Witt \texorpdfstring{$K$}{K}-theory} We refer the reader to \cite{Deglise-KMW,Carlier} for more in-depth discussions of what's found here.
 
 \begin{definition}\label{def:MW} 
 \textit{Milnor--Witt $K$-theory} of a field $F$ is defined to be the graded algebra $K_\ast^\MW(F)$ defined by symbols $[a]\in K_1^{\MW}(F)$ for $a\in F^\times$ and $\eta \in K_{-1}^\MW(F)$, modulo the relations:
@@ -3380,7 +3397,7 @@ This extends to a pullback of unramified sheaves of groups.
 \begin{definition} For $a \in F^\times$ we denote by $\Pfister{a}:= \left\langle 1 \right\rangle - \left\langle a \right\rangle$ the \textit{Pfister form} attached to $a$.
 \end{definition}
 
-\begin{remark} (On notation) Authors in the literature use $\Pfister{a}$ to denote $\left\langle 1 \right\rangle - \left\langle a \right\rangle \in \GW(F)$ as we have done, or to denote $\left\langle 1,-a \right\rangle\in W(F)$ (see e.g. \cite[p.~24]{EKM}. We should be careful about the context when using this notation, and we also warn the reader that a different sign convention is used in \cite[X.1.1]{Lam}.
+\begin{remark} (On notation) Authors in the literature use $\Pfister{a}$ to denote $\left\langle 1 \right\rangle - \left\langle a \right\rangle \in \GW(F)$ as we have done, or to denote $\left\langle 1,-a \right\rangle\in W(F)$ (see e.g. \cite[p.~24]{EKM}. We should be careful about the context when using this notation, and we also warn the reader that a different sign convention is used in \cite[X.1.1]{Lam-quad}.
 \end{remark}
 
 
@@ -3402,7 +3419,7 @@ This extends to a pullback of unramified sheaves of groups.
         I(F)/I^2(F) \cong F^\times/\left( F^\times \right)^2.
     \end{align*}
     %
-    This is a result of Pfister (c.f. \cite[II.2.3]{Lam}).
+    This is a result of Pfister (c.f. \cite[II.2.3]{Lam-quad}).
 
     \item For any $F$ we have that
     \begin{align*}
@@ -3421,7 +3438,7 @@ This extends to a pullback of unramified sheaves of groups.
 \begin{align*}
     \bigcap_{n=0}^\infty I^n(F) = 0,
 \end{align*}
-since we can show that if $\alpha - \beta \in \bigcap_{n=0}^\infty I^n(F)$, then $\alpha = \beta$. The question of whether this intersection is zero was first raised by Milnor \cite[4.4]{MilnorK}, and proven shortly thereafter by Aarason and Pfister as a consequence of their Hauptsatz \cite[X.5.1]{Lam}.
+since we can show that if $\alpha - \beta \in \bigcap_{n=0}^\infty I^n(F)$, then $\alpha = \beta$. The question of whether this intersection is zero was first raised by Milnor \cite[4.4]{MilnorK}, and proven shortly thereafter by Aarason and Pfister as a consequence of their Hauptsatz \cite[X.5.1]{Lam-quad}.
 \end{proof}
 
 
@@ -3465,11 +3482,11 @@ There is a pullback diagram of unramified sheaves
 
 \section{Eilenberg--MacLane spaces}
 
-We denote by $B_\mot G := L_\mot BG$, and we have seen the following:
+We denote by $B_\mot G := L_\mot BG$, and we have seen the following: (\todo fix this part)
 
 \begin{proposition} If $X$ is a scheme, then
 \begin{align*}
-    \pi_0 \Map_{\Spc(k)} \left( L_\mot h_X, B_\mot G \right) \cong H^1_\Nis(X,G).
+    \pi_0 \Map_{\Shv_\Nis(\Sm_k)} \left( h_X, B_\Nis G \right) \cong H^1_\Nis(X,G).
 \end{align*}
 \end{proposition}
 
@@ -3634,7 +3651,7 @@ This follows from \autoref{exa:p1-pushout} and \autoref{prop:cofiber-product-seq
 \begin{align*}
     0 \to F_{-1}(U) \to F(U \times \mathbb{G}_m) \to F(U) \to 0,
 \end{align*}
-and the latter map is $\id \times 1 \colon U \to U \times \mathbb{G}_m$. See \cite[2.1.10]{Freudenthal}.
+and the latter map is $\id \times 1 \colon U \to U \times \mathbb{G}_m$. See \cite[2.1.10]{ABH-Freudenthal}.
 \end{definition}
 
 \begin{remark} Since $F(U \times \mathbb{G}_m) \to F(U)$ is split by the inclusion of units, contraction is equivalently defined as the cokernel of the projection off of $\mathbb{G}_m$:
@@ -3717,12 +3734,10 @@ If $G$ is a strongly $\A^1$-invariant sheaf of groups, then
 is trivial for each $F/k$ finitely generated. By adjunction and representability of cohomology, this is asking whether $H^1(\mathbb{G}_m(F), G)$ is trivial. We can pass to the Zariski site by some formal nice properties of strongly invariant sheaves of groups (c.f. \cite[2.24]{Morel}), and then we can conclude by an argument involving 1-cocycles (see e.g. \cite[4.2]{bachmannstrongly}).
 \end{proof}
 
-We'll need the following result a few times, so let's include it.
+We'll need the following result a few times, so let's include it. In the Zariski cite, this was proven in \cite[3.6.5]{Tohoku}. The statement in the Nisnevich site can be found in \cite[E.6(c)]{TT} and \cite[1.32]{Nisnevich-cd}, but it first appeared in \cite[1.2.5]{KS-Global}.\footnote{In \cite{KS-Global}, they talk about the ``\textit{henselian topology},'' which is identical to the Nisnevich topology, which had been introduced by Nisnevich in \cite{Nis80} six years prior.}
 
 \begin{theorem}\label{thm:cd-krull-dim-inequality}
-\cite[3.6.5]{Tohoku}
-The cohomological dimension of a scheme $X$ is bounded above by its Krull dimension.\footnote{%
-In the Tohoku paper this is phrased in the Zariski site. It's certainly still true in the Nisnevich site, but we should cite a more general fact here.}
+The Zariski (or Nisnevich) cohomological dimension of a Noetherian scheme $X$ is bounded above by its Krull dimension.
 \end{theorem}
 
 
@@ -3798,7 +3813,7 @@ where the latter is the target of the residue map at zero. Since the contraction
     (\KM_n)_{-1} \cong \KM_{n-1} \text{ and } (\mathbf{I}_n)_{-1} \cong \mathbf{I}_{n-1}.
 \end{align*}
 \end{corollary}
-\begin{proof} A nearly identical argument to \autoref{cor:contraction-MW} works. Alternatively, we can leverage some techniques of d\'evissage and compactly supported cohomology to prove it, as in \cite[2.9]{AF-vb-spheres}.
+\begin{proof} A nearly identical argument to \autoref{cor:contraction-MW} works. Alternatively, we can leverage some techniques of d\'evissage and compactly supported cohomology to prove it, as in \cite[2.9]{AF-spheres}.
 \end{proof}
 
 \begin{note} There should(?) be a more direct algebraic argument that $\left( \KM_n \right)_{-1} \cong \KM_{n-1}$ which doesn't make reference to the Milnor exact sequence, and just leverages the symbol algebra of Milnor $K$-theory.
@@ -5120,7 +5135,7 @@ This induced map
     \P^1 &\to \P^1 \\
     [x:y] &\mapsto [ax:y]
 \end{align*}
-\textit{is pointed} at $\infty$. We call this resulting map $\left\langle a \right\rangle$ (\cite[6.3.4]{Trieste}, \cite[p.~74]{Morel}).
+\textit{is pointed} at $\infty$. We call this resulting map $\left\langle a \right\rangle$ (\cite[6.3.4]{Morel-trieste}, \cite[p.~74]{Morel}).
 
 
 
@@ -5159,7 +5174,6 @@ corresponds to $h$.
 
 
 
-
 \begin{proposition} The swap map
 \begin{align*}
     S^1 \smashprod S^1 \xto{\text{swap}} S^1 \smashprod S^1
@@ -5173,7 +5187,7 @@ corresponds to the class $-1$.
 \begin{align*}
     \mathbb{G}_m \smashprod \mathbb{G}_m \xto{\text{swap}} \mathbb{G}_m \smashprod \mathbb{G}_m
 \end{align*}
-corresponds stably to $\epsilon$ \cite[3.43]{Morel}, \cite[6.1.1(2)]{Trieste}.
+corresponds stably to $\epsilon$ \cite[3.43]{Morel}, \cite[6.1.1(2)]{Morel-trieste}.
 \end{proposition}
 \begin{proof} After suspending, we recall that $\Sigma (\mathbb{G}_m \smashprod \mathbb{G}_m) \simeq \A^2\minus 0$, and the map is of the form $(x,y) \mapsto (y,x)$. This is induced by the matrix
 \begin{align*}
@@ -5621,6 +5635,27 @@ We'll show algebraic $K$-theory is a Nisnevich sheaf, but first we provide a mor
 
 \subsection{Interlude: perfect complexes}
 
+Quillen first defined $K$-theory for schemes by considering the algebraic $K$-theory of the associated exact category of algebraic vector bundles over $X$ \cite[\S7]{Quillen-K1}. Waldhausen expanded the scope of algebraic $K$-theory, allowing us to work with $K$-theory of a ring in terms of its category of perfect complexes. Thomason and Trobaugh \cite{TT} point out that the notion of perfect complex dates back to Grothendieck and his collaborators, who first considered $K_0(\Perf(X))$.
+
+\quoteblock{Du point de vue de l'Alg\`ebre Homologique,
+les complexes parfaits sont ``aussi bon'' que les Modules localement libres, dont ils constituent la g\'en\'eralisation naturelle. Ils forment d'ailleurs une ``sous-cat\'egorie triangul\'ee'' de la cat\'egorie d\'eriv\'ee $D(Y)$.}{\cite[p.~6]{SGA6}}
+
+
+\begin{definition} \cite[p.~11]{SGA6} If $X$ is a scheme, we say a chain complex of $\O_X$-modules is \textit{perfect} if it is quasi-isomorphic to a bounded chain complex in $D(X)$. We denote by $\Perf(X)$ the category of perfect complexes over $X$.
+\end{definition}
+
+The modern perspective is that $\Perf(X)$ is a stable $\infty$-category --- this admits an underlying triangulated structure which is what was leveraged to investigate the $K$-theory of schemes in \cite{TT}. We will want to know some descent properties of $\Perf(-)$ which follow from the following theorem.
+
+\begin{theorem}\label{thm:qcoh-fpqc-descent} 
+The assignment
+\begin{align*}
+    \Aff^\op &\to \Cat_\infty \\
+    R &\mapsto \QCoh(R)
+\end{align*}
+is an fpqc sheaf, Kan extending to an fpqc sheaf on all schemes.\footnote{This can be promoted to a sheaf on \textit{derived} affine schemes, see for instance Adeel Khan's lecture notes on descent in algebraic $K$-theory for a proof.} A proof in the 1-categorical setting is in \cite[04Q7]{Stacks}, and the full $\infty$-categorical statement can be found in \cite[D.6.3.1]{SAG}, for instance.
+\end{theorem}
+
+
 
 
 \subsection{Algebraic $K$-theory as a Nisnevich sheaf}
@@ -5679,7 +5714,7 @@ being \textit{localizing}.
 
 \subsection{Algebraic $K$-theory as $\A^1$-invariant}
 
-\begin{theorem} \cite[p.~38]{Quillen} (Quillen) If $R$ is a regular Noetherian ring, the map $R \to R[t]$ induces an equivalence
+\begin{theorem} \cite[p.~38]{Quillen-K1} (Quillen) If $R$ is a regular Noetherian ring, the map $R \to R[t]$ induces an equivalence
 \begin{align*}
     K(R) \xto{\sim} K(R[t]).
 \end{align*}
@@ -5860,7 +5895,7 @@ between $\A^1$-homotopy classes of maps $X \to \BGL_r$ and rank $r$ algebraic ve
 
 So if $R$ is a smooth affine $k$-algebra, \textit{every} finitely generated projective module over $R$ is classified by a map $\Spec(R) \to \BGL_r$. Moreover we have access to obstruction theory in order to study them.
 
-Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel}.
+Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel82}.\footnote{\todo check this is the right Lindel reference}
 
 \subsection{Rank two oriented bundles}
 
@@ -5949,7 +5984,7 @@ Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note 
 If $N \ge r+d$, then all the $k$-invariants vanish, and there are no obstructions to lifting!
 \end{proof}
 
-\begin{remark} A more general result can be found in \cite{Swan67} (although it should be noted, analogous to the comparison between Serre splitting and motivic Serre splitting which we will soon discuss, the motivic version of Swan--Forster is a strictly stronger result in the geometric setting of smooth affine $k$-algebras).
+\begin{remark} A more general result can be found in \cite{Swan-gens} (although it should be noted, analogous to the comparison between Serre splitting and motivic Serre splitting which we will soon discuss, the motivic version of Swan--Forster is a strictly stronger result in the geometric setting of smooth affine $k$-algebras).
 \end{remark}
 
 
@@ -5987,7 +6022,7 @@ Over algebraically closed field, the difficulty of these sorts of splitting prob
 A famous result called \textit{Serre splitting} says that splitting problems are trivial in negative corank.
 
 \begin{theorem}\label{thm:Serre-splitting} 
-\textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-modulesprojectifs}.
+\textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-dubreil58}.
 \end{theorem}
 
 This can actually be strengthened in the geometric setting, where $R$ is a smooth $k$-algebra, following the discussion in \cite[4.2.1]{AF-survey}. This proof is independent of the original proof of Serre splitting, and there are concrete examples of varieties for which we can deduce splitting via the stronger version of the theorem that cannot be seen if we use the version of Serre splitting in \autoref{thm:Serre-splitting} (see for instance \cite[3.3.6,~3.5.4]{AF-survey}). Following \cite[Theorem~1]{AF-survey} we call this \textit{motivic Serre splitting}.
@@ -6010,7 +6045,12 @@ These vanish for $t+1\le r-2$ via the $\A^1$-connectivity of $S^{2r-1,r}$ (\auto
 Hence if $r>d$ then all the $k$-invariants vanish and there is no obstruction to splitting.
 \end{proof}
 
-\begin{theorem} (Murthy, 1994) If $X$ is a smooth affine $r$-fold over an algebraically closed field $k = \bar{k}$, then an algebraic vector bundle $E \to X$ of rank $r$ splits off a trivial rank one summand if and only if the top Chern class $c_r(E) \in \CH^r(X)$ is zero.
+\subsection{Corank zero splitting}
+
+Serre splitting says that when the corank of the bundle is negative, then any algebraic vector bundle over an affine splits. What about in corank zero? The following theorem says that, over an algebraically closed base field, the only obstruction is the top Chern class. This was first proven by Murthy and Swan for $r=d=2$ \cite{MurthySwan}, then by Murthy and Mohan Kumar for $r=d=3$ in \cite{KumarMurthy}, and finally by Murthy for $r=d\ge4$ \cite{Murthy94}.
+
+
+\begin{theorem} \textit{(Corank zero splitting)} If $X$ is a smooth affine $r$-fold over an algebraically closed field $k = \bar{k}$, then an algebraic vector bundle $E \to X$ of rank $r$ splits off a trivial rank one summand if and only if the top Chern class $c_r(E) \in \CH^r(X)$ is zero.
 \end{theorem}
 \begin{proof} The $k$-invariants are valued in
 \begin{align*}
@@ -6029,18 +6069,17 @@ and $H^r(X,\mathbf{I}^{r+1}) = 0$ over an algebraically closed field.
 \end{proof}
 
 
-
-
-Murthy's theorem can be rephrased as ``over an algebraically closed field, corank zero bundles split if and only if their top Chern class vanishes.''
-
-\begin{remark} (Historical background) For $r=d=2$, this was proven by Murthy and Swan \cite{MurthySwan}. Murthy and Mohan Kumar showed this for $r=d=3$ in \cite{KumarMurthy}, and finally Murthy proved the general result \cite{Murthy94}.
-\end{remark}
-
 The complexity of studying these sorts of splitting problems is governed by two factors:
 \begin{enumerate}
     \item the 2-cohomological dimension of the base field
     \item the \textit{corank} of the bundle.
 \end{enumerate}
+
+While the 2-cohomological dimension doesn't appear in the algebraically closed context, it can obstruct splitting over non-algebraically closed fields, where the group $H^r(X,\mathbf{I}^{r+1})$ need not vanish. For more on this we refer the reader to \cite{AF2}.
+
+\subsection{Murthy's conjecture: corank one splitting}
+
+
 
 The next interesting case to study is corank one. Murthy conjectured essentially that an analogous result holds.
 
@@ -6049,7 +6088,7 @@ The next interesting case to study is corank one. Murthy conjectured essentially
 
 A quarter of a century later, this is now a theorem in characteristic zero.
 
-\begin{theorem} \cite[Theorem~3]{Freudenthal} (Asok--Bachmann--Hopkins) Murthy's splitting conjecture holds in characteristic zero.
+\begin{theorem} \cite[Theorem~3]{ABH-Freudenthal} (Asok--Bachmann--Hopkins) Murthy's splitting conjecture holds in characteristic zero.
 \end{theorem}
 
 The source of the assumption on the characteristic is essentially the same as in the work on the motivic Wilson space hypothesis we've been discussing in the Thursday seminar --- the existence of workable models for motivic Eilenberg--MacLane spaces due to Voevodsky.
@@ -6084,7 +6123,7 @@ So we have two interesting obstruction classes:
     \begin{align*}
         k_{d-2}(E) = e(E) \in H^d(X,\pi_{d-1}(S^{2d-1,d})(\det E))
     \end{align*}
-    \item the \textit{secondary obstruction} $k_{d-1}$, which is denoted by $o_2(E)$ in \cite{Freudenthal}:
+    \item the \textit{secondary obstruction} $k_{d-1}$, which is denoted by $o_2(E)$ in \cite{ABH-Freudenthal}:
     \begin{align*}
         k_{d-1}(E) = o_2(E) \in H^{d+1}(X,\pi_{d}(S^{2d-1,d})(\det E)).
     \end{align*}
@@ -6149,7 +6188,7 @@ As an application, we can consider $X = S^{2d-1,d}$, and apply $\pi_d$ to get
 \end{align*}
 where the latter sheaf is in the stable range, and hence understandable by \cite{RSO}.
 
-\begin{theorem} \cite[7.2.1]{Freudenthal} For $d\ge4$ there is an exact sequence of sheaves
+\begin{theorem} \cite[7.2.1]{ABH-Freudenthal} For $d\ge4$ there is an exact sequence of sheaves
 \begin{align*}
     0 \to \KM_{d+2}/24 \to \pi_d(S^{2d-1,d}) \to \pi_d(\tau_{\ge(2d-1,d)}\Omega^{2d,d}O) \to 0.
 \end{align*}

@@ -10,7 +10,7 @@ To motivate the study of unimodular rows, we first review a foundational questio
     Let $k$ be a field. Is every finitely generated projective $k[t_1,\ldots,t_n]$-module free? In other words, is the base change functor \[\operatorname{Mod}_k^{\text{f.g., proj}} \to \operatorname{Mod}_{k[t_1,\ldots,t_n]}^{\text{f.g., proj}}, \quad M \mapsto M \otimes_k k[t_1,\ldots,t_n]\] essentially surjective?
 \end{question}
 
-Note that this problem can be reinterpreted geometrically as asking whether every algebraic vector bundle on $\A^n_k$ is trivial. On the other hand, from a motivic perspective, Serre's problem asks about $\A^1$-invariance of the sheaf $H^1_{\mathrm{Nis}}(-,\mathrm{GL}_*)$ taking an affine scheme $\Spec(R)$ to the graded abelian group of its algebraic vector bundles. When $n = 1$, this problem is straightforward, as $k[t_1]$ is a PID. For arbitrary $n$, our intuition from topology tells us that vector bundles on $\A^n_k$ should all be trivial because $\A^n_k$ is somehow a ``contractible" space. Of course, this intuition is far from a rigorous proof, and the first solutions to Serre's problem required deeper mathematics. In 1976, Quillen \cite{quillen_serre_problem} and Suslin \cite{suslin_serre_conj} produced independent proofs of the following theorem, answering Serre's question in the positive.
+Note that this problem can be reinterpreted geometrically as asking whether every algebraic vector bundle on $\A^n_k$ is trivial. On the other hand, from a motivic perspective, Serre's problem asks about $\A^1$-invariance of the sheaf $H^1_{\mathrm{Nis}}(-,\mathrm{GL}_*)$ taking an affine scheme $\Spec(R)$ to the graded abelian group of its algebraic vector bundles. When $n = 1$, this problem is straightforward, as $k[t_1]$ is a PID. For arbitrary $n$, our intuition from topology tells us that vector bundles on $\A^n_k$ should all be trivial because $\A^n_k$ is somehow a ``contractible" space. Of course, this intuition is far from a rigorous proof, and the first solutions to Serre's problem required deeper mathematics. In 1976, Quillen \cite{Quillen76} and Suslin \cite{Suslin76} produced independent proofs of the following theorem, answering Serre's question in the positive.
 
 \begin{theorem}[Quillen--Suslin]
     Every finitely generated projective $k[t_1,\ldots,t_n]$-module is free.
@@ -42,7 +42,7 @@ It turns out that this question can be answered in the language of motivic homot
 
 \subsubsection{Some Topological Motivation}
 
-To motivate the results we discuss in this appendix, we make a quick topological digression. For a finite CW complex $X$, let $C(X)$ denote the ring of continuous functions $X \to \R$. Under the assumption $\dim(X) \leq 2n - 4$, van der Kallen shows that the set $\mathrm{Um}_n(C(X))/E_n(C(X))$ carries the natural structure of an (abelian) group. On the other hand, recall that the topological $m$-sphere $S^m$ carries the natural structure of a co-H-space thanks to the natural fold map $S^m \vee S^m \to S^m$. Under suitable conditions on the space $X$, the structure above endows the set of homotopy classes of pointed maps $X \to S^m$, denoted $\pi^m(X)$, with the structure of a group. For instance, a classical theorem of Borsuk \cite{borsuk} shows that $\dim X \leq 2n - 4$ is sufficient for $\pi^n(X)$ to carry the aforementioned group structure. In this topological setting, van der Kallen \cite[Theorem 7.7]{vdk} proves
+To motivate the results we discuss in this appendix, we make a quick topological digression. For a finite CW complex $X$, let $C(X)$ denote the ring of continuous functions $X \to \R$. Under the assumption $\dim(X) \leq 2n - 4$, van der Kallen shows that the set $\mathrm{Um}_n(C(X))/E_n(C(X))$ carries the natural structure of an (abelian) group. On the other hand, recall that the topological $m$-sphere $S^m$ carries the natural structure of a co-H-space thanks to the natural fold map $S^m \vee S^m \to S^m$. Under suitable conditions on the space $X$, the structure above endows the set of homotopy classes of pointed maps $X \to S^m$, denoted $\pi^m(X)$, with the structure of a group. For instance, a classical theorem of Borsuk \cite{Borsuk61} shows that $\dim X \leq 2n - 4$ is sufficient for $\pi^n(X)$ to carry the aforementioned group structure. In this topological setting, van der Kallen \cite[Theorem 7.7]{vdk} proves
 
 \begin{theorem}[van der Kallen, 1989]\label{thm:vdk}
     Let $X$ be a $d$-dimensional CW complex. Then, there exists a natural bijection \[
@@ -51,7 +51,7 @@ To motivate the results we discuss in this appendix, we make a quick topological
 which can be upgraded to a group isomorphism whenever $d \leq 2n-4$.
 \end{theorem}
 
-Van der Kallen asked whether his theorem above can be extended to the algebraic setting. At the time, there was no suitable scheme-theoretic notion of cohomotopy groups, or even spheres. However, once the tools of $\A^1$-invariant motivic homotopy theory were developed, van der Kallen's question found a resolution in motivic homotopy theory, owing to Fasel \cite{Fasel_2010} and Lerbet \cite{LERBET2024109415}. Let's set up the algebraic analogue of van der Kallen's result. Clearly, we want to replace $X$ with the spectrum of a commutative $k$-algebra $A$. On the other hand, the stable dimension of $A$ ought to play the role of the dimension of the CW complex $X$. The most subtle step is determining the appropriate replacement for the topological $n$-sphere $S^n$. It turns out that the correct choice is the motivic sphere $S^{2n-1,n} = \A^n \setminus \{0\}$. The most basic result that we study in this note is the proof of the following theorem of Fasel, which in some sense, provides an aswer to a motivic version of Question \ref{question:q1}.
+Van der Kallen asked whether his theorem above can be extended to the algebraic setting. At the time, there was no suitable scheme-theoretic notion of cohomotopy groups, or even spheres. However, once the tools of $\A^1$-invariant motivic homotopy theory were developed, van der Kallen's question found a resolution in motivic homotopy theory, owing to Fasel \cite{Fasel-unim} and Lerbet \cite{Lerbet}. Let's set up the algebraic analogue of van der Kallen's result. Clearly, we want to replace $X$ with the spectrum of a commutative $k$-algebra $A$. On the other hand, the stable dimension of $A$ ought to play the role of the dimension of the CW complex $X$. The most subtle step is determining the appropriate replacement for the topological $n$-sphere $S^n$. It turns out that the correct choice is the motivic sphere $S^{2n-1,n} = \A^n \setminus \{0\}$. The most basic result that we study in this note is the proof of the following theorem of Fasel, which in some sense, provides an aswer to a motivic version of Question \ref{question:q1}.
 
 \begin{theorem}[Fasel, 2010]\label{thm:fasel}
     There exists a natural bijection
@@ -59,7 +59,7 @@ Van der Kallen asked whether his theorem above can be extended to the algebraic 
     where the right-hand side denotes the set of $\A^1$-homotopy classes of maps $\Spec A \to \A^n_k \setminus\{0\}$.
 \end{theorem}
 
-In this sense, we can say that $\A^n_k \setminus\{0\}$ represents the functor $k\mathsf{-Alg} \to \mathsf{Set}$ given by $A \mapsto \mathrm{Um}_n(A)/E_n(A)$ in the category of motivic spaces. Under some dimensionality assumptions on the ring $A$, van der Kallen endows the left-hand side of (\ref{eqn:fasel_bijection}) with the structure of an abelian group. With the same assumptions, the right-hand side can also be equipped with the structure of an abelian group coming from the co-H-space structure on $\A_k^n\setminus\{0\}$. Completing the analogy with van der Kallen's topological result, Lerbet \cite{LERBET2024109415} shows that Fasel's bijection is in fact a group isomorphism whenever these group structures can be defined. That is, our goal is to build up to the following theorem.
+In this sense, we can say that $\A^n_k \setminus\{0\}$ represents the functor $k\mathsf{-Alg} \to \mathsf{Set}$ given by $A \mapsto \mathrm{Um}_n(A)/E_n(A)$ in the category of motivic spaces. Under some dimensionality assumptions on the ring $A$, van der Kallen endows the left-hand side of (\ref{eqn:fasel_bijection}) with the structure of an abelian group. With the same assumptions, the right-hand side can also be equipped with the structure of an abelian group coming from the co-H-space structure on $\A_k^n\setminus\{0\}$. Completing the analogy with van der Kallen's topological result, Lerbet \cite{Lerbet} shows that Fasel's bijection is in fact a group isomorphism whenever these group structures can be defined. That is, our goal is to build up to the following theorem.
 
 \begin{theorem}[Lerbet, 2024]
     Suppose $A$ has Krull dimension at most $2n-4$. Then, the bijection (\ref{eqn:fasel_bijection}) is a group isomorphism.
@@ -67,7 +67,7 @@ In this sense, we can say that $\A^n_k \setminus\{0\}$ represents the functor $k
 
 Since the group structure on the right-hand side of (\ref{eqn:fasel_bijection}) can be interpreted geometrically, we can think of Lerbet's theorem as a motivic re-interpretation of van der Kallen's group law. 
 
-A natural question is to ask for an explicit computation of the group $\operatorname{Um}_n(A)/E_n(A)$. In the special case $n = \dim(A) + 1$, Fasel \cite{Fasel_2010} produces a cohomological description of this group.
+A natural question is to ask for an explicit computation of the group $\operatorname{Um}_n(A)/E_n(A)$. In the special case $n = \dim(A) + 1$, Fasel \cite{Fasel-unim} produces a cohomological description of this group.
 
 \begin{theorem}[Fasel, 2010]\label{thm:fasel_cohomology}
     Let $k$ be a perfect field of characteristic not equal to two, and suppose $A$ is a smooth $k$-algebra of Krull dimension $d = n-1 \geq 2$. There exists a natural isomorphism 
@@ -103,7 +103,7 @@ Strictly speaking, Fasel establishes a more concrete version of the bijection ab
 \end{tikzcd}\]
 In ring-theoretic terms, if $Y = \Spec B$ and $X = \Spec A$, a naive $\A^1$-homotopy between the corresponding ring maps $f^\sharp, g^\sharp\colon B \to A$ amounts to a map $H^\sharp\colon B \to A[t]$ such that $H^\sharp(0) = f^\sharp$ and $H^\sharp(1) = g^\sharp$. Here (and henceforth), for any $\alpha \in A$, we use the notation $H^\sharp(\alpha)\colon B \to A$ to denote the composition of $H^\sharp$ with the quotient map $A[t] \to A[t]/(t - \alpha) \cong A$.
 
-\begin{proposition}\cite[Theorem 2.1]{Fasel_2010}\label{prop:fasel_naive}
+\begin{proposition}\cite[Theorem 2.1]{Fasel-unim}\label{prop:fasel_naive}
     There exists natural bijection
     \[
     \mathrm{Um}_n(A)/E_n(A) \xto{\sim} [\Spec A, \A^n_k\setminus \{0\}]_{N},
@@ -112,7 +112,7 @@ In ring-theoretic terms, if $Y = \Spec B$ and $X = \Spec A$, a naive $\A^1$-homo
 \end{proposition}
 
 \begin{remark}
-    In fact, Fasel proves this proposition in greater generality. Let $\mathrm{Um}_{m,n}(A)$ denote the set of surjective $A$-module morphisms $A^n \to A^m$ and let $D(m,n) = \A^{m \times n}\setminus V(m,n)$, where $V(m,n)$ is the vanishing locus of all $m \times m$ minors in $\A^{m \times n} = \operatorname{Mat}_{m \times n}$. In \cite[Theorem 2.1]{Fasel_2010}, he establishes a natural bijection
+    In fact, Fasel proves this proposition in greater generality. Let $\mathrm{Um}_{m,n}(A)$ denote the set of surjective $A$-module morphisms $A^n \to A^m$ and let $D(m,n) = \A^{m \times n}\setminus V(m,n)$, where $V(m,n)$ is the vanishing locus of all $m \times m$ minors in $\A^{m \times n} = \operatorname{Mat}_{m \times n}$. In \cite[Theorem 2.1]{Fasel-unim}, he establishes a natural bijection
     \[
     \operatorname{Um}_{m,n}(A)/E_n(A) \xto{\sim} [\Spec A, D(m,n)]_{N}.
     \]
@@ -120,7 +120,7 @@ In ring-theoretic terms, if $Y = \Spec B$ and $X = \Spec A$, a naive $\A^1$-homo
 \end{remark}
 
 \begin{proof}[Proof of Proposition \ref{prop:fasel_naive}]
-    We follow the proof given by Fasel in \cite[Theorem 2.1]{Fasel_2010}, adding more detail where appropriate. Thanks to Proposition \ref{prop:unimodular-basic}, it suffices to prove that (1) unimodular rows belonging to the same orbit define naively homotopic morphisms and (2) if two unimodular rows define naively homotopic morphisms, then they belong to the same orbit. Given a unimodular row $u \in \operatorname{Um}_n(A)$, let $\psi_u\colon \Spec A \to \A^n\setminus\{0\}$ denote the induced morphism. 
+    We follow the proof given by Fasel in \cite[Theorem 2.1]{Fasel-unim}, adding more detail where appropriate. Thanks to Proposition \ref{prop:unimodular-basic}, it suffices to prove that (1) unimodular rows belonging to the same orbit define naively homotopic morphisms and (2) if two unimodular rows define naively homotopic morphisms, then they belong to the same orbit. Given a unimodular row $u \in \operatorname{Um}_n(A)$, let $\psi_u\colon \Spec A \to \A^n\setminus\{0\}$ denote the induced morphism. 
 
     Claim (1) is relatively straightforward. Letting $E_n$ denote the group scheme of elementary matrices, we can understand elements of $E_n(A)$ as morphisms $M\colon \Spec A \to E_n$. Given a unimodular row $u \in \mathrm{Um}_n(A)$, the morphism $\psi_{uM}\colon \Spec A \to \A^n\setminus\{0\}$ is the composition
     \[
@@ -132,7 +132,7 @@ In ring-theoretic terms, if $Y = \Spec B$ and $X = \Spec A$, a naive $\A^1$-homo
     \[
     0 \to B \to A[t]^n \xto{U(t)} A[t] \to 0,
     \]
-    where $B$ is the kernel of $U(t)$. Since the short exact sequence above splits, we see that the submodule $B \subset A[t]$ is a finitely-generated projective $A[t]$-module. A result of Lindel \cite[Lemma 3]{Lindel} shows that $B$ is extended from $A$ in the sense that $B \cong B(0)[t]$, where $B(0)$ denotes the quotient $B/tB$. Thus, we have a split short exact sequence
+    where $B$ is the kernel of $U(t)$. Since the short exact sequence above splits, we see that the submodule $B \subset A[t]$ is a finitely-generated projective $A[t]$-module. A result of Lindel \cite[Lemma 3]{Lindel82} shows that $B$ is extended from $A$ in the sense that $B \cong B(0)[t]$, where $B(0)$ denotes the quotient $B/tB$. Thus, we have a split short exact sequence
     \[
     0 \to B(0) \to A^n \xto{U(0) = u_0} A \to 0.
     \]
@@ -164,7 +164,7 @@ Combining the lemma above with Proposition \ref{prop:fasel_naive}, we have prove
 
 \subsection{Van Der Kallen's Group Structure}\label{sec:group_structure}
 
-In this section, we discuss the natural group structure on $\mathrm{Um}_n(A)/E_n(A)$ discovered by van der Kallen \cite{vdk}. As we mentioned in the introduction, van der Kallen discovered this group structure while studying the orbits of unimodular rows for the ring of continuous functions on a finite CW complex. The exposition in this section closely follows \cite[Section 3]{LERBET2024109415}. Van der Kallen's group structure was used by Lerbet to fully generalize Theorem \ref{thm:vdk} to the algebraic setting. The key idea here is to construct a natural correspondence between $\mathrm{Um}_n(A)/E_n(A)$ and a certain universal group of maps from $\mathrm{Um}_n(A)$. Although the structure of this universal group seems quite daunting \textit{a priori}, we will introduce a convenient trick (the Mennicke--Newman lemma) for computing products of orbits of unimodular rows at the end of this section.
+In this section, we discuss the natural group structure on $\mathrm{Um}_n(A)/E_n(A)$ discovered by van der Kallen \cite{vdk}. As we mentioned in the introduction, van der Kallen discovered this group structure while studying the orbits of unimodular rows for the ring of continuous functions on a finite CW complex. The exposition in this section closely follows \cite[Section 3]{Lerbet}. Van der Kallen's group structure was used by Lerbet to fully generalize Theorem \ref{thm:vdk} to the algebraic setting. The key idea here is to construct a natural correspondence between $\mathrm{Um}_n(A)/E_n(A)$ and a certain universal group of maps from $\mathrm{Um}_n(A)$. Although the structure of this universal group seems quite daunting \textit{a priori}, we will introduce a convenient trick (the Mennicke--Newman lemma) for computing products of orbits of unimodular rows at the end of this section.
 
 \subsubsection{Weak Mennicke Symbols}
 
@@ -177,7 +177,7 @@ In this section, we discuss the natural group structure on $\mathrm{Um}_n(A)/E_n
 \end{definition}
 
 \begin{remark}
-    Van der Kallen uses the terminology ``weak" Mennicke symbol because the axioms above do indeed give a weaker definition of the Mennicke symbols introduced by Suslin \cite{suslin2006mennicke} for the algebraic $K$-theory of fields.
+    Van der Kallen uses the terminology ``weak" Mennicke symbol because the axioms above do indeed give a weaker definition of the Mennicke symbols introduced by Suslin \cite{Suslin-Mennicke} for the algebraic $K$-theory of fields.
 \end{remark}
 
 A basic, yet fundamental, insight is the existence of a universal group $\mathrm{WMS}_n(A)$ of weak Mennicke symbols.
@@ -193,7 +193,7 @@ There exists a universal weak Mennicke symbol $\hat{\mu}\colon \mathrm{Um}_n(A) 
 \end{definition}
 
 \begin{remark}
-    For our purposes, we simply need an upper bound on the stable dimension of $A$. Bass \cite[Theorem 1]{bass} shows that the stable dimension of a Noetherian ring is bounded above by its Krull dimension, and thus, in applications, we can (and will) use the Krull dimension of $A$ instead. We record the definition of the stable dimension for completeness.
+    For our purposes, we simply need an upper bound on the stable dimension of $A$. Bass \cite[Theorem 1]{Bass-liberation} shows that the stable dimension of a Noetherian ring is bounded above by its Krull dimension, and thus, in applications, we can (and will) use the Krull dimension of $A$ instead. We record the definition of the stable dimension for completeness.
 \end{remark}
 
 When the stable dimension of $A$ is bounded, van der Kallen \cite[Theorems 3.6 and 4.1]{vdk} equips $\mathrm{Um}_n(A)/E_n(A)$ with the structure of an abelian group. His results are summarized in the following theorem. The proof, while completely ``elementary," is quite long and computational, so we omit it from our exposition and refer the interested reader to \cite[Sections 3 and 4]{vdk}.
@@ -220,10 +220,10 @@ Second, we have the so-called Mennicke--Newman lemma. The proof of this lemma wi
     Assume that $A$ has stable dimension $d \leq 2n-3$, and let $U,U' \in \mathrm{Um}_n(A)$ be unimodular rows. Then, there exist elementary matrices $E,E' \in E_n(A)$ such that $UE = (a,r_2,\ldots,r_n)$ and $U'E' = (1-a,r_2,\ldots,r_n)$ for some $a,r_2,\ldots,r_n \in A$.
 \end{lemma}
 
-This version of the Mennicke--Newman lemma and its proof appears as Proposition 3.6 in \cite{LERBET2024109415}.
+This version of the Mennicke--Newman lemma and its proof appears as Proposition 3.6 in \cite{Lerbet}.
 
 \begin{proof}
-    As mentioned above, we follow the proof of \cite[Proposition 3.6]{LERBET2024109415}. The proof is accomplished in three steps. Fix unimodular rows $U = (u_1,\ldots,u_n)$ and $U' = (v_1,\ldots,v_n)$.
+    As mentioned above, we follow the proof of \cite[Proposition 3.6]{Lerbet}. The proof is accomplished in three steps. Fix unimodular rows $U = (u_1,\ldots,u_n)$ and $U' = (v_1,\ldots,v_n)$.
 
     \textbf{Step 1.} We claim that it suffices to assume that $(u_2,\ldots,u_n,v_2,\ldots,v_n)$ is a unimodular row of length $2n-2$. Observe first that $(u_2,\ldots,u_n,v_2,\ldots,v_n, u_1v_1)$ is certainly a unimodular row -- indeed, if $b_1,\ldots,b_n$ and $c_1,\ldots,c_n$ are such that $\sum_i b_iu_i = 1$ and $\sum_i c_iv_i = 1$, then \[\sum_{j=2}^n \sum_{i=2}^n (b_iu_ic_j)v_j + b_1c_1(u_1v_1)= \sum_{j=1}^n c_j\left(\sum_{i=1}^n b_iu_i\right)v_j =1. \]
     Since $A$ has stable dimension at most $2n-3$, it has stable rank at most $2n-2$. In particular, by definition, there exist $\alpha_2,\ldots,\alpha_n,\beta_2,\ldots,\beta_n \in A$ such that
@@ -257,15 +257,15 @@ Let's explain how the preceding two facts allow us to compute van der Kallen's g
 
 \subsection{The Group Isomorphism}\label{sec:lerbet}
 
-In this section, we prove \cite[Theorem 5.1]{LERBET2024109415}, showing that Fasel's natural bijection 
+In this section, we prove \cite[Theorem 5.1]{Lerbet}, showing that Fasel's natural bijection 
 \[
 \mathrm{Um}_n(A)/E_n(A) \xto{\sim} [\Spec A, \A^n_k\setminus\{0\}]_{\A^1}
 \]
-has the structure of a group homomorphism whenever both sides of the bijection above carry a group structure. The exposition in this section closely follows that of \cite[Section 5]{LERBET2024109415}. In Subsection \ref{sec:group_structure}, we equipped $\mathrm{Um}_n(A)/E_n(A)$ with the structure of an abelian group whenever the stable dimension of $A$ is at most $2n-4$. In particular, this structure also exists when the \textit{Krull dimension} of $A$ is at most $2n-4$. 
+has the structure of a group homomorphism whenever both sides of the bijection above carry a group structure. The exposition in this section closely follows that of \cite[Section 5]{Lerbet}. In Subsection \ref{sec:group_structure}, we equipped $\mathrm{Um}_n(A)/E_n(A)$ with the structure of an abelian group whenever the stable dimension of $A$ is at most $2n-4$. In particular, this structure also exists when the \textit{Krull dimension} of $A$ is at most $2n-4$. 
 
 \subsubsection{Motivic Cohomotopy Groups}
 
-Let's first demonstrate how to equip $[\Spec A, \A^n_k\setminus\{0\}]_{\A^1}$ with the structure of an abelian group under the same assumptions. Intuitively, since we should think of $\A^n_k\setminus\{0\}$ as a motivic analog of the sphere $S^{n-1}$, this construction is a motivic analog of Borsuk's cohomotopy group structure on $\pi^{n-1}(X)$. This group law is thus aptly called the \textit{motivic Borsuk's group law}. We follow the exposition in \cite[Section 4]{LERBET2024109415}. 
+Let's first demonstrate how to equip $[\Spec A, \A^n_k\setminus\{0\}]_{\A^1}$ with the structure of an abelian group under the same assumptions. Intuitively, since we should think of $\A^n_k\setminus\{0\}$ as a motivic analog of the sphere $S^{n-1}$, this construction is a motivic analog of Borsuk's cohomotopy group structure on $\pi^{n-1}(X)$. This group law is thus aptly called the \textit{motivic Borsuk's group law}. We follow the exposition in \cite[Section 4]{Lerbet}. 
 
 Let $X$ and $Y$ be pointed motivic spaces over $k$, with morphisms $f,g: X \to Y$. These morphisms induce a product map
 \[
@@ -281,7 +281,7 @@ X \xto{\Delta} X \times X \dashrightarrow Y \vee Y \to Y,
 \]
 where the dashed right arrow is the map $X \times X \to Y \vee Y$ induced by $f \times g: X \times X \to Y \times Y$. If this scenario were to hold, a straightforward exercise, using the properties of the fold map $Y \vee Y \to Y$, verifies that the assignment above does indeed give $[X,Y]_{\A^1}$ the structure of an abelian group, whose identity element is given by the constant map $X \to Y$ (recall that all motivic spaces are pointed in our discussion). 
 
-The following result of Asok and Fasel \cite[Proposition 1.2.3]{AF22} gives us a condition for which our hopes may hold. Recall that the $\A^1$-cohomological dimension of a smooth $k$-scheme $X$ is the largest positive integer $d$ such that $H^d_{\operatorname{Nis}}(X,\mathcal{F}) = 0$ for any Nisnevich sheaf $\mathcal{F}$ of abelian groups on $X$. 
+The following result of Asok and Fasel \cite[Proposition 1.2.3]{AF-JEMS} gives us a condition for which our hopes may hold. Recall that the $\A^1$-cohomological dimension of a smooth $k$-scheme $X$ is the largest positive integer $d$ such that $H^d_{\operatorname{Nis}}(X,\mathcal{F}) = 0$ for any Nisnevich sheaf $\mathcal{F}$ of abelian groups on $X$. 
 
 \begin{theorem}[Asok--Fasel, 2022]\label{thm:af_group}
     Let $Y$ be a pointed motivic space over $k$ that is also defined over some perfect subfield $k' \subset k$. That is, $Y$ is the base change of some $k'$-motivic space $Y'$. Moreover, suppose $n \geq 2$ is a positive integer. If $Y$ is $(n-1)$-$\A^1$-connected, then the morphism $Y \vee Y \to Y \times Y$ induces a bijection
@@ -292,10 +292,10 @@ The following result of Asok and Fasel \cite[Proposition 1.2.3]{AF22} gives us a
 \end{theorem}
 
 \begin{proof}
-    For the sake of brevity, we omit the proof, referring the reader to \cite[Proposition 4.1]{LERBET2024109415}, for instance, for a proof. The point is to show that the map $f: Y \vee Y \to Y \times Y$ is $\A^1$-$(2n-2)$-connected, at which point \cite[Lemma 2.22]{LERBET2024109415} would give the desired result. The connectedness of $f$ is computed through an application of the Blakers--Massey theorem.
+    For the sake of brevity, we omit the proof, referring the reader to \cite[Proposition 4.1]{Lerbet}, for instance, for a proof. The point is to show that the map $f: Y \vee Y \to Y \times Y$ is $\A^1$-$(2n-2)$-connected, at which point \cite[Lemma 2.22]{Lerbet} would give the desired result. The connectedness of $f$ is computed through an application of the Blakers--Massey theorem.
 \end{proof}
 
-In fact, the results of Asok and Fasel \cite[Proposition 1.2.5]{AF22} also show that the group structure on $[X,Y]_{\A^1}$ defined in Theorem \ref{thm:af_group} is abelian. While we will not prove this fact here, we record the following corollary for convenience.
+In fact, the results of Asok and Fasel \cite[Proposition 1.2.5]{AF-JEMS} also show that the group structure on $[X,Y]_{\A^1}$ defined in Theorem \ref{thm:af_group} is abelian. While we will not prove this fact here, we record the following corollary for convenience.
 
 \begin{corollary}
     Let $\operatorname{Sm}_k^{\leq d}$ denote the full subcategory of smooth $k$-schemes of cohomological dimension $\leq d$. The assignment $Y \mapsto [-,Y]_{\A^1}$ defines a functor from the full subcategory of pointed motivic spaces satisfying the assumptions of Theorem \ref{thm:af_group} to the category of presheaves on $\operatorname{Sm}_k^{\leq 2n-2}$ valued in abelian groups. 
@@ -339,7 +339,7 @@ To construct $\pi_n$, we construct a Jouanolou device for $Z_n$. First, we produ
         Q_{2n} &:= \Spec k[x_1,\ldots,x_n,y_1,\ldots,y_n,z]/\langle x_1y_1 + \cdots + x_ny_n + z(1-z)\rangle \subset \A^{2n+1}. 
 \end{align*}
 
-\begin{proposition}\cite[Lemma 2.8]{LERBET2024109415} 
+\begin{proposition}\cite[Lemma 2.8]{Lerbet} 
     The map $Q_{2n+1} \to Y_{n+1}$ given by projection to the first $n+1$ coordinates is a Jouanolou device.
 \end{proposition}
 
@@ -384,7 +384,7 @@ where the right-vertical map $\A^n \times \A^n \to \A^{2n-2} = \A^{n-1} \times \
 \end{tikzcd}\]
 The bottom and right maps in the square above are vector bundles because they are base changes of the Jouanolou devices $Q_{4n-5}\to Y_{2n-2}$ and $Q_{2n-1} \times Q_{2n-1} \to Y_n \times Y_n$, respectively. Hence, the top and left maps are also vector bundles. We deduce that either composition $Z_n' \to Z_n$ in the diagram above is a Jouanolou device for $Z_n$. Let's return to the construction of the map $\pi_n$. Since $Z_n' \to Z_n$ induces a motivic equivalence, it suffices to study maps $Z_n' \to Y_n$. 
 
-The key reason that we want to consider the scheme $Z_n'$ is due to its explicit connection to unimodular rows. Lerbet \cite[pg. 27]{LERBET2024109415} describes the  coordinate ring of $Z_n'$ as the quotient 
+The key reason that we want to consider the scheme $Z_n'$ is due to its explicit connection to unimodular rows. Lerbet \cite[pg. 27]{Lerbet} describes the  coordinate ring of $Z_n'$ as the quotient 
 \[
 k[Z_n'] = k[x_1,\ldots,x_ny_1,\ldots,y_n,u_1,\ldots,u_n,v_1,\ldots,v_n,r_2,\ldots,r_n,s_2,\ldots,s_n]/I
 \]
@@ -406,7 +406,7 @@ As Lerbet remarks, we should think of $(x_1,\ldots,x_n,u_1,\ldots,u_n)$ as the u
 
 In particular, thanks to the relation (\ref{eqn:mn_relation})-(\ref{eqn:mn_relation2}) for unimodular rows, we see that $(\gamma(1-\gamma),a_2,\ldots,a_n)$ is also a unimodular row for $k[Z_n']$, and hence, we obtain a morphism $\pi_n': Z_n' \to Y_n$ of schemes. Since $Z_n' \to Z_n$ is a motivic equivalence, the map $\pi_n'$ uniquely determines a morphism $Z_n \to Y_n$ in the category of motivic spaces. It remains to describe the fold map $Y_n \vee Y_n \to Y_n$ in terms of $\pi_n$. 
 
-\begin{proposition}\cite[Lemma 5.8]{LERBET2024109415}\label{prop:big_upshot}
+\begin{proposition}\cite[Lemma 5.8]{Lerbet}\label{prop:big_upshot}
     There is a commutative diagram in the category of pointed motivic spaces
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJZX24gXFx2ZWUgWV9uIl0sWzEsMSwiWV9uIl0sWzEsMCwiWl9uIl0sWzAsMl0sWzIsMSwiXFxwaV9uIl0sWzAsMV1d
 \[\begin{tikzcd}
@@ -420,7 +420,7 @@ where the diagonal map is the fold map $\nabla: Y_n \vee Y_n \to Y_n$ and the ho
 \end{proposition}
 
 \begin{proof}
-    Refer to the proof of \cite[Lemma 5.8]{LERBET2024109415}, relying entirely on elementary unimodular row operations.
+    Refer to the proof of \cite[Lemma 5.8]{Lerbet}, relying entirely on elementary unimodular row operations.
 \end{proof} 
 
 \subsubsection{Lerbet's Theorem -- Motivic Ingredients}\label{subsec:lerbet_motivic}
@@ -437,29 +437,29 @@ The upshot of our work in the preceding subsubsection is quite substantial. To r
 
 We would like to prove a similar result for the inclusion $Z_n \to Y_n \times Y_n$. We need a sequence of lemmas to achieve this result.
 
-\begin{lemma}\cite[Lemma 4.5]{LERBET2024109415}
+\begin{lemma}\cite[Lemma 4.5]{Lerbet}
     If $n \geq 2$, then $Z_n$ is $\A^1$-connected. 
 \end{lemma}
 
 \begin{proof}
-    We provide a sketch of the proof, referring the reader to \cite[Lemma 5.5]{LERBET2024109415} for details. First, one shows that $Y_n = \A^n \setminus \{0\}$ is $\A^1$-chain connected for $n \geq 2$. That is, for any finite separable extension $L/k$ and any points $x,x' \in Y_n(L)$, there exists a morphism $g: \A^1_L \to Y_n(L)$ such that $g(0) = x$ and $g(1) = x'$. This step is elementary and explicit. Next, the product of $\A^1$-chain connected schemes is also $\A^1$-chain connected, so $U_n \times Y_n$ and $Y_n \times U_n$ are both $\A^1$-chain connected. Finally, the union $Z_n = U_n \times Y_n \cup Y_n \times U_n$ is $\A^1$-chain connected because the schemes $U_n \times Y_n$ and $Y_n \times U_n$ share a base point. Since $\A^1$-chain connectedness implies $\A^1$-connectedness, the result follows.
+    We provide a sketch of the proof, referring the reader to \cite[Lemma 5.5]{Lerbet} for details. First, one shows that $Y_n = \A^n \setminus \{0\}$ is $\A^1$-chain connected for $n \geq 2$. That is, for any finite separable extension $L/k$ and any points $x,x' \in Y_n(L)$, there exists a morphism $g: \A^1_L \to Y_n(L)$ such that $g(0) = x$ and $g(1) = x'$. This step is elementary and explicit. Next, the product of $\A^1$-chain connected schemes is also $\A^1$-chain connected, so $U_n \times Y_n$ and $Y_n \times U_n$ are both $\A^1$-chain connected. Finally, the union $Z_n = U_n \times Y_n \cup Y_n \times U_n$ is $\A^1$-chain connected because the schemes $U_n \times Y_n$ and $Y_n \times U_n$ share a base point. Since $\A^1$-chain connectedness implies $\A^1$-connectedness, the result follows.
 \end{proof}
 
-\begin{lemma}\cite[Lemma 5.6]{LERBET2024109415}
+\begin{lemma}\cite[Lemma 5.6]{Lerbet}
     Suppose $n \geq 3$. The inclusion $Z_n \to Y_n \times Y_n$ is $\A^1$-$(2n-4)$-connected.
 \end{lemma}
 
 \begin{proof}
-    The first step of the proof is to show that $Z_n$ is $\A^1$-simply connected. We already kow that $Z_n$ is $\A^1$-connected. On the other hand, we have \[\pi_1^{\A^1}(U_n \times Y_n) = \pi_1^{\A^1}(Y_n) \times \pi_1^{\A^1}(Y_{n-1}) \times \pi_1^{\A^1}(\A^1) = \pi_1^{\A^1}(Y_n) \times \pi_1^{\A^1}(Y_{n-1})= 1\] because $Y_m = \A^m\setminus\{0\}$ is $\A^1$-simply connected for $m \geq 2$. Similalry, $\pi_1^{\A^1}(Y_n \times U_n)$ is trivial. On the other hand, the intersection $(Y_n \times U_n) \cap (U_n \times Y_n) = U_n \times U_n$ is also $\A^1$-simply connected. We conclude with an application of the motivic van Kampen theorem cited by Lerbet in \cite[Lemma 5.6]{LERBET2024109415}. 
+    The first step of the proof is to show that $Z_n$ is $\A^1$-simply connected. We already kow that $Z_n$ is $\A^1$-connected. On the other hand, we have \[\pi_1^{\A^1}(U_n \times Y_n) = \pi_1^{\A^1}(Y_n) \times \pi_1^{\A^1}(Y_{n-1}) \times \pi_1^{\A^1}(\A^1) = \pi_1^{\A^1}(Y_n) \times \pi_1^{\A^1}(Y_{n-1})= 1\] because $Y_m = \A^m\setminus\{0\}$ is $\A^1$-simply connected for $m \geq 2$. Similalry, $\pi_1^{\A^1}(Y_n \times U_n)$ is trivial. On the other hand, the intersection $(Y_n \times U_n) \cap (U_n \times Y_n) = U_n \times U_n$ is also $\A^1$-simply connected. We conclude with an application of the motivic van Kampen theorem cited by Lerbet in \cite[Lemma 5.6]{Lerbet}. 
 
     Next, Lerbet explains that we have a cofiber sequence
     \[
     Z_n \to Y_n \times Y_n \to (\G_m \times \G_m)_+ \wedge (\P^1)^{\wedge 2n-2},
     \]
-    so the homotopy cofiber of the map $Z_n \to Y_n \times Y_n$ is $\A^1$-$(2n-3)$-connected. From here, the result follows from an application of the Blakers--Massey theorem also cited by Lerbet. We omit the details for the sake of brevity and refer the reader to \cite[Lemma 5.6]{LERBET2024109415}.
+    so the homotopy cofiber of the map $Z_n \to Y_n \times Y_n$ is $\A^1$-$(2n-3)$-connected. From here, the result follows from an application of the Blakers--Massey theorem also cited by Lerbet. We omit the details for the sake of brevity and refer the reader to \cite[Lemma 5.6]{Lerbet}.
 \end{proof}
 
-A standard motivic obstruction theory result \cite[Lemma 2.22]{LERBET2024109415} allows us to conclude the desired
+A standard motivic obstruction theory result \cite[Lemma 2.22]{Lerbet} allows us to conclude the desired
 
 \begin{corollary}\label{cor:easy}
     The map $Z_n \to Y_n \times Y_n$ induces a bijection $[\Spec A, Z_n]_{\A^1} \to [\Spec A, Y_n \times Y_n]_{\A^1}$.
@@ -525,9 +525,9 @@ Without further ado, we can wrap up the proof of Theorem \ref{thm:lerbet}.
 
 We conclude this appendix with a discussion of some other results on unimodular rows explored from a motivic perspective. First, we discuss Fasel's cohomological interpretation of the group structure on $\mathrm{Um}_n(A)/E_n(A)$ (i.e., Theorem \ref{thm:fasel_cohomology}). Following Fasel, we will give an explicit computation of this group for some examples of $\R$-algebras. We concludediscuss some related applications of this computation to the study of stably free modules, per Morel and Fasel. 
 
-\subsubsection{Cohomology and Unimodular Rows} In contrast with Lerbet's geometric interpretation van der Kallen's group structure, Fasel offers a cohomological perspective on the group $\operatorname{Um}_n(A)/E_n(A)$, though only for $n = \dim(A) + 1$. In this subsubsection, we draw our material from \cite[Sections 3, 4]{Fasel_2010}. His results relate this group to the cohomology of the Milnor--Witt sheaf on $\Spec A$.
+\subsubsection{Cohomology and Unimodular Rows} In contrast with Lerbet's geometric interpretation van der Kallen's group structure, Fasel offers a cohomological perspective on the group $\operatorname{Um}_n(A)/E_n(A)$, though only for $n = \dim(A) + 1$. In this subsubsection, we draw our material from \cite[Sections 3, 4]{Fasel-unim}. His results relate this group to the cohomology of the Milnor--Witt sheaf on $\Spec A$.
 
-\begin{theorem}\cite[Theorem 4.9]{Fasel_2010}
+\begin{theorem}\cite[Theorem 4.9]{Fasel-unim}
     Let $k$ be a perfect field of characteristic not equal to two, and suppose $A$ is a smooth $k$-algebra of Krull dimension $d = n-1 \geq 2$. There exists a natural isomorphism 
     \[
     \mathrm{Um}_n(A)/E_n(A) \xto{\sim} H^{n-1}(\Spec A,K_{n}^{MW}),
@@ -539,7 +539,7 @@ We conclude this appendix with a discussion of some other results on unimodular 
     Strictly speaking, Fasel proves the result above for a sheaf $G^{n}$ of abelian groups instead of $K_*^{MW}$. However, as he remarks in the introduction to his paper, we have isomorphisms of cohomology groups $H^{n-1}(\Spec A, K_n^{MW}) \cong H^{n-1}(\Spec A, G^n)$ (using the notation above) whenever $\operatorname{char}(k) \neq 2$.
 \end{remark}
 
-Instead of providing the full proof of the theorem above, which requires a long technical detour, we simply direct the reader to \cite[Section 4]{Fasel_2010} for details. Instead, let's give a brief description of how the homomorphism in the theorem is constructed. Given a smooth $k$-algebra $A$, Fasel produces a map
+Instead of providing the full proof of the theorem above, which requires a long technical detour, we simply direct the reader to \cite[Section 4]{Fasel-unim} for details. Instead, let's give a brief description of how the homomorphism in the theorem is constructed. Given a smooth $k$-algebra $A$, Fasel produces a map
 \[
 \varphi: \mathrm{Um}_n(A)/E_n(A) \to H^{n-1}(\Spec A,K_{n}^{MW})
 \]
@@ -547,11 +547,11 @@ as follows. We have a natural map
 \[
 \Hom_{k\mathrm{-Sch}}(\Spec A, \A^{m+1} \setminus\{0\}) \to H^{m}(A,K_{m+1}^{MW})
 \]
-given by $f \mapsto f^*(\xi)$, where $\xi \in H^{m}(\A^m\setminus\{0\},K_{m+1}^{MW})$ is some distinguished class defined in \cite[Section 3]{Fasel_2010}. One can show that this map is $\A^1$-naive homotopy invariant, so that it factors through $\operatorname{Um}_n(A)/E_n(A)$ by Proposition \ref{prop:fasel_naive}. The fact that this map is a homomorphism is the content of the proof of \cite[Theorem 4.1]{Fasel_2010}. There, Fasel notes that it suffices to verify the relation (\ref{eqn:mn_relation})-(\ref{eqn:mn_relation2}) in $H^{m}(A,K_{m+1}^{MW})$ and reduces the verification of this relation to a simple computation using the defining relations of the Milnor--Witt group $K_1^{MW}(k(t))$. The remainder of \cite[Section 4]{Fasel_2010} is dedicated to proving that this homomorphism is an isomorphism when $n-1 = \dim(A) \geq 2$ (in fact, the cases $\dim(A) = 2,3$ must be handled separately), and we refer the reader to that section for details of this proof, which are quite technical and perhaps beyond the scope of this appendix.
+given by $f \mapsto f^*(\xi)$, where $\xi \in H^{m}(\A^m\setminus\{0\},K_{m+1}^{MW})$ is some distinguished class defined in \cite[Section 3]{Fasel-unim}. One can show that this map is $\A^1$-naive homotopy invariant, so that it factors through $\operatorname{Um}_n(A)/E_n(A)$ by Proposition \ref{prop:fasel_naive}. The fact that this map is a homomorphism is the content of the proof of \cite[Theorem 4.1]{Fasel-unim}. There, Fasel notes that it suffices to verify the relation (\ref{eqn:mn_relation})-(\ref{eqn:mn_relation2}) in $H^{m}(A,K_{m+1}^{MW})$ and reduces the verification of this relation to a simple computation using the defining relations of the Milnor--Witt group $K_1^{MW}(k(t))$. The remainder of \cite[Section 4]{Fasel-unim} is dedicated to proving that this homomorphism is an isomorphism when $n-1 = \dim(A) \geq 2$ (in fact, the cases $\dim(A) = 2,3$ must be handled separately), and we refer the reader to that section for details of this proof, which are quite technical and perhaps beyond the scope of this appendix.
 
-As a consequence of this theorem, however, Fasel is able to explicitly compute the group $\mathrm{Um}_n(A)/E_n(A)$ in some special cases. He works over the field $\R$ in particular. Recall that a smooth $\R$-variety $X$ is called rational if the base change to $\C$ is birational to $\P_\C^d$ for some $d$. As a result of some rather technical computations (we refer the reader to \cite[Section 5]{Fasel_2010} for details), Fasel proves the following result. In particular, under some restrictive assumptions, he shows that the group $\operatorname{Um}_n(A)/E_n(A)$ is free abelian with an explicitly determined indexing set.
+As a consequence of this theorem, however, Fasel is able to explicitly compute the group $\mathrm{Um}_n(A)/E_n(A)$ in some special cases. He works over the field $\R$ in particular. Recall that a smooth $\R$-variety $X$ is called rational if the base change to $\C$ is birational to $\P_\C^d$ for some $d$. As a result of some rather technical computations (we refer the reader to \cite[Section 5]{Fasel-unim} for details), Fasel proves the following result. In particular, under some restrictive assumptions, he shows that the group $\operatorname{Um}_n(A)/E_n(A)$ is free abelian with an explicitly determined indexing set.
 
-\begin{theorem}\cite[Theorem 5.7, Remark 5.8]{Fasel_2010}\label{thm:fasel_explicit_group}
+\begin{theorem}\cite[Theorem 5.7, Remark 5.8]{Fasel-unim}\label{thm:fasel_explicit_group}
     Suppose $A$ is a smooth $\R$-algebra of Krull dimension $d = n-1 \geq 2$. Moreover, assume that $X = \Spec(A)$ is rational and has trivial canonical bundle. Then, we have an isomorphism
     \[
     \operatorname{Um}_n(A)/E_n(A) \cong H^{n-1}(X, K_{n}^{MW}) \cong \Z^{\oplus \pi_0^c(X(\R))}
@@ -563,21 +563,21 @@ As a consequence of this theorem, however, Fasel is able to explicitly compute t
     where $\pi^d(X(\R))$ is the $d$th cohomotopy group.
 \end{theorem}
 
-\subsubsection{Applications to Stably Free Modules} In this section, we discuss some applications of the motivic perspective on unimodular rows to the study of stably free modules, following the work of Fasel \cite[Section 5.2]{Fasel_2010}. Recall that an $A$-module $M$ is called \textit{stably free} if there exists some $r \geq 0$ such that $M \oplus A^{\oplus r}$ is a finite rank free $A$-module. Observe that a stably free module is necessarily projective. The study of stably free modules arises as a special case of the following question in commutative algebra.
+\subsubsection{Applications to Stably Free Modules} In this section, we discuss some applications of the motivic perspective on unimodular rows to the study of stably free modules, following the work of Fasel \cite[Section 5.2]{Fasel-unim}. Recall that an $A$-module $M$ is called \textit{stably free} if there exists some $r \geq 0$ such that $M \oplus A^{\oplus r}$ is a finite rank free $A$-module. Observe that a stably free module is necessarily projective. The study of stably free modules arises as a special case of the following question in commutative algebra.
 
 \begin{question}
     Let $P$ and $Q$ be projective modules such that $P \oplus A^{\oplus n} \cong Q \oplus A^{\oplus n}$ for some $n \geq 0$. Are $P$ and $Q$ isomorphic?
 \end{question}
 
-This question finds a partial resolution through a result of Bass and Schanuel \cite[Theorem 2]{Bass_Schanuel}:
+This question finds a partial resolution through a result of Bass and Schanuel \cite[Theorem 2]{BassSchanuel}:
 
 \begin{theorem}(Bass--Schanuel, 1962)
     If $P$ is a finitely generated projective $A$-module of $f$-rank at least the Krull dimension of $A$, and $Q$ is any finitely generated projective $A$-module satisfying $P \oplus A^{\oplus r} \cong Q \oplus A^{\oplus r}$ for some $r \geq 0$, then $P \cong Q$.
 \end{theorem}
 
-Observe that the Bass--Schanuel theorem reduces the study of stably free modules to the special case of finitely generated projective modules $P$ such that $P \oplus A \cong A^{\oplus n}$, where $n-1$ is the Krull dimension of $A$. It turns out that the study of these modules can be handled with the theory of unimodular rows, and this source of motivation actually was the impetus for Fasel's study of unimodular rows in \cite{Fasel_2010}. 
+Observe that the Bass--Schanuel theorem reduces the study of stably free modules to the special case of finitely generated projective modules $P$ such that $P \oplus A \cong A^{\oplus n}$, where $n-1$ is the Krull dimension of $A$. It turns out that the study of these modules can be handled with the theory of unimodular rows, and this source of motivation actually was the impetus for Fasel's study of unimodular rows in \cite{Fasel-unim}. 
 
-Indeed, we claim that a finitely generated projective $A$-module $P$ satisfying $P \oplus A \cong A^{\oplus n}$ for some $n \geq 0$ is the same data as a unimodular row $u \in \operatorname{Um}_n(A)$. Given a unimodular row $(u_1,\ldots,u_n)$, we take $P \subset A^{\oplus n}$ as the kernel of the corresponding surjection $A^{\oplus n} \to A$. Note that the resulting short exact sequence \[0 \to P \to A^{\oplus n} \to A \to 0\] splits, as desired. Conversely, a split short exact sequence as above contains a surjective homomorphism $A^{\oplus n} \to A$, which gives us a unimodular row of length $n$. Of course, note that isomorphisms of the modules $P$ correspond to equivalences of unimodular rows under the natural action of $\mathrm{GL}_n(A)$. Thus, we are actually interested in the orbit set \[\operatorname{Um}_n(A)/\mathrm{GL}_n(A) \simeq \mathrm{Um}_n(A)/\mathrm{SL}_n(A),\] a quotient of $\mathrm{Um}_n(A)/E_n(A)$. Given the results of Fasel that we presented the previous subsubsection, it is perhaps unsurprising that Morel\footnote{I am unable to find the reference cited by Fasel's paper} found a cohomological interpretation of the  orbit set above. Strictly speaking, Morel's result only applies to smooth algebras $A$ of Krull dimension at least three. Fasel \cite[Theorem 4.11]{Fasel_2010} extends Morel's result to the dimension two case, resulting in the following theorem.
+Indeed, we claim that a finitely generated projective $A$-module $P$ satisfying $P \oplus A \cong A^{\oplus n}$ for some $n \geq 0$ is the same data as a unimodular row $u \in \operatorname{Um}_n(A)$. Given a unimodular row $(u_1,\ldots,u_n)$, we take $P \subset A^{\oplus n}$ as the kernel of the corresponding surjection $A^{\oplus n} \to A$. Note that the resulting short exact sequence \[0 \to P \to A^{\oplus n} \to A \to 0\] splits, as desired. Conversely, a split short exact sequence as above contains a surjective homomorphism $A^{\oplus n} \to A$, which gives us a unimodular row of length $n$. Of course, note that isomorphisms of the modules $P$ correspond to equivalences of unimodular rows under the natural action of $\mathrm{GL}_n(A)$. Thus, we are actually interested in the orbit set \[\operatorname{Um}_n(A)/\mathrm{GL}_n(A) \simeq \mathrm{Um}_n(A)/\mathrm{SL}_n(A),\] a quotient of $\mathrm{Um}_n(A)/E_n(A)$. Given the results of Fasel that we presented the previous subsubsection, it is perhaps unsurprising that Morel\footnote{I am unable to find the reference cited by Fasel's paper} found a cohomological interpretation of the  orbit set above. Strictly speaking, Morel's result only applies to smooth algebras $A$ of Krull dimension at least three. Fasel \cite[Theorem 4.11]{Fasel-unim} extends Morel's result to the dimension two case, resulting in the following theorem.
 
 \begin{theorem}[Fasel--Morel]
     Let $A$ be a smooth $k$-algebra of Krull dimension $d = n-1 \geq 2$ over a perfect field $k$ with characteristic not equal to two. There is a natural bijection 
@@ -586,20 +586,20 @@ Indeed, we claim that a finitely generated projective $A$-module $P$ satisfying 
     \]
 \end{theorem}
 
-The proof of this theorem relies on the study of some short exact sequences related to the Chow--Witt group. In order to avoid a long technical discussion, we omit the proof and refer the reader to \cite[Section 4]{Fasel_2010}. Similar to the case of elementary orbits of unimodular rows, Fasel uses the theorem above to explicitly compute the set $\mathrm{Um}_n(A)/\mathrm{SL}_n(A)$ in the case of some exceptional real algebras $A$.
+The proof of this theorem relies on the study of some short exact sequences related to the Chow--Witt group. In order to avoid a long technical discussion, we omit the proof and refer the reader to \cite[Section 4]{Fasel-unim}. Similar to the case of elementary orbits of unimodular rows, Fasel uses the theorem above to explicitly compute the set $\mathrm{Um}_n(A)/\mathrm{SL}_n(A)$ in the case of some exceptional real algebras $A$.
 
-\begin{theorem}\cite[Theorem 5.9]{Fasel_2010}\label{thm:fasel_stable}
+\begin{theorem}\cite[Theorem 5.9]{Fasel-unim}\label{thm:fasel_stable}
     Let $A$ be a smooth $\R$-algebra of even Krull dimension $d$ such that $\Spec A$ has trivial canonical bundle and is rational. The set of isomorphism classes of stably free $A$-modules is isomorphic to $\Z^{\oplus \pi_0^c(X(\R))}$, where $\pi_0^c(X(\R))$ is the set of compact connected components of $X(\R)$.
 \end{theorem}
 
 The proof of this theorem crucially uses Theorem \ref{thm:fasel_explicit_group} and thus the cohomological/motivic machinery employed by Fasel. As a consequence of Theorem \ref{thm:fasel_stable}, Fasel gives a criterion for some stably free modules to be free. 
 
-\begin{theorem}\cite[Theorem 5.10]{Fasel_2010}
+\begin{theorem}\cite[Theorem 5.10]{Fasel-unim}
     Suppose $A$ is an $\R$-algebra satisfying the assumptions of Theorem \ref{thm:fasel_stable}. A stably free $A$-module of rank $\dim(A)$ is free if and only if its Euler class vanishes.
 \end{theorem}
 
 Fasel's classification result above finds the following curious application. 
 
-\begin{corollary}\cite[Corollary 5.12]{Fasel_2010}
+\begin{corollary}\cite[Corollary 5.12]{Fasel-unim}
     The set of isomorphism classes of stably free rank $2d$ modules on the sphere $S^{2d}$ (i.e., stably free vector bundles on $S^{2d}$) is isomorphic to $\Z$ and is generated by the tangent bundle. 
 \end{corollary}
