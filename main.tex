@@ -56,7 +56,7 @@
 \newcommand{\quoteblock}[2]{\epigraph{\itshape#1}{#2}}
 
 
-\usepackage[notref]{showkeys}
+%\usepackage[notref]{showkeys}
 
 
 \fancyfoot[C]{\thepage}
@@ -804,7 +804,7 @@ Note that $d_1 \colon G^{\times 2} \to G$ is precisely the group multiplication,
 Check the simplicial identities hold \textit{precisely} because of the group axioms. In particular, observe that we didn't use anything special about spaces --- if $G$ is a group object in any category $\mathscr{C}$ we obtain an associated bar construction which is a simplicial object in $\mathscr{C}$ that we call $B_{\bullet}G$.
 \end{exercise}
 
-\begin{example} (Important) For the formal categorical reason in \autoref{exer:simplicial-bar-construction-gp-object}, any group scheme $G$ gives rise to a simplicial scheme $B_\bullet G \in \Fun \left( \DDelta^\op, \Sch \right)$. This dates back at least to work of Friedlander \cite[Example~1.2]{Friedlander}. We'll use this object frequently.
+\begin{example}[Important] For the formal categorical reason in \autoref{exer:simplicial-bar-construction-gp-object}, any group scheme $G$ gives rise to a simplicial scheme $B_\bullet G \in \Fun \left( \DDelta^\op, \Sch \right)$. This dates back at least to work of Friedlander \cite[Example~1.2]{Friedlander}. We'll use this object frequently.
 \end{example}
 
 \begin{example} Simplicial objects appeared crucially in Deligne's work on resolution of singularities and mixed Hodge structures.
@@ -829,7 +829,7 @@ The associated chain complex is called the \textit{Moore complex} of the simplic
 \end{enumerate}
 \end{example}
 
-\begin{example}[\v{C}ech nerve $N_\bullet(U)$] A simplicial object can conveniently encode the data of an open cover, its intersections, triple intersections, etc.\footnote{%
+\begin{example}[The \v{C}ech nerve $N_\bullet(U)$] A simplicial object can conveniently encode the data of an open cover, its intersections, triple intersections, etc.\footnote{%
     Technically it should be an \textit{augmented simplicial object} since we'd also like to remember the data of the maps $U_i \to X$.} For this, given an open cover $\{U_i \to X\}$ of a variety $X$, denote by $U_{ij} := U_i \times_{X} U_j$ the double overlaps, by $U_{ijk} := U_i \times_X U_j \times_X U_k$ the triple overlaps, and so on. We define a simplicial object
 \[ \begin{tikzcd}[column sep=small]
     {\coprod_i U_i}\rar & {\coprod_{i,j}U_{ij}} \lar[shift left=\theshiftamount]\lar[shift right=\theshiftamount]\rar[shift left=\theshiftamount]\rar[shift right=\theshiftamount] & \coprod_{i,j,k} U_{ijk} \lar \lar[shift left=2*\theshiftamount]\lar[shift right=2*\theshiftamount] & \cdots 
@@ -1093,6 +1093,10 @@ A pair of a category and a topology $(\mathscr{C},\tau)$ is called a \textit{sit
 
 \begin{example} A \textit{Nisnevich cover} is a collection of \'etale morphisms $\left\{ U_i \to U \right\}$ so that for each $x\in X$ there exists an $i$ and a $y\in U_i$ so that $y\mapsto x$ induces an isomorphism on residue fields.
 \end{example}
+
+\begin{remark} The \textit{Nisnevich topology} first appeared in work of Nisnevich, where it was called the ``completely decomposed topology'' \cite{Nis80}, and then appeared in work of Kato and Saito \cite{KS-Global} where it was referred to as the ``henselian topology.''
+\end{remark}
+
 
 \begin{note} If $R\to S$ is an \'etale ring extension, then $\Spec(S) \to \Spec(R)$ is an \'etale cover but not necessarily a Nisnevich cover. For example $\Spec(L) \to \Spec(k)$ is \'etale if $L/k$ is a finite separable extension, but not Nisnevich unless $k=L$.
 \end{note}
@@ -1982,7 +1986,7 @@ is a local equivalence of presheaves.
 
 \begin{remark} (How to prove this)
 \begin{enumerate}
-    \item  One way to prove this is by identifying the sheaf topos, as a simplicial model category, with the Bousfield localization of the category of simplicial presheaves, endowed with the projective model structure, at the class of hypercovers in the topology. We insist on $S$ being qcqs and Noetherian so we don't have to stress about the difference between covers and hypercovers here, although there is a more general statement over any base. This follows a body of work by Jardine, Bousfield and Kan, Dugger, Hollander and Isaksen.
+    \item  One way to prove this is by identifying the sheaf topos, viewed as a simplicial model category, with the Bousfield localization of the category of simplicial presheaves, endowed with the projective model structure, at the class of hypercovers in the topology. We insist on $S$ being qcqs and Noetherian so we don't have to stress about the difference between covers and hypercovers here, although there is a more general statement over any base. This follows a body of work by Jardine, Bousfield and Kan, Dugger, Hollander, Isaksen, and others.
     \item Another direction is by formal nonsense of $\infty$-topos theory. For instance if $X\in \Sm_S$, we can apply \cite[A.5.3.1]{SAG} to the \v{C}ech nerve of a cover after pulling it back to the slice topos $\Shv_{\tau}(\Sm_S)_{/X}$.
 \end{enumerate}
 
@@ -2009,7 +2013,8 @@ This gives rise to a sheaf $B\Tors_\tau(\mathcal{G})$ by post-composing with the
 There is a morphism of simplicial presheaves $B_\bullet \mathcal{G} \to B\Tors_\tau(\mathcal{G})$, defined on sections by sending the unique vertex of $B_\bullet \mathcal{G}(U)$ to the trivial $\mathcal{G}$-torsor over $U$. This map is a local equivalence.
 \end{theorem}
 
-\begin{corollary} For any $\tau$-sheaf of groups $\mathcal{G}$, there is a natural isomorphism of sheaves of sets
+\begin{corollary}\label{cor:BG-representability-sheaf-topos} 
+For any $\tau$-sheaf of groups $\mathcal{G}$, there is a natural isomorphism of sheaves of sets
 \begin{align*}
     [-, B_\tau \mathcal{G}]_\tau = \pi_0 \Map_{\Shv_\tau(\Sch_S)}(-,B_\tau \mathcal{G}) \cong H^1_\tau(-,\mathcal{G}).
 \end{align*}
@@ -2228,7 +2233,7 @@ Since $L_{\A^1}$ preserves pushouts, we have that
 \end{align*}
 By \autoref{prop:la1-sends-proj-to-equivalence} we can contract away the $\A^n$'s, and we invoke that $U_0$, $U_1$, and $U_{01}$ were already $\A^1$-local to get that the above is equivalent to
 \begin{align*}
-    &\simeq L_{\A^1}(U_0) \coprod_{L_{\A^1}(U_{01})} L_{\A^1}(U_1) = U_0 \coprod_{U_{01}} A_1.
+    &\simeq L_{\A^1}(U_0) \coprod_{L_{\A^1}(U_{01})} L_{\A^1}(U_1) = U_0 \coprod_{U_{01}} U_1.
 \end{align*}
 If this were a sheaf, it would agree with its sheafification, and since sheafification preserves pushouts, we would have that it is equal to the \textit{pushout of sheaves}
 \begin{align*}
@@ -2328,8 +2333,9 @@ Since colimits are universal in any $\infty$-topos (in particular in the preshea
 
 \section{Jouanolou devices and motivic equivalences}
 
+A key trick in motivic homotopy, originally due to Jouanolou, is to replace non-affine schemes by affine ones, up to motivic equivalence. More precisely:
 
-\begin{theorem} (Jouanolou--Thomason trick) Suppose that $S$ is qcqs and further suppose either $S$ is affine or it is noetherian, regular, and separated. Then for any quasi-projective $X\in \Sch_S$, there exists an affine bundle $Y \to X$, where $Y$ is affine.
+\begin{theorem}[Jouanolou--Thomason trick]Suppose that $S$ is qcqs and further suppose either $S$ is affine or it is noetherian, regular, and separated. Then for any quasi-projective $X\in \Sch_S$, there exists an affine bundle $Y \to X$, where $Y$ is affine.
 \end{theorem}
 
 \begin{remark} The above result probably holds under weaker assumptions -- we're citing \cite[2.20]{Hoyois6}, pulling our assumptions on $S$ from \cite[2.8]{Hoyois6} and letting $G$ be trivial. In most cases we apply this, $S$ will be a field, and $X$ will be smooth, and we can apply this trick by e.g. \cite[3.3.3]{AF-spheres}.
@@ -2557,7 +2563,7 @@ Hence $\left[ X,\mathcal{Y} \right]_{\A^1} = \pi_0 \mathcal{Y}(X)$.
 
 \begin{example} We have a bijection
 \begin{align*}
-    \left[ X, \mathbb{G}_m \right]_{\A^1} = \mathbb{G}_m(X)
+    \left[ X, \mathbb{G}_m \right]_{\A^1} = \mathbb{G}_m(X) = H^0(X,\O_X^\times)
 \end{align*}
 for any $X\in \Sm_S$.
 \end{example}
@@ -2634,6 +2640,10 @@ For the backwards direction, this condition on homotopy groups unwinds to tell u
 \end{center}
 \end{terminology}
 
+\begin{warning}
+    The equivalence between $\A^1$-contractibility and $\A^1$-$\infty$-connected is implicitly requiring that we are in a hypercomplete setting.
+\end{warning}
+
 
 \begin{example}\label{exa:connectivity-motivic-spheres} 
 We have that $S^{i+j,j}$ is $\A^1$-$(i-1)$-connected (see \cite[2.4.5]{AO-contractible}). In particular it depends only on the number of copies of $S^{1,0}$ and not on the number of copies of $\mathbb{G}_m$.
@@ -2670,7 +2680,7 @@ We have seen that in order to check a map is a motivic equivalence, it suffices 
 
 Note that $\pi_n^{\A^1}(X)$ is a Nisnevich sheaf of sets, but it is not necessarily a motivic space. We can ask to what extent it is $\A^1$-invariant.
 
-It was conjectured by Morel that $\pi_0^{\A^1}(X)$ was always $\A^1$-invariant, but a counterexample was found by Ayoub (todo). Nevertheless we can ask for $\pi_i^{\A^1}(X)$ for $i\ge 1$. A more general question is to understand conditions that tell us a sheaf of groups is invariant.
+It was conjectured by Morel that $\pi_0^{\A^1}(X)$ was always $\A^1$-invariant, but a counterexample was found by Ayoub \cite{Ayoub-counterexamples}. Nevertheless we can ask for $\pi_i^{\A^1}(X)$ for $i\ge 1$. A more general question is to understand conditions that tell us a sheaf of groups is invariant.
 
 Let $\mathcal{G}$ denote a Nisnevich sheaf of groups. Since $\mathcal{G}(X) = H^0_\Nis(X,\mathcal{G})$, the condition that $\mathcal{G}$ is $\A^1$-invariant is equivalent to asking whether
 \begin{align*}
@@ -2761,6 +2771,8 @@ has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(
 \begin{example} Any unramified presheaf of sets is automatically a Zariski sheaf.
 \end{example}
 
+Morel gives these examples around \cite[2.3]{Morel}.\footnote{\todo add precise references for all these examples}
+
 \begin{theorem} (Morel) Any strictly $\A^1$-invariant sheaf is unramified.
 \end{theorem}
 
@@ -2772,7 +2784,7 @@ has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(
 \end{enumerate}
 \end{example}
 
-Unramified sheaves are determined in a precise sense by their values on fields, which we will now explain (and eventually reach in Theorem~\ref{thm:restriction-to-Fk}.
+Unramified sheaves are determined in a precise sense by their values on fields, which we will now explain (and eventually reach in \autoref{thm:restriction-to-Fk}).
 
 \subsection{Unramified sheaves from theories on fields}
 
@@ -3036,7 +3048,7 @@ We will see later that the sheaf cohomology of $\KM_n$ computes the Chow groups 
 \begin{align*}
     K_n^M(F) \to K_n(F),
 \end{align*}
-which is an isomorphism for $n\le 2$. (For $n=0,1$ this is easy, for $n=2$ this is \textit{Matsumoto's theorem}).
+which is an isomorphism for $n\le 2$. (For $n=0,1$ this is easy, for $n=2$ this is \textit{Matsumoto's theorem} --- see \autoref{sec:jonathan}).
 \end{proposition}
 
 \section{Milnor--Witt \texorpdfstring{$K$}{K}-theory} We refer the reader to \cite{Deglise-KMW,Carlier} for more in-depth discussions of what's found here.
@@ -3045,10 +3057,10 @@ which is an isomorphism for $n\le 2$. (For $n=0,1$ this is easy, for $n=2$ this 
 \textit{Milnor--Witt $K$-theory} of a field $F$ is defined to be the graded algebra $K_\ast^\MW(F)$ defined by symbols $[a]\in K_1^{\MW}(F)$ for $a\in F^\times$ and $\eta \in K_{-1}^\MW(F)$, modulo the relations:
 \begin{enumerate}
 \setlist[enumerate]{align=left,wide=0,leftmargin=\parindent, labelsep=*}
-    \item[(MW1)] $[a][1-a] = 0$ for $a\ne 0,1$
-    \item[(MW2)] $[ab] = [a]+[b] + \eta[a][b]$
-    \item[(MW3)] $\eta[a]=[a]\eta$
-    \item[(MW4)] $\eta(2+\eta[-1]) = 0$.
+    \item[\textbf{(MW1)}] $[a][1-a] = 0$ for $a\ne 0,1$
+    \item[\textbf{(MW2)}] $[ab] = [a]+[b] + \eta[a][b]$
+    \item[\textbf{(MW3)}] $\eta[a]=[a]\eta$
+    \item[\textbf{(MW4)}] $\eta(2+\eta[-1]) = 0$.
 \end{enumerate}
 \end{definition}
 
@@ -3366,6 +3378,7 @@ $\KMW_n$ is unramified and strongly $\A^1$-invariant.
 \end{align*}
 associated to each of these $\mathcal{F}_k$-data.
 \end{proposition}
+There is a tremendous amount to check here. The statement for Witt sheaves is \cite[Corollary~6]{Morel-connectivity}.
 
 \begin{proposition}\label{prop:GW-pullback} 
 There is a pullback square of abelian groups for any field $F$
@@ -3482,15 +3495,7 @@ There is a pullback diagram of unramified sheaves
 
 \section{Eilenberg--MacLane spaces}
 
-We denote by $B_\mot G := L_\mot BG$, and we have seen the following: (\todo fix this part)
-
-\begin{proposition} If $X$ is a scheme, then
-\begin{align*}
-    \pi_0 \Map_{\Shv_\Nis(\Sm_k)} \left( h_X, B_\Nis G \right) \cong H^1_\Nis(X,G).
-\end{align*}
-\end{proposition}
-
-We wonder whether higher Nisnevich cohomology is represented by Eilenberg--MacLane spaces? The answer is yes!
+We have seen in \autoref{cor:BG-representability-sheaf-topos} that $H^1_\Nis(X,G)$ is classified by homotopy classes of maps into a universal classifying object $B_\Nis G$. We may wonder whether higher Nisnevich cohomology is represented by Eilenberg--MacLane spaces. The answer is yes!
 
 \begin{theorem} (Dold--Kan) If $\Ab_\Nis(k)$ denotes the category of Nisnevich sheaves of abelian groups on $X$, there is an equivalence of categories
 \begin{align*}
@@ -3549,7 +3554,7 @@ With EM spaces in hand in the sheaf topos, we can reframe our definitions of str
 Let $\mathcal{G}$ be a sheaf of groups and $\mathcal{A}$ a sheaf of abelian groups. Then
 \begin{enumerate}
     \item $\mathcal{G}$ is strongly invariant if and only if $B_\Nis \mathcal{G}$ is $\A^1$-local
-    \item $\mathcal{A}$ is strictly invariant if and only if $K(\mathcal{A},n)$ is $\A^1$-local for every $n\ge0$.
+    \item $\mathcal{A}$ is strictly invariant if and only if $K(\mathcal{A},n)$ is $\A^1$-local for every $n\ge0$ (see \cite[6.2.2]{Morel-connectivity}).
 \end{enumerate}
 \end{proposition}
 \begin{proof} The backwards direction is immediate by representability of cohomology. The forwards direction needs a nontrivial argument, see \cite[1.5]{bachmannstrongly}.
@@ -3711,7 +3716,7 @@ For any strongly $\A^1$-invariant sheaf of abelian groups, we have that
 This suggests that $\A^1$-invariance of a sheaf is related to $\A^1$-invariance of its contraction.
 
 
-\begin{proposition} (Properties of contraction), c.f. \cite[\S4.1]{bachmannstrongly}
+\begin{proposition}[Properties of contraction] See e.g. \cite[\S4.1]{bachmannstrongly}
 \begin{enumerate}
     \item If $F$ is a sheaf of (abelian) groups, so is $F_{-1}$
     \item If $F$ is $\A^1$-invariant, so is $F_{-1}$.
@@ -3727,7 +3732,7 @@ If $G$ is a strongly $\A^1$-invariant sheaf of groups, then
     \Omega_{\mathbb{G}_m} K(G,1) \simeq K(G_{-1},1).
 \end{align*}
 \end{lemma}
-\begin{proof}[Proof sketch] Easy to check that $\pi_1 K(G_{-1},1) = G_{-1}$. What's less obvious is $\Omega_{\mathbb{G}_m} K(G,1)$ is connected. We've learned we can check connectivity on fields, so this reduces to asking that
+\begin{proof}[Proof sketch] It's easy to check that $\pi_1 K(G_{-1},1) = G_{-1}$. What's less obvious is $\Omega_{\mathbb{G}_m} K(G,1)$ is connected. We've learned we can check connectivity on fields, so this reduces to asking that
 \begin{align*}
     \left[ \Spec(F)_+, \Omega_{\mathbb{G}_m} K(G,1) \right]_{\A^1}
 \end{align*}
@@ -3741,7 +3746,7 @@ The Zariski (or Nisnevich) cohomological dimension of a Noetherian scheme $X$ is
 \end{theorem}
 
 
-\begin{corollary}\label{cor:strongly-invt-contraction} 
+\begin{corollary}\label{cor:strongly-invt-contraction} \,
 \begin{enumerate}
     \item If $G$ is a strongly $\A^1$-invariant sheaf of groups, then so is $G_{-1}$.
     \item If $A$ is a strictly $\A^1$-invariant sheaf of abelian groups. Then there is a canonical equivalence
@@ -3991,6 +3996,7 @@ are defined to be mates to the natural equivalences
 
 \subsection{Monoidal structure on homotopy modules}
 
+We're going to leverage the symmetric monoidal structure on $\HI(k)$ to induce one on $\HM(k)$, via a standard trick.
 
 
 \begin{definition} An object $X\in \mathscr{C}$ in a symmetric monoidal 1-category (resp. $\infty$-category) is called \textit{cyclic} if some permutation of $X^{\otimes n}$ is equal to (resp. homotopic to) the identity.
@@ -4093,11 +4099,11 @@ of modules over Milnor $K$-theory (or modules over $\KMW_\ast$ on which $\eta$ a
 \begin{remark} $\ $
 \begin{enumerate}
     \item It is easier to define differentials for homotopy modules with transfers since we don't have to stress about twists.
-    \item Rost cycle modules were used famously in the proof of the Milnor conjecture. Moreover over a perfect field, the category of Rost cycle modules is equivalent to the heart of the category of Voevodsky motives in the homotopy $t$-structure (see Deglise modules de cycles et motifes mixtes)
+    \item Rost cycle modules were used famously in the proof of the Milnor conjecture. Moreover over a perfect field, the category of Rost cycle modules is equivalent to the heart of the category of Voevodsky motives in the homotopy $t$-structure\footnote{\todo add reference to D\'eglise's modules de cycles et motifes mixtes}
 \end{enumerate}
 \end{remark}
 
-\begin{theorem} \textit{(Properties of the Rost--Schmid complex)}
+\begin{theorem}[Properties of the Rost--Schmid complex]
 \begin{enumerate}
     \item For $X$ smooth, the Rost--Schmid complex provides an acyclic resolution in the Zariski or Nisnevich sites
     \item The projection $X \times \A^1 \to X$ induces a quasi-isomorphism
@@ -4165,7 +4171,7 @@ If $\mathbf{I}^n / \mathbf{I}^{n+1} = 0$ then $\mathbf{I}^n = 0$.
 so we have that $I^n(k(X))/I^{n+1}(k(X)) = H^n_\Gal(k(X), \mu_2^{\otimes n})$, which vanishes above the dimension of $X$. 
 \end{proof}
 
-\begin{remark} \textit{(Vanishing of $I^j$-cohomology)}
+\begin{remark}[Vanishing of $I^j$-cohomology]
 \begin{enumerate}
     \item Over an arbitrary field $k$, the same vanishing result will hold for $n \ge d+r+1$, where $r = \cd_2(k)$ is the 2-cohomological dimension of the field $k$ \cite[5.1]{AF3}.
     \item An even strongly vanishing statement is proven in \cite[5.2]{AF3}, using a Bloch--Ogus spectral sequence argument.
@@ -4409,7 +4415,7 @@ Since $\pi_1(\P^1)_{-1}$ is strongly invariant, the above is isomorphic to
 
 \begin{corollary} The assignment \autoref{eqn:end-p1-end-fa1} is a bijection.
 \end{corollary}
-\begin{proof} Since $BF_{\A^1}(1)$ is 1-truncated, we have that any map $\P^1 \to BF_{\A^1}(1)$ factors through $L_\mot \tau_{\le 1} \P^1$. Since $\P^1$ is connected,\footnote{} we have that $\tau_{\le 1} \P^1$ is equal to $BF_{\A^1}(1)$, which is $\A^1$-local.
+\begin{proof} Since $BF_{\A^1}(1)$ is 1-truncated, we have that any map $\P^1 \to BF_{\A^1}(1)$ factors through $L_\mot \tau_{\le 1} \P^1$. Since $\P^1$ is connected, we have that $\tau_{\le 1} \P^1$ is equal to $BF_{\A^1}(1)$, which is $\A^1$-local.
 \end{proof}
 
 \begin{proposition} The contraction of $\mathbb{G}_m$ is $\Z$.
@@ -4451,7 +4457,7 @@ There is a canonical isomorphism
 \end{proposition}
 \begin{proof} Since $F_{\A^1}(1)$ is by definition the free pointed sheaf of abelian groups on $\mathbb{G}_m$, there is a canonical isomorphism
 \begin{align*}
-    \Hom_{\Shv(\Grp)} \left( F_{\A^1}(1), F_{\A^1}(1) \right) &= \Hom_{\Shv_\ast} \left( \mathbb{G}_m, F_{\A^1}(1) \right).
+    \Hom_{\Shv(\Grp)} \left( F_{\A^1}(1), F_{\A^1}(1) \right) &\cong \Hom_{\Shv_\ast} \left( \mathbb{G}_m, F_{\A^1}(1) \right).
 \end{align*}
 This is the contraction $F_{\A^1}(1)_{-1}$.
 \end{proof}
@@ -4482,7 +4488,7 @@ Some facts are true about this:
 \end{tikzcd} \]
 \end{enumerate}
 \end{proposition}
-\begin{proof} todo
+\begin{proof} \todo
 \end{proof}
 
 Hence we think about $\Z$ as recording \textit{rank}.
@@ -4560,9 +4566,7 @@ Smashing with $\mathbb{G}_m$, we use that smash products distribute over wedge p
 This cogroup structure induces an addition on $\left[ \P^1,\P^1 \right]_{\A^1}$ which corresponds to addition in $\GW(k)$.
 
 \subsection{Explicit computations}
-Given an endomorphism $f/g \colon \P^1\to \P^1$, explicit formulas exist for computing the associated symmetric bilinear form in $\GW(k)$ \cite{Cazanave}. We spell these out now.
-
-By convention $\P^1$ is pointed at $\infty$ as a motivic space, however we could pick any basepoint and get analogous formulas.
+Given an endomorphism $f/g \colon \P^1\to \P^1$, explicit formulas exist for computing the associated symmetric bilinear form in $\GW(k)$ \cite{Cazanave}. We spell these out now. By convention $\P^1$ is pointed at $\infty$ as a motivic space, however we could pick any basepoint and obtain analogous formulas.
 
 \begin{note} We say a morphism of schemes $f/g \colon \P^1 \to \P^1$ is \textit{pointed} if it sends $\infty$ to $\infty$. Explicitly this implies that $\deg(g) < \deg(f)$. WLOG we can assume $f$ is monic, and we can dehomogenize and write
 \begin{align*}
@@ -4584,7 +4588,7 @@ the resultant is a hypersurface in here. So the data of $f/g$ of leading degree 
 This is called the \textit{B\'ezoutian}, and we denote by $\Bez(f/g)$ the $n \times n$ matrix $(c_{ij})_{i,j}$ over $k$.
 \end{definition}
 
-\begin{theorem} (Cazanave) The B\'{e}zoutian is a symmetric bilinear matrix, equal to the $\A^1$-degree of $f/g$, and the bijection
+\begin{theorem}[{\cite{Cazanave-thesis}}] The B\'{e}zoutian is a symmetric bilinear matrix, equal to the $\A^1$-degree of $f/g$, and the bijection
 \begin{align*}
     \left[ \P^1,\P^1 \right]_\ast &\to \GW(k) \times_{k^\times / \left( k^\times \right)^2} k^\times \\
     (f/g) &\mapsto \left( \Bez(f/g), (-1)^{\frac{n(n-1)}{2}} \det \Bez(f/g) \right)
@@ -4671,7 +4675,7 @@ Here the latter equality is by \autoref{exa:genuine-classes-of-maps-between-sche
 
 We remark that if $L_{\A^1}h_Y$ is already a Nisnevich sheaf, then we get that these two classes agree, however this rarely happens.
 
-\begin{definition} \cite[\S3.2.4]{MV}
+\begin{definition}[{\cite[\S3.2.4]{MV}}]
 We say that $Y \in \Sm_k$ is \textit{$\A^1$-rigid} if $h_Y$ is $\A^1$-invariant.
 \end{definition}
 
@@ -4733,7 +4737,7 @@ In general naive and genuine $\A^1$-homotopy classes of maps are quite different
 
 As a particular example, we have seen that $\left[ \P^1,\P^1 \right]_\ast$ is an abelian group. 
 
-\begin{theorem} (Cazanave) The set $\left[ \P^1,\P^1 \right]_N$ of pointed naive homotopy classes of maps admits a monoid structure, and the natural map
+\begin{theorem}[{\cite{Cazanave}}] The set $\left[ \P^1,\P^1 \right]_N$ of pointed naive homotopy classes of maps admits a monoid structure, and the natural map
 \begin{align*}
     \left[ \P^1,\P^1 \right]_N \to \left[ \P^1,\P^1 \right]_{\A^1}
 \end{align*}
@@ -4763,8 +4767,9 @@ This has an immediate corollary, which is that connectivity is preserved in pass
 This is the $n=0$ of the \textit{unstable connectivity theorem}.
 
 
-\begin{theorem}\label{thm:unstable-connectivity}
-(Unstable connectivity theorem, Morel) If $F$ is a simplicial sheaf which is $n$-connected, then $L_\mot F$ is $n$-connected.
+\begin{theorem}[{Unstable connectivity theorem, \cite[Thm~6.38]{Morel}}] 
+\label{thm:unstable-connectivity}
+If $F$ is a simplicial sheaf which is $n$-connected, then $L_\mot F$ is $n$-connected.
 \end{theorem}
 
 The goal of this section is to prove this.
@@ -4788,7 +4793,7 @@ For the base case it suffices to check that $X_{\le 0}$ is $\A^1$-local. However
 
 
 
-We can now prove the connectivity theorem, following \cite[1.10]{bachmannstrongly}.
+We can now prove the unstable connectivity theorem, following \cite[1.10]{bachmannstrongly}.
 
 \begin{proof}[Proof of \autoref{thm:unstable-connectivity}] We already proved this when $n=0$ (\autoref{cor:unstable-connectivity-0}), so we may assume $n>0$. Consider the fiber sequence in the sheaf topos
 \begin{align*}
@@ -5405,7 +5410,7 @@ We can define $\pi_n$ of a spectrum $E$ to be the sheafification of the presheaf
 \end{align*}
 \end{definition}
 
-\begin{proposition} We denote by $\SH_{S^1}(k) \subseteq \Sp(k)$ the category of $\A^1$-invariant sheaves of spectra. This is an accessible subcategory, hence the inclusion admits a left adjoint.
+\begin{proposition} We denote by $\SH_{S^1}(k) \subseteq \Sp(k)$ the category of $\A^1$-invariant sheaves of spectra. This is an accessible subcategory, hence the inclusion admits a left adjoint (cf. \cite[4.2.1]{Morel-connectivity}).
 \end{proposition}
 
 \begin{remark} This is poor notation --- technically $\SH_{S^1}(k)$ should denote the \textit{homotopy category}, rather than the $\infty$-category itself. This is a pervasive notational inconsistency in the literature. This is denoted by $\SH^{S^1}(k)$ in \cite[3.2.1]{Morel-pi0}.
@@ -5939,9 +5944,7 @@ So the number of algebraic vector bundles over $X$ with fixed $c_2$ is acted upo
 
 \subsection{The Swan--Forster theorem}
 
-This section is from soon-to-appear work of Asok, Opie, Shin and Syed.
-
-Suppose we're given a vector bundle of rank $r$ over a smooth affine $d$-fold $X$. This is classified by a map
+This section is from soon-to-appear work of Asok, Opie, Shin and Syed. Suppose we're given a vector bundle of rank $r$ over a smooth affine $d$-fold $X$. This is classified by a map
 \begin{align*}
     X \to \BGL_r = \Gr(r,\infty).
 \end{align*}
@@ -5958,7 +5961,7 @@ Our intuition might be that once $N$ is large enough, we can obtain all rank $r$
 \begin{align*}
     \Gr(r,N) \to \Gr(r,N+1)
 \end{align*}
-is $N-r$-connective. That is, its fiber has homotopy sheaves vanishing in degrees below $N-r$.
+is $(N-r)$-connective. That is, its fiber has homotopy sheaves vanishing in degrees below $N-r$.
 \end{proposition}
 
 \begin{theorem}\label{thm:motivic-Swan-Forster} 
@@ -6081,14 +6084,14 @@ While the 2-cohomological dimension doesn't appear in the algebraically closed c
 
 
 
-The next interesting case to study is corank one. Murthy conjectured essentially that an analogous result holds.
+The next interesting case to study is corank one. Murthy conjectured essentially that an analogous result holds. We call this \textit{Murthy's conjecture}.
 
-\begin{conjecture} (Murthy, 1999) Over an algebraically closed field, if $X$ is a smooth affine variety of dimension $d$,\footnote{Note that this conjecture only makes sense when $d\ge 2$. If $d=1$, then a corank one bundle is rank zero and cannot split any further.} then a corank one bundle $E \to X$ splits if and only if its top Chern class $c_{d-1}(E)$ is zero.
-\end{conjecture}
+
+\quoteblock{It would be interesting to find obstruction to splitting projective modules of rank less than the dimension of $A$. Let $X = \Spec A$ be a smooth affine variety of dimension $n$ over an algebraically closed field. I do no know any example of such an $A$ with a projective $A$-module of rank $n-1$ such that $c_{n-1}(P) = 0$ in $\CH^{n-1}(X)$, but $P$ does not have a free direct summand of rank one.}{\cite[p.~173]{Murthy-survey}}
 
 A quarter of a century later, this is now a theorem in characteristic zero.
 
-\begin{theorem} \cite[Theorem~3]{ABH-Freudenthal} (Asok--Bachmann--Hopkins) Murthy's splitting conjecture holds in characteristic zero.
+\begin{theorem}[{\cite[Theorem~3]{ABH-Freudenthal}}] In characteristic zero, over an algebraically closed field, the only obstruction to splitting corank one modules over a smooth affine $k$-algebra is the top Chern class.
 \end{theorem}
 
 The source of the assumption on the characteristic is essentially the same as in the work on the motivic Wilson space hypothesis we've been discussing in the Thursday seminar --- the existence of workable models for motivic Eilenberg--MacLane spaces due to Voevodsky.
