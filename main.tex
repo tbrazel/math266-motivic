@@ -2765,7 +2765,7 @@ has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(
     \begin{align*}
         \mathcal{F}(X) \to\bigcap_{x\in X^{(1)}} \mathcal{F}(\Spec \O_{X,x})
     \end{align*}
-    is an injection.
+    is a bijection.
 \end{enumerate}
 \end{definition}
 
@@ -2774,7 +2774,7 @@ has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(
 
 Morel gives these examples around \cite[2.3]{Morel}.\footnote{\todo add precise references for all these examples}
 
-\begin{theorem} (Morel) Any strictly $\A^1$-invariant sheaf is unramified.
+\begin{theorem}[{\cite[2.3]{Morel}}] Any strictly $\A^1$-invariant sheaf of abelian groups is unramified.
 \end{theorem}
 
 \begin{example} Some other examples of unramified sheaves:
@@ -2951,7 +2951,6 @@ By \autoref{thm:restriction-to-Fk}, we can define unramified sheaves of abelian 
 
 \subsection{Basic symbol algebra in $K_\ast^M$}
 
-Much of this can be found in \cite[\S7.1]{GilleSzamuely}.
 
 
 An immediate corollary of bilinearity of symbols is the following:
@@ -2967,13 +2966,10 @@ In $K_2^M(F)$ we have that
     \item $-\left\{ x,y \right\} = \left\{ x^{-1},y \right\}$.
     \item More generally for any $i,j\in \Z$ we have
     \begin{align*}
-         \left\{ x^i,y^j \right\} = (i+j) \left\{ x,y \right\}.
+         \left\{ x^i,y^j \right\} = (i\cdot j) \left\{ x,y \right\}.
     \end{align*}
 \end{enumerate}
 \end{proposition}
-
-
-
 
 
 \begin{proposition} \cite[1.1]{MilnorK}
@@ -3010,6 +3006,7 @@ The last statement follows from observing that
 since $\left\{ 1 \right\} = 0$.
 \end{proof}
 
+For more about symbol algebra in $K_\ast^M$, we refer the reader to \cite[\S7.1]{GilleSzamuely}.
 
 
 \subsection{Computations}
@@ -3018,13 +3015,13 @@ since $\left\{ 1 \right\} = 0$.
 \begin{example} \cite[III.6.1,~III.7.2]{Kbook}
 We have that $K_n^M(\mathbb{F}_q) =0$ for $n\ge 2$.
 \end{example}
-\begin{proof} We will show that it vanishes for $n=2$. Pick $x$ to generate $\mathbb{F}_q^\times$, then any element in $K_2^M(\mathbb{F}_q)$ is of the form $\left\{ x^i,x^j \right\}$. By \autoref{prop:powers-symbols}, this is equal to $(i+j) \left\{ x,x \right\}$ so it will suffice to verify that $\left\{ x,x \right\} = \left\{ x,-1 \right\}$ vanishes. This has order dividing two. We want to show it is killed by an odd number as well, and we'll be done. If $q = 2^m$, then $x^{2^m-1}=1$, and hence
+\begin{proof} We will show that it vanishes for $n=2$. Pick $x$ to generate $\mathbb{F}_q^\times$, then any element in $K_2^M(\mathbb{F}_q)$ is of the form $\left\{ x^i,x^j \right\}$. By \autoref{prop:powers-symbols}, this is equal to $ij \left\{ x,x \right\}$ so it will suffice to verify that $\left\{ x,x \right\} = \left\{ x,-1 \right\}$ vanishes. This has order dividing two. We want to show it is killed by an odd number as well, and we'll be done. If $q = 2^m$, then $x^{2^m-1}=1$, and hence
 \begin{align*}
     0 &= \left\{ 1,x \right\} = \left\{ x^{2^m-1},x \right\} = \left( 2^m-1 \right)\left\{ x,x \right\},
 \end{align*}
-which concludes the proof. If $q$ has odd exponential characteristic, we can find two non-squares in $\mathbb{F}_q$ which sum to 1 (c.f. \cite[1.3.6]{GilleSzamuely}). This gives us $x^k + x^\ell = 1$ for $k,\ell$ odd. Hence we get
+which concludes the proof. If $q$ has odd exponential characteristic, we can find two non-squares in $\mathbb{F}_q^\times$ which sum to 1 (c.f. \cite[1.3.6]{GilleSzamuely}). This gives us $x^k + x^\ell = 1$ for $k,\ell$ odd. Hence we get
 \begin{align*}
-    0 = \left\{ x^k,x^\ell \right\} = (k+ \ell) \left\{ x,x \right\},
+    0 = \left\{ x^k,x^\ell \right\} = k\cdot \ell\left\{ x,x \right\},
 \end{align*}
 and we are done.
 \end{proof}
