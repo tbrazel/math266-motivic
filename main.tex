@@ -569,7 +569,7 @@ So a very natural question is \textit{how do we tell when a $\tau$-torsor is als
 
 So it's a very reasonable goal to ask for any tools that could help us try to classify torsors. A natural idea, by analogy, is to look to homotopy theory, where we have a suite of tools for studying torsors.
 
-\begin{definition} Let $X$ be a compact Hausdorff topological space and $G$ a group. Then a \textit{principal $G$-bundle} (or we might just say a $G$-torsor) is a fiber bundle $\pi \colon Y \to X$ so that $G$ acts freely and transitively on the fibers.\footnote{\todo this is wrong, add in local trivialization condition}
+\begin{definition} Let $X$ be a compact Hausdorff topological space and $G$ a group. Then a \textit{principal $G$-bundle} (or we might just say a $G$-torsor) is a fiber bundle $\pi \colon Y \to X$ so that $G$ acts freely and transitively on the fibers, \textit{and} there exists an open cover $\left\{ U_i \to X \right\}$ over which $\pi$ is trivialized.
 \end{definition}
 
 In topology there is a \textit{universal $G$-torsor}, which is denoted $EG \to BG$. This is universal in the sense that, given any map $f \colon X \to BG$, we can consider the fiber product
@@ -2780,7 +2780,7 @@ Morel gives these examples around \cite[2.3]{Morel}.\footnote{\todo add precise 
 \begin{example} Some other examples of unramified sheaves:
 \begin{enumerate}
     \item Homotopy modules with transfers
-    \item Rost cycle modules
+    \item Rost cycle modules (see e.g. \cite[p.~338]{Rost-Chow})
     \item Unramified \'etale cohomology (ref needed)
 \end{enumerate}
 \end{example}
@@ -3165,7 +3165,7 @@ Some further relations let us expand various degree one elements, and are useful
     
     \item Since $ab=ba$ in $F$, we have that $[ab] = [ba]$. Expanding each of these using MW2 gives the desired result.
 
-    \item By applying \autoref{KMW:square-brackets-commute-eta}, we see that
+    \item By applying (\ref{KMW:square-brackets-commute-eta}), we see that
     \begin{align*}
         [a] \left\langle b \right\rangle &= [a] \left( 1 + \eta[b] \right) = [a] + \eta[a][b] = [a] + \eta[b][a] = \left\langle b \right\rangle[a].
     \end{align*}
@@ -3197,7 +3197,7 @@ Some further relations let us expand various degree one elements, and are useful
 \end{enumerate}
 \end{proof}
 
-In degree two, we see the value of $\epsilon$, that it measures the failure of commutativity:
+In degree two, we see why it was important to highlight $\epsilon$ as a special element, since it measures the failure of commutativity for symbols:
 
 \begin{proposition}\label{prop:properties-KMW2}  \textit{(Properties in $K_2^\MW$)}
 \begin{enumerate}
@@ -4098,11 +4098,11 @@ of modules over Milnor $K$-theory (or modules over $\KMW_\ast$ on which $\eta$ a
 \begin{remark} $\ $
 \begin{enumerate}
     \item It is easier to define differentials for homotopy modules with transfers since we don't have to stress about twists.
-    \item Rost cycle modules were used famously in the proof of the Milnor conjecture. Moreover over a perfect field, the category of Rost cycle modules is equivalent to the heart of the category of Voevodsky motives in the homotopy $t$-structure\footnote{\todo add reference to D\'eglise's modules de cycles et motifes mixtes}
+    \item Rost cycle modules were used famously in the proof of the Milnor conjecture. Moreover over a perfect field, the category of Rost cycle modules is equivalent to the heart of the category of Voevodsky motives in the homotopy $t$-structure. This is proven in \cite[Theorem 4.5]{Deglise-motifs-mixtes}
 \end{enumerate}
 \end{remark}
 
-\begin{theorem}[Properties of the Rost--Schmid complex]
+\begin{theorem}[Properties of the Rost--Schmid complex] \,
 \begin{enumerate}
     \item For $X$ smooth, the Rost--Schmid complex provides an acyclic resolution in the Zariski or Nisnevich sites
     \item The projection $X \times \A^1 \to X$ induces a quasi-isomorphism
@@ -4117,7 +4117,7 @@ of modules over Milnor $K$-theory (or modules over $\KMW_\ast$ on which $\eta$ a
 
 
 
-\begin{theorem} (Rost ?) For any smooth $X$, we have that $H^n(X,\KM_n) = \CH^n(X)$.
+\begin{theorem}[{\cite[p.~323]{Rost-Chow}}] For any smooth $X$, we have that $H^n(X,\KM_n) = \CH^n(X)$.
 \end{theorem}
 \begin{proof} At the tail end of the Rost--Schmid complex. we have
 \begin{align*}
@@ -4151,7 +4151,7 @@ are called \textit{Chow--Witt groups}. Note that negative Milnor--Witt $K$-theor
 
 \begin{proposition} If $\mathbf{I}^n \ne 0$ for some $n$, then $\mathbf{I}^n \ne \mathbf{I}^{n+1}$.
 \end{proposition}
-\begin{proof} It suffices to check on fields, from which it was originally proven by Arason and Pfister \cite[Korollar~2]{ArasonPfister}.
+\begin{proof} It suffices to check on fields, which is a result originally due to Arason and Pfister \cite[Korollar~2]{ArasonPfister}.
 \end{proof}
 
 \begin{corollary}\label{cor:vanishing-In-associated-graded} 
@@ -4170,7 +4170,7 @@ If $\mathbf{I}^n / \mathbf{I}^{n+1} = 0$ then $\mathbf{I}^n = 0$.
 so we have that $I^n(k(X))/I^{n+1}(k(X)) = H^n_\Gal(k(X), \mu_2^{\otimes n})$, which vanishes above the dimension of $X$. 
 \end{proof}
 
-\begin{remark}[Vanishing of $I^j$-cohomology]
+\begin{remark}[Vanishing of $I^j$-cohomology] \,
 \begin{enumerate}
     \item Over an arbitrary field $k$, the same vanishing result will hold for $n \ge d+r+1$, where $r = \cd_2(k)$ is the 2-cohomological dimension of the field $k$ \cite[5.1]{AF3}.
     \item An even strongly vanishing statement is proven in \cite[5.2]{AF3}, using a Bloch--Ogus spectral sequence argument.
@@ -5897,7 +5897,7 @@ between $\A^1$-homotopy classes of maps $X \to \BGL_r$ and rank $r$ algebraic ve
 
 So if $R$ is a smooth affine $k$-algebra, \textit{every} finitely generated projective module over $R$ is classified by a map $\Spec(R) \to \BGL_r$. Moreover we have access to obstruction theory in order to study them.
 
-Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel82}.\footnote{\todo check this is the right Lindel reference}
+Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel81}.\footnote{Lindel first proved this over a perfect field in his Habilitationschrift at M\"unster, but using work of Vorst and Mohan Kumar \cite{Vorst}, was able to extend it to an arbitrary base field.}
 
 \subsection{Rank two oriented bundles}
 
