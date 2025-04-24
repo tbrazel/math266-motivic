@@ -2562,7 +2562,7 @@ Hence $\left[ X,\mathcal{Y} \right]_{\A^1} = \pi_0 \mathcal{Y}(X)$.
 
 \begin{example} We have a bijection
 \begin{align*}
-    \left[ X, \mathbb{G}_m \right]_{\A^1} = \mathbb{G}_m(X) = H^0(X,\O_X^\times)
+    \left[ X, \mathbb{G}_m \right]_{\A^1} = \mathbb{G}_m(X) = H^0(X,\mathcal{O}_X^\times)
 \end{align*}
 for any $X\in \Sm_S$.
 \end{example}
@@ -2744,7 +2744,7 @@ is strongly invariant, which is strictly invariant for $n>1$ by \autoref{thm:str
 
 Let $\mathcal{F}$ be a sheaf of sets. We say it \textit{ramifies} if, for some $X$, the map
 \begin{align*}
-    \mathcal{F}(X) \to \bigcap_{x\in X^{(1)}} \mathcal{F}(\Spec \O_{X,x})
+    \mathcal{F}(X) \to \bigcap_{x\in X^{(1)}} \mathcal{F}(\Spec \mathcal{O}_{X,x})
 \end{align*}
 has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(X))$). This is very related to the idea of \textit{purity} for torsors.
 
@@ -2762,7 +2762,7 @@ has nontrivial kernel (here the intersection takes place in $\mathcal{F}(\kappa(
     is injective
     \item The map
     \begin{align*}
-        \mathcal{F}(X) \to\bigcap_{x\in X^{(1)}} \mathcal{F}(\Spec \O_{X,x})
+        \mathcal{F}(X) \to\bigcap_{x\in X^{(1)}} \mathcal{F}(\Spec \mathcal{O}_{X,x})
     \end{align*}
     is a bijection.
 \end{enumerate}
@@ -2822,11 +2822,11 @@ An \textit{unramified $\mathcal{F}_k$-datum} is the data of
     \item[\textbf{D1}] A continuous functor $M \colon \mathcal{F}_k \to \Ab$.
     \item[\textbf{D2}] For every $F\in \mathcal{F}_k$ and discrete valuation $v$ on $F$, a subgroup
     \begin{align*}
-        M(\O_v) \subseteq M(F),
+        M(\mathcal{O}_v) \subseteq M(F),
     \end{align*}
     \item[\textbf{D3}] For every $F\in \mathcal{F}_k$ and valuation $v$ on $F$ a specialization map
     \begin{align*}
-        s_v \colon M(\O_v) \to M(\kappa(v)).
+        s_v \colon M(\mathcal{O}_v) \to M(\kappa(v)).
     \end{align*}
 \end{enumerate}
 This data is subject to the axioms
@@ -2836,34 +2836,34 @@ This data is subject to the axioms
     }
     then the square commutes
 \[ \begin{tikzcd}
-    M(\O_w)\dar[hook]\rar[dashed] & M(\O_w)\dar[hook]\\
+    M(\mathcal{O}_w)\dar[hook]\rar[dashed] & M(\mathcal{O}_w)\dar[hook]\\
     M(E)\rar & M(F).
 \end{tikzcd} \]
 If the field extension $\kappa(v) \to \kappa(w)$ is an isomorphism then this square is cartesian.
 
-    \item[\textbf{A2}] If $X$ is irreducible with function field $F$, and $m\in M(F)$, then $m$ lies in all but a finite number of $S(\O_{X,x})$, where $x\in X^{(1)}$.
+    \item[\textbf{A2}] If $X$ is irreducible with function field $F$, and $m\in M(F)$, then $m$ lies in all but a finite number of $S(\mathcal{O}_{X,x})$, where $x\in X^{(1)}$.
     \item[\textbf{A3(i)}] If $(E,w) \subseteq (F,v)$ is an extension in $\mathcal{F}_k$, then the diagram commutes:
 \[ \begin{tikzcd}
-    M(\mathcal{O}_v)\dar\rar[dashed] & M(\O_w)\dar\\
+    M(\mathcal{O}_v)\dar\rar[dashed] & M(\mathcal{O}_w)\dar\\
     M(\kappa(v))\rar & M(\kappa(w)).
 \end{tikzcd} \]
     
     \item[\textbf{A3(ii)}] If $E \subseteq F$ is an extension in $\mathcal{F}_k$ and $v$ a discrete valuation on $F$ restricting to zero on $E$, and $j \colon E \hookto \kappa(v)$ the induced field extension, then the diagram commutes
 \[ \begin{tikzcd}
      & M(\kappa(v))\\
-    M(E)\ar[ur,"M(j)" above left]\ar[dr]\rar[dashed] & M(\O_v)\dar[hook]\uar["s_v" right]\\
+    M(E)\ar[ur,"M(j)" above left]\ar[dr]\rar[dashed] & M(\mathcal{O}_v)\dar[hook]\uar["s_v" right]\\
      & M(F).
 \end{tikzcd} \]
     
     \item[\textbf{A4(i)}] If $X\in \Sm_k$ is local of dimension two with closed point $z$, and $y_0 \in X^{(1)}$ has smooth reduced scheme $\bar{y}_0$, then the diagram commutes
 \[ \begin{tikzcd}
-    \bigcap_{y\in X^{(1)}} M(\O_y)\dar[hook]\rar[dashed] & M(\O_{\bar{y}_0,z})\dar[hook]\\
-    M(\O_{y_0})\rar["s_{y_0}" below] & M(\kappa(y_0)).
+    \bigcap_{y\in X^{(1)}} M(\mathcal{O}_y)\dar[hook]\rar[dashed] & M(\mathcal{O}_{\bar{y}_0,z})\dar[hook]\\
+    M(\mathcal{O}_{y_0})\rar["s_{y_0}" below] & M(\kappa(y_0)).
 \end{tikzcd} \]
 
     \item[\textbf{A4(ii)}] The composite
     \begin{align*}
-        \bigcap_{y\in X^{(1)}}M(\O_y) \to M(\O_{\bar{y}_0,z}) \to M(\kappa(z))
+        \bigcap_{y\in X^{(1)}}M(\mathcal{O}_y) \to M(\mathcal{O}_{\bar{y}_0,z}) \to M(\kappa(z))
     \end{align*}
     doesn't depend on the choice of $y_0$.
 \end{enumerate}
@@ -2880,7 +2880,7 @@ We say that $M$ is \textit{strongly unramified} if it satisfies some further axi
 
 This lets us take theories on fields and bootstrap them up to presheaves of abelian groups! Suppose that $M$ is an unramified sheaf, and $X\in \Sm_k$ is an irreducible smooth scheme. Then we can define
 \begin{align*}
-    M(X) := \bigcap_{x\in X^{(1)}} M(\O_x) \subseteq M(F).
+    M(X) := \bigcap_{x\in X^{(1)}} M(\mathcal{O}_x) \subseteq M(F).
 \end{align*}
 If $X$ is smooth with irreducible components $X_\alpha$, we define
 \begin{align*}
@@ -3034,7 +3034,7 @@ If $F = \bar{F}$ is algebraically closed, then $K_n^M(F)$ is uniquely divisible 
 %
 These come equipped with subrings
 \begin{align*}
-    K^M_\ast(\O_v) \subseteq K^M_\ast(F)
+    K^M_\ast(\mathcal{O}_v) \subseteq K^M_\ast(F)
 \end{align*}
 for every discrete valuation $v$ on $F$, and specialization maps, which we omit (see Milnor's original paper or \cite[7.3]{Kbook}. These satisfy the axioms for being an unramified $\mathcal{F}_k$-datum, proving the following.
 \begin{proposition} Milnor $K$-theory gives rise to an unramified sheaf of abelian groups $\KM_n$ for every $n$.
@@ -4319,9 +4319,9 @@ This is the sheaf of groups we want to compute.
 the free strongly invariant sheaf of groups on the smash product $\mathbb{G}_m^{\smashprod n}$.
 \end{notation}
 
-We have that $\mathbb{G}_m$, as a motivic space, represents units of global sections. Since smash products are computed sectionwise, we have that $\mathbb{G}_m^{\smashprod n}$ represents the $n$-fold smash product of $\O_X(X)^\times$ for any $X$. This is a sheaf of pointed sets, with no higher homotopy. Hence it gives rise to a map
+We have that $\mathbb{G}_m$, as a motivic space, represents units of global sections. Since smash products are computed sectionwise, we have that $\mathbb{G}_m^{\smashprod n}$ represents the $n$-fold smash product of $\mathcal{O}_X(X)^\times$ for any $X$. This is a sheaf of pointed sets, with no higher homotopy. Hence it gives rise to a map
 \begin{align*}
-    \left( \O_X(X)^\times \right)^{\smashprod n} &\to (k(X)^\times)^{\smashprod n} \to K_n^\MW(k(X)) \\
+    \left( \mathcal{O}_X(X)^\times \right)^{\smashprod n} &\to (k(X)^\times)^{\smashprod n} \to K_n^\MW(k(X)) \\
     (a_1, \ldots, a_n) &\mapsto \left[ a_1, \ldots, a_n \right].
 \end{align*}
 By the yoga of $\mathcal{F}_k$-data, this bootstraps up to a \textit{symbol map}, which we denote by
@@ -5644,7 +5644,7 @@ Quillen first defined $K$-theory for schemes by considering the algebraic $K$-th
 les complexes parfaits sont ``aussi bon'' que les Modules localement libres, dont ils constituent la g\'en\'eralisation naturelle. Ils forment d'ailleurs une ``sous-cat\'egorie triangul\'ee'' de la cat\'egorie d\'eriv\'ee $D(Y)$.}{\cite[p.~6]{SGA6}}
 
 
-\begin{definition} \cite[p.~11]{SGA6} If $X$ is a scheme, we say a chain complex of $\O_X$-modules is \textit{perfect} if it is quasi-isomorphic to a bounded chain complex in $D(X)$. We denote by $\Perf(X)$ the category of perfect complexes over $X$.
+\begin{definition} \cite[p.~11]{SGA6} If $X$ is a scheme, we say a chain complex of $\mathcal{O}_X$-modules is \textit{perfect} if it is quasi-isomorphic to a bounded chain complex in $D(X)$. We denote by $\Perf(X)$ the category of perfect complexes over $X$.
 \end{definition}
 
 The modern perspective is that $\Perf(X)$ is a stable $\infty$-category --- this admits an underlying triangulated structure which is what was leveraged to investigate the $K$-theory of schemes in \cite{TT}. We will want to know some descent properties of $\Perf(-)$ which follow from the following theorem.
@@ -5675,7 +5675,7 @@ Given a distinguished Nisnevich square of the form
 \end{tikzcd} \]
 we want to argue that $K$ maps it to a homotopy pullback square of spectra.
 
-Given a scheme $X$, we can form its $\infty$-category of perfect complexes of $\O_X$-modules $\Perf(X)$. This is a stable $\infty$-category, giving a functor
+Given a scheme $X$, we can form its $\infty$-category of perfect complexes of $\mathcal{O}_X$-modules $\Perf(X)$. This is a stable $\infty$-category, giving a functor
 \begin{align*}
     \Sm_k^\op \to \Cat_\infty^\st.
 \end{align*}
