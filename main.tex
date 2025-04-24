@@ -105,12 +105,11 @@ To that end, we treat the classification of torsors as \textit{motivation} for c
 
 \section*{Acknowledgements}
 
-Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, and Natalie Stewart for valuable changes and suggestions to these notes.
-
-Thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering random motivic questions.
+Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, and Maria Yakerson for their suggestions and changes to these notes.
 
 Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting be bother them about technical non-motivic questions.
 
+Finally, a special thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering some motivic questions as I was writing these notes.
 
 \section{Introduction}
 
@@ -1620,7 +1619,7 @@ We will call these squares \textit{distinguished Zariski squares}.
 \end{example}
 
 
-\begin{theorem} Let $\mathcal{F} \in \Pre(\Sch_S^\op)$ be a presheaf. Then $\mathcal{F}$ is a Zariski sheaf if and only if $\mathcal{F}(\emptyset) = \ast$ and $\mathcal{F}$ sends every distinguished Zariski square to a (homotopy) pullback square.
+\begin{theorem} Let $\mathcal{F} \in \Pre(\Sch_S)$ be a presheaf. Then $\mathcal{F}$ is a Zariski sheaf if and only if $\mathcal{F}(\emptyset) = \ast$ and $\mathcal{F}$ sends every distinguished Zariski square to a (homotopy) pullback square.
 \end{theorem}
 
 
@@ -1675,7 +1674,7 @@ This is some higher categorical analogue of the fact from topos theory that ever
 
 \begin{terminology} We refer to the localization functor
 \begin{align*}
-    L_\tau \colon \Pre(\mathscr{C}) \leftrightarrows \Shv_\tau \noloc i
+    L_\tau \colon \Pre(\mathscr{C}) \leftrightarrows \Shv_\tau (\mathscr{C}) \noloc i
 \end{align*}
 as \textit{sheafification}.
 \end{terminology}
@@ -1865,7 +1864,7 @@ Truncation and connectivity fit into fiber sequences
 %
 which allow us to form Postnikov towers out of objects of $\infty$-topoi:
 \[ \begin{tikzcd}
-    & \tau_{\le n X}\dar \\
+    & \tau_{\le n }X\dar \\
     & \vdots\dar\\
     X\rar\ar[uur,dashed] & \tau_{\le 0} X
 \end{tikzcd} \]
@@ -2025,7 +2024,7 @@ This is the result we've been hoping for. It tells us we can classify torsors in
 \begin{example} If $\mathcal{G}$ is a sheaf of discrete groups, we have that
 \begin{align*}
     \pi_n B_\tau \mathcal{G} = \begin{cases}
-    \mathcal{G} & i=1 \\
+    \mathcal{G} & n=1 \\
     0 & \text{otherwise}
     \end{cases}
 \end{align*}
@@ -2046,7 +2045,7 @@ This is the result we've been hoping for. It tells us we can classify torsors in
 We are interested in studying \textit{$\A^1$-invariance} of presheaves. There are a few ways we might impose this, the first being the most naive --- we can study presheaves $F$ for which
 \begin{enumerate}
     \item any projection $X \times \A^1 \to X$ induces an equivalence $F(X) \xto{\sim} F(X \times \A^1)$
-    \item any  vector bundle torsor $E \to X$ induces an equivalence $F(X) \xto{\sim} F(E)$
+    \item any algebraic vector bundle $E \to X$ induces an equivalence $F(X) \xto{\sim} F(E)$
     \item any algebraic vector bundle \textit{torsor} $Y \to X$ induces an equivalence $F(X) \to F(Y)$.
 \end{enumerate}
 We have a strengthening of conditions here, but we notice that in the context of sheaves they all become equivalent, so the definition is only really important for presheaves. We will work with the first one as it is classically what people work with, and the last one since it will simplify some proofs. Let's first define vector bundle torsors explicitly.
@@ -2090,7 +2089,7 @@ but neither of the reverse inclusions hold.
 \begin{proposition}\label{prop:shv-and-a1-invariant-presheaves-are-accessible-subcats} 
 Both of $\Pre_{\A^1}(\Sm_S)$ and $\Pre_{\htp}(\Sm_S)$ are accessible subcategories of $\Pre(\Sm_S)$, and therefore their inclusions admit left adjoints.
 \end{proposition}
-\begin{proof} By \autoref{prop:localization-at-set-of-morphisms} it suffices to check they are defined by being local with respect to a \textit{set} of maps. Note that $\Sm_S$ has a small skeleton, hence we may pick a form a set $S$ containing a projection $X \times \A^1 \to X$ for each isomorphism class of smooth schemes $X$. Now note that
+\begin{proof} By \autoref{prop:localization-at-set-of-morphisms} it suffices to check they are defined by being local with respect to a \textit{set} of maps. Note that $\Sm_S$ has a small skeleton, hence we may pick a set $S$ containing a projection $X \times \A^1 \to X$ for each isomorphism class of smooth schemes $X$. Now note that
 a presheaf $F$ is $\A^1$-invariant if and only if it is $S$-local, meaning that
 \begin{align*}
     \Map_{\PSh(\Sm_S)}(h_{X},F) \xto{\sim} \Map_{\PSh(\Sm_S)}(h_{X \times \A^1},F)
@@ -2529,7 +2528,7 @@ There is a motivic equivalence
 
 \begin{proposition} We have that
 \begin{align*}
-    \frac{\P^n}{\P^n-0}\simeq S^{n,n}.
+    \frac{\P^n}{\P^n-0}\simeq S^{2n,n}.
 \end{align*}
 \end{proposition}
 \begin{proof} By covering $\P^n$ with $\A^n$ and $\P^n\minus\left\{ 0 \right\}$, we get a pushout diagram
