@@ -10,20 +10,21 @@
 \WarningFilter{minitoc(hints)}{W0028}
 \WarningFilter{minitoc(hints)}{W0030}
 % Bibliography stuff
-\usepackage[%
-    hyperref,
-    doi=false,
-    isbn=false,
-    url=false,
-    backend=biber,
-    backref,
-    backrefstyle=none,
-    style=alphabetic%
-]{biblatex}
-\bibliography{citations.bib}
-\bibliography{zotero.bib}
-\DeclareFieldFormat{postnote}{#1}
-\DeclareFieldFormat{multipostnote}{#1}
+% \usepackage[%
+%     hyperref,
+%     doi=false,
+%     isbn=false,
+%     url=false,
+%     backend=biber,
+%     backref,
+%     backrefstyle=none,
+%     style=alphabetic%
+% ]{biblatex}
+% \bibliography{citations.bib}
+% \bibliography{zotero.bib}
+% \DeclareFieldFormat{postnote}{#1}
+% \DeclareFieldFormat{multipostnote}{#1}
+
 
 \input{commands/commands.tex}
 \input{commands/macros.tex}
@@ -94,7 +95,7 @@ These are notes for a topics class taught at Harvard in Fall 2024. The most rece
 
 To that end, we treat the classification of torsors as \textit{motivation} for constructing motivic spaces. It is important to note that this is very ahistorical, and is done only for pedagogical reasons. Although affine representability was one of the key early results explored by Morel, motivic spaces and spectra were developed in order to house theories such as algebraic $K$-theory, Bloch's higher Chow groups, and to grow new theories such as algebraic cobordism. We chose this route for a few reasons:
 \begin{enumerate}
-    \item The Fall 2024 Thursday seminar is on the Wilson space hypothesis, so we're hoping this class will contrast nicely and provide some foundational background in techniques in motivic obstruction theory.
+    \item The Fall 2024 Thursday seminar is on the motivic Wilson space hypothesis, so we're hoping this class will contrast nicely and provide some foundational background in techniques in motivic obstruction theory.
     \item In order to tailor the course to a broader audience, we'd like to unify the class around a key question which has general appeal, so we've picked the classification of torsors over affine varieties using motivic methods as such a question. This has certain advantages, for instance we can pause in the sheaf topos and discuss classifying torsors there before building motivic spaces --- this vista is useful to people across many fields.
 \end{enumerate}
 
@@ -107,7 +108,7 @@ To that end, we treat the classification of torsors as \textit{motivation} for c
 
 Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, and Maria Yakerson for their suggestions and changes to these notes.
 
-Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting be bother them about technical non-motivic questions.
+Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting me bother them about technical non-motivic questions.
 
 Finally, a special thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering some motivic questions as I was writing these notes.
 
@@ -141,18 +142,11 @@ We therefore might rephrase \autoref{eqn:units-rings} as saying that the represe
     M &\mapsto M \otimes_k k[t_1, \ldots, t_n].
 \end{aligned}
 \end{equation}
-\textbf{Serre's Problem}: Is every finitely generated $k[t_1, \ldots, t_n]$-module free?
+\textbf{Serre's Problem}: Is every finitely generated projective $k[t_1, \ldots, t_n]$-module free?
 
-We can rephrase this in a few ways:
-\begin{enumerate}
-    \item Is the functor
-\end{enumerate}
+Serre's problem is equivalent to the statement that \autoref{eqn:extn-scalars} is essentially surjective. Equivalently under the Serre correspondence, this is the same as saying that every algebraic vector bundle on affine space $\A^n_k$ is trivial.
 
-
-
-Recall finitely generated projective $R$-modules are the same as ``algebraic vector bundles'' over $\Spec(R)$, so we're asking whether every algebraic vector bundle on $\A^n_k$ is trivial.
-
-\textbf{Answer}: Yes (Quillen--Suslin, 1974). Quillen actually proved more-- for $R$ a PID, he proved that the every finitely generated projective $R[t]$-module is extended from an $R$-module.\footnote{%
+\textbf{Answer}: Yes \cite{Quillen76,Suslin76}. Quillen actually proved more-- for $R$ a PID, he proved that the every finitely generated projective $R[t]$-module is extended from an $R$-module.\footnote{%
 Quillen's proof involves leveraging some previous work of Horrocks, flat descent for vector bundles, and a very clever technique he invented called \textit{patching}. Suslin's proof, which appeared in the same year, is almost completely linear algebraic, leveraging the theory of \textit{unimodular rows}.} Lindel proved shortly thereafter that every finitely generated projective $A[t]$-module is extended from an $A$-algebra, where $A$ is a smooth algebra containing a field $k$. We could read this as saying that the stack of algebraic vector bundles is $\A^1$-invariant over the category of smooth affine $k$-schemes.
 \end{example}
 
@@ -163,7 +157,7 @@ Quillen's proof involves leveraging some previous work of Horrocks, flat descent
 \end{align*}
 is essentially surjective? \textit{Still open}.
 
-\textbf{Fundamental Theorem of Algebraic $K$-Theory} (Quillen): For $R$ regular Noetherian, we have that $R \to R[t]$ induces an equivalence\footnote{%
+\textbf{Fundamental Theorem of Algebraic $K$-Theory} \cite{Quillen-K1}: For $R$ regular Noetherian, we have that $R \to R[t]$ induces an equivalence\footnote{%
 So Bass--Quillen is really a question about \textit{unstable} modules.}\footnote{%
 The statement for $K_0$ is originally due to Grothendieck \cite[5.6.1.3]{Asok-A1AG}. The statement for $K_1$ is due to Bass--Heller--Swan \cite[5.8.2.1]{Asok-A1AG}.
 }
@@ -204,7 +198,7 @@ More generally if $A$ is reduced, Noetherian, and has a finite normalization, th
 \end{definition}
 
 
-\begin{theorem} (Harder's Theorem, VII.3.13 in Lam's book on Serre's problem) Let $k$ be a field. Then every inner product space over $k[t]$ is extended from an inner product space over $k$.
+\begin{theorem}[{Harder's Theorem, \cite[VII.3.13]{Lam-SerresProblem}}] Let $k$ be a field. Then every inner product space over $k[t]$ is extended from an inner product space over $k$.
 \end{theorem}
 
 \begin{remark} The stable analogue of this has to do with $\A^1$-invariance of Hermitian $K$-theory [reference needed].
@@ -4739,7 +4733,7 @@ As a particular example, we have seen that $\left[ \P^1,\P^1 \right]_\ast$ is an
 \begin{align*}
     \left[ \P^1,\P^1 \right]_N \to \left[ \P^1,\P^1 \right]_{\A^1}
 \end{align*}
-is a group completion.
+is a group completion.\footnote{Interesting, this seems to be special to $\P^1$. Such a statement is never true for punctured affine space, for example \cite{BrazeltonHornslien}.}
 \end{theorem}
 
 Cazanave's monoidal structure is defined explicitly in terms of rational maps.
@@ -5665,7 +5659,7 @@ is an fpqc sheaf, Kan extending to an fpqc sheaf on all schemes.\footnote{This c
 
 We'd like to argue that (non-connective) algebraic $K$-theory is a Nisnevich sheaf of spectra. For this, a more general perspective is helpful.
 
-\begin{theorem} (Thomason--Trobaugh) Algebraic $K$-theory is a Nisnevich sheaf of spectra.
+\begin{theorem}[{\cite{TT}}] Algebraic $K$-theory is a Nisnevich sheaf of spectra.
 \end{theorem}
 
 Given a distinguished Nisnevich square of the form
@@ -6218,5 +6212,6 @@ Appendices were written by students in the course and cover some additional topi
 \include{appendices/hamilton}
 \include{appendices/howard}
 
-\printbibliography
+\bibliography{zotero.bib}
+\bibliographystyle{amsalpha}
 \end{document}
