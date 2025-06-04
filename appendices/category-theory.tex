@@ -95,7 +95,7 @@ In general we cannot truncate in order to obtain an $\infty$-cofinal diagram. We
 \begin{definition} An $\infty$-category $\mathscr{C}$ is \textit{sifted} if the diagonal map $\mathscr{C} \to \mathscr{C} \times \mathscr{C}$ is cofinal \cite[5.5.8.1]{HTT}.
 \end{definition}
 
-\begin{proposition} \cite[5.5.8.11]{HTT} \label{prop:sifted-colimits-finite-limits} 
+\begin{proposition}[{\cite[5.5.8.11]{HTT}}] \label{prop:sifted-colimits-finite-limits} 
   Sifted colimits valued in $\Set$ commute with finite products.
 \end{proposition}
 
@@ -378,4 +378,18 @@ in $\Pr^L_\st$ is \textit{exact} if
     \item the map $\mathcal{B}/\mathcal{A} \to \mathcal{C}$ is an equivalence.
 \end{enumerate}
 \end{definition}
+
+\begin{definition}[{\cite[8.1]{BGT}}] A functor
+\begin{align*}
+    F \colon \Cat_\infty^\ex \to \mathscr{D},
+\end{align*}
+valued in any stable presentable $\infty$-category $\mathscr{D}$, is a \textit{localizing invariant} if it
+\begin{itemize}
+    \item inverts Morita equivalences,
+    \item preserves filtered colimits,
+    \item and sends exact sequences of small stable $\infty$-categories to cofiber sequences in $\mathscr{D}$.
+\end{itemize}
+\end{definition}
+
+
 

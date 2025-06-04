@@ -241,6 +241,9 @@ These observations lead to the following curiosity:
 
 This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homotopy theory}. This dates back to Morel and Voevodsky's seminal work in 1999, but many ideas date back to work of Karoubi--Villamayor, Jardine, Weibel in the 1980's, work of Brown, Gersten, Illusie and Joyal in the 1970's, and of Quillen and Grothendieck in the 1960's.
 
+
+
+
 % \textbf{Q}: What can we do with motivic homotopy theory?
 
 % \textbf{A}: Motivic homotopy theory blends algebraic geometry and topology in a beautiful way, allowing us to do many things. A short list is:
@@ -250,6 +253,17 @@ This is what's known as \textit{$\A^1$-homotopy theory} or \textit{motivic homot
 %     \item we can eliminate differentials in the Adams spectral sequence via looking at their motivic depth (citation needed)
 % \end{itemize}
 
+
+
+\section{Cheatsheets}
+
+Some cheatsheets can be found throughout. I also include them here in the intro for ease of reference.
+
+\input{cheatsheets/topologies}
+
+\input{cheatsheets/contraction}
+
+\input{cheatsheets/higher-cats}
 
 \chapter{Torsors}
 \minitoc
@@ -340,11 +354,7 @@ The associated frame bundle of an algebraic vector bundle is a $\GL_n$-torsor (s
 \begin{goal} Develop methods to classify torsors.
 \end{goal}
 
-
-
-
-
-Let's do this, by first considering an alternative perspective on what a torsor is. We learned this from Alex Youcis' excellent note on torsors \cite{Youcis}.
+Let's do this, by first considering an alternative perspective on what a torsor is (the exposition that follows borrows a lot from Alex Youcis' excellent note on torsors \cite{Youcis}).
 
 \subsection{Sheaves and stacks}
 
@@ -360,7 +370,7 @@ Let's suppose now that $\mathcal{F}(U)$ is a \textit{category} for every $U$, an
     x &\mapsto \left( x|_{U_i} \right)_i.
 \end{align*}
 %
-\textbf{Q}: Does this map need to reflect isomorphisms?\footnote{A functor which reflects isomorphisms is called \textit{conservative}.}
+\textbf{Q}: Does this functor necessarily reflect isomorphisms?\footnote{A functor which reflects isomorphisms is called \textit{conservative}.}
 
 \begin{example} Let $\mathcal{F}$ be the functor sending $U$ to the category of line bundles over $U$. If the cover is picked appropriately small, then all line bundles are isomorphic to the trivial line bundle over $U_i$, but they need not be isomorphic globally as line bundles over $U$.
 \end{example}
@@ -466,7 +476,8 @@ When both the presheaf $\mathcal{G}$ and the sheaf of sets $\mathcal{F}$ are rep
 \begin{setup}\label{set:representable-torsor-and-group-scheme} Suppose $\mathscr{C} = \Sch_X$ is a site of schemes over $X$, and let $G \in \Grp(\Sch_X)$ be a group scheme over $X$. Suppose $\mathcal{G} = \Hom_X(-,G)$ is a representable sheaf of groups, and let $\mathcal{F} = \Hom_X(-,Y)$ for some $Y\in \Sch_X$, where $Y$ comes equipped with a $G$-action.
 \end{setup}
 
-In this setup, what does it mean in this case for $\mathcal{F}$ to be a $\mathcal{G}$-torsor?
+\begin{question} In \autoref{set:representable-torsor-and-group-scheme}, what does it mean in this case for $\mathcal{F}$ to be a $\mathcal{G}$-torsor?
+\end{question}
 
 Condition (1) from \autoref{def:torsor} asks that
 \begin{align*}
@@ -511,8 +522,8 @@ Let $X$ be a scheme, let $G$ be a group scheme over $X$, and let
 \end{align*}
 be an $X$-scheme equipped with a $G$-action. Then $Y$ is a $G$-torsor if and only if
 \begin{enumerate}
-    \item The map $G \times_X Y \to Y \times_X Y$ is an isomorphism of $X$-schemes.
-    \item There exists a cover $\left\{ U_i \to X \right\}$ for which $Y \times_X U_i \to U_i$ is isomorphic to the trivial $G$-torsor over $U_i$.
+    \item the map $G \times_X Y \to Y \times_X Y$ is an isomorphism of $X$-schemes, and
+    \item there exists a cover $\left\{ U_i \to X \right\}$ for which $Y \times_X U_i \to U_i$ is isomorphic to the trivial $G$-torsor over $U_i$.
 \end{enumerate}
 In this setting, we call $Y \to X$ a \textit{principal $G$-bundle}.
 \end{proposition}
@@ -558,11 +569,11 @@ Let $G$ be an affine group scheme over $X$, and let $\tau\le \fppf$. Then every 
 So a very natural question is \textit{how do we tell when a $\tau$-torsor is also a $t$-torsor?} We'll discuss this next week.
 
 
-\subsection{Interlude: representability of torsors in topology}
+\subsection{Interlude: representability of torsors in homotopy theory}
 
-So it's a very reasonable goal to ask for any tools that could help us try to classify torsors. A natural idea, by analogy, is to look to homotopy theory, where we have a suite of tools for studying torsors.
+It's a very reasonable goal to ask for any tools that could help us try to classify torsors. A natural idea, by analogy, is to look to homotopy theory, where we have a suite of tools for studying torsors.
 
-\begin{definition} Let $X$ be a compact Hausdorff topological space and $G$ a group. Then a \textit{principal $G$-bundle} (or we might just say a $G$-torsor) is a fiber bundle $\pi \colon Y \to X$ so that $G$ acts freely and transitively on the fibers, \textit{and} there exists an open cover $\left\{ U_i \to X \right\}$ over which $\pi$ is trivialized.
+\begin{definition} Let $X$ be a compact Hausdorff topological space and $G$ a group. Then a \textit{principal $G$-bundle} (or we might just say a $G$-torsor) is a fiber bundle $\pi \colon Y \to X$ so that $G$ acts freely and transitively on the fibers, \textit{and} there exists an open cover $\left\{ U_i \to X \right\}$ over which $\pi$ is trivialized (contrast this with \autoref{prop:principal-G-bundle}).
 \end{definition}
 
 In topology there is a \textit{universal $G$-torsor}, which is denoted $EG \to BG$. This is universal in the sense that, given any map $f \colon X \to BG$, we can consider the fiber product
@@ -571,9 +582,11 @@ In topology there is a \textit{universal $G$-torsor}, which is denoted $EG \to B
     X\rar["f" below] & BG.
 \end{tikzcd} \]
 Then $f^\ast EG \to X$ is a principal $G$-bundle, and all principal $G$-bundles are obtained in this way. Not only that, but isomorphic principal $G$-bundles are given by homotopic classifying maps. In other words we have a bijection
-\begin{align*}
+\begin{equation}\label{eqn:representability-torsors-homotopy-theory}
+\begin{aligned}
     \Prin_G(X) \leftrightarrow \left[ X,BG \right].
-\end{align*}
+\end{aligned}
+\end{equation}
 %
 So the data of a principal $G$-bundle is the data of a map $X \to BG$, and an isomorphism of principal $G$-bundles is equivalent to a homotopy between two maps $f,g \colon X \to BG$.
 
@@ -582,33 +595,34 @@ So the data of a principal $G$-bundle is the data of a map $X \to BG$, and an is
 
 A big example comes from quotienting out by a compact subgroup:
 
-\begin{theorem} (Samelson, 1941) If $H \le G$ is a compact subgroup of a Lie group, then $G \to G/H$ is a Serre fibration and principal $H$-bundle.
+\begin{theorem}[{\cite{Samelson41}}]
+\label{thm:fibration-from-subgp-of-liegp}
+If $H \le G$ is a compact subgroup of a Lie group, then $G \to G/H$ is a Serre fibration and principal $H$-bundle.
 \end{theorem}
 
-\begin{corollary} We have fiber sequences
+\begin{corollary} 
+\label{cor:fiber-sequences-from-subgps-lie-gps}
+In the setting of \autoref{thm:fibration-from-subgp-of-liegp}, we obtain fiber sequences
 \begin{align*}
     H \to G \to G/H \\
     G/H \to BH \to BG.
 \end{align*}
 \end{corollary}
 
-\begin{example} For the inclusions $O(n) \subseteq O(n+1)$ and $U(n) \subseteq U(n+1)$ we get fiber sequences
+\begin{example} Applying \autoref{cor:fiber-sequences-from-subgps-lie-gps} to the inclusions inclusions $O(n) \subseteq O(n+1)$ and $U(n) \subseteq U(n+1)$, we obtain fiber sequences
 \begin{align*}
     S^{2n+1} \to \BU(n) \to \BU(n+1) \\
     S^n \to \BO(n) \to \BO(n+1).
 \end{align*}
 \end{example}
-This is how Bott periodicity is proven.
+Leveraging these fiber sequences is one way to prove Bott periodicity.
 
 
-
-\subsection{Why we like representability of torsors}
-
+\subsection{Why we like representability of torsors in homotopy theory}
 
 
-
-
-This has a number of huge applications:
+The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic topology with motivic methods.
+ First off:
 \begin{itemize}
     \item Given any cohomology theory $E^\ast$ and any class $c\in E^\ast(BG)$, if $f^\ast(c) \ne g^\ast(c)$ in $E^\ast(X)$, this means that $f$ and $g$ correspond to non-isomorphic torsors. This the basic idea of characteristic classes.
 \end{itemize}
@@ -916,23 +930,28 @@ This notion makes sense for maps between simplicial objects in any category, and
 \end{enumerate}
 \end{remark}
 
-
-\begin{theorem} Geometric realization preserves products.
+\begin{theorem}
+Geometric realization preserves products.
 \end{theorem}
+\begin{proof}
+By the co-Yoneda lemma, we can write any $X,Y\in \sSet$ as a colimit of representables, and since colimits in spaces $\mathcal{S}$ are universal (in particular finite products commute with finite colimits), the product $X \times Y$ distributes over the colimits, so $X \times Y$ can be written as a colimit of products of representable. Hence it suffices to restrict to the case where $X$ and $Y$ are representable. In this case, we can directly argue that the natural map
+\begin{align*}
+    \left| \Hom_{\DDelta}(-,[m]) \times \Hom_{\DDelta}(-,[n]) \right| \to \left| \Hom_{\DDelta}(-,[m]) \right| \times \left| \Hom_{\DDelta}(-,[n]) \right|
+\end{align*}
+is a homeomorphism.
+\end{proof}
 
-\begin{corollary} Simplicial homotopies become honest homotopies of spaces after geometric realization.
+\begin{corollary}
+Simplicial homotopies become honest homotopies of spaces after geometric realization.
 \end{corollary}
 
-
-\begin{remark} We can study simplicial sets up to homotopy or spaces up to homotopy, and in a sense that can be made precise, these are essentially the same theory.
+\begin{remark}
+We can study simplicial sets up to homotopy or spaces up to homotopy, and in a sense that can be made precise, these are essentially the same theory.
 \end{remark}
 
-\begin{remark} This connection between simplicial sets and spaces emerged initially in a research program which used to be called ``combinatorial homotopy theory,'' led by Kan in the 1950's. % Goerss--Jardine p2
+\begin{remark}
+This connection between simplicial sets and spaces emerged initially in a research program which used to be called ``combinatorial homotopy theory,'' led by Kan in the 1950's. % Goerss--Jardine p2
 \end{remark}
-
-
-
-
 
 \subsection{Torsors via simplicial maps}
 
@@ -1170,7 +1189,7 @@ We can summarize what we've learned in the following cheatsheet:
 \begin{definition} We say an algebraic group (a group object in varieties) over a field $k$ is \textit{linear} if it admits a faithful finite-dimensional representation (c.f. \cite[p.~72]{MilneAG}).
 \end{definition}
 
-\begin{note} If an algebraic group is linear, it is automatically affine (\cite[1.29]{MilneAG}) and finite type. Also, all linear algebraic groups are closed subgroups of $\GL_n$.
+\begin{note} If an algebraic group is linear, it is automatically affine (\cite[1.29]{MilneAG}) and finite type. Moreover, all linear algebraic groups are closed subgroups of $\GL_n$.
 \end{note}
 
 
@@ -1179,7 +1198,7 @@ We can summarize what we've learned in the following cheatsheet:
 
 
 
-\begin{definition} \cite[p.~5-11]{Grothendieck-torsion} A group scheme is called \textit{special} if it is a linear algebraic group $G$ with the property that every $G$-torsor\footnote{Since $G$ is affine, every $G$-torsor in $\tau\le \fppf$ is automatically a principal $G$-bundle.} is locally trivial in the Zariski topology.
+\begin{definition} \cite[pp.~5-11]{Grothendieck-torsion} A group scheme is called \textit{special} if it is a linear algebraic group $G$ with the property that every $G$-torsor\footnote{Since $G$ is affine, every $G$-torsor in $\tau\le \fppf$ is automatically a principal $G$-bundle.} is locally trivial in the Zariski topology.
 \end{definition}
 
 \begin{theorem} \cite[Th\'eor\`eme~3]{Grothendieck-torsion} The group $\GL_n$ is special.
@@ -1232,9 +1251,8 @@ We think about this 2-cell as a \textit{witness} for the composition. Note that 
 
 \textbf{Q}: Given a simplicial set, when can you tell whether it arose as the nerve of a 1-category?
 
-\textbf{A}: Given any diagram of the form $\bullet \to \bullet \to \bullet$, it has to fill in uniquely to a 2-cell. But we also need to fill in composites of three morphisms uniquely (to get a tetrahedron), and composites of four morphisms, and so on. To that end, let $\Lambda^k_n$ be the simplicial set obtained from $\Delta^n$ by deleting the $k$th face. This is called a \textit{horn}.
-
-This isn't a definition of a horn --- we might instead characterize the horns by their representable functors, i.e. $\Hom_{\sSet}(\Lambda_2^1,-)$ represents the set of ``composable'' edges $x \xto{f} y \xto{g} z$ in any simplicial set.
+\textbf{A}: Given any diagram of the form $\bullet \to \bullet \to \bullet$, it has to fill in uniquely to a 2-cell. But we also need to fill in composites of three morphisms uniquely (to get a tetrahedron), and composites of four morphisms, and so on. To that end, let $\Lambda^k_n$ be the simplicial set obtained from $\Delta^n$ by deleting the $k$th face. This is called a \textit{horn}.\footnote{
+This isn't a definition of a horn --- we might instead characterize the horns by their representable functors, i.e. $\Hom_{\sSet}(\Lambda_2^1,-)$ represents the set of ``composable'' edges $x \xto{f} y \xto{g} z$ in any simplicial set.}
 
 \begin{proposition} A simplicial set $X_\bullet$ is the nerve of a 1-category if and only if it admits \textit{unique inner horn filling}, meaning for every $n$ and every $0 < k < n$, given any map $\Lambda^k_n \to X_\bullet$ it admits a unique lift:
 \[ \begin{tikzcd}
@@ -1274,13 +1292,11 @@ convince yourself that $\Sing(-)$ is the same as $\Pi_\infty(-)$.
 
 A natural question to ask is to what extent there is ambiguity in composition -- how many choices do we have for horn filling? Do different choices \textit{mean} different things? The following proposition answers this to some extent.
 
-\begin{proposition} (Joyal) If $\mathscr{C}$ is a quasi-category, then the map of simplicial sets
+\begin{proposition}[{\cite[4.15,~12.18]{Joyal-qcats}}] If $\mathscr{C}$ is a quasi-category, then the map of simplicial sets
 \begin{align*}
     \Fun(\Delta^2,\mathscr{C})\to \Fun(\Lambda_2^1,\mathscr{C})
 \end{align*}
-has contractible fibers (i.e., the geometric realization of the fibers under this map are contractible spaces).\footnote{In fact $\mathscr{C}$ is a quasi-category if and only if this holds.}
-
-% todo add reference -- this is 3.4 and 3.5 in https://arxiv.org/pdf/1303.4669
+has contractible fibers (i.e., the geometric realization of the fibers under this map are contractible spaces). In fact $\mathscr{C}$ is a quasi-category if and only if this condition holds.\footnote{In Joyal's notes, this is phrased that the induced map is a \textit{trivial fibration}. We can fibrantly replace it by a Kan fibration, then by \cite[12.18]{Joyal-qcats} a Kan fibration is a trivial fibration if and only if its fibers are contractible.}
 \end{proposition}
 
 
@@ -1629,7 +1645,9 @@ We will call these squares \textit{distinguished Zariski squares}.
 where $i$ is an open immersion, $p$ is \'etale, and $p$ restricts to an isomorphism $p^{-1}(X-U)\to X-U$.
 \end{example}
 
-\begin{example}\label{ex:affine-distinguished-nisnevich-square} \textit{(Affine distinguished Nisnevich square)}. Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $x\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
+\begin{example}[Affine distinguished Nisnevich squares]
+\label{ex:affine-distinguished-nisnevich-square}
+Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $x\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
 \[ \begin{tikzcd}
     \Spec(S_{f(x)})\rar\dar\pb & \Spec(S)\dar\\
     \Spec(R_f)\rar & \Spec(R).
@@ -1641,7 +1659,7 @@ where $i$ is an open immersion, $p$ is \'etale, and $p$ restricts to an isomorph
 \begin{definition} We say $\mathcal{F} \in \Pre(\Sm_S)$ is a \textit{Nisnevich sheaf} if $\mathcal{F}(\emptyset)= \ast$ and $\mathcal{F}$ sends every distinguished Nisnevich square to a pullback square.
 \end{definition}
 
-\begin{exercise} Show that $\Mod(-)$ is a Nisnevich sheaf on the site of affine schemes.
+\begin{exercise} Show that $\Mod(-)$ is a Nisnevich sheaf on the site of affine schemes. (In fact $\Mod(-)$ has much stronger descent properties as we will see in \autoref{thm:qcoh-fpqc-descent}).
 \end{exercise}
 
 
@@ -1829,13 +1847,16 @@ Let $\mathscr{C}$ denote a presentable category and $\tau_{\le k} \mathscr{C} \s
 
 \subsection{Whitehead's theorem}
 
-\begin{theorem} (Whitehead's theorem) Let $f \colon X \to Y$ be a map of CW complexes. Then $f$ is a homotopy equivalence if and only if $f \colon \pi_i(X) \to \pi_i(Y)$ is an isomorphism for each $i\ge0$.
+\begin{theorem}[Whitehead's theorem]
+Let $f \colon X \to Y$ be a map of CW complexes. Then $f$ is a homotopy equivalence if and only if $f \colon \pi_i(X) \to \pi_i(Y)$ is an isomorphism for each $i\ge0$.
 \end{theorem}
 
 A way to say this is that ``$\infty$-connective morphisms are homotopy equivalences.'' The $\infty$-categorical analogue of this is the notion of \textit{hypercompleteness}.
 
-\begin{definition} An $\infty$-topos is \textit{hypercomplete} if and only if every object is $\infty$-connective.
+\begin{definition}
+An $\infty$-topos is \textit{hypercomplete} if and only if every object is $\infty$-connective.
 \end{definition}
+
 
 \begin{definition} \cite[7.2.11]{HTT} An $\infty$-topos has \textit{homotopy dimension} $\le n$ if every $(n-1)$-connected object $X$ receives a map from the terminal object $\ast \to X$.
 \end{definition}
@@ -2697,6 +2718,7 @@ is $\A^1$-invariant.
     \end{align*}
     is an equivalence for all $i$ and for all $X$.
 \end{enumerate}
+We will revisit these definitions in \autoref{prop:strongly-strictly-redefined}.
 \end{definition}
 
 
@@ -3402,12 +3424,12 @@ This extends to a pullback of unramified sheaves of groups.
 \begin{definition} For $a \in F^\times$ we denote by $\Pfister{a}:= \left\langle 1 \right\rangle - \left\langle a \right\rangle$ the \textit{Pfister form} attached to $a$.
 \end{definition}
 
-\begin{remark} (On notation) Authors in the literature use $\Pfister{a}$ to denote $\left\langle 1 \right\rangle - \left\langle a \right\rangle \in \GW(F)$ as we have done, or to denote $\left\langle 1,-a \right\rangle\in W(F)$ (see e.g. \cite[p.~24]{EKM}. We should be careful about the context when using this notation, and we also warn the reader that a different sign convention is used in \cite[X.1.1]{Lam-quad}.
+\begin{remark}[On notation] Authors in the literature use $\Pfister{a}$ to denote $\left\langle 1 \right\rangle - \left\langle a \right\rangle \in \GW(F)$ as we have done, or to denote $\left\langle 1,-a \right\rangle\in W(F)$ (see e.g. \cite[p.~24]{EKM}. We should be careful about the context when using this notation, and we also warn the reader that a different sign convention is used in \cite[X.1.1]{Lam-quad}.
 \end{remark}
 
 
 
-\begin{example} \textit{(Examples of fundamental ideals)}
+\begin{example}[Examples of fundamental ideals] \,
 \begin{enumerate}
     \item Every Pfister form is hyperbolic over an algebraically closed field, or even just a quadratically closed field. Hence $I(F) = 0$ if $F = \bar{F}$.
     \item $I(\R) \cong \Z$, generated by $\Pfister{-1}$. We can check that
@@ -3449,7 +3471,7 @@ since we can show that if $\alpha - \beta \in \bigcap_{n=0}^\infty I^n(F)$, then
 
 
 
-\begin{proposition} (Milnor) There is a homomorphism
+\begin{proposition}[{\cite{MilnorK}}] There is a homomorphism
 \begin{equation}\label{eqn:milnor-mod-2-to-powers-ideal}
 \begin{aligned}
     K_n^M(F)/2 &\to I^n(F)/I^{n+1}(F) \\
@@ -3489,7 +3511,7 @@ There is a pullback diagram of unramified sheaves
 
 We have seen in \autoref{cor:BG-representability-sheaf-topos} that $H^1_\Nis(X,G)$ is classified by homotopy classes of maps into a universal classifying object $B_\Nis G$. We may wonder whether higher Nisnevich cohomology is represented by Eilenberg--MacLane spaces. The answer is yes!
 
-\begin{theorem} (Dold--Kan) If $\Ab_\Nis(k)$ denotes the category of Nisnevich sheaves of abelian groups on $X$, there is an equivalence of categories
+\begin{theorem}[Dold--Kan] If $\Ab_\Nis(k)$ denotes the category of Nisnevich sheaves of abelian groups on $X$, there is an equivalence of categories
 \begin{align*}
     \Ch_{\ge0}(\Ab_\Nis(k)) \cong \Fun(\DDelta^\op, \Ab_\Nis(k)).
 \end{align*}
@@ -3520,7 +3542,7 @@ We'll note by $\DK$ this composite:
 the space $K(A,n):= \DK(A[n])$ given by applying the Dold--Kan construction to the chain complex with $A$ concentrated in degree $n$.
 \end{definition}
 
-\begin{proposition} \textit{(Properties of $K(A,n)$)}
+\begin{proposition}[Properties of $K(A,n)$] \,
 \begin{enumerate}
     \item We have that $K(A,n)$ is already an object in the sheaf topos $\Shv_\Nis(\Sm_k)$
     \item We have that
@@ -3540,7 +3562,7 @@ the space $K(A,n):= \DK(A[n])$ given by applying the Dold--Kan construction to t
 
 \subsection{Strong and strict invariance revisited}
 
-With EM spaces in hand in the sheaf topos, we can reframe our definitions of strong and strict invariance.
+With Eilenberg-MacLane spaces in hand in the sheaf topos, we can reframe our definitions of strong and strict invariance.
 
 \begin{proposition}\label{prop:strongly-strictly-redefined} 
 Let $\mathcal{G}$ be a sheaf of groups and $\mathcal{A}$ a sheaf of abelian groups. Then
@@ -5532,11 +5554,7 @@ A primary case of interest is when $\mathscr{C} = \mathcal{S}$ is the category o
 \end{align*}
 which can be studied at the level of homology \cite{McDuffSegal,Nikolaus-gp}.
 
-\begin{definition} Take a collection of generators for $\pi_0 M$, and denote by
-\begin{align*}
-    M_\infty
-\end{align*}
-the colimit of multiplying by finite subsets of the generators infinitely many times. In nice settings, this is precisely $M \left[ \pi_0(M)^{-1} \right]$.
+\begin{definition} Take a collection of generators for $\pi_0 M$, and denote by $M_\infty$ the colimit of multiplying by finite subsets of the generators infinitely many times. In nice settings, this is precisely $M \left[ \pi_0(M)^{-1} \right]$.
 \end{definition}
 
 Since every element in $\pi_0(M)$ is invertible in $B\Omega M$, the universal map factors as
@@ -5866,7 +5884,7 @@ From this perspective, we might ask for some algebraic version of a Pontryagin--
 \begin{definition} Let $\Gr(r,\infty)$ denote the colimit $\colim_n \Gr(r,n)$, considered as a presheaf.
 \end{definition}
 
-\begin{proposition} \cite[p.138]{MV}
+\begin{proposition}[{\cite[p.138]{MV}}]
 There is a canonical equivalence of motivic spaces $\BGL_r \simeq \Gr(r,\infty)$.
 \end{proposition}
 
@@ -5954,8 +5972,9 @@ Our intuition might be that once $N$ is large enough, we can obtain all rank $r$
 is $(N-r)$-connective. That is, its fiber has homotopy sheaves vanishing in degrees below $N-r$.
 \end{proposition}
 
-\begin{theorem}\label{thm:motivic-Swan-Forster} 
-\textit{(Motivic Swan--Forster)} If $A$ is a smooth $k$-algebra of cohomological dimension $\le d$, then every finitely generated projective $A$-module of rank $r$ needs at most $r+d$ generators.
+\begin{theorem}[Motivic Swan-Forster]
+\label{thm:motivic-Swan-Forster} 
+If $A$ is a smooth $k$-algebra of Nisnevich cohomological dimension $\le d$, then every finitely generated projective $A$-module of rank $r$ needs at most $r+d$ generators.
 \end{theorem}
 \begin{proof} We want to study the lifting problem
 \[ \begin{tikzcd}
@@ -6014,13 +6033,14 @@ Over algebraically closed field, the difficulty of these sorts of splitting prob
 
 A famous result called \textit{Serre splitting} says that splitting problems are trivial in negative corank.
 
-\begin{theorem}\label{thm:Serre-splitting} 
-\textit{(Serre splitting)} Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$ \cite[Theorem~1]{Serre-dubreil58}.
+\begin{theorem}[{Serre splitting \cite[Theorem~1]{Serre-dubreil58}}]
+\label{thm:Serre-splitting} 
+Let $R$ be a Noetherian ring of dimension $d$, and $M$ a projective $R$-module of rank $r > d$. Then $M$ decomposes as $M \cong M' \oplus R$ for some projective module $M'$.
 \end{theorem}
 
 This can actually be strengthened in the geometric setting, where $R$ is a smooth $k$-algebra, following the discussion in \cite[4.2.1]{AF-survey}. This proof is independent of the original proof of Serre splitting, and there are concrete examples of varieties for which we can deduce splitting via the stronger version of the theorem that cannot be seen if we use the version of Serre splitting in \autoref{thm:Serre-splitting} (see for instance \cite[3.3.6,~3.5.4]{AF-survey}). Following \cite[Theorem~1]{AF-survey} we call this \textit{motivic Serre splitting}.
 
-\begin{theorem} \textit{(Motivic Serre splitting)} Let $X = \Spec(R)\in \Sm_k^\aff$ be of \textit{Nisnevich cohomological dimension} $d$, and let $M$ be any finitely generated projective $R$-module. If $\text{rank}(M) > d$, then $M$ splits.
+\begin{theorem}[Motivic Serre splitting] Let $X = \Spec(R)\in \Sm_k^\aff$ be of \textit{Nisnevich cohomological dimension} $d$, and let $M$ be any finitely generated projective $R$-module. If $\text{rank}(M) > d$, then $M$ splits.
 \end{theorem}
 \begin{proof} This follows by direct analysis of the Moore--Postnikov tower for the splitting problem
 \[ \begin{tikzcd}
@@ -6100,17 +6120,20 @@ If $X$ has dimension $d+1$, then this is the lifting problem we're interested in
     X\rar["E" below]\ar[ur,dashed] & \BGL_d.
 \end{tikzcd} \]
 %
-The $k$-invariants as we have seen live in the (twisted) homology of the fiber, where the twist is by $\pi_1(\BGL_d)$, giving $\det E$. That is, our $k$-invariants are
+The $k$-invariants as we have seen live in the (twisted) cohomology of the fiber, where the twist is by $\pi_1(\BGL_d)$, giving $\det E$. That is, our $k$-invariants are
 \begin{align*}
     k_t \in H^{t+2}(X,\pi_{t+1}(S^{2d-1,d})(\det E)).
 \end{align*}
 %
-So we have that
+Since $X$ is Krull dimension $d$, the cohomology vanishes for $t+2 \ge d+2$, hence:
 \begin{itemize}
-    \item $k_d$ and the higher $k$-invariants are all zero since $\dim(X) = d+1$
-    \item $k_{d-3}$ and the lower $k$-invariants are zero because of the connectivity of $S^{2d-1,d}$ (\todo check the numbers here)
+    \item $k_d$ and the higher $k$-invariants are all zero.
 \end{itemize}
-So we have two interesting obstruction classes:
+Moreover, by the connectivity of $S^{2d-1,d}$, we have that $\pi_{t+1}(S^{2d-1,d})$ vanishes for $t+1\le d-2$, hence:
+\begin{itemize}
+    \item $k_{d-3}$ and the lower $k$-invariants vanish.
+\end{itemize}
+This leaves us with two interesting obstruction classes:
 \begin{enumerate}
     \item the \textit{primary obstruction} $k_{d-2}$, which can be identified with the \textit{Euler class} of the bundle
     \begin{align*}
