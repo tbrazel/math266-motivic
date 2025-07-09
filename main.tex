@@ -114,9 +114,7 @@ Finally, a special thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels
 
 \section{Introduction}
 
-\subsection{Overview} What sorts of things about a ring $R$ are still true when we move to the polynomial ring $R[t]$? In other words, what sorts of things about $R$ can't be varied in a 1-parameter family?
-
-Let's give a ton of examples! Don't stress if not all of the words are familiar, we'll break down what's happening here over the course of the semester, this is just motivation.
+\subsection{Overview} What sorts of things about a ring $R$ are still true when we move to the polynomial ring $R[t]$? In other words, what sorts of things about $R$ can't be varied in a 1-parameter family? Let's give a ton of examples! Don't stress if not all of the words are familiar, we'll break down what's happening here over the course of the semester, this is just motivation.
 
 \begin{example} Let $R$ be a reduced ring. Then the inclusion $R \to R[t]$ induces an isomorphism after taking units\footnote{If $R$ is not reduced, say there is some $r\in R$ so that $r^2 = 0$, then $(1+rt)(1-rt) = 1$, so $1+rt\in R[t]^\times$.}
 \begin{equation}\label{eqn:units-rings}
@@ -155,7 +153,7 @@ Quillen's proof involves leveraging some previous work of Horrocks, flat descent
     \Mod_R^{\text{f.g., proj}} &\to \Mod_{R[t]}^{\text{f.g., proj}} \\
     M &\mapsto M \otimes_R R[t]
 \end{align*}
-is essentially surjective? \textit{Still open}.
+is essentially surjective? This is \textit{still open}.
 
 \textbf{Fundamental Theorem of Algebraic $K$-Theory} \cite{Quillen-K1}: For $R$ regular Noetherian, we have that $R \to R[t]$ induces an equivalence\footnote{%
 So Bass--Quillen is really a question about \textit{unstable} modules.}\footnote{%
@@ -269,7 +267,7 @@ Some cheatsheets can be found throughout. I also include them here in the intro 
 \minitoc
 \section{Torsors}
 
-\begin{assumption} For this lecture, every time we say ``cover'' you can assume we are working with Zariski covers, or even open covers of topological spaces, since the intuition will be the same and the results here will be mostly identical. If you know about other topologies, the statements here work for any site. We will go into sheaves and sites more next week, when we will remark that everything here works for other nice sites (\'etale, Nisnevich, flat, etc.).
+\begin{assumption} For this lecture, every time we say ``cover'' you can assume we are working with Zariski covers, or even open covers of topological spaces, since the intuition will be the same and the results here will be mostly identical. We'll go deeper into Grothendieck topologies later in these notes.
 \end{assumption}
 
 \begin{definition} Let $G$ be a group. Then a $G$-set $X$ is called a (left) $G$-\textit{torsor} if its $G$-action is simple and transitive. Equivalently, if the action map
@@ -283,9 +281,9 @@ is a bijection.
 \end{definition}
 
 
-Observe that there are two types of $G$-torsors --- sets of the form $G/e$, and the empty set. Depending on the convention, we might want to exclude the case of the empty set by including $X \ne \emptyset$ in the definition.
+Observe that there are two types of $G$-torsors --- sets  that look like $G/e$, and the empty set. Depending on the convention, we might want to exclude the case of the empty set by including $X \ne \emptyset$ in the definition.
 
-\begin{intuition} A $G$-torsor is like a group $G$ which has remembered its multiplication but forgotten its identity. Any choice of basepoint $x\in X$ yields a canonical bijection $G \xto{\sim} X$ by sending $g \mapsto g\cdot x$.
+\begin{intuition} A nonempty $G$-torsor is like a group $G$ which has remembered its multiplication but forgotten its identity. Any choice of basepoint $x\in X$ yields a canonical bijection $G \xto{\sim} X$ by sending $g \mapsto g\cdot x$.
 \end{intuition}
 
 \begin{example} In a locally small category $\mathscr{C}$, given two objects $x,y \in \mathscr{C}$, the set of isomorphisms $\mathrm{Isom}_{\mathscr{C}}(x , y)$ is a left $\Aut_{\mathscr{C}}(x)$-torsor and a right $\Aut_{\mathscr{C}}(y)$-torsor.
@@ -314,7 +312,7 @@ Let's try to extend this definition to the setting where $G$ isn't a single grou
 \begin{example} The sheaf $\mathcal{G}$, acting on itself by scaling, is called the \textit{trivial} $\mathcal{G}$-torsor.
 \end{example}
 
-\begin{example} For any group scheme $G$, we will refer to $G$\textit{-torsors}, by which we mean torsors for the representable functor $\Hom(-,G)$.
+\begin{example} For any group scheme $G$, we will refer to $G$\textit{-torsors}, by which we mean torsors for the representable functor $\Hom_\Sch(-,G)$.
 \end{example}
 
 \begin{proposition}\label{prop:torsor-trivial-iff-global-section} 
@@ -336,7 +334,7 @@ If $L/k$ is a Galois field extension then $\Spec(L) \to \Spec(k)$ is a $\Gal(L/k
 \end{itemize}
 
 \begin{example}
-The associated frame bundle of an algebraic vector bundle is a $\GL_n$-torsor (say, in the Zariski topology).
+The associated frame bundle of an algebraic vector bundle is a $\GL_n$-torsor in the Zariski topology.\footnote{Or Nisnevich or \'etale topology --- see \Cref{cor:h1-gln-hilbert90}.}
 \end{example}
 \begin{proof} Since $\GL_n$ is affine, every torsor is representable, hence $\GL_n$-torsors are just principal $\GL_n$-bundles, which are precisely algebraic vector bundles.
 \end{proof}
@@ -417,7 +415,8 @@ on triple overlaps.\footnote{See e.g. \cite[\S11]{MilneLEC}.}
 \end{enumerate}
 \end{definition}
 
-\begin{theorem} There is a bijection between $H^1(U,\Aut_{\mathcal{F}}(x))$ and isomorphism classes of objects $y\in \mathscr{F}(U)$ which are locally isomorphic to $x$.
+\begin{theorem}\label{thm:cech-cohom-measures-an-LGP} 
+There is a bijection between $\check{H}^1(U,\Aut_{\mathcal{F}}(x))$ and isomorphism classes of objects $y\in \mathscr{F}(U)$ which are locally isomorphic to $x$.
 \end{theorem}
 \begin{proof} Let's first define a map. If $y$ is locally isomorphic to $x$, then there is a cover $\left\{ U_i \right\}$ of $U$ and isomorphisms $\phi_i \colon \left. x \right|_{ U_i } \xto{\sim} \left. y \right|_{ U_i }$ for each $i$. If the $\phi_i$'s agreed on overlaps then they would glue to a global isomorphism $\phi \colon x \xto{\sim} y$ because $\Aut(x)$ is a sheaf of groups, so it makes sense to look on overlaps to see what happens. Note that $\left. \phi_i \right|_{ U_{ij} }$ and $\left. \phi_j \right|_{ U_{ij} }$ will differ by an automorphism of $\left. x \right|_{ U_{ij} }$, call this $g_{ij}$:
 \begin{align*}
@@ -450,7 +449,7 @@ And we get cohomologous 1-cocycles.
 
 \begin{theorem} There is a bijection between isomorphism classes of $\mathcal{G}$-torsors and $\check{H}^1(U,\mathcal{G})$.
 \end{theorem}
-\begin{proof}[Sketch] Let $\mathcal{F}$ be a $\mathcal{G}$-torsor, and pick $s_i \in \mathcal{F}(U_i)$ for each $i$. Then on the overlap $U_i \times_U U_j$, we have that $s_i$ and $s_j$ differ by a unique element $g_{ij}\in \mathcal{G}(U_i \times_U U_j)$. We run basically an identical argument.
+\begin{proof}[Sketch] Let $\mathcal{F}$ be a $\mathcal{G}$-torsor, and pick $s_i \in \mathcal{F}(U_i)$ for each $i$. Then on the overlap $U_i \times_U U_j$, we have that $s_i$ and $s_j$ differ by a unique element $g_{ij}\in \mathcal{G}(U_i \times_U U_j)$. We run basically an identical argument to the proof of \Cref{thm:cech-cohom-measures-an-LGP}.
 \end{proof}
 
 So if $\mathcal{G} = \Aut_{\mathcal{F}}(x)$ then we have a bijection
@@ -463,7 +462,7 @@ These sorts of arguments are compatible with refinement of the cover, and since 
 
 %
 \begin{exercise}\label{exer:every-sheaf-of-groups-is-aut} 
-Show that every sheaf of groups $\mathcal{G}$ is of the form $\Aut_\mathcal{F}(x)$ for some sheaf of categories $\mathcal{F}$.
+Show that \textit{every} sheaf of groups $\mathcal{G}$ is of the form $\Aut_\mathcal{F}(x)$ for some sheaf of categories $\mathcal{F}$.
 \end{exercise}
 
 \begin{intuition} A $\mathcal{G}$-torsor is an object whose automorphisms locally look like $\mathcal{G}(U_i)$.
@@ -544,7 +543,7 @@ to be an equivalence, which we recall is the \textit{normal basis theorem} from 
     \Spec(L \otimes_k L)\dar\rar\pb & \Spec(L)\dar\\
     \Spec(L)\rar\uar[dashed,bend left=30] & \Spec(k).
 \end{tikzcd} \]
-Hence we have a trivialization, and hence a principal $\Gal(L/k)$-bundle (a $\Gal(L/k)$-torsor).
+Hence we have a trivialization, and therefore a principal $\Gal(L/k)$-bundle (a $\Gal(L/k)$-torsor).
 \end{proof}
 
 
@@ -624,7 +623,7 @@ Leveraging these fiber sequences is one way to prove Bott periodicity.
 The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic topology with motivic methods.
  First off:
 \begin{itemize}
-    \item Given any cohomology theory $E^\ast$ and any class $c\in E^\ast(BG)$, if $f^\ast(c) \ne g^\ast(c)$ in $E^\ast(X)$, this means that $f$ and $g$ correspond to non-isomorphic torsors. This the basic idea of characteristic classes.
+    \item Suppose we have two torsors $f,g \colon X\to BG$ and we want to prove they are not isomorphic. If we can find any cohomology theory $E^\ast$ and any class $c\in E^\ast(BG)$ so that $f^\ast(c) \ne g^\ast(c)$ in $E^\ast(X)$, this means that $f$ and $g$ correspond to non-isomorphic torsors. This the basic idea of characteristic classes.
 \end{itemize}
 
 \begin{example} If $G = \GL_n(\C)$, then $\BGL_n(\C) = \BU(n) = \Gr_\C(n,\infty)$ is a Grassmannian of $n$-planes in $\C^\infty$. A map $f \colon X \to \Gr_\C(n,\infty)$ gives a complex $n$-dimensional vector space by pullback.
@@ -926,7 +925,7 @@ This notion makes sense for maps between simplicial objects in any category, and
 \begin{enumerate}
     \item A priori we should be careful calling it a homotopy, since it doesn't require us to have any notion of a model structure or higher-categorical structure in order to state, however we will see this won't be a problem.
     \item In the context of simplicial sets, this coincides with \autoref{def:simplicial-homotopy-sset}, as we can check (see e.g. \cite[8.3.12]{Weibel}).
-    \item It is not true (even in simplicial sets) that this is an equivalence relation, and indeed it isn't. Nevertheless it generates one, so when we say ``up to simplicial homotopy'' we often mean with respect to the transitive closure of this relation.
+    \item It is not true (even in simplicial sets) that this is an equivalence relation. Nevertheless it generates one, so when we say ``up to simplicial homotopy'' we often mean with respect to the transitive closure of this relation.
 \end{enumerate}
 \end{remark}
 
@@ -1076,7 +1075,7 @@ So altogether we get a Yoneda embedding
 \begin{align*}
     \Var_k \hookto \Fun(\Var_k^\op, \sSet).
 \end{align*}
-This latter category is called the category of \textit{simplicial presheaves}, or in higher category language it is just denoted $\Pre(\Var_k)$, and called the $\infty$-category of ($\infty$-)presheaves. It comes with a notion of homotopy coming from simplicial homotopy theory. We'll see that this was not only a nice well-behaved way to access homotopy theory starting from $\Var_k$, it was actually the \textit{universal} way to do this (see e.g. \cite{Dugger-univ}).
+This latter category is called the category of \textit{simplicial presheaves}, or in higher category language it is just denoted $\Pre(\Var_k)$, and called the $\infty$-category of ($\infty$-)presheaves. It comes equipped with a homotopy theory coming levelwise from simplicial homotopy theory. It turns out this is not just a nice well-behaved way to access homotopy theory starting from $\Var_k$, it is actually the \textit{universal} way to do this (see e.g. \cite{Dugger-univ}).
 
 This category $\Pre(\Var_k)$ will take care of item (1) on our checklist! After we define what homotopy means there, homotopic maps in this category will give isomorphic torsors.
 
@@ -1204,7 +1203,9 @@ We can summarize what we've learned in the following cheatsheet:
 \begin{theorem} \cite[Th\'eor\`eme~3]{Grothendieck-torsion} The group $\GL_n$ is special.
 \end{theorem}
 
-\begin{corollary} \cite[11.4]{MilneLEC} There is a natural bijection
+\begin{corollary}[{\cite[11.4]{MilneLEC}}]
+\label{cor:h1-gln-hilbert90} 
+There is a natural bijection
 \begin{align*}
     H^1_\Zar(X,\GL_n) \leftrightarrow H^1_\Nis(X,\GL_n) \leftrightarrow H^1_\et(X,\GL_n) \leftrightarrow H^1_{\fpqc}(X,\GL_n).
 \end{align*}
@@ -4755,7 +4756,7 @@ As a particular example, we have seen that $\left[ \P^1,\P^1 \right]_\ast$ is an
 \begin{align*}
     \left[ \P^1,\P^1 \right]_N \to \left[ \P^1,\P^1 \right]_{\A^1}
 \end{align*}
-is a group completion.\footnote{Interesting, this seems to be special to $\P^1$. Such a statement is never true for punctured affine space, for example \cite{BrazeltonHornslien}.}
+is a group completion.\footnote{Interesting, this seems to be special to $\P^1$. Such a statement is never true for punctured affine space, for instance (see \cite{BrazeltonHornslien}).}
 \end{theorem}
 
 Cazanave's monoidal structure is defined explicitly in terms of rational maps.
@@ -5633,7 +5634,8 @@ Since $K = \Vect^\gp$, the factorization $\Vect \to \Vect_\infty \to \Vect^\gp$ 
      & \Z \times \BGL\ar[ur] &
 \end{tikzcd} \]
 
-\begin{theorem} We have that $\Z \times \BGL \to K$ is a motivic equivalence.
+\begin{theorem}\label{thm:K-is-BGLxZ} 
+We have that $\Z \times \BGL \to K$ is a motivic equivalence.
 \end{theorem}
 \begin{proof} Since $L_\mot$ preserves finite products, it clearly preserves commutative monoids, and will preserve group objects since it preserves equivalences. It also preserves colimits, so we can commute $L_\mot$ with both $(-)_\infty$ and $(-)^\gp$. We are trying to show $\Vect_\infty \to \Vect^\gp$ is a motivic equivalence, and commuting past $L_\mot$, we see this is equivalent to showing that $L_\mot \Vect$ satisfies the properties of the theorem above.
 
@@ -5749,13 +5751,23 @@ Since every smooth finite scheme over a regular Noetherian scheme is itself regu
 We have that $K \in \Sp_{\A^1}(k)$ is $\A^1$-invariant by the fundamental theorem of algebraic $K$-theory. Thus to produce a spectrum, we just have to give bonding maps for the projective line. This is an immediate consequence of the projective bundle formula. From this we obtain $\KGL \in \SH(k)$ given by $\left\{ \BGL \times \Z, \BGL \times \Z, \ldots \right\}$.
 
 
-\begin{corollary} \cite[6.15]{AE}
+\begin{corollary}[{see \cite[6.15]{AE}}]
 We have that
 \begin{align*}
     \pi_i \BGL_n = K_i
 \end{align*}
-for $2\le i\le n-1$.
+for $2\le i\le n-1$.\footnote{todo - reorder this result so we don't have forward references}
 \end{corollary}
+\begin{proof} We have an $\A^1$-fiber sequence \Cref{eqn:fiber-stabilization-BGLr}, hence we get a long exact sequence of homotopy sheaves
+\begin{align*}
+    \cdots \to \pi_i(S^{2r-1,r}) \to \pi_i(\BGL_{r-1}) \to \pi_i (\BGL_r) \to \pi_{i+1}(S^{2r-1,r}) \to \cdots 
+\end{align*}
+Since $S^{2r-1,r}$ is $\A^1$-$(r-2)$-connected, the suspension map $\pi_i(\BGL_{r-1}) \to \pi_{i}(\BGL_{r})$ is an isomorphism for $i\le r-2$. Letting $n = r-1$, we see that if $i\le n-1$, we have that
+\begin{align*}
+    \pi_i(\BGL_n) \cong \pi_i(\BGL_{n+1}) \cong \cdots \cong \pi_i(\BGL).
+\end{align*}
+Since $K \simeq \Z \times \BGL$ by \Cref{thm:K-is-BGLxZ}, we have that this is equal to $K_i$.
+\end{proof}
 
 
 \section{Obstruction theory}
@@ -5770,7 +5782,7 @@ Let $X \in \Shv_\Nis(\Sm_k)$ be a space in the sheaf topos. Then we recall its \
 \end{align*}
 and as we are working over a field, the sheaf topos is hypercomplete, meaning
 \begin{align*}
-    X = \tau_{\le \infty} X = \lim_n \tau_{\le n}.
+    X = \tau_{\le \infty} X = \lim_n \tau_{\le n} X.
 \end{align*}
 %
 \begin{proposition} If $X$ is a pointed connected sheaf, we have fiber sequences of the form
@@ -5853,14 +5865,10 @@ More generally, given a map $Y \to Z$, we can break the lifting problem
      & Y\dar\\
     X\rar\ar[ur,dashed] & Z
 \end{tikzcd} \]
-into a sequence of analogous stages. This relative situation is often called the \textit{Postnikov--Moore tower} attached to the map $Y \xto{f} Z$. Its theory is outlined in \cite[\S B]{Morel}.
+into a sequence of analogous stages. This relative situation is often called the \textit{Postnikov--Moore tower} attached to the map $Y \xto{f} Z$. Its theory is outlined in \cite[\S B]{Morel}. The key point is that if $f\colon Y \to Z$ is a fibration with fiber $F$, then the $k$-invariants for lifting $X \to Z$ along $f$ are valued in Eilenberg--MacLane spaces for the homotopy sheaves of $F$. Our primary application of this is the classification of torsors.
+
+
 \end{remark}
-
-The key point is that if $f\colon Y \to Z$ is a fibration with fiber $F$, then the $k$-invariants for lifting $X \to Z$ along $f$ are valued in Eilenberg--MacLane spaces for the homotopy sheaves of $F$.
-
-
-
-Our primary application of this is the classification of torsors.
 
 
 
@@ -5888,7 +5896,8 @@ From this perspective, we might ask for some algebraic version of a Pontryagin--
 There is a canonical equivalence of motivic spaces $\BGL_r \simeq \Gr(r,\infty)$.
 \end{proposition}
 
-\begin{theorem} \textit{(Affine representability)} \cite{AHW1} If $X \in \Sm_k^\aff$ is any smooth affine $k$-scheme, then there is a bijection
+\begin{theorem}[{Affine representability \cite{AHW1}}]
+If $X \in \Sm_k^\aff$ is any smooth affine $k$-scheme, then there is a bijection
 \begin{align*}
     \left[ X, \BGL_r \right]_{\A^1} \cong \Vect_r^\alg(X)^{\simeq}
 \end{align*}
@@ -5926,7 +5935,8 @@ In particular, if $X$ is affine, the composite
 \end{align*}
 is exactly the first Chern class $c_1 \in \Pic(X)$. Hence $\SL_n$-torsors are algebraic vector bundles with $c_1 = 0$.
 
-\begin{theorem} If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2, then a rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
+\begin{theorem}
+If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2 over an algebraically closed field, then a rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
 \end{theorem}
 \begin{proof} We can analyze the Postnikov tower for $\BSL_2$. We have that $\pi_1(\BSL_2) = \ast$, so the first nontrivial stage occurs at degree 2, which is $\tau_{\le 2}\BSL_2 = K(\KMW_2,2)$. Since $X$ has Krull dimension two, we have by \autoref{thm:krull-dim-postnikov-truncation} that
 \begin{align*}
@@ -5944,11 +5954,27 @@ we get part of a long exact sequence
 \begin{align*}
     \cdots \to H^2(X,\mathbf{I}^3) \to H^2(X,\KMW_2) \to \CH^2(X) \to 0.
 \end{align*}
-So the number of algebraic vector bundles over $X$ with fixed $c_2$ is acted upon transitively by $H^2(X,\mathbf{I}^3)$. If $k = \bar{k}$, this set vanishes \cite[5.1]{AF3}. If $k$ is not algebraically closed, $H^2(X,\mathbf{I}^3)$ need not vanish, and it may in fact contain more data governing the structure of algebraic vector bundles. 
+So the number of algebraic vector bundles over $X$ with fixed $c_2$ is acted upon transitively by $H^2(X,\mathbf{I}^3)$. If $k = \bar{k}$, this set vanishes \cite[5.1]{AF3}.
 \end{proof}
 
-\begin{example} (Fasel) Over the algebraic 2-sphere, there are infinitely many non-isomorphic rank two algebraic vector bundles with vanishing $c_1$ and $c_2$.
+If $k$ is not algebraically closed, $H^2(X,\mathbf{I}^3)$ need not vanish, and it may in fact contain more data governing the structure of algebraic vector bundles. An explicit example is the following:
+
+\begin{example}[{\cite[5.12]{Fasel-unim}}]
+\label{exa:stably-free-corank-zero-algebraic-S2}
+Let $X$ the algebraic 2-sphere $X=\Spec(A)$, where
+\begin{align*}
+    A = \frac{\R[x,y,z]}{x^2 + y^2 + z^2 - 1}.
+\end{align*}
+Then there are infinitely many non-isomorphic rank two algebraic vector bundles with vanishing $c_1$ and $c_2$.
 \end{example}
+
+More generally, if $A\in \Sm_\R^\aff$ is a smooth $\R$ algebra of dimension $2d$ which is rational and has trivial canonical bundle. Then by \cite{Fasel-unim}, we have an isomorphism
+\begin{align*}
+    H^{2d}(X, I^{2d+1}) \cong \oplus_{\pi_0(X(\R))}\Z.
+\end{align*}
+In particular, this is the number of stably free corank zero modules up to isomorphism!
+
+
 
 \subsection{The Swan--Forster theorem}
 
@@ -6088,7 +6114,7 @@ The complexity of studying these sorts of splitting problems is governed by two 
     \item the \textit{corank} of the bundle.
 \end{enumerate}
 
-While the 2-cohomological dimension doesn't appear in the algebraically closed context, it can obstruct splitting over non-algebraically closed fields, where the group $H^r(X,\mathbf{I}^{r+1})$ need not vanish. For more on this we refer the reader to \cite{AF2}.
+While the 2-cohomological dimension doesn't appear in the algebraically closed context, it can obstruct splitting over non-algebraically closed fields, where the group $H^r(X,\mathbf{I}^{r+1})$ need not vanish. We saw an example of this in \Cref{exa:stably-free-corank-zero-algebraic-S2}. For more on this story we refer the reader to \cite{AF2}.
 
 \subsection{Murthy's conjecture: corank one splitting}
 
@@ -6097,7 +6123,7 @@ While the 2-cohomological dimension doesn't appear in the algebraically closed c
 The next interesting case to study is corank one. Murthy conjectured essentially that an analogous result holds. We call this \textit{Murthy's conjecture}.
 
 
-\quoteblock{It would be interesting to find obstruction to splitting projective modules of rank less than the dimension of $A$. Let $X = \Spec A$ be a smooth affine variety of dimension $n$ over an algebraically closed field. I do no know any example of such an $A$ with a projective $A$-module of rank $n-1$ such that $c_{n-1}(P) = 0$ in $\CH^{n-1}(X)$, but $P$ does not have a free direct summand of rank one.}{\cite[p.~173]{Murthy-survey}}
+\quoteblock{It would be interesting to find obstruction to splitting projective modules of rank less than the dimension of $A$. Let $X = \Spec A$ be a smooth affine variety of dimension $n$ over an algebraically closed field. I do not know any example of such an $A$ with a projective $A$-module of rank $n-1$ such that $c_{n-1}(P) = 0$ in $\CH^{n-1}(X)$, but $P$ does not have a free direct summand of rank one.}{\cite[p.~173]{Murthy-survey}}
 
 A quarter of a century later, this is now a theorem in characteristic zero.
 
