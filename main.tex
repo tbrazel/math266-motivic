@@ -106,7 +106,7 @@ To that end, we treat the classification of torsors as \textit{motivation} for c
 
 \section*{Acknowledgements}
 
-Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, and Maria Yakerson for their suggestions and changes to these notes.
+Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, Maria Yakerson, and Qi Zhu for their suggestions and changes to these notes.
 
 Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting me bother them about technical non-motivic questions.
 
@@ -1461,13 +1461,13 @@ Modulo some set-theoretic technicalities, we can now be content with the existen
 
 \begin{example} We can think about presheaves of simplicial sets $\Fun(\Sch_S^\op, \sSet)$ as the presheaf category $\Pre(\Sch_S)$. Note what lives in here:
 \begin{enumerate}
-    \item Schemes all live in here via the Yoneda embedding $\Sch_S \hookto \Fun(\Sch_S^\op, \Set) \subseteq \Fun(\Sch_S^\op, \sSet)$, by viewing $\Set \subseteq \sSet$ as discrete simplicial sets (no non-degenerate $n$-simplices for $n\ge 1$).
+    \item \textit{Schemes} all live in here via the Yoneda embedding $\Sch_S \hookto \Fun(\Sch_S^\op, \Set) \subseteq \Fun(\Sch_S^\op, \sSet)$, by viewing $\Set \subseteq \sSet$ as discrete simplicial sets (no non-degenerate $n$-simplices for $n\ge 1$).
     \item \textit{Simplicial schemes} also live in here, by moving some adjoint stuff around:
     \begin{align*}
         \Fun(\DDelta^\op, \Sch_S) \xhookto{y} \Fun(\DDelta^\op, \Fun(\Sch_S^\op, \Set)) \cong \Fun(\Sch_S^\op, \Fun(\DDelta^\op, \Set)) = \Pre(\Sch_S).
     \end{align*}
     %
-    \item Spaces (viewed as simplicial sets by $\Pi_\infty$) live in here as constant presheaves $\sSet \hookto \Fun(\Sch_S^\op, \sSet)$.
+    \item \textit{Spaces} (viewed as simplicial sets by $\Pi_\infty$) live in here as constant presheaves $\sSet \hookto \Fun(\Sch_S^\op, \sSet)$.
 \end{enumerate}
 Thus we have a natural home for schemes and spaces, as well as these simplicial scheme data types we've been looking at.
 \end{example}
@@ -1836,6 +1836,11 @@ If $\mathscr{C}$ is an $\infty$-topos and $(X,x) \in \mathscr{C}_\ast$, then
 Let $\mathscr{C}$ denote a presentable category and $\tau_{\le k} \mathscr{C} \subseteq \mathscr{C}$ the full subcategory spanned by $k$-truncated objects. Then the inclusion admits an accessible left adjoint, in other words there is a truncation functor $\tau_{\le k} : \mathscr{C} \to \tau_{\leq k} \mathscr{C}$ which is a localization.
 \end{proposition}
 
+\begin{notation}\label{nota:truncated-subcategory}
+For any presentable $\infty$-category, we denote by $\mathscr{C}_{\le n}$ or $\tau_{\le n}\mathscr{C}$ the full subcategory spanned by the $n$-truncated objects.
+\end{notation}
+
+
 \noindent In particular, the collection of $n$-truncated spaces is closed under limits.
 
 \begin{definition} If $(\mathscr{C},\tau)$ is any site, then the category $\tau_{\le 0}\Sh_\tau(\mathscr{C}) =: \Sh_\tau(\mathscr{C}) _{\le 0}$ is the category of sheaves of sets $\Sh_\tau(\mathscr{C};\Set)$.
@@ -1843,8 +1848,6 @@ Let $\mathscr{C}$ denote a presentable category and $\tau_{\le k} \mathscr{C} \s
 
 \begin{notation} We write $\Ab(\Sh_\tau(\mathscr{C})_{\le 0})$ for the sheaves of abelian groups.
 \end{notation}
-
-
 
 \subsection{Whitehead's theorem}
 
@@ -1858,39 +1861,8 @@ A way to say this is that ``$\infty$-connective morphisms are homotopy equivalen
 An $\infty$-topos is \textit{hypercomplete} if and only if every object is $\infty$-connective.
 \end{definition}
 
-
-\begin{definition} \cite[7.2.11]{HTT} An $\infty$-topos has \textit{homotopy dimension} $\le n$ if every $(n-1)$-connected object $X$ receives a map from the terminal object $\ast \to X$.
-\end{definition}
-
-\begin{theorem} If an $\infty$-topos has finite homotopy dimension then it is hypercomplete.
-\end{theorem}
-
 \begin{warning} The \'etale topos $\Shv_\et(\Sm_S)$ need not be hypercomplete, even for nice $S$ (reference needed).
 \end{warning}
-
-\begin{theorem} (Voevodsky) If $S$ is qcqs and Noetherian, then the homotopy dimension of $\Shv_\Nis(\Sm_S)$ is bounded above by $\dim(S)$. In particular this implies it is hypercomplete.
-\end{theorem}
-
-Truncation and connectivity fit into fiber sequences
-\begin{equation}\label{eqn:truncation-connectivity-fiber-seq}
-\begin{aligned}
-    \tau_{>n} \to \id \to \tau_{\le n}
-\end{aligned}
-\end{equation}
-%
-which allow us to form Postnikov towers out of objects of $\infty$-topoi:
-\[ \begin{tikzcd}
-    & \tau_{\le n }X\dar \\
-    & \vdots\dar\\
-    X\rar\ar[uur,dashed] & \tau_{\le 0} X
-\end{tikzcd} \]
-Hypercompleteness implies \textit{Postnikov completeness} (reference needed) meaning that the induced map
-\begin{align*}
-    X \to \lim_n \tau_{\le n} X
-\end{align*}
-is an equivalence. That is, the Postnikov towers converge and we can make sense of obstruction theory.
-
-We'll see soon that this is a valuable perspective, e.g. for classifying torsors via homotopy theory. However the obstruction theory won't be very useful in the sheaf topos setting. This is one of the advantages we gain by passing to motivic spaces.
 
 \begin{upshot} In a hypercomplete topos, equivalences can be checked on homotopy sheaves.
 \end{upshot}
@@ -1903,7 +1875,57 @@ Let $F \to G$ be a map in the sheaf topos $\Shv_\Nis(\Sch_S)$ (or any hypercompl
 \end{enumerate}
 \end{corollary}
 
-So this gives us a way to check equivalence on homotopy groups.
+We have two more notions we want to define -- the idea of \textit{homotopy dimension} and that of \textit{Postnikov completeness}.
+
+\begin{definition} \cite[7.2.11]{HTT} An $\infty$-topos has \textit{homotopy dimension} $\le n$ if every $(n-1)$-connected object $X$ receives a map from the terminal object $\ast \to X$.
+\end{definition}
+
+We can also ask, for any $\infty$-topos, to what extent the category is determined by its truncations. More precisely, we make the following definition:
+
+\begin{definition}[{\cite[A.7.2.1]{SAG}}]
+Let $\mathscr{C}$ be any presentable $\infty$-category.
+
+\begin{enumerate}
+    \item We say it is \textit{Postnikov complete (SAG)} if the induced map
+\begin{align*}
+    \mathscr{C} \to \lim \left( \cdots \mathscr{C}_{\le 3} \xto{\tau_{\le 2}} \mathscr{C}_{\le 2} \xto{\tau_{\le 1}} \mathscr{C}_{\le 1}\xto{\tau_{\le 0}} \mathscr{C}_{\le 0} \right)
+\end{align*}
+is an equivalence.
+    \item We say it is \textit{Postnikov complete (HTT)} if for every $X\in \mathscr{C}$, the induced map
+    \begin{align*}
+        X \to \lim \left( \cdots X_{\le 3} \xto{\tau_{\le 2}} X_{\le 2} \xto{\tau_{\le 1}} X_{\le 1}\xto{\tau_{\le 0}} X_{\le 0} \right)
+    \end{align*}
+    is an equivalence.
+\end{enumerate}
+The former definition implies the second, and it is still open as to whether the second implies the first. When we say ``Postnikov complete'' we will be referring to the first definition, unless otherwise specified.
+\end{definition}
+
+\begin{slogan} The notion of Postnikov completion in HTT should be thought of as the statement that ``Postnikov towers converge.'' In particular it should be considered as a green light for obstruction theory.
+\end{slogan}
+
+
+For $\infty$-topoi, all these notions are related via the following:
+
+\begin{proposition}\label{prop:htpy-dim-Postnikov-complete-hypercomplete} 
+Let $\mathscr{C}$ be an $\infty$-topos. Then the following implications hold:
+\begin{align*}
+    \left\{ \mathscr{C}\text{ has finite htpy dimension} \right\}\Rightarrow \left\{ \mathscr{C}\text{ is Postnikov complete (HTT)} \right\}\Rightarrow \left\{ \mathscr{C}\text{ is hypercomplete} \right\}.
+\end{align*}
+The first implication is \cite[7.2.1.10]{HTT}, the latter is basically by definition. %\cite[A.7.2.3]{HTT}
+\end{proposition}
+
+\begin{question} In \Cref{prop:htpy-dim-Postnikov-complete-hypercomplete}, can we replace the notion of Postnikov complete with the definition from SGA? The latter implication is clearly fine, so we're asking -- if $\mathscr{C}$ has finite homotopy dimension, is it Postnikov complete in the sense of SGA?
+\end{question}
+
+Our main use for the results above will be the following theorem of Voevodsky.
+
+\begin{theorem} (Voevodsky) If $S$ is qcqs and Noetherian, then the homotopy dimension of $\Shv_\Nis(\Sm_S)$ is bounded above by $\dim(S)$. In particular this implies that Postnikov towers converge, and we have hypercompleteness.
+\end{theorem}
+
+Hence in our main setting, Nisnevich sheaves over a field, we can carry out obstruction theory arguments!
+
+
+\subsection{Equivalences of sheaves and presheaves}
 
 \begin{notation} For $F,G \in \Shv_\tau(\Sch_S)$, we denote by 
 \begin{align*}
@@ -1917,10 +1939,6 @@ So this gives us a way to check equivalence on homotopy groups.
 \end{align*}
 We think of this as a higher categorical analogue of the universal property of sheafification: that a map from a presheaf to a sheaf factors uniquely through its sheafification.
 \end{remark}
-
-
-
-\subsection{Equivalences of sheaves and presheaves}
 
 Recall that if $f\colon F \to G$ is a map in $\Pre(\Sch_S)$, then it is an equivalence if and only if $F(U) \to G(U)$ is an equivalence of spaces for each $U \in \Sch_S$, also called a \textit{sectionwise equivalence}. If $f\colon F \to G$ is an equivalence, then so is the associated map after sheafification. The converse doesn't hold though, since different presheaves can admit the same sheafification. To that end, we introduce a new notion.
 
@@ -2311,7 +2329,7 @@ is an equivalence in $L_\mot$. This is true in the ambient presheaf category sin
 \begin{proposition}\label{prop:spc-not-a-topos} 
 We have that $L_\mot$ is \textit{not left exact}. In particular $\Spc(k)$ is not an $\infty$-topos.
 \end{proposition}
-We will come back to prove \autoref{prop:spc-not-a-topos} later when we have a little more machinery.
+%We will come back to prove \autoref{prop:spc-not-a-topos} later when we have a little more machinery.
 
 \subsection{Motivic equivalences}
 
