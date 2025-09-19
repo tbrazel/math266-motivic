@@ -59,7 +59,6 @@
 
 %\usepackage[notref]{showkeys}
 
-
 \fancyfoot[C]{\thepage}
 \begin{document}
 \dominitoc
@@ -91,7 +90,7 @@ These are notes for a topics class taught at Harvard in Fall 2024. The most rece
     \href{https://github.com/tbrazel/math266-motivic}{https://github.com/tbrazel/math266-motivic}
 \end{center}
 
-\textbf{What isn't in these notes?} A ton of core principles in motivic homotopy theory, for instance: purity, six functors formalism, the motivic complexes $\Z(q)$,... Despite the concise title, these notes are not intended to be a sprawling survey of all techniques in motivic homotopy theory, but rather a geodesic towards the motivic obstruction theory that allows us to talk about classification of torsors over smooth affine varieties. To that end, these notes shouldn't be viewed as a supplement to Morel's book or even a replacement for it. Rather it is a primer for people interested in the Asok--Fasel--et. al. program of research.
+\textbf{What isn't in these notes?} A ton of core principles in motivic homotopy theory, for instance: purity, six functors formalism, the motivic complexes $\Z(q)$, the norm residue isomorphism theorem... Despite the concise title, these notes are not intended to be a sprawling survey of all techniques in motivic homotopy theory, but rather a geodesic towards the motivic obstruction theory that allows us to talk about classification of torsors over smooth affine varieties. To that end, these notes shouldn't be viewed as a supplement to Morel's book or even a replacement for it. Rather it is a primer for people interested in the Asok--Fasel--et. al. program of research.
 
 To that end, we treat the classification of torsors as \textit{motivation} for constructing motivic spaces. It is important to note that this is very ahistorical, and is done only for pedagogical reasons. Although affine representability was one of the key early results explored by Morel, motivic spaces and spectra were developed in order to house theories such as algebraic $K$-theory, Bloch's higher Chow groups, and to grow new theories such as algebraic cobordism. We chose this route for a few reasons:
 \begin{enumerate}
@@ -106,15 +105,11 @@ To that end, we treat the classification of torsors as \textit{motivation} for c
 
 \section*{Acknowledgements}
 
-Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, Maria Yakerson, and Qi Zhu for their suggestions and changes to these notes.
-
-Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting me bother them about technical non-motivic questions.
-
-Finally, a special thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering some motivic questions as I was writing these notes.
+Thank you to Howard Beck, Merrick Cai, Juan Fernando Valdes, Jake Levinson, Jiantong Liu, Isabel Longbottom, Sof\'ia Marlasca Aparicio, Matthew Niemiro, Natalie Stewart, Maria Yakerson, and Qi Zhu for their suggestions and changes to these notes. Thank you to Maxine Calle, Connor Cassady, David Chan, Liam Keenan, and Maximilien P\'eroux for letting me bother them about technical non-motivic questions. Finally, a special thank you to Aravind Asok, Tom Bachmann, Elden Elmanto, Niels Feld, Mike Hopkins, and Matthias Wendt for answering some motivic questions as I was writing these notes.
 
 \section{Introduction}
 
-\subsection{Overview} What sorts of things about a ring $R$ are still true when we move to the polynomial ring $R[t]$? In other words, what sorts of things about $R$ can't be varied in a 1-parameter family? Let's give a ton of examples! Don't stress if not all of the words are familiar, we'll break down what's happening here over the course of the semester, this is just motivation.
+\subsection{Overview} What sorts of things about a ring $R$ are still true when we move to the polynomial ring $R[t]$? In other words, what sorts of things about $R$ can be varied in a 1-parameter family without changing? Let's give a ton of examples! Don't stress if not all of the words are familiar, we'll break down what's happening here over the course of the semester, this is just motivation.
 
 \begin{example} Let $R$ be a reduced ring. Then the inclusion $R \to R[t]$ induces an isomorphism after taking units\footnote{If $R$ is not reduced, say there is some $r\in R$ so that $r^2 = 0$, then $(1+rt)(1-rt) = 1$, so $1+rt\in R[t]^\times$.}
 \begin{equation}\label{eqn:units-rings}
@@ -140,9 +135,7 @@ We therefore might rephrase \autoref{eqn:units-rings} as saying that the represe
     M &\mapsto M \otimes_k k[t_1, \ldots, t_n].
 \end{aligned}
 \end{equation}
-\textbf{Serre's Problem}: Is every finitely generated projective $k[t_1, \ldots, t_n]$-module free?
-
-Serre's problem is equivalent to the statement that \autoref{eqn:extn-scalars} is essentially surjective. Equivalently under the Serre correspondence, this is the same as saying that every algebraic vector bundle on affine space $\A^n_k$ is trivial.
+\textbf{Serre's Problem}: Is every finitely generated projective $k[t_1, \ldots, t_n]$-module free? In other words, is the functor \autoref{eqn:extn-scalars} essentially surjective? Or, in other other words, under the Serre correspondence, is every algebraic vector bundle on affine space $\A^n_k$ trivial?
 
 \textbf{Answer}: Yes \cite{Quillen76,Suslin76}. Quillen actually proved more-- for $R$ a PID, he proved that the every finitely generated projective $R[t]$-module is extended from an $R$-module.\footnote{%
 Quillen's proof involves leveraging some previous work of Horrocks, flat descent for vector bundles, and a very clever technique he invented called \textit{patching}. Suslin's proof, which appeared in the same year, is almost completely linear algebraic, leveraging the theory of \textit{unimodular rows}.} Lindel proved shortly thereafter that every finitely generated projective $A[t]$-module is extended from an $A$-algebra, where $A$ is a smooth algebra containing a field $k$. We could read this as saying that the stack of algebraic vector bundles is $\A^1$-invariant over the category of smooth affine $k$-schemes.
@@ -318,10 +311,14 @@ Let's try to extend this definition to the setting where $G$ isn't a single grou
 \begin{proposition}\label{prop:torsor-trivial-iff-global-section} 
 A $\mathcal{G}$-torsor $\mathcal{F}$ on $X$ is trivial if and only if $\mathcal{F}(X) \ne \emptyset$, i.e. if it admits a global section.
 \end{proposition}
+\begin{proof} A trivial torsor admits a global section, namely the identity. Conversely a choice of global section is a choice of trivialization.
+\end{proof}
 
 
 
-\begin{theorem} Every morphism in $\Tors_G(X)$ is an isomorphism.
+
+\begin{theorem}\label{thm:every-morphism-in-torsG-is-an-iso} 
+Every morphism in $\Tors_G(X)$ is an isomorphism.
 \end{theorem}
 
 So what are some examples of torsors, and why might we care to classify them?
@@ -370,10 +367,10 @@ Let's suppose now that $\mathcal{F}(U)$ is a \textit{category} for every $U$, an
 %
 \textbf{Q}: Does this functor necessarily reflect isomorphisms?\footnote{A functor which reflects isomorphisms is called \textit{conservative}.}
 
-\begin{example} Let $\mathcal{F}$ be the functor sending $U$ to the category of line bundles over $U$. If the cover is picked appropriately small, then all line bundles are isomorphic to the trivial line bundle over $U_i$, but they need not be isomorphic globally as line bundles over $U$.
+\begin{example} Let $\mathcal{F}$ be the functor sending $U$ to the category of line bundles over $U$. If the cover is picked to be appropriately small, then all line bundles are isomorphic to the trivial line bundle over $U_i$, but they need not be isomorphic globally as line bundles over $U$.
 \end{example}
 
-\textbf{A}: No, by the example above. This means that we can have $x,y \in \mathcal{F}(U)$ so that $x|_{U_i} \cong y|_{U_i}$ for each $i$, but we \textit{do not have} that $x$ and $y$ are isomorphic in the category $\mathcal{F}(U)$. In other words, the following two notions are \textit{different}.
+\textbf{A}: No, by the example above. This means that we can have $x,y \in \mathcal{F}(U)$ so that $x|_{U_i} \cong y|_{U_i}$ for each $i$, but we \textit{do not have} that $x$ and $y$ are isomorphic in the category $\mathcal{F}(U)$. In other words, the following two notions are \textit{different}:
 \begin{itemize}
     \item $x$ and $y$ agree \textit{globally}, meaning $x$ and $y$ are isomorphic in $\mathscr{F}(U)$.
     \item  $x$ and $y$ agree \textit{locally}, meaning there exists an open cover $\left\{ U_i \to U \right\}$ for which we have isomorphisms $\left. x \right|_{ U_i } \xto{\sim} \left. y \right|_{ U_i }$ in $\mathcal{F}(U_i)$.\footnote{%
@@ -462,7 +459,7 @@ These sorts of arguments are compatible with refinement of the cover, and since 
 
 %
 \begin{exercise}\label{exer:every-sheaf-of-groups-is-aut} 
-Show that \textit{every} sheaf of groups $\mathcal{G}$ is of the form $\Aut_\mathcal{F}(x)$ for some sheaf of categories $\mathcal{F}$.
+Show that \textit{every} sheaf of groups $\mathcal{G}$ is of the form $\Aut_\mathcal{F}(x)$ for some sheaf of categories $\mathcal{F}$. (Hint: first prove \Cref{thm:every-morphism-in-torsG-is-an-iso})
 \end{exercise}
 
 \begin{intuition} A $\mathcal{G}$-torsor is an object whose automorphisms locally look like $\mathcal{G}(U_i)$.
@@ -504,7 +501,7 @@ to be simply transitive for every $U\in \Sch_X$. This seems a bit tedious to che
 What about condition (2) from \autoref{def:torsor}? This condition translates, in \autoref{set:representable-torsor-and-group-scheme}, to asking for a cover $\left\{ U_i \to X \right\}$ for which $\Hom_X(U_i,Y)\ne \emptyset$ for each $i$. Pick any $s_i \in \Hom_X(U_i,Y)$, then it makes the diagram commute:
 \[ \begin{tikzcd}
      & Y\dar\\
-    U_i\rar\ar[ur,"s" above left] & X.
+    U_i\rar\ar[ur,"s_i" above left] & X.
 \end{tikzcd} \]
 Then the pullback torsor $Y \times_X U_i \to U_i$ admits a section, which implies it is trivial by \autoref{prop:torsor-trivial-iff-global-section}:
 \[ \begin{tikzcd}
@@ -617,10 +614,7 @@ In the setting of \autoref{thm:fibration-from-subgp-of-liegp}, we obtain fiber s
 Leveraging these fiber sequences is one way to prove Bott periodicity.
 
 
-\subsection{Why we like representability of torsors in homotopy theory}
-
-
-The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic topology with motivic methods.
+\textbf{Why we like representability of torsors in homotopy theory}: The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic topology with motivic methods.
  First off:
 \begin{itemize}
     \item Suppose we have two torsors $f,g \colon X\to BG$ and we want to prove they are not isomorphic. If we can find any cohomology theory $E^\ast$ and any class $c\in E^\ast(BG)$ so that $f^\ast(c) \ne g^\ast(c)$ in $E^\ast(X)$, this means that $f$ and $g$ correspond to non-isomorphic torsors. This the basic idea of characteristic classes.
@@ -688,7 +682,7 @@ The answer to both will be yes, but \textit{not in the category of varieties}. W
 \begin{definition} We denote by $\DDelta$ the category whose objects are finite ordered sets of the form $[n] = \left\{ 0<1< \cdots<n \right\}$, and whose morphisms $[n] \to [m]$ are order-preserving maps.
 \end{definition}
 
-\begin{notation} Let $\mathscr{C}$ be a category. Then we refer to a functor $\DDelta \to \mathscr{C}$ as a \textit{cosimplicial object} of $\mathscr{C}$, and a functor $\DDelta^\op \to \mathscr{C}$ as a \textit{simplicial object} of $\mathscr{C}$.
+\begin{notation} Let $\mathscr{C}$ be a category. Then we refer to a functor $\DDelta \to \mathscr{C}$ as a \textit{cosimplicial object} in $\mathscr{C}$, and a functor $\DDelta^\op \to \mathscr{C}$ as a \textit{simplicial object} in $\mathscr{C}$.\footnote{People say things like ``a simplicial object in $\mathscr{C}$'' although we should clarify this sentence doesn't quite parse -- it is an object of $\Fun(\DDelta^\op),\mathscr{C})$ not an object of $\mathscr{C}$, just to clarify.}
 \end{notation}
 
 \begin{intuition} We should think about a (co)simplicial object as a \textit{data type} ---  it is a combinatorial gadget that is surprisingly convenient for bookkeeping and appears frequently in nature. We'll see quite a few examples, but let's first see how to compress this data.
@@ -756,7 +750,7 @@ There are a priori a lot of order-preserving functions $[n] \to [m]$, so we'd li
 \end{enumerate}
 \end{terminology}
 
-\begin{exercise} Convince yourself that every map in $\DDelta$ factors into face and degeneracy maps, and therefore any simplicial object $X_\bullet$ in $\mathscr{C}$ can be described by the data of $X_n$ for each $n$, and its face and degeneracy maps.\footnote{%
+\begin{exercise} Convince yourself that every map in $\DDelta$ factors into face and degeneracy maps, and therefore any simplicial object $X_\bullet$ in $\mathscr{C}$ can be described by the data of $X_n$ for each $n$, and its face and degeneracy maps. The intuition is that, by only describing $X_n$ and the face and degeneracy maps, we have \emph{compressed} the data of a simplicial object in a lossless way.\footnote{%
 Any time we define a simplicial object via this compressed data, we should check that the simplicial identities hold, although we'll mostly omit these arguments here.}
 \end{exercise}
 
@@ -818,7 +812,7 @@ Let $X$ be a complete\footnote{$X$ is \textit{complete} if it is proper over the
 \[ \begin{tikzcd}[column sep=small]
     \cdots & X_2\rar\rar[shift right=2*\theshiftamount]\rar[shift left=2*\theshiftamount] & X_1\lar[shift right=\theshiftamount]\lar[shift left=\theshiftamount]\rar[shift right=\theshiftamount]\rar[shift left=\theshiftamount] & X_0,\lar
 \end{tikzcd} \]
-where each $X_i$ is smooth and projective. There is a cohomological descent spectral sequence computing the cohomology of $X$ in terms of the cohomology of the $X_n$'s. This dates back to SGA 4. Additionally, this replacement is the core idea of \textit{resolution of singularities}. Deligne uses these simplicial methods to endow singular varieties with Hodge structures, so-called \textit{mixed Hodge structures} \cite{Hodge3}.
+where each $X_i$ is smooth and projective. There is a cohomological descent spectral sequence computing the cohomology of $X$ in terms of the cohomology of the $X_n$'s. This dates back to SGA 4. This replacement is the core idea of \textit{resolution of singularities}. Deligne uses these simplicial methods to endow singular varieties with Hodge structures, so-called \textit{mixed Hodge structures} \cite{Hodge3}.
 \end{example}
 
 \begin{example} Let $A_\bullet \colon \DDelta^\op \to \Ab$ be a simplicial abelian group. Then by taking the alternating sum of the face maps, we obtain a chain complex, purely by the simplicial identities. This assignment is functorial:
@@ -2850,7 +2844,8 @@ We will see that elements in $\HI(k)$ are completely determined by their value o
 
 We'll work with unramified sheaves of abelian groups here (c.f. \cite[\S1.5]{Feld-thesis}), but the more general definitions are for sheaves of pointed sets.
 
-\begin{definition} \cite[2.6,2.9]{Morel}
+\begin{definition}[{\cite[2.6,2.9]{Morel}}]
+\label{def:unramified-Fk-datum}
 An \textit{unramified $\mathcal{F}_k$-datum} is the data of
 \setlist[enumerate]{align=left,wide=0cm,leftmargin=\parindent, labelsep=*}
 \begin{enumerate}
@@ -2871,7 +2866,7 @@ This data is subject to the axioms
     }
     then the square commutes
 \[ \begin{tikzcd}
-    M(\mathcal{O}_w)\dar[hook]\rar[dashed] & M(\mathcal{O}_w)\dar[hook]\\
+    M(\mathcal{O}_v)\dar[hook]\rar[dashed] & M(\mathcal{O}_w)\dar[hook]\\
     M(E)\rar & M(F).
 \end{tikzcd} \]
 If the field extension $\kappa(v) \to \kappa(w)$ is an isomorphism then this square is cartesian.
@@ -3012,29 +3007,71 @@ It is now a theorem of Merkurjev-Suslin and Rost that this is an isomorphism for
 \begin{notation} We denote by $K_\ast^M(F) = \oplus_{n\ge0} K_n^M(F)$. This is a graded abelian group, with multiplication coming from the multiplication of symbols.
 \end{notation}
 
+\begin{proposition}\label{prop:Milnor-K-thy-continuous} 
+For any $n$, and any base field $k$, we have that Milnor $K$-theory
+\begin{align*}
+    K_n^M \colon \mathcal{F}_k \to \Ab
+\end{align*}
+is continuous. That is, for any $F\in \mathcal{F}_k$, we have that the natural map is an isomorphism:
+\begin{align*}
+   \mathop{\colim}_{\substack{E \subseteq F \\ E \in \mathcal{E}_k}} K_n^M(E) \xto{\sim} K_n^M(F).
+\end{align*}
+\end{proposition}
+\begin{proof} Let $F\in \mathcal{F}_k$. Then any symbol $\left\{ a_1, \ldots, a_n \right\}\in K_n^M(E)$ involves only \emph{finitely many elements} of $F$, hence lies in $k(a_1, \ldots, a_n)$, which is a finitely generated field over $k$. Similarly the Steinberg relation involves only one element, so it is detected on $\mathcal{E}_k$.
+\end{proof}
+
+\begin{corollary} Mod $m$ Milnor $K$-theory is also continuous; that is, for $F\in \mathcal{F}_k$ we have
+\begin{align*}
+   \mathop{\colim}_{\substack{E \subseteq F \\ E \in \mathcal{E}_k}} K_n^M(E)/m \xto{\sim} K_n^M(F)/m.
+\end{align*}
+\end{corollary}
+
+
 
 \subsection{Basic symbol algebra in $K_\ast^M$}
 
-
-
-An immediate corollary of bilinearity of symbols is the following:
-
 \begin{proposition} In $K_1^M(F)$ we have that $\left\{ 1 \right\} = 0$.
 \end{proposition}
-\begin{proof} By \textbf{(M2)}, we have that $\left\{ 1\cdot 1 \right\} = \left\{ 1 \right\} + \left\{ 1 \right\}$, hence $0 = \left\{ 1 \right\}$ by subtracting a copy of $\left\{ 1 \right\}$ from either side.
+\begin{proof} This is an immediate corollary of bilinearity of symbols. By \textbf{(M2)}, we have that $\left\{ 1\cdot 1 \right\} = \left\{ 1 \right\} + \left\{ 1 \right\}$, hence $0 = \left\{ 1 \right\}$ by subtracting a copy of $\left\{ 1 \right\}$ from either side.
 \end{proof}
 
 \begin{proposition}\label{prop:powers-symbols} 
 In $K_2^M(F)$ we have that
 \begin{enumerate}
-    \item $-\left\{ x,y \right\} = \left\{ x^{-1},y \right\}$.
+    \item $-\left\{ a,b \right\} = \left\{ a^{-1},b \right\}$.
     \item More generally for any $i,j\in \Z$ we have
     \begin{align*}
-         \left\{ x^i,y^j \right\} = (i\cdot j) \left\{ x,y \right\}.
+         \left\{ a^i,b^j \right\} = (i\cdot j) \left\{ a,b \right\}.
     \end{align*}
 \end{enumerate}
 \end{proposition}
 
+\begin{proposition}\label{prop:KM2-relations} 
+\cite[1.1,~1.2]{MilnorK}
+We have that
+\begin{align*}
+    \left\{ a,-a \right\} &= 0 \\
+    \left\{ a,a \right\} &= \left\{ a,-1 \right\}.
+\end{align*}
+In particular $2\left\{ a,a \right\} = 0$ for any $x$.
+\end{proposition}
+\begin{proof} Note for $a\ne 1$, we have that
+\begin{align*}
+    -a = \frac{1-a}{ 1- a^{-1}}.
+\end{align*}
+%
+Hence 
+\begin{align*}
+    \left\{ a,-a \right\} &= \left\{ a,1-a \right\} - \left\{ a, 1-a^{-1} \right\} = -\left\{ a, 1- a^{-1} \right\} = \left\{a^{-1}, 1-a^{-1} \right\} = 0.
+\end{align*}
+This last equality uses \autoref{prop:powers-symbols}.
+The argument that $\left\{ a,a \right\} = \left\{ a,-1 \right\}$ is similar.
+The last statement follows from observing that
+\begin{align*}
+    2\left\{ a,a \right\} = 2 \left\{ a, -1 \right\} = \left\{ a, 1 \right\} = 0,
+\end{align*}
+since $\left\{ 1 \right\} = 0$.
+\end{proof}
 
 \begin{proposition} \cite[1.1]{MilnorK}
 Multiplication on $K_\ast^M(F)$ is graded commutative, meaning if $\alpha \in K_m^M(F)$ and $\beta \in K_n^M(F)$, we have that
@@ -3042,36 +3079,16 @@ Multiplication on $K_\ast^M(F)$ is graded commutative, meaning if $\alpha \in K_
     \alpha\beta = (-1)^{mn}\beta\alpha.
 \end{align*}
 \end{proposition}
-
-\begin{proposition}\label{prop:KM2-relations} 
-\cite[1.1,~1.2]{MilnorK}
-We have that
+\begin{proof} By induction it suffices to treat the case where $\alpha,\beta\in K_1^M(F)$. In this setting, we see that, for any two $a,b\in F^\times$, we have
 \begin{align*}
-    \left\{ x,-x \right\} &= 0 \\
-    \left\{ x,x \right\} &= \left\{ x,-1 \right\}.
+    \left\{ a,b \right\} + \left\{ b,a \right\} &= \left\{ a,b \right\} + \left\{ a,-a \right\} + \left\{ b,-b \right\} + \left\{ b,a \right\} \\
+    &= \left\{ a,-ab \right\} + \left\{ b,-ab \right\} \\
+    &= \left\{ ab,-ab \right\} = 0.
 \end{align*}
-In particular $2\left\{ x,x \right\} = 0$ for any $x$.
-\end{proposition}
-\begin{proof} Note for $x\ne 1$, we have that
-\begin{align*}
-    -x = \frac{1-x}{ 1- x^{-1}}.
-\end{align*}
-%
-Hence 
-\begin{align*}
-    \left\{ x,-x \right\} &= \left\{ x,1-x \right\} - \left\{ x, 1-x^{-1} \right\} = -\left\{ x, 1- x^{-1} \right\} = \left\{x^{-1}, 1-x^{-1} \right\} = 0.
-\end{align*}
-This last equality uses \autoref{prop:powers-symbols}.
-The argument that $\left\{ x,x \right\} = \left\{ x,-1 \right\}$ is similar.
-The last statement follows from observing that
-\begin{align*}
-    2\left\{ x,x \right\} = 2 \left\{ x, -1 \right\} = \left\{ x, 1 \right\} = 0,
-\end{align*}
-since $\left\{ 1 \right\} = 0$.
+Hence $\left\{ a,b \right\} = - \left\{ b,a \right\}$.
 \end{proof}
 
-For more about symbol algebra in $K_\ast^M$, we refer the reader to \cite[\S7.1]{GilleSzamuely}.
-
+\textbf{More reading}: For more about symbol algebra in $K_\ast^M$, we refer the reader to \cite[\S7.1]{GilleSzamuely}.
 
 \subsection{Computations}
 
@@ -3079,13 +3096,14 @@ For more about symbol algebra in $K_\ast^M$, we refer the reader to \cite[\S7.1]
 \begin{example} \cite[III.6.1,~III.7.2]{Kbook}
 We have that $K_n^M(\mathbb{F}_q) =0$ for $n\ge 2$.
 \end{example}
-\begin{proof} We will show that it vanishes for $n=2$. Pick $x$ to generate $\mathbb{F}_q^\times$, then any element in $K_2^M(\mathbb{F}_q)$ is of the form $\left\{ x^i,x^j \right\}$. By \autoref{prop:powers-symbols}, this is equal to $ij \left\{ x,x \right\}$ so it will suffice to verify that $\left\{ x,x \right\} = \left\{ x,-1 \right\}$ vanishes. This has order dividing two. We want to show it is killed by an odd number as well, and we'll be done. If $q = 2^m$, then $x^{2^m-1}=1$, and hence
+\begin{proof}
+It suffices to show that $K_2^M(\mathbb{F}_q)=0$. Pick $a$ to generate $\mathbb{F}_q^\times$, then any element in $K_2^M(\mathbb{F}_q)$ is of the form $\left\{ a^i,a^j \right\}$. By \autoref{prop:powers-symbols}, this is equal to $ij \left\{ a,a \right\}$ so it will suffice to verify that $\left\{ a,a \right\} = \left\{ a,-1 \right\}$ vanishes. This has order dividing two. We want to show it is killed by an odd number as well, and we'll be done. If $q = 2^m$, then $a^{2^m-1}=1$, and hence
 \begin{align*}
-    0 &= \left\{ 1,x \right\} = \left\{ x^{2^m-1},x \right\} = \left( 2^m-1 \right)\left\{ x,x \right\},
+    0 &= \left\{ 1,a \right\} = \left\{ a^{2^m-1},a \right\} = \left( 2^m-1 \right)\left\{ a,a \right\},
 \end{align*}
-which concludes the proof. If $q$ has odd exponential characteristic, we can find two non-squares in $\mathbb{F}_q^\times$ which sum to 1 (c.f. \cite[1.3.6]{GilleSzamuely}). This gives us $x^k + x^\ell = 1$ for $k,\ell$ odd. Hence we get
+which concludes the proof. If $q$ has odd eaponential characteristic, we can find two non-squares in $\mathbb{F}_q^\times$ which sum to 1 (c.f. \cite[1.3.6]{GilleSzamuely}). This gives us $a^k + a^\ell = 1$ for $k,\ell$ odd. Hence we get
 \begin{align*}
-    0 = \left\{ x^k,x^\ell \right\} = k\cdot \ell\left\{ x,x \right\},
+    0 = \left\{ a^k,a^\ell \right\} = k\cdot \ell\left\{ a,a \right\},
 \end{align*}
 and we are done.
 \end{proof}
@@ -3102,21 +3120,78 @@ and we are done.
 In particular, $K_3^M(\mathbb{F}_q) = 0$ but $K_3(\mathbb{F}_q) = \Z/(q-1)$.
 \end{remark}
 
-
-
-
 \begin{example} \cite[III.7.2]{Kbook}
 If $F = \bar{F}$ is algebraically closed, then $K_n^M(F)$ is uniquely divisible for $n\ge1$. In particular $K_n^M(F)/\ell = 0$ for any $n\ge 1$ and any $\ell\ne 0$.
 \end{example}
 
-%
-These come equipped with subrings
+\subsection{Residue and specialization homomorphisms for Milnor $K$-theory}
+Suppose $F$ is equipped with a discrete valuation $v$ and residue field $\bar{F}_v$, and denote by $\mathcal{O}_v \subseteq F$ the \emph{valuation ring}. We can pick a uniformizing parameter $\pi$ for which every element in $F$ is uniquely expressible as $\pi^r u$ for $u\in \mathcal{O}_v$ a \emph{unit} and $r\in \Z$. In this setting, the Milnor $K$-theory of $F$ is related to that of its residue field.
+
+\begin{lemma}[{\cite[2.1]{MilnorK}}] In the situation above, there is a well-defined \emph{residue homomorphism}
+\begin{equation}\label{eqn:Milnor-K-residue-homomorphism}
+\begin{aligned}
+    \del_v \colon K_{n+1}^M(F) \to K_n^M(\bar{F}_v),
+\end{aligned}
+\end{equation}
+with the property that, for any uniformizing parameter $\pi$ and any units $u_i\in \mathcal{O}_v^\times$, we have that\footnote{Here we are conflating $u_i$ with its image in $\bar{F}_v$ --- we should probably write $\bar{u}_i$ instead as Milnor does.}
 \begin{align*}
-    K^M_\ast(\mathcal{O}_v) \subseteq K^M_\ast(F)
+    \left\{ \pi, u_1, \ldots, u_n \right\} &\mapsto \left\{ u_1, \ldots, u_n \right\} \\
+    \left\{ u_0,u_1, \ldots, u_n \right\}&\mapsto 0.
 \end{align*}
-for every discrete valuation $v$ on $F$, and specialization maps, which we omit (see Milnor's original paper or \cite[7.3]{Kbook}. These satisfy the axioms for being an unramified $\mathcal{F}_k$-datum, proving the following.
-\begin{proposition} Milnor $K$-theory gives rise to an unramified sheaf of abelian groups $\KM_n$ for every $n$.
+\end{lemma}
+\begin{proof} Omitted, see \cite[\S2]{MilnorK}.
+\end{proof}
+
+\begin{notation} It is clear that these residue homomorphisms in \Cref{eqn:Milnor-K-residue-homomorphism} are surjective, so we denote by
+\begin{equation}\label{eqn:Milnor-K-thy-of-unit-ring}
+\begin{aligned}
+    K_n^M(\mathcal{O}_v) := \ker \left( K_n^M(F) \xto{\del_v} K_{n-1}^M(\bar{F}_v) \right) \in \Ab.
+\end{aligned}
+\end{equation}
+A priori this is just notation --- $K_n^M(-)$ is defined on fields, so it doesn't even make sense to plug in a ring. We will see soon that $K_n^M$ is a prototypical example of an unramified $\mathcal{F}_k$-datum, hence it promotes to a \emph{sheaf}, which we denote $\KM_n$. After this we verify that $H^0(\Spec(\mathcal{O}_v),\KM_n) = K_n^M(\mathcal{O}_v)$ as above.% todo -- this should be like a Hilbert 90 thing
+\end{notation}
+
+\begin{definition}\label{def:specialization-Milnor-K-theory} 
+For $F$ a field, and $v$ a discrete valuation, we have a natural \emph{specialization homomorphism}
+\begin{align*}
+    s_v \colon K_n^M(\mathcal{O}_v) &\to K_n^M(\bar{F}_v) \\
+    \left\{ u_1, \ldots, u_n \right\}&\mapsto \left\{ u_1, \ldots, u_n \right\}.
+\end{align*}
+\end{definition}
+
+\begin{proposition}\label{prop:A1-axiom-Milnor-K-thy} 
+If $(E,v) \subseteq (F,w)$ is a separable extension of discretely valued fields where $v$ has ramification index $1$ on $E$, then the square commutes
+\[ \begin{tikzcd}
+    K_n^M(\mathcal{O}_v)\dar\rar & K_n^M(\mathcal{O}_w)\dar\\
+    K_n^M(E)\rar & K_n^M(F),
+\end{tikzcd} \]
+and if $\bar{E}_v \to \bar{F}_w$ is an isomorphism, the above square is cartesian.
 \end{proposition}
+
+
+
+
+
+\subsection{The Milnor exact sequence}
+
+The following is a key result we will make use of.
+
+\begin{theorem}[{Milnor exact sequence,~\cite[2.3]{MilnorK}}] Let $F$ be an arbitrary field, and consider the field of rational functions $F(t)$. Then the sequence
+\begin{align*}
+    0 \to K_n^M(F) \to K_n^M(F(t)) \xto{\oplus\del_\pi} \bigoplus_{\substack{(\pi)\in \Spec(\A^1_F) \\ (\pi)\ne (0)}} K_{n-1}^M(F[t]/\pi) \to 0
+\end{align*}
+is split exact.
+\end{theorem}
+\begin{proof} See \cite[pp.~325-327]{MilnorK}.
+\end{proof}
+
+
+\begin{proposition}\label{prop:KM-is-an-unramified-sheaf} 
+Milnor $K$-theory gives rise to an unramified sheaf of abelian groups $\KM_n$ for every $n$.
+\end{proposition}
+\begin{proof} By \Cref{thm:restriction-to-Fk} it suffices to check that Milnor $K$-theory $K_n^M(-)$ defines an unramified $\mathcal{F}_k$-datum for every $n$, hence we check that the conditions of \Cref{def:unramified-Fk-datum} are satisfied. The continuity of Milnor $K$-theory (\textbf{D1}) is \Cref{prop:Milnor-K-thy-continuous}, our subgroups $K_n^M(\mathcal{O}_v) \subseteq K_n^M(F)$ is \Cref{eqn:Milnor-K-thy-of-unit-ring}, and specialization morphisms in \Cref{def:specialization-Milnor-K-theory}. We verified \textbf{A1} in \Cref{prop:A1-axiom-Milnor-K-thy}, so it suffices to check the remaining axioms (todo).
+\end{proof}
+
 
 We will see later that the sheaf cohomology of $\KM_n$ computes the Chow groups of a scheme.
 
@@ -3432,7 +3507,8 @@ It is clear by construction that this map is injective, so it suffices to see it
 
 Via the equivalence of categories between unramified sheaves of groups and unramified data for fields, we get sheaves corresponding to each of the invariants above.
 
-\begin{proposition} \cite[p.~71]{Morel}
+\begin{proposition}[{\cite[p.~71]{Morel}}]
+\label{prop:KMW-unramified-and-invariant} 
 $\KMW_n$ is unramified and strongly $\A^1$-invariant.
 \end{proposition}
 
@@ -3448,13 +3524,13 @@ $\KMW_n$ is unramified and strongly $\A^1$-invariant.
 \begin{definition} We define the \textit{fundamental ideal} $I(F)$ to be the kernel of the modulo two rank homomorphism $W(F) \to \Z/2$. We denote by $I^j$ the powers of the fundamental ideal.
 \end{definition}
 
-\begin{proposition} We obtain unramified sheaves of groups
+We can obtain unramified sheaves of groups
 \begin{align*}
     \mathbf{GW},\ \mathbf{W},\ \mathbf{I}^j,
 \end{align*}
-associated to each of these $\mathcal{F}_k$-data.
-\end{proposition}
-There is a tremendous amount to check here. The statement for Witt sheaves is \cite[Corollary~6]{Morel-connectivity}.
+associated to each of these $\mathcal{F}_k$-data. There is a tremendous amount to check here. The statement for Witt sheaves is \cite[Corollary~6]{Morel-connectivity}, while the statement for $\mathbf{GW}$ follows from \Cref{prop:KMW-unramified-and-invariant} when $n=0$.
+
+
 
 \begin{proposition}\label{prop:GW-pullback} 
 There is a pullback square of abelian groups for any field $F$
