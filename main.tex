@@ -50,6 +50,9 @@
 \providecommand{\KMW}{\mathbf{K}^\mathrm{MW}}
 \providecommand{\CHW}{\widetilde{\mathrm{CH}}}
 
+\providecommand{\fp}{\mathrm{fp}}
+\providecommand{\qcqs}{\mathrm{qcqs}}
+
 \newcommand{\Pfister}[1]{\left\langle\! \left\langle #1 \right\rangle\! \right\rangle}
 
 % Custom quote block command
@@ -1109,6 +1112,14 @@ A pair of a category and a topology $(\mathscr{C},\tau)$ is called a \textit{sit
 \begin{example} \cite[021M]{Stacks} An \textit{fppf cover} is a jointly surjective collection of morphisms $\left\{ U_i \xto{f_i} U \right\}$ so that each $f_i$ is flat and locally of finite presentation.
 \end{example}
 
+\begin{example} Consider the following map for any $n\ge2$:
+\begin{align*}
+    U_n = \Spec(k[t^{1/n}]) \to \Spec(k[t]),
+\end{align*}
+sending $t \mapsto t = (t^{1/n})^n$ for each $n\ge 0$. The maps $\left\{ U_n \to \A^1_k \right\}_{n\ge2}$ form an fppf cover which is not \'etale since each map is ramified at the origin. 
+\end{example}
+
+
 \begin{example} \cite[03NW]{Stacks} An \textit{fpqc cover} is a jointly surjective collection of morphisms $\left\{ U_i \xto{f_i} U \right\}$ so that $\amalg_i U_i \to X$ is faithfully flat and quasi-compact.
 \end{example}
 
@@ -1537,6 +1548,202 @@ Let $\mathscr{C}_0 \subseteq \mathscr{C}$ be the full subcategory of $S$-local o
 Hence we think about $\Pre(\mathscr{C}) = \Fun(\mathscr{C}^\op, \mathcal{S})$ as simplicial presheaves, equipped with a \textit{levelwise} notion of weak equivalence, coming from weak homotopy equivalence of simplicial sets.
 \end{example}
 
+\subsection{Cofinality}
+\begin{definition}\label{def:cofinal} 
+We say a subcategory $I \subseteq J$ is \textit{cofinal} if for any functor $F \colon J \to \mathscr{C}$, the induced map on colimits
+\begin{equation}\label{eqn:cofinality}
+\begin{aligned}
+    \colim_I F \to \colim_J F
+\end{aligned}
+\end{equation}
+is an isomorphism.\footnote{%
+We dually say $I \subseteq J$ is \textit{final} if the natural map $\lim_I F \to \lim_J F$ is an isomorphism for any $F$.%
+}
+In other words, in order to compute a $J$-shaped colimit, it suffices to restrict to the subdiagram $I \subseteq J$.
+\end{definition}
+
+\begin{remark} This definition makes sense in 1-category theory as well as it does in $\infty$-category theory, however we remark that the two notions are different, so let's differentiate between the two, continuing the story of \autoref{def:cofinal}:
+\begin{itemize}
+    \item $I \subseteq J$ is $1$\textit{-cofinal} if for any $1$-category $\mathscr{C}$ and $1$-functor $F \colon J \to \mathscr{C}$, the induced map \autoref{eqn:cofinality} is an isomorphism.
+    \item $I \subseteq J$ is \textit{cofinal} ($\infty$-cofinal if we want to be really pedantic) if for any $\infty$-category and $\infty$-functor $F \colon J \to \mathscr{C}$, the induced map \autoref{eqn:cofinality} is an equivalence.
+\end{itemize}
+Note this latter definition extends to the case where $I$ and $J$ are themselves $\infty$-categories, or even just simplicial sets.
+\end{remark}
+
+\begin{example}\label{exa:even-odd-cofinal}
+The subcategories $2\mathbb{N} \subseteq \mathbb{N}$ and $2 \mathbb{N} + 1 \subseteq \mathbb{N}$ are both 1-cofinal and $\infty$-cofinal. 
+\end{example}
+
+
+It is straightforward to check when a subdiagram is 1-cofinal:
+\begin{proposition} \cite[04E6]{Stacks}
+$I \subseteq J$ is $1$-cofinal if
+\begin{itemize}
+    \item every $j\in J$ has some $i \in I$ with a morphism $j \to i$
+    \item for every $j \in J$ and pair of objects $i,i'\in I$, there is a zig-zag of morphisms between $i,i'\in I$ and maps from $j$ into the zig-zag making the diagram commute:
+\[ \begin{tikzcd}
+     &  & j\dar\ar[dr]\ar[dl] &  & \\
+    \cdots\rar & i_n & i_{n+1}\lar\rar & i_{n+2} & \lar\cdots \\
+\end{tikzcd} \]
+\end{itemize}
+\end{proposition}
+
+\begin{notation} Let $\DDelta^\inj \subseteq \DDelta$ be the subcategory of injective maps, and let $\DDelta_{\le n} \subseteq \DDelta$ denote the full subcategory of objects $[k]$ for $k\le n$. For example $\DDelta^\inj_{\le 1}$ is just a the category with two parallel arrows, i.e. the ``(co)equalizer'' category:
+\begin{align*}
+    \DDelta^\inj_{\le 1} := \bullet \rightrightarrows \bullet
+\end{align*}
+\end{notation}
+
+
+\begin{example}\label{exa:1-cofinal-parallel-arrows-ddelta} 
+We have that $\DDelta_{\le1}^{\inj,\,\op} \subseteq \DDelta^\op$ is 1-cofinal (c.f. \cite[8.3.8]{Riehl-categorical-htpy}).
+\end{example}
+% \begin{proof} It's easier to check the dual properties hold before taking the opposite category. It's clear both $[0]$ and $[1]$ map to any element in $\DDelta$. For the second condition we have to check the zig-zag condition. If $i=i'$ in this setting, then it is clear
+% \end{proof}
+
+\begin{proposition} The inclusion $\DDelta_{\le n}^{\inj,\op} \subseteq \DDelta^\op$ is $n$-cofinal for any $1\le n \le \infty$.
+\end{proposition}
+
+
+It turns out by a souped-up extension of Quillen Theorem A, originally due to Joyal, we have a necessary condition for cofinality in the $\infty$-categorical setting.
+
+\begin{theorem} (Joyal, Quillen) Let $f \colon I \to J$ be a functor of 1-categories which is ($\infty$-)cofinal. Then the induced map on classifying spaces
+\begin{align*}
+    BI \to BJ
+\end{align*}
+is a weak homotopy equivalence \cite[4.1.3.1,~4.1.3.3]{HTT}.
+\end{theorem}
+
+
+\begin{example} The same subcategory $\DDelta_{\le1}^{\inj,\,\op} \subseteq \DDelta^\op$ is \textit{not} $\infty$-cofinal.
+\end{example}
+\begin{proof} The classifying space of the coequalizer diagram is $S^1$, however since $[0] \in\DDelta$ is terminal, it is initial in $\DDelta^\op$, hence $B\DDelta^\op \simeq \ast$ is contractible.
+\end{proof}
+
+\begin{remark} Removing this injectivity hypothesis is also interesting, since we include the opposite of the map $[1] \to [0]$ --- the category $\DDelta_{\le1}^\op$ is the \textit{split coequalizer} category:
+\[\begin{tikzcd}[column sep=small]
+    \bullet\rar[bend right=30]\rar[bend left=30] & \bullet\lar
+\end{tikzcd} \]
+\end{remark}
+
+\begin{proposition} Each of the composites
+\begin{align*}
+    \DDelta_{\le1}^{\inj,\,\op} \subseteq \DDelta_{\le1}^\op \subseteq \DDelta^\op
+\end{align*}
+is $1$-cofinal, however none of these inclusions are $\infty$-cofinal.
+\end{proposition}
+\begin{proof} The universal property of the 1-categorical colimit for both $\DDelta_{\le1}^{\inj,\,\op}$ and $\DDelta_{\le1}^\op$ agree, so this is direct. The other inclusion now follows by \autoref{exa:1-cofinal-parallel-arrows-ddelta}.
+\end{proof}
+
+In general we cannot truncate in order to obtain an $\infty$-cofinal diagram. We can, however, restrict only to face maps and throw out degeneracies:
+
+\begin{lemma} \cite[6.5.3.7]{HTT} The inclusion $\DDelta^{\inj,\op} \subseteq \DDelta$ is cofinal.
+\end{lemma}
+
+
+
+\begin{definition} An $\infty$-category $\mathscr{C}$ is \textit{sifted} if the diagonal map $\mathscr{C} \to \mathscr{C} \times \mathscr{C}$ is cofinal \cite[5.5.8.1]{HTT}.
+\end{definition}
+
+\begin{proposition}[{\cite[5.5.8.11]{HTT}}] \label{prop:sifted-colimits-finite-limits} 
+  Sifted colimits valued in $\Set$ commute with finite products.
+\end{proposition}
+
+\begin{remark} In the 1-categorical setting, the converse of \autoref{prop:sifted-colimits-finite-limits} holds, meaning we can take this to be the definition of sifted colimits.
+\end{remark}
+
+\begin{example}\label{exa:sifted-category-examples} \,
+\begin{enumerate}
+    \item The category $\DDelta^\op$ is sifted (see \href{https://amathew.wordpress.com/2012/07/12/more-examples-of-cofinality/}{Akhil's blog} for a nice proof of this)
+    \item Any filtered category is sifted
+\end{enumerate}
+\end{example}
+
+The examples above are the only interesting examples, in the following more precise sense.
+
+\begin{proposition}\label{prop:sifted-is-filtered-plus-geometric-realizations} 
+A category $\mathscr{C}$ admits all sifted colimits if and only if it admits all filtered colimits and it admits geometric realizations (meaning $\DDelta^\op$-indexed colimits).
+\end{proposition}
+
+\begin{corollary} A 1-category admits all sifted colimits if and only if it admits all filtered colimits and it has coequalizers.
+\end{corollary}
+\begin{proof} $\DDelta^\op$-indexed colimits are just coequalizers in 1-categories by \autoref{exa:1-cofinal-parallel-arrows-ddelta}.
+\end{proof}
+
+Moreover, we may add in \emph{finite coproducts} to capture all colimits.
+\def\cC{\mathcal{C}}
+\def\cD{\mathcal{D}}
+\begin{proposition}\label{prop:colimit-is-sifted-plus-finite-coproducts}
+  Let $\cC$ be a category, $\cD \subset \cC$, a full subcategory, and $X$ an object.
+  Then, the following are equivalent.
+  \begin{enumerate}[label={(\alph*)}]
+    \item $X$ is a geometric realization of coproducts of elements in $\cD$.
+    \item $X$ is a sifted colimit of finite coproducts of elements in $\cD$.
+    \item $X$ is a colimit of object in $\cD$.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  The implication (a) $\implies$ (b) is essentially \autoref{prop:sifted-is-filtered-plus-geometric-realizations} (as coproducts are filtered colimits of finite coproducts) and the implication (b) $\implies$ (c) is the fact that colimits of colimits are colimits.
+  The implication (c) $\implies$ (a) follows from the Bousfield-Kan formula for a limit of $p\colon K \rightarrow \cC$:
+  \[
+    \colim_K p \xleftarrow{\;\;\sim\;\;} \colim \left(
+\begin{tikzcd}
+	{\coprod\limits_{x \in K_0} p(x)} & {\coprod\limits_{\alpha \in K_1} p(\alpha(0))} & {\coprod\limits_{\alpha \in K_2} p(\alpha(0))} & \vdots
+	\arrow[shift left, from=1-2, to=1-1]
+	\arrow[shift right, from=1-2, to=1-1]
+	\arrow[from=1-3, to=1-2]
+	\arrow[shift right=2, from=1-3, to=1-2]
+	\arrow[shift left=2, from=1-3, to=1-2]
+	\arrow[shift left, from=1-4, to=1-3]
+	\arrow[shift right, from=1-4, to=1-3]
+	\arrow[shift left=3, from=1-4, to=1-3]
+	\arrow[shift right=3, from=1-4, to=1-3]
+\end{tikzcd}
+    \right)
+  \] 
+  see e.g. \cite[Cor~12.5]{Shah-parametrized}.
+\end{proof}
+
+\subsection{A bit more on filtered colimits}
+
+When working with filtered diagrams, we can often reduce to a much simpler diagram. The Stacks Project has many results which discuss index schemes over directed sets, and these can in general be extended to hold when indexed over a filtered diagram. The technical fact that makes this work in the 1-categorical setting is \Cref{prop:stacks-0032}. Let's first make some definitions and observations:
+
+\begin{definition}\label{def:thin-skeletal-category} Let $\mathscr{C}$ be a $1$-category.
+\begin{enumerate}
+    \item We say $\mathscr{C}$ is \emph{thin} if there is at most one arrow between any two objects.
+    \item We say $\mathscr{C}$ is \emph{skeletal} if any isomorphic objects are equal.
+    \item A \emph{preordered set} is a small thin category.
+    \item A \emph{poset} is a small thin skeletal category.
+\end{enumerate}
+Hence every small thin category is, up to equivalence, a poset (by taking its skeleton).
+\end{definition}
+
+
+\begin{definition}\label{def:directed-set}
+A \emph{directed set} is a poset $(\mathscr{C},\le)$ with the property that for any two objects $x,y\in \mathscr{C}$ there exists a third object $z$ with $x\le z$ and $y\le z$. In other words, we have \emph{finite joins} of objects.
+\end{definition}
+
+\begin{remark} If $\mathscr{C}$ is a thin small 1-category, it is directed if and only if it is filtered. This is precisely because a filtered 1-category requires finite joins, but it also requires coequalizer diagrams for parallel arrows. Since a thin category has no parallel arrows, this condition is vacuous.
+\end{remark}
+
+Why is all of this important? In many settings in algebraic geometry, we deal with diagrams which are by nature thin --- often the relation we care about in a diagram is inclusion, for instance. In this case different definitions collapse into one notion (up to equivalence), so where algebraic geometers may use the phrase ``directed set'' and homotopy theorists may say ``filtered colimit'' we really mean the same thing. In fact, even when we are not thin, we can reduce to the thin case:
+
+\begin{proposition}\label{prop:stacks-0032} 
+Every filtered $1$-category or $\infty$-category $\mathcal{I}$ admits a cofinal directed set $I \to \mathcal{I}$.
+\end{proposition}
+\begin{proof} The 1-categorical proof is \cite[0032]{Stacks} and the higher categorical proof is \cite[5.3.1.16]{HTT}.
+\end{proof}
+
+\begin{example} Suppose $A\in \Alg_k$ is an algebra built as a filtered colimit $A = \colim_{i\in \mathcal{I}} A_i$. Then the result above says we can build $A$ using a directed set. The precise construction is the following: we let
+\begin{align*}
+    I = \left\{ (i,B_i) \mid i\in \mathcal{I},\ B_i \subseteq A_i\text{ finitely generated subalgebra} \right\}.
+\end{align*}
+The order in $I$ is the following: we have $(i,B_i) \le (j,B_j)$ if the associated map $i \to j$ in $\mathcal{I}$ has the property that it sends $B_i$ inside of $B_j$ under the map $A_i \to A_j$. This is directed, and the fibers of the map $I \to \mathcal{I}$ are all the finitely generated subalgebras $B_i \subseteq A_i$, whose filtered colimit produces $A_i$. Hence the map $I \to \mathcal{I}$ is cofinal.
+\end{example}
+
+
+
+
 
 
 \section{Descent}
@@ -1547,6 +1754,97 @@ Hence we think about $\Pre(\mathscr{C}) = \Fun(\mathscr{C}^\op, \mathcal{S})$ as
 \begin{assumption} We will work over a base scheme $S$ which is qcqs and Noetherian.
 \end{assumption}
 
+
+\subsection{Warmup: limits and colimits of schemes}
+
+We want to explore here certain important properties about forming limits and colimits in the world of schemes. This first property is basically by definition:
+
+\begin{proposition}\label{prop:scheme-sifted-colimit-affines}
+Every scheme is a sifted colimit of affine schemes along open immersions.
+\end{proposition}
+\begin{proof} Every scheme can be written as the colimit of its affine \v{C}ech nerve, which is a colimit indexed over $\DDelta^\op$, which we've said earlier is sifted \Cref{exa:sifted-category-examples}.
+\end{proof}
+
+This is a core idea in algebraic geometry --- if we want to prove a statement holds true for a scheme $X$, we can check it on all the affines covering $X$, and then try to descend the property along the colimit diagram. There are two key cases to highlight when this process becomes simpler, namely when the scheme is separated or qcqs.
+
+\begin{proposition}\label{prop:separated-colimit-affines} If $X$ is separated or quasi-compact quasi-separated, then it can be written as a $\DDelta^\op_{\le1}$-indexed colimit of affine schemes, that is, a reflexive coequalizer of affine schemes.
+\end{proposition}
+\begin{proof} Recall being separated is equivalent to the property that the union of any two affine open subschemes is itself affine. Thus we can take our affine cover $\left\{ U_i \to X \right\}_{i\in I}$, and write $X$ as a colimit
+\begin{align*}
+    \amalg_{i,j}U_i \cap U_j \rightrightarrows \amalg_i U_i \to X.
+\end{align*}
+This is the core idea of \v{C}ech covers on an arbitrary scheme, that intersections of affines need not be affine, hence we need to cover them by affines then study those overlaps, and so on and so on.
+
+If, on the other hand, $X$ is quasi-compact quasi-separated, then we can begin with a \emph{finite} affine cover $\left\{ U_i \to X \right\}_{i=1}^n$. Each $U_i$ is affine, hence quasi-compact, and we can consider the overlaps $U_{ij}: = U_i \cap U_j$. Recall that $X$ being quasi-separated implies that intersections of quasi-compact opens in $X$ are themselves quasi-compact, so we can write $U_{ij} = \cup_{k=1}^{N_{ij}} V_{ijk}$ for some affine opens. Altogether this is enough data to build $X$ out of affines, i.e. we have a colimit diagram
+\begin{align*}
+    \amalg_{i,j,k}V_{ijk} \to \amalg_i U_i \to X.
+\end{align*}
+\end{proof}
+
+When $X$ has some nice properties, we can guarantee the affines do as well, for instance being finitely presented:
+\begin{proposition}\label{prop:fp-scheme-colimit-fp-affines}
+If $X$ is of finite presentation, then we can write $X$ as a split coequalizer of finitely presented affines.
+\end{proposition}
+\begin{proof} If $X$ is finite presentation, it is in particular qcqs, so we can write $X$ as a filtered colimit of affines by \Cref{prop:separated-colimit-affines}. Following the proof there, we'd like to know that affine opens in $X$ are still of finite presentation, as are their overlaps. By \cite[01TU]{Stacks}, we know that an open subscheme $Y \subseteq X$ will be finitely presented if and only if it is quasi-compact. Affine opens in $X$ are quasi-compact simply because they are affine. The overlaps are not necessarily affine, but they can be refined by a finite union of affines since $X$ is a quasi-compact and quasi-separated, and these will be quasi-compact and hence finitely presented.
+\end{proof}
+
+Finite presentation is important since it allows for an elegant commutativity with certain filtered colimits, and is a warmup to some sheafy statements we will soon make. We'll phrase this in the general setting where we're working relative to a base scheme $S$, which currently has no assumptions. We first observe the following important result.
+
+
+
+
+
+
+\begin{proposition}[Limits are affine local on the target]
+\label{prop:limits-affine-local-on-target}
+If we have a cofiltered\footnote{Question: what goes wrong when this isn't cofiltered?} system $\left\{ T_i \right\}_{i\in I}$ of $S$-schemes with affine transition maps, then $\lim_i T_i =: T$ exists in $\Sch_S$. Moreover, any affine open $U \subseteq T$ ``comes from'' a $T_i$ in the sense that there exists some $i\in I$ and some affine open $U_i \subseteq T_i$ for which $U_i = \lim_{j\ge i} U_i \times_{T_i}T_j$.
+\end{proposition}
+
+It's important to remember in \Cref{prop:limits-affine-local-on-target} that when we write an affine open $U \subseteq T$ as a limit, it is \emph{still cofiltered} since it is indexed over the same category $I$ and the new transition maps $U_i \to U_j$ are of course still affine.
+
+
+\begin{proposition}\label{prop:every-scheme-cofiltered-limit-of-fp-schemes}
+Every qcqs scheme $X\in \Sch_S$ is a cofiltered limit of finitely presented $S$-schemes.
+\end{proposition}
+\begin{proof}[Sketch] Cover $X$ by finitely many affines $\Spec(A_i)$, and write each $A_i$ as a filtered colimit of its finitely generated subalgebras. Then descend the gluing data and glue.
+\end{proof}
+
+
+\begin{proposition}\label{prop:fp-scheme-commute-filtered-colimits}
+Let $X\in\Sch_S$ be finitely presented, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of $S$-schemes with affine transition morphisms.\footnote{Note that the limit necessarily exists in $\Sch_S$ under these assumptions.} Then the natural map
+\begin{align*}
+    \colim_{i\in I}\Hom_S(T_i,X) \xto{\sim} \Hom_S(\lim_{i\in I}T_i,X)
+\end{align*}
+is a bijection. In other words the representable functor $\Hom_S(-,X)$ commutes with cofiltered limits with affine transition maps.
+\end{proposition}
+\begin{proof} Since $\Hom_S(-,X)$ is a Zariski sheaf, we can try to understand $\Hom_S(T,X)$ by writing $T$ as a colimit of affines, and then gluing what happens together along these affines. A priori it's not clear that an affine $U \subseteq T$ is expressible as an $I$-indexed colimit of affines $U_i \subseteq T_i$, but this is \emph{precisely} what having affine transition maps allows us to say by \Cref{prop:limits-affine-local-on-target}. Hence we can reduce to the case $T= \Spec(A)$ and $T_i = \Spec(A_i)$.
+
+We now want to argue we can reduce to $X$ affine. By \Cref{prop:fp-scheme-colimit-fp-affines} we can write $X$ as a colimit
+\begin{align*}
+    V_1 \rightrightarrows V_2 \to X,
+\end{align*}
+where $V_i$'s are finitely presented affine $S$-schemes. Since $\Hom_S(T,-)$ commutes with colimits, it suffices to check the statement on the $V_i$'s and then glue. Hence we can restrict to the case $X = \Spec(B)$, with $B$ a finitely presented algebra.
+
+We have therefore reduced to the case where we want to know whether $\Hom(-,\Spec(B))$ commutes with cofiltered limits, or phrased differently whether $\Hom(B,-)$ commutes with filtered colimits. But this is true precisely by the statement that $B$ is finitely presented.
+\end{proof}
+
+This is why finite presentation was important --- it is just a souped up version of the statement that finitely presented algebras are \emph{compact} in a categorical sense, i.e. they commute with filtered colimits.
+
+An important categorical remark is the following:
+
+\begin{proposition} Consider the category $\Sch^\qcqs_S$ of quasi-compact quasi-separated schemes over some arbitrary base. Let $\Sch_S^{\fp}$ denote the full subcategory of finitely presented $S$-schemes.
+\begin{enumerate}
+    \item The representable presheaf $h_X\in \PSh(\Sch^\qcqs_S)$ is compact
+    \item The collection of all $h_X$ over all $X\in \Sch_S^\fp$ forms a collection of compact generators.
+\end{enumerate}
+\end{proposition}
+\begin{proof} Let $\left\{ F_i \right\}_{i\in I}$ be a filtered diagram of presheaves with colimit $F$. We want to argue that
+\begin{align*}
+    \colim_i \Map_{\PSh}(h_X,F_i) \to \Map_{\PSh}(h_X,F)
+\end{align*}
+is an equivalence. By the Yoneda lemma, this is the statement that $\colim_i F_i(X) = F(X)$, which is clear since colimits of presheaves are computed pointwise. The fact that representables generate the presheaf category is the co-Yoneda lemma, so it suffices to argue why an arbitrary representable is approximable by representables at finitely presented opens. Since the Yoneda embedding sends limits to colimits, we just have to check that an arbitrary qcqs scheme can be written as a cofiltered limit of finitely presented schemes. This is \Cref{prop:every-scheme-cofiltered-limit-of-fp-schemes}.
+\end{proof}
+When we work with the entire category of schemes $\Sch_S$ I don't think this can be done, but this won't be an issue for us since we will always restrict to a nice category of schemes.
 
 \subsection{Descent, higher categorically}
 
@@ -1739,6 +2037,57 @@ simplicial objects in set-valued presheaves naturally give rise to $\infty$-cate
 \begin{warning} (c.f.~\cite[7.1.3.1]{HTT}) In the literature, we can find objects $X_\bullet$ of the form in \autoref{term:simplicial-object-in-sheaves} referred to as ``simplicial sheaves.'' This is overloaded terminology, and suggests that $\infty$-categorical sheaves are just those presheaves of simplicial sets which are levelwise sheaves of sets, an erroneous claim that can be found throughout the literature.
 \end{warning}
 
+\subsection{Continuity}
+
+Here's where our discussion about cofiltered limits of schemes comes back to play an important role.
+
+
+
+\begin{definition}\label{def:continuous-sheaf}
+Let $\tau$ be any Grothendieck topology on $\Sch_S$. We say that a sheaf $F\in \Shv_\tau(\Sch_S)$ is \emph{continuous} if, for any cofiltered limit of schemes $\left\{ T_i \right\}_{i\in I}$ in $\Sch_S$, with affine transition maps and limit $T$, the induced map
+\begin{align*}
+    F(T) \to \colim_i F(T_i)
+\end{align*}
+is an equivalence.
+\end{definition}
+
+We can ask when a sheaf topos is continuous, and for the basic ones we want to talk about in motivic homotopy theory (Zariski, Nisnevich, \'etale), they are. The fppf and fpqc sites are \emph{not} continuous! This is an important distinction, and it comes from the fact that the Zariski/Nisnevich/\'etale topologies are generated by finitely presented morphisms while fppf/fpqc are not. More precisely:
+
+\begin{theorem}\label{thm:zar-nis-etale-topoi-are-continuous} 
+The Zariski, Nisnevich, and \'etale sheaf topoi are continuous.
+\end{theorem}
+\begin{proof} Since every sheaf $F$ is the colimit of representables, we can reduce to the case of $F = h_X$, and since $X = \colim_i U_i$ is covered by affines and we are in the Zariski site or finer, we have that $h_X = \colim_i h_{U_i}$, so we can restrict to the case where $X$ is affine. Since Zariski open immersions valued in affines are finitely presented, and \'etale morphisms are finitely presented, we can find a cover of $X$ by finitely presented affine schemes $V_\alpha$, and then in the sheaf topos we have that $h_X = \colim h_{V_\alpha}$, so we can restrict to $X$ affine and finitely presented. Thus we just want to argue that the representable functor attached to a finitely presented affine scheme is continuous, and we already proved this in \Cref{prop:fp-scheme-commute-filtered-colimits}.
+\end{proof}
+
+
+% \subsection{Digression: $\Sigma$-presheaves aka radditive presheaves}
+
+% (Note: This section is a late addition, and may get moved around at some point down the line).
+
+% \begin{definition}
+% \label{def:radditive-presheaves} Let $\mathscr{C}$ be any small $\infty$-category with finite coproducts. We write
+% \begin{align*}
+%     \PSh_\Sigma(\mathscr{C}) \subseteq  \Fun \left( \mathscr{C}^\op, \mathcal{S} \right)
+% \end{align*}
+% to be full subcategory of those presheaves on $\mathscr{C}$ which send coproducts in $\mathscr{C}$ to products in $\mathcal{S}$. This is called the
+% \begin{enumerate}
+%     \item \textit{nonabelian derived $\infty$-category} of $\mathscr{C}$ \cite{bachmannNormsMotivicHomotopy2021} (although people very often call it the ``category of $\Sigma$-presheaves'' in conversation) 
+%     \item the category of \textit{radditive presheaves} in \cite{Voevodsky-radditive}
+%     \item the category of \textit{spherical presheaves} in e.g. \cite{pstragowskiModuliSpacesPrescribed2023}
+% \end{enumerate}
+% \end{definition}
+
+% \begin{example}[{\cite[2.4]{bachmannNormsMotivicHomotopy2021}}]
+% If $S$ is qcqs, then we have that
+% \begin{align*}
+%     \PSh_\Sigma(\Sm_S) \simeq \Sh_\amalg(\Sm_S),
+% \end{align*}
+% where $\amalg$ is shorthand for the disjoint union cd-structure.\footnote{More generally, this holds when $\Sm_S$ is replaced by any extensive $\infty$-category, see loc. cit.}
+% \end{example}
+
+
+
+
 \subsection{Slice categories}
 
 Recall if $\mathscr{C}$ is any ($\infty$-)category and $x\in \mathscr{C}$, we have the under and over categories $\mathscr{C}_{x/}$ and $\mathscr{C}_{/x}$, respectively. If $\ast\in \mathscr{C}$ is a terminal object, then it becomes both initial and terminal in $\mathscr{C}_{\ast/}$, that is, it is a zero object. We call a category with a zero object \textit{pointed}.
@@ -1908,7 +2257,7 @@ Let $\mathscr{C}$ be an $\infty$-topos. Then the following implications hold:
 The first implication is \cite[7.2.1.10]{HTT}, the latter is basically by definition. %\cite[A.7.2.3]{HTT}
 \end{proposition}
 
-\begin{question} In \Cref{prop:htpy-dim-Postnikov-complete-hypercomplete}, can we replace the notion of Postnikov complete with the definition from SGA? The latter implication is clearly fine, so we're asking -- if $\mathscr{C}$ has finite homotopy dimension, is it Postnikov complete in the sense of SGA?
+\begin{question} In \Cref{prop:htpy-dim-Postnikov-complete-hypercomplete}, can we replace the notion of Postnikov complete with the definition from SAG? The latter implication is clearly fine, so we're asking -- if $\mathscr{C}$ has finite homotopy dimension, is it Postnikov complete in the sense of SAG?
 \end{question}
 
 Our main use for the results above will be the following theorem of Voevodsky.
@@ -1971,7 +2320,7 @@ is a natural equivalence, which follows from the counit being a natural equivale
 \begin{align*}
     X_x^h := \lim_{(Y,y) \in \Hen_{X,x}} Y = \lim_{(Y,y) \in \Hen_{X,x}} Y_y
 \end{align*}
-See \cite[04GV]{Stacks}, or \cite[2.22]{Bachmann-K}.
+See \cite[04GV]{Stacks}, or \cite[2.22]{Bachmann-K}. This is the \emph{henselization} of $X$ at the point $x\in X$.
 \end{definition}
 
 \begin{notation} Denote by $\Sm_S \subseteq \Sch_S$ the full subcategory of smooth $S$-schemes. Here $S$ is still qcqs and Noetherian as assumed. We will restrict our attention here as it will be needed for upcoming results.
@@ -1979,10 +2328,49 @@ See \cite[04GV]{Stacks}, or \cite[2.22]{Bachmann-K}.
 
 \begin{definition} Let $f \colon F \to G$ be a map of presheaves in $\Pre(\Sm_S)$. Then we say $f$ is a \textit{stalkwise (Nisnevich) weak equivalence} if for every $X\in \Sm_S$ and every $x\in X$, the induced map
 \begin{align*}
-    \colim_{\Hen_{X,x}} F(Y) \to \colim_{\Hen_{X,x}} G(Y)
+    \colim_{Y\in \Hen_{X,x}} F(Y) \to \colim_{Y\in \Hen_{X,x}} G(Y)
 \end{align*}
 is an equivalence of spaces.
 \end{definition}
+
+If $F\in \Pre(\Sm_S)$ with $X\in\Sm_S$ and $x\in X$, the universal property of the limit forming the henselization induces a natural map
+\begin{align*}
+    \colim_{Y\in \Hen_{X,x}} F(Y) \to F(X_x^h).
+\end{align*}
+In general there is no reason to expect this to be an equivalence since $F$ is a presheaf and there's no reason to expect it to preserve these kinds of filtered colimits. One of the core ideas of sheaf theory is that for sheaves this \emph{is} an equivalence. Let's prove this.
+
+We first use the following helpful lemma.
+
+\begin{lemma} Let $\left\{ S_i \right\}_{i\in I}$ be a cofiltered diagram of schemes with affine transition maps. Then the limit $S = \lim S_i$ exists in $\Sch$, and induces an equivalence of categories
+\begin{align*}
+    \colim_i \Sch^{f.p.}_{S_i} \xto{\sim} \Sch^{f.p.}_S.
+\end{align*}
+\end{lemma}
+\begin{proof} When the diagram is a directed set, this is literally \cite[01ZM]{Stacks} and we refer to the proof there. For us it suffices then to argue how one gets the general cofiltered result from the directed result.
+\end{proof}
+
+
+
+
+\begin{theorem} Let $f \colon I \to \Sch;\ f(i) = T_i$ be a cofiltered diagram of schemes with \emph{affine} transitition maps. Then its limit $T = \colim_i T_i$ exists in $\Sch$, and the natural map
+\begin{align*}
+    \colim_{i\in I} F(T_i) \to F(T)
+\end{align*}
+is an equivalence for any Nisnevich sheaf $F\in \Shv_\Nis(\Sm_S)$. The key idea here is that every cofiltered diagram of schemes admits (affine-locally) a cofinal directed subdiagram.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+\begin{proposition} If $F\in\Pre(\Sm_S)$ is a Nisnevich sheaf, the 
+\end{proposition}
+
 
 \begin{warning} This is \textit{not} the same as saying that $F(X_x^h) \to G(X_x^h)$ is an equivalence.
 \end{warning}
@@ -2024,6 +2412,13 @@ What about classifying spaces $B_{\bullet}\mathcal{G}\in \Pre(\Sch_S)$? We would
 \begin{notation} If $\tau$ is a topology, we denote by $B_\tau \mathcal{G} := L_\tau B_\bullet \mathcal{G}$ the sheafification of the bar construction in the $\tau$ topology.
 \end{notation}
 
+\begin{example} We have that $B_\et \Sigma_n = \FEt_n$, where $\Sigma_n$ is the symmetric group on $n$ elements and $\FEt_n$ is the sheaf of \'etale schemes of degree $n$ over an input scheme.
+\end{example}
+\begin{proof} We first claim there is a natural map of presheaves $B\Sigma_n \to \FEt_n$. To see this, it is helpful to think of $B\Sigma_n = [\ast/\Sigma_n]$ as the constant presheaf valued at the one-object groupoid $\Sigma_n$. On some $U$, we have a map of groupoids $B\Sigma_n \to \FEt_n$ sending the point to $U^{\times n}$ and sending a morphism to the induced permutation action on $U^{\times n}$. We claim this is a local equivalence in the \'etale topos, i.e. it becomes an equivalence of sheaves after sheafifying. To verify this, it suffices to check it is a stalkwise equivalence
+\end{proof}
+
+
+
 \begin{example}
 For any $\mathcal{G}$, we have a stack of $\mathcal{G}$-torsors, which we denote by
 \begin{align*}
@@ -2059,6 +2454,15 @@ This is the result we've been hoping for. It tells us we can classify torsors in
 \end{example}
 \begin{proof} By \autoref{thm:BG-BTorsG} we have that $B_\tau \mathcal{G} \simeq B\Tors_\tau \mathcal{G}$, and the latter is a sheaf whose sections are exactly the nerves of discrete groupoids, and hence $K(\pi,1)$'s.
 \end{proof}
+
+
+% \subsection{Change of site}
+
+% todo:
+% \begin{itemize}
+%     \item explain $B_\et G$ and examples, including $\Et_\ast = B_\et \amalg_{n\ge0}B\Sigma_n$
+% \end{itemize}
+
 
 
 \section{Bonus: more category theory}
