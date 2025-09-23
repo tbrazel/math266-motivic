@@ -1797,8 +1797,11 @@ Finite presentation is important since it allows for an elegant commutativity wi
 
 \begin{proposition}[Limits are affine local on the target]
 \label{prop:limits-affine-local-on-target}
-If we have a cofiltered\footnote{Question: what goes wrong when this isn't cofiltered?} system $\left\{ T_i \right\}_{i\in I}$ of $S$-schemes with affine transition maps, then $\lim_i T_i =: T$ exists in $\Sch_S$. Moreover, any affine open $U \subseteq T$ ``comes from'' a $T_i$ in the sense that there exists some $i\in I$ and some affine open $U_i \subseteq T_i$ for which $U_i = \lim_{j\ge i} U_i \times_{T_i}T_j$.
+If we have a cofiltered system $\left\{ T_i \right\}_{i\in I}$ of $S$-schemes with affine transition maps, then $\lim_i T_i =: T$ exists in $\Sch_S$. Moreover, any affine open $U \subseteq T$ ``comes from'' a $T_i$ in the sense that there exists some $i\in I$ and some affine open $U_i \subseteq T_i$ for which $U_i = \lim_{j\ge i} U_i \times_{T_i}T_j$.
 \end{proposition}
+\begin{proof} Existence is \cite[01YW]{Stacks}, and the limit characterization of $U_i$ is \cite[01YZ]{Stacks}.
+\end{proof}
+
 
 It's important to remember in \Cref{prop:limits-affine-local-on-target} that when we write an affine open $U \subseteq T$ as a limit, it is \emph{still cofiltered} since it is indexed over the same category $I$ and the new transition maps $U_i \to U_j$ are of course still affine.
 
@@ -1811,7 +1814,7 @@ Every qcqs scheme $X\in \Sch_S$ is a cofiltered limit of finitely presented $S$-
 
 
 \begin{proposition}\label{prop:fp-scheme-commute-filtered-colimits}
-Let $X\in\Sch_S$ be finitely presented, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of $S$-schemes with affine transition morphisms.\footnote{Note that the limit necessarily exists in $\Sch_S$ under these assumptions.} Then the natural map
+Let $X\in\Sch_S$ be finitely presented, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of $S$-schemes with affine transition morphisms. Then the natural map
 \begin{align*}
     \colim_{i\in I}\Hom_S(T_i,X) \xto{\sim} \Hom_S(\lim_{i\in I}T_i,X)
 \end{align*}
@@ -1830,21 +1833,21 @@ We have therefore reduced to the case where we want to know whether $\Hom(-,\Spe
 
 This is why finite presentation was important --- it is just a souped up version of the statement that finitely presented algebras are \emph{compact} in a categorical sense, i.e. they commute with filtered colimits.
 
-An important categorical remark is the following:
+% An important categorical remark is the following:
 
-\begin{proposition} Consider the category $\Sch^\qcqs_S$ of quasi-compact quasi-separated schemes over some arbitrary base. Let $\Sch_S^{\fp}$ denote the full subcategory of finitely presented $S$-schemes.
-\begin{enumerate}
-    \item The representable presheaf $h_X\in \PSh(\Sch^\qcqs_S)$ is compact
-    \item The collection of all $h_X$ over all $X\in \Sch_S^\fp$ forms a collection of compact generators.
-\end{enumerate}
-\end{proposition}
-\begin{proof} Let $\left\{ F_i \right\}_{i\in I}$ be a filtered diagram of presheaves with colimit $F$. We want to argue that
-\begin{align*}
-    \colim_i \Map_{\PSh}(h_X,F_i) \to \Map_{\PSh}(h_X,F)
-\end{align*}
-is an equivalence. By the Yoneda lemma, this is the statement that $\colim_i F_i(X) = F(X)$, which is clear since colimits of presheaves are computed pointwise. The fact that representables generate the presheaf category is the co-Yoneda lemma, so it suffices to argue why an arbitrary representable is approximable by representables at finitely presented opens. Since the Yoneda embedding sends limits to colimits, we just have to check that an arbitrary qcqs scheme can be written as a cofiltered limit of finitely presented schemes. This is \Cref{prop:every-scheme-cofiltered-limit-of-fp-schemes}.
-\end{proof}
-When we work with the entire category of schemes $\Sch_S$ I don't think this can be done, but this won't be an issue for us since we will always restrict to a nice category of schemes.
+% \begin{proposition} Consider the category $\Sch^\qcqs_S$ of quasi-compact quasi-separated schemes over some arbitrary base. Let $\Sch_S^{\fp}$ denote the full subcategory of finitely presented $S$-schemes.
+% \begin{enumerate}
+%     \item The representable presheaf $h_X\in \PSh(\Sch^\qcqs_S)$ is compact
+%     \item The collection of all $h_X$ over all $X\in \Sch_S^\fp$ forms a collection of compact generators.
+% \end{enumerate}
+% \end{proposition}
+% \begin{proof} Let $\left\{ F_i \right\}_{i\in I}$ be a filtered diagram of presheaves with colimit $F$. We want to argue that
+% \begin{align*}
+%     \colim_i \Map_{\PSh}(h_X,F_i) \to \Map_{\PSh}(h_X,F)
+% \end{align*}
+% is an equivalence. By the Yoneda lemma, this is the statement that $\colim_i F_i(X) = F(X)$, which is clear since colimits of presheaves are computed pointwise. The fact that representables generate the presheaf category is the co-Yoneda lemma, so it suffices to argue why an arbitrary representable is approximable by representables at finitely presented opens. Since the Yoneda embedding sends limits to colimits, we just have to check that an arbitrary qcqs scheme can be written as a cofiltered limit of finitely presented schemes. This is \Cref{prop:every-scheme-cofiltered-limit-of-fp-schemes}.
+% \end{proof}
+% When we work with the entire category of schemes $\Sch_S$ I don't think this can be done, but this won't be an issue for us since we will always restrict to a nice category of schemes.
 
 \subsection{Descent, higher categorically}
 
