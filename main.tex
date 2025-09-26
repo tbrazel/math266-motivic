@@ -43,6 +43,7 @@
 \providecommand{\aff}{\mathrm{aff}}
 \providecommand{\HA}{\mathrm{HA}}
 \providecommand{\cn}{\mathrm{cn}}
+\providecommand{\FEt}{\mathrm{FEt}}
 
 \let\smashprod\wedge
 
@@ -1105,6 +1106,42 @@ A pair of a category and a topology $(\mathscr{C},\tau)$ is called a \textit{sit
 \begin{remark} The \textit{Nisnevich topology} first appeared in work of Nisnevich, where it was called the ``completely decomposed topology'' \cite{Nis80}, and then appeared in work of Kato and Saito \cite{KS-Global} where it was referred to as the ``henselian topology.''
 \end{remark}
 
+Here's the key property of Nisnevich covers we will use. We'll first do it in the affine case then in the general case.
+
+\begin{proposition}[{\cite[B.4.4.5]{SAG}}]
+\label{prop:Nis-cover-surj-on-sections-affine}
+Let $\Spec(R)$ be affine, and let $\left\{ \phi_\alpha \colon \Spec(R_\alpha) \to \Spec(R) \right\}_{\alpha}$ be a Nisnevich cover. Then $R$ is henselian if and only one of the $\phi_\alpha$ admits a left inverse.
+\end{proposition}
+
+So we have a commutative diagram
+\[ \begin{tikzcd}
+    \Spec(R)\rar\ar[dr,equal] & \Spec(R_\alpha)\dar\\
+     & \Spec(R).
+\end{tikzcd} \]
+%
+Since $\Spec(R_\alpha) \to \Spec(R)$ is \'etale, it implies that $R_\alpha$ decomposes as a product $R_\alpha \cong R \times S_\alpha$ for some ring $S_\alpha$. Hence the section considers our base $\Spec(R)$ as a clopen component of that cover $\Spec(R_\alpha)$. What happens with the sheaf condition? We have
+\begin{align*}
+    F(R) \to \lim \left( F(\prod R_\alpha) \rightrightarrows F(\prod R_\alpha \otimes_R R_\beta) \rightrightarrows \cdots \right)
+\end{align*}
+
+
+\begin{proposition}[{\cite[p.~95]{MV}}]
+\label{prop:Nis-cover-surj-on-sections}
+If $X$ is a finite type $S$-scheme, and $\left\{ U_i \to X \right\}_i$ is a Nisnevich cover, then for any closed point $x\in X$, consider the pullback along the inclusion from the Henselization:
+\[ \begin{tikzcd}
+    \amalg_i U_i \times_X \Spec(\mathcal{O}_{X,x}^h)\dar["\phi_x" left]\rar\pb  & \amalg_i U_i\dar\\
+    \Spec(\mathcal{O}_{X,x}^h)\rar & X.
+\end{tikzcd} \]
+Then $\phi_x$ admits a section.
+\end{proposition}
+\begin{proof} The pullback of a Nisnevich cover is still a cover, so
+\begin{align*}
+    \amalg_i U_i \times_X \Spec(\mathcal{O}_{X,x}^h) \to \Spec(\mathcal{O}_{X,x}^h)
+\end{align*}
+is a Nisnevich cover. We can refine this to an affine cover, after which we can apply \Cref{prop:Nis-cover-surj-on-sections-affine}.
+\end{proof}
+
+
 
 \begin{note} If $R\to S$ is an \'etale ring extension, then $\Spec(S) \to \Spec(R)$ is an \'etale cover but not necessarily a Nisnevich cover. For example $\Spec(L) \to \Spec(k)$ is \'etale if $L/k$ is a finite separable extension, but not Nisnevich unless $k=L$.
 \end{note}
@@ -1640,7 +1677,23 @@ In general we cannot truncate in order to obtain an $\infty$-cofinal diagram. We
 \begin{lemma} \cite[6.5.3.7]{HTT} The inclusion $\DDelta^{\inj,\op} \subseteq \DDelta$ is cofinal.
 \end{lemma}
 
+A \emph{crucial} fact we will use is the following:
+\begin{lemma}[Split augmented cosimplicial object lemma]
+\label{lem:delta-augmented-split-limit} 
+Let $F \colon \DDelta\to \mathscr{C}$ be a $\DDelta$-indexed diagram in an arbitrary $\infty$-category $\mathscr{C}$, and let $X\in \mathscr{C}$ be the vertex of a cone over $F$. Then $X$ is a limiting cone if and only if the map $X \to F(0)$ admits a retract.
+\end{lemma}
 
+We will also need the following result about simplicial spaces (recall $\tau_{\le n}$ is the $n$-truncation functor on topological spaces):
+
+\begin{lemma}[Coskeleton lemma]
+\label{lem:coskeleton-lemma}
+Let $X_\bullet$ be a simplicial space. Then its truncation can be computed as
+\begin{align*}
+    \tau_{\le n} \lim_{\DDelta} X_\bullet = \lim_{\DDelta_{\le (n+1)}} \tau_{\le n} X_\bullet.
+\end{align*}
+\end{lemma}
+\begin{proof} This is \cite[6.5.3.9]{HTT}.
+\end{proof}
 
 \begin{definition} An $\infty$-category $\mathscr{C}$ is \textit{sifted} if the diagonal map $\mathscr{C} \to \mathscr{C} \times \mathscr{C}$ is cofinal \cite[5.5.8.1]{HTT}.
 \end{definition}
@@ -2062,64 +2115,133 @@ The Zariski, Nisnevich, and \'etale sheaf topoi are continuous.
 \begin{proof} Since every sheaf $F$ is the colimit of representables, we can reduce to the case of $F = h_X$, and since $X = \colim_i U_i$ is covered by affines and we are in the Zariski site or finer, we have that $h_X = \colim_i h_{U_i}$, so we can restrict to the case where $X$ is affine. Since Zariski open immersions valued in affines are finitely presented, and \'etale morphisms are finitely presented, we can find a cover of $X$ by finitely presented affine schemes $V_\alpha$, and then in the sheaf topos we have that $h_X = \colim h_{V_\alpha}$, so we can restrict to $X$ affine and finitely presented. Thus we just want to argue that the representable functor attached to a finitely presented affine scheme is continuous, and we already proved this in \Cref{prop:fp-scheme-commute-filtered-colimits}.
 \end{proof}
 
+We'll do a core example:
 
-% \subsection{Digression: $\Sigma$-presheaves aka radditive presheaves}
-
-% (Note: This section is a late addition, and may get moved around at some point down the line).
-
-% \begin{definition}
-% \label{def:radditive-presheaves} Let $\mathscr{C}$ be any small $\infty$-category with finite coproducts. We write
-% \begin{align*}
-%     \PSh_\Sigma(\mathscr{C}) \subseteq  \Fun \left( \mathscr{C}^\op, \mathcal{S} \right)
-% \end{align*}
-% to be full subcategory of those presheaves on $\mathscr{C}$ which send coproducts in $\mathscr{C}$ to products in $\mathcal{S}$. This is called the
-% \begin{enumerate}
-%     \item \textit{nonabelian derived $\infty$-category} of $\mathscr{C}$ \cite{bachmannNormsMotivicHomotopy2021} (although people very often call it the ``category of $\Sigma$-presheaves'' in conversation) 
-%     \item the category of \textit{radditive presheaves} in \cite{Voevodsky-radditive}
-%     \item the category of \textit{spherical presheaves} in e.g. \cite{pstragowskiModuliSpacesPrescribed2023}
-% \end{enumerate}
-% \end{definition}
-
-% \begin{example}[{\cite[2.4]{bachmannNormsMotivicHomotopy2021}}]
-% If $S$ is qcqs, then we have that
-% \begin{align*}
-%     \PSh_\Sigma(\Sm_S) \simeq \Sh_\amalg(\Sm_S),
-% \end{align*}
-% where $\amalg$ is shorthand for the disjoint union cd-structure.\footnote{More generally, this holds when $\Sm_S$ is replaced by any extensive $\infty$-category, see loc. cit.}
-% \end{example}
-
-
-
-
-\subsection{Slice categories}
-
-Recall if $\mathscr{C}$ is any ($\infty$-)category and $x\in \mathscr{C}$, we have the under and over categories $\mathscr{C}_{x/}$ and $\mathscr{C}_{/x}$, respectively. If $\ast\in \mathscr{C}$ is a terminal object, then it becomes both initial and terminal in $\mathscr{C}_{\ast/}$, that is, it is a zero object. We call a category with a zero object \textit{pointed}.
-
-\begin{proposition} We have that $\Delta^0 \in \mathcal{S}$, viewed as a constant sheaf, is terminal in the sheaf topos $\Shv_\tau(\mathscr{C})$ for any site.
-\end{proposition}
-\begin{proof}
-The inclusion $\Sh_\tau(\mathscr{C}) \subseteq \PSh(\mathscr{C})$ will preserve terminal objects, being a limit over an empty diagram, so it suffices to observe that the constant presheaf $\Delta^0$ is already a sheaf.
-\end{proof}
-
-\begin{proposition}\label{prop:terminal-object-sheaves} 
-Let $h_S \in \PSh(\Sm_S)$ denote the representable sheaf attached to the base. Then the map $h_S \xto{!} \Delta^0$ of presheaves is a \emph{local equivalence}, i.e. it sheafifies to an equivalence.
-\end{proposition}
-\begin{proof} It suffices to observe that the presheaves are identical, which is true because for any $U\in \Sm_S$, we have that $h_S(U) = \Hom_S(U,S)$, which is a one-object set consisting of the structure map (since $S$ is terminal in $\Sm_S$).
-\end{proof}
-
-\begin{notation} We denote by $\Shv_\tau(\mathscr{C})_\ast := \Shv_\tau(\mathscr{C})_{\Delta^0/}$ the pointed slice category. An object here is a map of sheaves $\Delta^0 \to F$, which we observe is equivalent to picking a basepoint in $F(U)$ for every $U \in \mathscr{C}$. Hence we can think of these as sheaves of \textit{pointed} spaces.
+\begin{notation}\label{nota:HenXx} 
+For any scheme $x\in X$, we denote by $\Hen_{X,x}$ the category of $f \colon (Y,y) \to (X,x)$ where $f \colon Y \to X$ is \'etale, $f(y) = x$, and $f$ induces an isomorphism $k(x) \xto{\sim} k(y)$.
 \end{notation}
 
-\subsection{Connectivity}
+\begin{proposition}\label{prop:HenXx-cofiltered} For any scheme $X$ and any point $x\in X$:
+\begin{enumerate}
+    \item $\Hen_{X,x}$ is cofiltered
+    \item If we let $\Hen_{X,x}^\aff \subseteq \Hen_{X,x}$ denote the full subcategory of those $(Y,y)$ for which $Y$ is affine, we have that $\Hen_{X,x}^\aff$ is cofinal and cofiltered.
+    \item The limit of $\Hen_{X,x}^\aff$ and $\Hen_{X,x}$ agree when computed in schemes.
+\end{enumerate}
+\end{proposition}
+\begin{proof} A proof of cofilteredness in the affine setting is in \cite[04GV]{Stacks}. Cofinality follows by the fact that if $Y \to X$ is \'etale, any affine open $U \subseteq Y$ is still \'etale over $X$, so we can restrict to affines by gluing. The limit statement does \emph{not} follow by cofinality since cofinality concerns colimits; it instead follows from the fact that Henselization can be computed on $\Spec(\mathcal{O}_{X,x})$, so we can restrict to affines if we like.
+\end{proof}
 
 
-
-\begin{definition} Let $(X,x)\in\Shv_\tau(\mathscr{C})_\ast$ and $n\ge0$. Then we denote by $\pi_n(X,x)$ the $n$th \textit{homotopy sheaf}, defined to be the $\tau$-sheafification of the presheaf of sets
+\begin{definition}\label{def:henselization} For any $x\in X$, we denote by $X_x^h$ the limit
 \begin{align*}
-    \mathscr{C}^\op &\to \Set \\
-    U &\mapsto \pi_n(X(U),x).
+    X_x^h = \lim_{(Y,y)\in \Hen_{X,x}} Y.
 \end{align*}
+% This limit exists by \Cref{prop:limits-affine-local-on-target} and \Cref{prop:HenXx-cofiltered}.
 \end{definition}
+
+\begin{proposition}\label{prop:Nis-scheme-conts-henselization} Let $F$ be a Nisnevich sheaf, let $X$ be a scheme, and let $x\in X$. Then the natural map
+\begin{align*}
+    \colim_{(Y,y)\in \Hen_{X,x}} F(Y) \to F(X_x^h)
+\end{align*}
+is an equivalence.
+\end{proposition}
+\begin{proof} Since we are now taking a \emph{colimit} indexed over $\Hen_{X,x}$, it suffices to restrict to $\Hen_{X,x}^\aff$ by cofinality (\Cref{prop:HenXx-cofiltered}). Now we are asking about a colimit of values on a sheaf indexed over $\Hen_{X,x}^\aff$. This category is cofiltered, and the transition maps are now affine (since we're now only looking at affine schemes). Hence this becomes a corollary of continuity in the Nisnevich site (\Cref{thm:zar-nis-etale-topoi-are-continuous}).
+\end{proof}
+
+This becomes helpful when we discuss equivalences of sheaves and presheaves --- however we don't exactly know what kind of equivalence we want to study quite yet. 
+
+\subsection{Nisnevich descent}
+
+Here we want to pause and establish some core properties that help us understand when a presheaf satisfies descent for the Nisnevich topology.
+
+\begin{proposition} Let $\left\{ U_i \to \Spec(R) \right\}$ be a Nisnevich cover, where $R$ is Henselian local. Then this refines to a one-object cover $\left\{ U_{i_0}\to \Spec(R) \right\}$, and \emph{every} presheaf satisfies Nisnevich descent along this cover.
+\end{proposition}
+So presheaves automatically satisfy descent along \emph{refinements} of covers over henselian local schemes. They don't need to satisfy descent for the original cover because there's no reason to expect that their value on $\amalg_i U_i$ is built out of their values on the $U_i$'s individually --- in other words, we don't know whether they are product-preserving.
+
+\begin{proposition} Let $\left\{ U_i \to \Spec(R) \right\}$ be a Nisnevich cover, where $R$ is Henselian local. Then every $\Sigma$-presheaf satisfies Nisnevich descent with respect to this cover.
+\end{proposition}
+
+So in general we want to understand henselian local objects. The following proposition is crucially important, since it indicates very roughly that Nisnevich sheaves of sets are \emph{determined} by their values on henselian local schemes.
+
+\begin{proposition} Let $X\in\Sch_S$ and let $F\in \Shv_\Nis(\Sch_S)_{\le0}$ be a Nisnevich sheaf of sets. Then the inclusions of henselian local neighborhods induce a map
+\begin{align*}
+    F(X) \to \prod_{x\in X}F(X_x^h).
+\end{align*}
+This is injective, and its image are those germs $(s_x)_{x\in X}$ for which:
+\begin{itemize}
+    \item if $y$ specializes to $x$ then $s_y = f^\ast s_x$ where $f \colon \mathcal{O}_{X,x}^h \to \mathcal{O}_{X,y}^h$
+    \item for each $x\in X$ there is an \'etale neighborhood $U \to X$ and $t\in F(U)$ restricting to $(s_x)_{x\in U}$.
+\end{itemize}
+\end{proposition}
+
+\begin{corollary}\label{cor:morphism-nis-sheaves-of-sets-determined-by-henselian-local-schemes} 
+Let $f \colon F \to G$ be a morphism between Nisnevich sheaves of sets. Then $f$ is an isomorphism if and only if the induced maps
+\begin{align*}
+    F(X_x^h) \to G(X_x^h)
+\end{align*}
+are natural bijections for every scheme $X$ and every point $x\in X$.
+\end{corollary}
+
+We're sweeping something under the rug, namely that there are \emph{enough} geometric points in the Nisnevich topology to carry out these types of arguments. This holds though.
+
+\subsection{Homotopy sheaves}
+
+Let's recall that an equivalence between (pre)sheaves of spaces is checked levelwise. What this means is that if $f \colon F \to G$ is a map of (pre)sheaves, it is an equivalence if and only if for every $U$, the induced map $F(U) \to G(U)$ is an equivalence of spaces. We are working with a nice model for spaces (e.g. one in which Whitehead's theorem holds and each space is approximated by a CW complex), so this is equivalent to checking $\pi_n(F(U)) \to \pi_n(G(U))$ is an abelian group isomorphism for every $U$.\footnote{There's a subtlety here we'll see soon.} We need to pick a basepoint compatibly in $F(U)$ for every $U$, so let's first make this definition:
+
+\begin{definition} Let $\Delta^0\in \Sh_\tau(\Sm_S)$ denote the sheafification of the constant presheaf at the one-point space.\footnote{One can check that $\Delta^0$ is isomorphic to $h_S$.} This is terminal in $\Sh_\tau(\Sm_S)$, and we denote by
+\begin{align*}
+    \Sh_\tau(\Sch_S)_\ast = \Sh_\tau(\Sch_S)_{\Delta^0 /}
+\end{align*}
+the slice category under $\Delta^0$.
+\end{definition}
+
+
+
+\begin{definition}\label{def:homotopy-sheaf}
+For a pointed presheaf $F\in \PSh(\Sm_S)_{\Delta^0 /}$, we define $\pi_n(F)\in \Sh_\tau(\Sm_S)_{\Delta^0 /,\ \le 0}$ to be the sheaf of sets defined by the presheaf
+\begin{equation}\label{eqn:homotopy-group-presheaf}
+\begin{aligned}
+    U \mapsto \pi_n(F(U),x),
+\end{aligned}
+\end{equation}
+where $x \colon \Delta^0 \to F(U)$ is our given basepoint.
+\end{definition}
+
+\begin{proposition}\label{prop:htpy-sheaf-of-sheaf-is-sheaf} If $F$ is a sheaf of spaces, then the homotopy presheaf defined by \Cref{eqn:homotopy-group-presheaf} is already a sheaf of sets.
+\end{proposition}
+\begin{proof} It's not true that homotopy groups $\pi_n$ preserve infinite limits, but they do preserve finite ones, so it would be great if we could truncate the $\DDelta$-indexed diagram
+\begin{align*}
+    F(U) \xto{\sim} \lim_{\DDelta} \left( F(\amalg U_i) \rightrightarrows F(\amalg U_{ij}) \rightrightarrows \cdots  \right).
+\end{align*}
+However note that $\pi_n$ of a space only depends on its $n$-truncation! So we can truncate all the spaces, and use the coskeleton lemma \Cref{lem:coskeleton-lemma} to truncate the diagram. This gives
+\begin{align*}
+    \tau_{\le n} F(U) \xto{\sim} \lim_{\DDelta_{\le (n+1)}} \tau_{\le n} F(U_\ast).
+\end{align*}
+We now have that $\pi_n$ preserves this limit.
+\end{proof}
+
+Let's check some other properties of $\pi_n$. We first need some notation:
+\begin{notation} If $\mathscr{C}$ is any pointed $\infty$-category admitting limits, and $X\in \mathscr{C}$, we denote by $\Omega X$ its \textit{loop space}, defined as the pullback
+\[ \begin{tikzcd}
+    \Omega X\rar\dar\pb & \ast\dar\\
+    \ast\rar & X.
+\end{tikzcd} \]
+\end{notation}
+
+\begin{proposition}\label{prop:properties-of-pi-n-sheaf} \,
+\begin{enumerate}
+    \item\label{loops-on-sheaf}
+    For any pointed sheaf $(F,x)$, we have that
+    \begin{align*}
+        \pi_n(F,x) = \pi_0(\Omega^n(F,x))
+    \end{align*}
+    where $\Omega$ denotes the loop space in the sheaf topos.
+    \item\label{pi-n-sheaf-of-groups}
+    $\pi_1$ is a sheaf of groups, and $\pi_n$ is a sheaf of abelian groups for $n\ge 2$.
+\end{enumerate}
+\end{proposition}
+\begin{proof} For (\ref{loops-on-sheaf}) we recall that $\Omega$ is a colimit, hence computed sectionwise. Thus $(\Omega F)(U) = \Omega F(U)$, so the proof reduces to the compatibility between loops and homotopy groups in spaces. Then (\ref{pi-n-sheaf-of-groups}) follows immediately.
+\end{proof}
 
 \begin{remark} There is a more intrinsic definition of $\pi_n$, leveraging that an $\infty$-topos is cotensored over spaces,\footnote{%
 This means that for any $F \in \Shv_\tau(\Sch_S)$ and any $X \in \sSet$, we have a natural object $F^X\in \Shv_\tau(\Sch_S)$ with natural equivalences of mapping spaces
@@ -2129,45 +2251,6 @@ This means that for any $F \in \Shv_\tau(\Sch_S)$ and any $X \in \sSet$, we have
 }
 and considering the map $X^{S^n} \to X$ in the slice topos $\Shv_{/X}$, and defining $\pi_n$ to be its 0-truncation.
 \end{remark}
-
-
-\begin{proposition} We have that
-\begin{enumerate}
-    \item $\pi_0$ is a sheaf of sets
-    \item $\pi_1$ is a sheaf of groups
-    \item $\pi_n$ is a sheaf of abelian groups for $n\ge 2$.
-\end{enumerate}
-\end{proposition}
-
-\begin{notation} If $\mathscr{C}$ is any pointed $\infty$-category admitting limits, and $X\in \mathscr{C}$, we denote by $\Omega X$ its \textit{loop space}, defined as the pullback
-\[ \begin{tikzcd}
-    \Omega X\rar\dar\pb & \ast\dar\\
-    \ast\rar & X.
-\end{tikzcd} \]
-\end{notation}
-
-The loop space interacts with the homotopy groups in a topos in the way we might expect from topology:
-
-\begin{proposition}\label{prop:pi-n-loops} 
-If $\mathscr{C}$ is an $\infty$-topos and $(X,x) \in \mathscr{C}_\ast$, then
-\begin{align*}
-    \pi_n(X,x) = \pi_0 (\Omega^n (X,x)).
-\end{align*}
-\end{proposition}
-\begin{proof} (reference needed)
-\end{proof}
-
-
-
-
-\begin{example} Let $\mathscr{F} \colon \Sm_S^\op \to \Set$ be any sheaf of sets, groups, abelian groups, etc. Then
-\begin{align*}
-    \pi_n(\mathscr{F}) = \begin{cases} \mathscr{F} & n=0 \\ \ast & n>0. \end{cases}
-\end{align*}
-\end{example}
-\begin{proof} It suffices to observe that the presheaf $\pi_n \mathscr{F}$ is identical to the constant presheaf sheaf $\Delta^0$ since $\mathscr{F}(U)$ has no higher homotopy for each $U \in \Sm_S$.
-\end{proof}
-
 
 \begin{definition} \cite[6.5.1.10]{HTT} Let $\mathscr{C}$ be an $\infty$-topos, and take $X\in \mathscr{C}$.
 \begin{enumerate}
@@ -2195,8 +2278,32 @@ For any presentable $\infty$-category, we denote by $\mathscr{C}_{\le n}$ or $\t
 \begin{notation} We write $\Ab(\Sh_\tau(\mathscr{C})_{\le 0})$ for the sheaves of abelian groups.
 \end{notation}
 
-\subsection{Whitehead's theorem}
+\subsection{Whitehead's theorem and hypercompleteness}
 
+\begin{question} Suppose we have some map of sheaves $f \colon F \to G$, and we know that $f \colon \pi_n(F) \to \pi_n(G)$ is an equivalence of sheaves (of sets) for each $n\ge 0$. Does this imply $f$ is an equivalence in the sheaf topos?
+\end{question}
+
+The answer is \emph{not necessarily}! This is the subtlety in \emph{hypercompleteness}. Let's put some definitions down.
+
+\begin{definition}\label{def:infty-connective} A map of sheaves $f \colon F \to G$ is $\infty$-\emph{connective} if $f_n \colon \pi_n(F,x) \to \pi_n(G,f(x))$ is an equivalence of sheaves for every $n$ and every basepoint.
+\end{definition}
+
+\begin{proposition}[$\infty$-connective=stalkwise]
+\label{prop:infty-connective-is-stalkwise}
+Let $f \colon F \to G$ be a map of sheaves in the Nisnevich topos $\Shv_\Nis(\Sch_S)$ over some arbitrary base. Then the following are equivalent:
+\begin{enumerate}
+    \item $f$ is $\infty$-connective
+    \item $f_x \colon F(X_x^h) \to G(X_x^h)$ is an equivalence of spaces for every $X\in \Sch_S$ and every $x\in X$.
+\end{enumerate}
+\end{proposition}
+\begin{proof} Checking $\infty$-connectivity is equivalent to checking equivalence on homotopy sheaves. Since we have enough points, this can be done at the level of henselian local schemes by \Cref{cor:morphism-nis-sheaves-of-sets-determined-by-henselian-local-schemes}.
+\end{proof}
+
+
+
+
+
+Recall the following result from topology:
 \begin{theorem}[Whitehead's theorem]
 Let $f \colon X \to Y$ be a map of CW complexes. Then $f$ is a homotopy equivalence if and only if $f \colon \pi_i(X) \to \pi_i(Y)$ is an isomorphism for each $i\ge0$.
 \end{theorem}
@@ -2206,20 +2313,11 @@ A way to say this is that ``$\infty$-connective morphisms are homotopy equivalen
 \begin{definition}
 An $\infty$-topos is \textit{hypercomplete} if and only if every object is $\infty$-connective.
 \end{definition}
-
 \begin{warning} The \'etale topos $\Shv_\et(\Sm_S)$ need not be hypercomplete, even for nice $S$ (reference needed).
 \end{warning}
 
 \begin{upshot} In a hypercomplete topos, equivalences can be checked on homotopy sheaves.
 \end{upshot}
-
-\begin{corollary}\label{cor:equivalence-in-hypercomplete-topos} 
-Let $F \to G$ be a map in the sheaf topos $\Shv_\Nis(\Sch_S)$ (or any hypercomplete topos) where $S$ is qcqs and Noetherian. Then the following are equivalent:
-\begin{enumerate}
-    \item The map $F \to G$ is an equivalence in $\Shv_\Nis(\Sm_S)$
-    \item The induced maps $\pi_n(F) \to \pi_n(G)$ are isomorphisms for every $n\ge 0$.
-\end{enumerate}
-\end{corollary}
 
 We have two more notions we want to define -- the idea of \textit{homotopy dimension} and that of \textit{Postnikov completeness}.
 
@@ -2265,133 +2363,73 @@ The first implication is \cite[7.2.1.10]{HTT}, the latter is basically by defini
 
 Our main use for the results above will be the following theorem of Voevodsky.
 
-\begin{theorem} (Voevodsky) If $S$ is qcqs and Noetherian, then the homotopy dimension of $\Shv_\Nis(\Sm_S)$ is bounded above by $\dim(S)$. In particular this implies that Postnikov towers converge, and we have hypercompleteness.
+\begin{theorem}[{\cite[2.27]{voevodskyHomotopyTheorySimplicial2010}}] If $S$ is qcqs and Noetherian, then the homotopy dimension of $\Shv_\Nis(\Sm_S)$ is bounded above by $\dim(S)$. In particular this implies that Postnikov towers converge, and we have hypercompleteness.
 \end{theorem}
 
-Hence in our main setting, Nisnevich sheaves over a field, we can carry out obstruction theory arguments!
+This now means we can work in a hypercomplete topos without worry, and we can detect equivalences stalkwise!
 
-
-\subsection{Equivalences of sheaves and presheaves}
-
-\begin{notation} For $F,G \in \Shv_\tau(\Sch_S)$, we denote by 
-\begin{align*}
-    \left[ F,G \right]_\tau := \pi_0 \Map_{\Shv_\tau(\Sch_S)}(F,G).
-\end{align*}
-\end{notation}
-
-\begin{remark} If $F,G$ are presheaves, then their mapping space in presheaves and the mapping space of their associated sheafifications are quite different. We notice that if $G$ is already a sheaf, then the unit $G \to i L_\Nis G$ is an equivalence, inducing an equivalence of mapping spaces
-\begin{align*}
-    \Map_{\Pre(\Sch_S)}(F,G) \cong \Map_{\Pre(\Sch_S)}(F, i L_\Nis G) \cong \Map_{\Shv_\tau(\Sch_S)}(L_\Nis F, L_\Nis G).
-\end{align*}
-We think of this as a higher categorical analogue of the universal property of sheafification: that a map from a presheaf to a sheaf factors uniquely through its sheafification.
+\begin{remark} Prior to Voevodsky's work, there were a few competing model structures on simplicial presheaves, in particular the projective and the ``local'' model structure. The projective one checked weak equivalences levelwise (we might think about it as a model structure for the $\infty$-topos) and the local model structure had stalkwise weak equivalences (a model structure for the hypercompletion of the $\infty$-topos). The theorem above, in model category language, is a Quillen equivalence between these model structures.
 \end{remark}
 
-Recall that if $f\colon F \to G$ is a map in $\Pre(\Sch_S)$, then it is an equivalence if and only if $F(U) \to G(U)$ is an equivalence of spaces for each $U \in \Sch_S$, also called a \textit{sectionwise equivalence}. If $f\colon F \to G$ is an equivalence, then so is the associated map after sheafification. The converse doesn't hold though, since different presheaves can admit the same sheafification. To that end, we introduce a new notion.
+\subsection{Local equivalences}
 
-\begin{definition} Let $F,G\in \Pre(\Sch_S)$ be presheaves, and let $f \colon F \to G$ be a map of presheaves. We say that $f$ is a \textit{local equivalence} if
+What is the big advantage in passing from sectionwise to stalkwise equivalences? It is because while sheafification is not in general a sectionwise equivalence, it \emph{is} a stalkwise equivalence! So we often don't even need to sheafify, we can just work with the presheaves, which is often much easier. To that end, let's give the following definition, which first appeared in different machinery in the \emph{local model structure} of Jardine and Voevodsky. We always work in the Nisnevich topology over a qcqs Noetherian base scheme $S$.
+
+\begin{definition}\label{def:local-equivalence}
+ Let $F,G\in \Pre(\Sch_S)$ be presheaves, and let $f \colon F \to G$ be a map of presheaves. We say that $f$ is a \textit{local equivalence} if
 \begin{align*}
     L_\Nis (f) \colon L_\Nis F \to L_\Nis G
 \end{align*}
 is an equivalence of sheaves.
 \end{definition}
 
-\begin{example}\label{exa:sheafification-local-equivalence}
-The unit of the sheafification adjunction $L_\Nis \dashv i$ has components
-\begin{align*}
-    F \to i L_\Nis F,
-\end{align*}
-which are all local equivalences.
-\end{example}
-\begin{proof} Since $i$ is fully faithful, we have that the counit $L_\Nis i \to \id$ is a natural equivalence. We'd like to argue that
-\begin{align*}
-    L_\Nis F \to L_\Nis i L_\Nis F
-\end{align*}
-is an equivalence. Since $i$ is fully faithful, it reflects equivalences, so it suffices to check that
-\begin{align*}
-    i L_\Nis F \to i L_\Nis i L_\Nis F
-\end{align*}
-is a natural equivalence, which follows from the counit being a natural equivalence.
-\end{proof}
-
-
-
-\begin{notation} Let $X$ be a scheme and $x\in X$. We denote by $\Hen_{X,x}$ the category of maps $f \colon (Y,y) \to (X,x)$ where $f \colon Y \to X$ is \'etale, $f(y) = x$, and $f$ induces an isomorphism $k(x) \xto{\sim} k(y)$.
-\end{notation}
-
-
-\begin{definition} Let $X$ be a scheme and $x\in X$. We denote by 
-\begin{align*}
-    X_x^h := \lim_{(Y,y) \in \Hen_{X,x}} Y = \lim_{(Y,y) \in \Hen_{X,x}} Y_y
-\end{align*}
-See \cite[04GV]{Stacks}, or \cite[2.22]{Bachmann-K}. This is the \emph{henselization} of $X$ at the point $x\in X$.
-\end{definition}
-
-\begin{notation} Denote by $\Sm_S \subseteq \Sch_S$ the full subcategory of smooth $S$-schemes. Here $S$ is still qcqs and Noetherian as assumed. We will restrict our attention here as it will be needed for upcoming results.
-\end{notation}
-
-\begin{definition} Let $f \colon F \to G$ be a map of presheaves in $\Pre(\Sm_S)$. Then we say $f$ is a \textit{stalkwise (Nisnevich) weak equivalence} if for every $X\in \Sm_S$ and every $x\in X$, the induced map
-\begin{align*}
-    \colim_{Y\in \Hen_{X,x}} F(Y) \to \colim_{Y\in \Hen_{X,x}} G(Y)
-\end{align*}
-is an equivalence of spaces.
-\end{definition}
-
-If $F\in \Pre(\Sm_S)$ with $X\in\Sm_S$ and $x\in X$, the universal property of the limit forming the henselization induces a natural map
-\begin{align*}
-    \colim_{Y\in \Hen_{X,x}} F(Y) \to F(X_x^h).
-\end{align*}
-In general there is no reason to expect this to be an equivalence since $F$ is a presheaf and there's no reason to expect it to preserve these kinds of filtered colimits. One of the core ideas of sheaf theory is that for sheaves this \emph{is} an equivalence. Let's prove this.
-
-We first use the following helpful lemma.
-
-\begin{lemma} Let $\left\{ S_i \right\}_{i\in I}$ be a cofiltered diagram of schemes with affine transition maps. Then the limit $S = \lim S_i$ exists in $\Sch$, and induces an equivalence of categories
-\begin{align*}
-    \colim_i \Sch^{f.p.}_{S_i} \xto{\sim} \Sch^{f.p.}_S.
-\end{align*}
-\end{lemma}
-\begin{proof} When the diagram is a directed set, this is literally \cite[01ZM]{Stacks} and we refer to the proof there. For us it suffices then to argue how one gets the general cofiltered result from the directed result.
-\end{proof}
-
-
-
-
-\begin{theorem} Let $f \colon I \to \Sch;\ f(i) = T_i$ be a cofiltered diagram of schemes with \emph{affine} transitition maps. Then its limit $T = \colim_i T_i$ exists in $\Sch$, and the natural map
-\begin{align*}
-    \colim_{i\in I} F(T_i) \to F(T)
-\end{align*}
-is an equivalence for any Nisnevich sheaf $F\in \Shv_\Nis(\Sm_S)$. The key idea here is that every cofiltered diagram of schemes admits (affine-locally) a cofinal directed subdiagram.
-\end{theorem}
-
-
-
-
-
-
-
-
-
-
-\begin{proposition} If $F\in\Pre(\Sm_S)$ is a Nisnevich sheaf, the 
+\begin{proposition}\label{prop:stalkwise-iff-local-equivalence} For a map of presheaves $f \colon F \to G$, the following are equivalent:
+\begin{enumerate}
+    \item $f$ is a local equivalence
+    \item for every $X\in \Sch_S$ and $x\in X$, we have that the induced map
+    \begin{align*}
+        \colim_{Y\in \Hen_{X,x}} F(Y) \to \colim_{Y\in \Hen_{X,x}} G(Y)
+    \end{align*}
+    is an equivalence.
+\end{enumerate}
 \end{proposition}
-
-
-\begin{warning} This is \textit{not} the same as saying that $F(X_x^h) \to G(X_x^h)$ is an equivalence.
-\end{warning}
-
-
-
-\begin{theorem}\label{thm:local-and-stalkwise-equiv} 
-(Voevodsky) Let $S$ be qcqs and Noetherian, and let $f \colon F \to G$ in $\Pre(\Sm_S)$. Then $f$ is a local equivalence if and only if it is a stalkwise equivalence.
-\end{theorem}
-\begin{proof} (todo --- hard)
+\begin{proof} For the forward direction, we use that $L_\Nis$ is a left adjoint, so we can commute it with the colimits, after which this is clearly true. For the backwards direction, suppose we know we have such equivalences on colimit diagrams over henselian neighborhoods. We want to check if $f$ is a local equivalence, so we use that $L_\Nis$ is a left adjoint again to commute with colimits, after which we apply \Cref{prop:Nis-scheme-conts-henselization} to see that $L_\Nis$ is a stalkwise equivalence. Finally by hypercompleteness, a stalkwise equivalence is equivalent to a sectionwise equivalence, so we conclude that $f$ is indeed a local equivalence.
 \end{proof}
 
-As a particular case of \autoref{thm:local-and-stalkwise-equiv} applied to \autoref{exa:sheafification-local-equivalence}, we recover the following familiar result.
-
-\begin{corollary} A presheaf and its Nisnevich sheafification admit the same stalks in the Nisnevich site.
-\end{corollary}
 
 
+
+
+% \vspace{1em}\hrule
+% \begin{center}
+% Stuff below here in this chapter is being rewritten
+% \end{center}
+% \hrule\vspace{1em}
+
+% \subsection{Digression: $\Sigma$-presheaves aka radditive presheaves}
+
+% (Note: This section is a late addition, and may get moved around at some point down the line).
+
+% \begin{definition}
+% \label{def:radditive-presheaves} Let $\mathscr{C}$ be any small $\infty$-category with finite coproducts. We write
+% \begin{align*}
+%     \PSh_\Sigma(\mathscr{C}) \subseteq  \Fun \left( \mathscr{C}^\op, \mathcal{S} \right)
+% \end{align*}
+% to be full subcategory of those presheaves on $\mathscr{C}$ which send coproducts in $\mathscr{C}$ to products in $\mathcal{S}$. This is called the
+% \begin{enumerate}
+%     \item \textit{nonabelian derived $\infty$-category} of $\mathscr{C}$ \cite{bachmannNormsMotivicHomotopy2021} (although people very often call it the ``category of $\Sigma$-presheaves'' in conversation) 
+%     \item the category of \textit{radditive presheaves} in \cite{Voevodsky-radditive}
+%     \item the category of \textit{spherical presheaves} in e.g. \cite{pstragowskiModuliSpacesPrescribed2023}
+% \end{enumerate}
+% \end{definition}
+
+% \begin{example}[{\cite[2.4]{bachmannNormsMotivicHomotopy2021}}]
+% If $S$ is qcqs, then we have that
+% \begin{align*}
+%     \PSh_\Sigma(\Sm_S) \simeq \Sh_\amalg(\Sm_S),
+% \end{align*}
+% where $\amalg$ is shorthand for the disjoint union cd-structure.\footnote{More generally, this holds when $\Sm_S$ is replaced by any extensive $\infty$-category, see loc. cit.}
+% \end{example}
 
 \subsection{Torsors revisited}
 
@@ -3062,7 +3100,7 @@ is an equivalence for all $n\ge0$ and all basepoints $x\in F$.
 \end{proposition}
 \begin{proof} The forward direction is clear, since $f$ being a motivic equivalence would induce a natural isomorphism $[-,X]_{\A^1} \cong \left[ -,Y \right]_{\A^1}$, hence the associated homotopy (pre)sheaves would be identical.
 
-For the backwards direction, this condition on homotopy groups unwinds to tell us that $L_\mot F \to L_\mot G$ is an equivalence of sheaves by \autoref{cor:equivalence-in-hypercomplete-topos}, which in particular implies it is an equivalence of motivic spaces.
+For the backwards direction, this condition on homotopy groups unwinds to tell us that $L_\mot F \to L_\mot G$ is an equivalence of sheaves, which in particular implies it is an equivalence of motivic spaces.
 \end{proof}
 
 \begin{terminology} We say that a motivic space $X$ is $\A^1$\textit{-$n$-connected} if $\pi_i^{\A^1}(X,x)$ is trivial for all $i\le n$ and all basepoints. Some special cases:
