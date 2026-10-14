@@ -2048,7 +2048,7 @@ as \textit{sheafification}.
 \begin{corollary}\label{cor:properties-sheafification} 
 Some consequences:
 \begin{enumerate}
-    \item The \textit{sheafification} functor $L_\tau \colon \Pre(\mathscr{C}) \to \Shv_\tau(\mathscr{C})$ preserves all colimits (being a left adjoint) and all small limits (being left exact).
+    \item The \textit{sheafification} functor $L_\tau \colon \Pre(\mathscr{C}) \to \Shv_\tau(\mathscr{C})$ preserves all colimits (being a left adjoint) and finite limits (being left exact).
 
     \item The inclusion functor $i \colon \Shv_\tau(\mathscr{C}) \hookto \Pre(\mathscr{C})$ preserves all limits and all filtered colimits, by the adjoint functor theorem.
 \end{enumerate}
@@ -6537,7 +6537,7 @@ between $\A^1$-homotopy classes of maps $X \to \BGL_r$ and rank $r$ algebraic ve
 
 So if $R$ is a smooth affine $k$-algebra, \textit{every} finitely generated projective module over $R$ is classified by a map $\Spec(R) \to \BGL_r$. Moreover we have access to obstruction theory in order to study them.
 
-Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel81}.\footnote{Lindel first proved this over a perfect field in his Habilitationschrift at M\"unster, but using work of Vorst and Mohan Kumar \cite{Vorst}, was able to extend it to an arbitrary base field.}
+Implicit in this result (and indeed used in this result) is $\A^1$-invariance, which says that every finitely generated projective $R[t]$-module is extended from $R$. In the context of smooth affine algebras over a field, this result is originally due to Lindel \cite{Lindel81}.\footnote{Lindel first proved this over a perfect field in his Habilitationschrift at M\"unster, but using work of Vorst and Mohan Kumar \cite{Vorst}, was able to extend it to an arbitrary base field.}
 
 \subsection{Rank two oriented bundles}
 
@@ -6553,10 +6553,10 @@ In particular, if $X$ is affine, the composite
 \begin{align*}
     X \to \BGL_n \xto{\det} B \mathbb{G}_m = \P^\infty
 \end{align*}
-is exactly the first Chern class $c_1 \in \Pic(X)$. Hence $\SL_n$-torsors are algebraic vector bundles with $c_1 = 0$.
+is exactly the first Chern class $c_1 \in \Pic(X)$. Hence $\SL_n$-torsors are algebraic vector bundles equipped with a trivialization of their determinant line bundle.
 
 \begin{theorem}
-If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2 over an algebraically closed field, then a rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
+If $X = \Spec(R)$ is a smooth affine $k$-scheme of dimension 2 over an algebraically closed field, then an oriented rank two finitely generated projective module over $X$ is completely determined by its $c_2$.
 \end{theorem}
 \begin{proof} We can analyze the Postnikov tower for $\BSL_2$. We have that $\pi_1(\BSL_2) = \ast$, so the first nontrivial stage occurs at degree 2, which is $\tau_{\le 2}\BSL_2 = K(\KMW_2,2)$. Since $X$ has Krull dimension two, we have by \autoref{thm:krull-dim-postnikov-truncation} that
 \begin{align*}
@@ -6635,7 +6635,7 @@ Then the $k$-invariants are valued in
 \begin{align*}
     H^{t+2}(X, \pi_{t+1}F).
 \end{align*}
-Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note that $\pi_t F = 0$ for $t \le N-r-1$. So we obtain vanishing in the range
+Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note that $\pi_t F = 0$ for $t \le N-r-1$. So we obtain vanishing outside of the range
 \begin{align*}
     d-1 \le t \le N-r-1.
 \end{align*}
@@ -6697,7 +6697,7 @@ Via the fiber sequence \autoref{eqn:fiber-stabilization-BGLr}, the $k$-invariant
 \begin{align*}
     k_t \in H^{t+2}(X, \pi_{t+1}(S^{2r-1,r})(\det)).
 \end{align*}
-These vanish for $t+1\le r-2$ via the $\A^1$-connectivity of $S^{2r-1,r}$ (\autoref{exa:connectivity-punctured-affine-space}), and the $k$-invariants also vanish for $t+2 \ge d+1$ by consideration of the cohomological dimension of $X$. Combining these bounds, we see that the $k$-invariants vanish in the range
+These vanish for $t+1\le r-2$ via the $\A^1$-connectivity of $S^{2r-1,r}$ (\autoref{exa:connectivity-punctured-affine-space}), and the $k$-invariants also vanish for $t+2 \ge d+1$ by consideration of the cohomological dimension of $X$. Combining these bounds, we see that the $k$-invariants vanish outside the range
 \begin{align*}
     d-1 \le t \le r-2.
 \end{align*}
@@ -6715,7 +6715,7 @@ Serre splitting says that when the corank of the bundle is negative, then any al
 \begin{align*}
     k_t \in H^{t+2}(X, \pi_{t+1}(\A^r\minus 0)(\det E)).
 \end{align*}
-This vanishes for $t\ge r-1$, and $\pi_{t+1}(\A^r\minus 0)$ is zero for $t \le r-3$, since the first nonvanishing homotopy sheaf of $\A^r\minus 0$ is $\pi_{r-1}(\A^2\minus 0)$. Hence there is only one nonvanishing $k$-invariant, which is
+This vanishes for $t\ge r-1$, and $\pi_{t+1}(\A^r\minus 0)$ is zero for $t \le r-3$, since the first nonvanishing homotopy sheaf of $\A^r\minus 0$ is $\pi_{r-1}(\A^r\minus 0)$. Hence there is only one nonvanishing $k$-invariant, which is
 \begin{align*}
     k_{r-2} \in H^{r}(X, \pi_{r-1}(\A^r\minus 0)(\det E)) = H^r(X,\KMW_r(\det)) = \CHW^r(X,\det).
 \end{align*}
@@ -6771,7 +6771,7 @@ The $k$-invariants as we have seen live in the (twisted) cohomology of the fiber
     k_t \in H^{t+2}(X,\pi_{t+1}(S^{2d-1,d})(\det E)).
 \end{align*}
 %
-Since $X$ is Krull dimension $d$, the cohomology vanishes for $t+2 \ge d+2$, hence:
+Since $X$ is Krull dimension $d+1$, the cohomology vanishes for $t+2 \ge d+2$, hence:
 \begin{itemize}
     \item $k_d$ and the higher $k$-invariants are all zero.
 \end{itemize}
@@ -6792,7 +6792,7 @@ This leaves us with two interesting obstruction classes:
 \end{enumerate}
 Recall by \autoref{prop:punctured-affine-space-motivic-sphere} we have that $S^{2d-1,d}\simeq \A^d\minus\{0\}$, and by \autoref{exa:connectivity-punctured-affine-space}, we have that $S^{2d-1,d}$ is $\A^1$-($d-2$)-connected. In particular as we have seen (c.f. \autoref{cor:pi_n_Sph_KMW}), we get that
 \begin{align*}
-    \pi_n S^{2d-1,d} = \begin{cases} 0 & n\le d-2 \\ \KMW_d & n=d-1 \\ \text{mostly unknown} & n\ge d-2.\end{cases}
+    \pi_n S^{2d-1,d} = \begin{cases} 0 & n\le d-2 \\ \KMW_d & n=d-1 \\ \text{mostly unknown} & n\ge d.\end{cases}
 \end{align*}
 We now see that the primary obstruction is a bit easier to manage.
 
@@ -6803,7 +6803,7 @@ For a corank one bundle over an algebraically closed field, its Euler class is z
 \begin{align*}
     0 \to \mathbf{I}^{d+1}(\det E) \to \KMW_d(\det E) \to \KM_d \to 0,
 \end{align*}
-and we get a long exact sequence, sending $e(E)\mapsto c_{d-1}(E)$:
+and we get a long exact sequence, sending $e(E)\mapsto c_{d}(E)$:
 \begin{align*}
     \cdots \to H^d(X, \mathbf{I}^{d+1}(\det E)) \to H^d(X, \KMW_d(\det E)) \to H^d(X, \KM_d) \to H^{d+1}(X, \mathbf{I}^{d+1}(\det E)) \to \cdots 
 \end{align*}
