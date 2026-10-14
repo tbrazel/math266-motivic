@@ -142,7 +142,7 @@ We therefore might rephrase \autoref{eqn:units-rings} as saying that the represe
 \textbf{Serre's Problem}: Is every finitely generated projective $k[t_1, \ldots, t_n]$-module free? In other words, is the functor \autoref{eqn:extn-scalars} essentially surjective? Or, in other other words, under the Serre correspondence, is every algebraic vector bundle on affine space $\A^n_k$ trivial?
 
 \textbf{Answer}: Yes \cite{Quillen76,Suslin76}. Quillen actually proved more-- for $R$ a PID, he proved that the every finitely generated projective $R[t]$-module is extended from an $R$-module.\footnote{%
-Quillen's proof involves leveraging some previous work of Horrocks, flat descent for vector bundles, and a very clever technique he invented called \textit{patching}. Suslin's proof, which appeared in the same year, is almost completely linear algebraic, leveraging the theory of \textit{unimodular rows}.} Lindel proved shortly thereafter that every finitely generated projective $A[t]$-module is extended from an $A$-algebra, where $A$ is a smooth algebra containing a field $k$. We could read this as saying that the stack of algebraic vector bundles is $\A^1$-invariant over the category of smooth affine $k$-schemes.
+Quillen's proof involves leveraging some previous work of Horrocks, flat descent for vector bundles, and a very clever technique he invented called \textit{patching}. Suslin's proof, which appeared in the same year, is almost completely linear algebraic, leveraging the theory of \textit{unimodular rows}.} Lindel proved shortly thereafter that every finitely generated projective $A[t]$-module is extended from an $A$-module, where $A$ is a smooth algebra containing a field $k$. We could read this as saying that the stack of algebraic vector bundles is $\A^1$-invariant over the category of smooth affine $k$-schemes.
 \end{example}
 
 \textbf{More general}: (Bass--Quillen conjecture) is it true that for every $R$ regular Noetherian, the map
@@ -189,7 +189,7 @@ More generally if $A$ is reduced, Noetherian, and has a finite normalization, th
 }
 \end{example}
 
-\begin{definition} An \textit{inner product space} over a ring $R$ is a finitely generated productive $R$-module $M$ and a symmetric bilinear form $\beta \colon M \times M \to R$ for which $m \mapsto \beta(-,m)$ defines an isomorphism $M \cong M^\ast$.
+\begin{definition} An \textit{inner product space} over a ring $R$ is a finitely generated projective $R$-module $M$ and a symmetric bilinear form $\beta \colon M \times M \to R$ for which $m \mapsto \beta(-,m)$ defines an isomorphism $M \cong M^\ast$.
 \end{definition}
 
 
@@ -283,7 +283,7 @@ Observe that there are two types of $G$-torsors --- sets  that look like $G/e$, 
 \begin{intuition} A nonempty $G$-torsor is like a group $G$ which has remembered its multiplication but forgotten its identity. Any choice of basepoint $x\in X$ yields a canonical bijection $G \xto{\sim} X$ by sending $g \mapsto g\cdot x$.
 \end{intuition}
 
-\begin{example} In a locally small category $\mathscr{C}$, given two objects $x,y \in \mathscr{C}$, the set of isomorphisms $\mathrm{Isom}_{\mathscr{C}}(x , y)$ is a left $\Aut_{\mathscr{C}}(x)$-torsor and a right $\Aut_{\mathscr{C}}(y)$-torsor.
+\begin{example} In a locally small category $\mathscr{C}$, given two objects $x,y \in \mathscr{C}$, the set of isomorphisms $\mathrm{Isom}_{\mathscr{C}}(x , y)$ is a left $\Aut_{\mathscr{C}}(y)$-torsor and a right $\Aut_{\mathscr{C}}(x)$-torsor.
 \end{example}
 
 
@@ -340,7 +340,7 @@ The associated frame bundle of an algebraic vector bundle is a $\GL_n$-torsor in
 \begin{proof} Since $\GL_n$ is affine, every torsor is representable, hence $\GL_n$-torsors are just principal $\GL_n$-bundles, which are precisely algebraic vector bundles.
 \end{proof}
 \begin{itemize}
-    \item \textit{Bass--Quillen conjecture}: this can be reframed as asking whether each $\GL_n$-torsor over a regular Noetherian ring is trivial
+    \item \textit{Bass--Quillen conjecture}: this can be reframed as asking whether, for $R$ a regular Noetherian ring, each $\GL_n$-torsor over $R[t_1,\ldots,t_n]$ is extended from $R$
     \item \textit{Hartshorne's conjecture} concerns $\GL_2$-torsors over $\P^n$ for $n\ge7$
 \end{itemize}
 
@@ -429,7 +429,7 @@ On triple overlaps, it is straightforward to verify that
 \end{align*}
 In other words we get a 1-cocycle! There was ambiguity here, since we \textit{picked} isomorphisms $x|_{U_i} \xto{\sim} y|_{U_i}$ as our starting data. The remaining thing to prove is that any other choice of local isomorphisms gives rise to a cohomologous 1-cocycle.
 
-Suppose we instead picked some $\psi_i \colon x|_{U_i} \xto{\sim} y|_{U_i}$ for each $i$, yielding $\gamma_{ij} = \psi_j^{-1}\psi_i $. Then $\psi_i$ and $\phi_i$ differ by an automorphism of $y$ which we call $\alpha_i$:
+Suppose we instead picked some $\psi_i \colon x|_{U_i} \xto{\sim} y|_{U_i}$ for each $i$, yielding $\gamma_{ij} = \psi_i^{-1}\psi_j$. Then $\psi_i$ and $\phi_i$ differ by an automorphism of $x_{|U_i}$ which we call $\alpha_i$:
 \[ \begin{tikzcd}
     x|_{U_i}\ar[rr,"\phi_i"]\ar[dr,"\alpha_i" below left] &  & y|_{U_i}\\
      & x|_{U_i}\ar[ur,"\psi_i" below right] & 
@@ -509,7 +509,7 @@ What about condition (2) from \autoref{def:torsor}? This condition translates, i
 \end{tikzcd} \]
 Then the pullback torsor $Y \times_X U_i \to U_i$ admits a section, which implies it is trivial by \autoref{prop:torsor-trivial-iff-global-section}:
 \[ \begin{tikzcd}
-    Y\times_X U_i\dar\rar\pb & X\dar\\
+    Y\times_X U_i\dar\rar\pb & Y\dar\\
     U_i\rar\uar[dashed,bend left=30] & X.
 \end{tikzcd} \]
 %
@@ -539,7 +539,7 @@ is an equivalence. Since everything in sight is affine, we can rephrase this as 
     \prod_{g\in G} L &\from L \otimes_k L \\
     (x \cdot g(y))_{g\in G} &\mapsfrom x \otimes y
 \end{align*}
-to be an equivalence, which we recall is the \textit{normal basis theorem} from Galois theory. The second condition from \autoref{prop:principal-G-bundle} asks us to find a cover of $\Spec(k)$ trivializing $\Spec(L) \to \Spec(k)$, but if we work in the \'etale site, then $\Spec(L) \to \Spec(k)$ is itself a cover, and it is clear that the product induces a section
+to be an equivalence, which is true by the primitive element theorem and the remainder theorem. The second condition from \autoref{prop:principal-G-bundle} asks us to find a cover of $\Spec(k)$ trivializing $\Spec(L) \to \Spec(k)$, but if we work in the \'etale site, then $\Spec(L) \to \Spec(k)$ is itself a cover, and it is clear that the product induces a section
 \[ \begin{tikzcd}
     \Spec(L \otimes_k L)\dar\rar\pb & \Spec(L)\dar\\
     \Spec(L)\rar\uar[dashed,bend left=30] & \Spec(k).
@@ -618,8 +618,8 @@ In the setting of \autoref{thm:fibration-from-subgp-of-liegp}, we obtain fiber s
 Leveraging these fiber sequences is one way to prove Bott periodicity.
 
 
-\textbf{Why we like representability of torsors in homotopy theory}: The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic topology with motivic methods.
- First off:
+\textbf{Why we like representability of torsors in homotopy theory}: The fact that principal $G$-bundles are representable in homotopy theory (in the sense of \autoref{eqn:representability-torsors-homotopy-theory}) has a number of applications. We list three here, to motivate what tools we will try to build when studying torsors in algebraic geometry with motivic methods.
+First off:
 \begin{itemize}
     \item Suppose we have two torsors $f,g \colon X\to BG$ and we want to prove they are not isomorphic. If we can find any cohomology theory $E^\ast$ and any class $c\in E^\ast(BG)$ so that $f^\ast(c) \ne g^\ast(c)$ in $E^\ast(X)$, this means that $f$ and $g$ correspond to non-isomorphic torsors. This the basic idea of characteristic classes.
 \end{itemize}
@@ -698,7 +698,7 @@ There are a priori a lot of order-preserving functions $[n] \to [m]$, so we'd li
 \begin{enumerate}
     \item We have \textit{coface} maps $d^i \colon [n] \to [n+1]$ for $0\le i\le n+1$ which are defined by the property that they miss the element $i\in [n+1]$.
 
-    \item We have \textit{codegeneracy} maps $s^j \colon [n] \to [n-1]$ for $0\le j\le n-1$ defined by the property that they are surjective and that $s^j(j) = s_j(j+1)$.
+    \item We have \textit{codegeneracy} maps $s^j \colon [n] \to [n-1]$ for $0\le j\le n-1$ defined by the property that they are surjective and that $s^j(j) = s^j(j+1)$.
 \end{enumerate}
 \end{terminology}
 
@@ -816,7 +816,7 @@ Let $X$ be a complete\footnote{$X$ is \textit{complete} if it is proper over the
 \[ \begin{tikzcd}[column sep=small]
     \cdots & X_2\rar\rar[shift right=2*\theshiftamount]\rar[shift left=2*\theshiftamount] & X_1\lar[shift right=\theshiftamount]\lar[shift left=\theshiftamount]\rar[shift right=\theshiftamount]\rar[shift left=\theshiftamount] & X_0,\lar
 \end{tikzcd} \]
-where each $X_i$ is smooth and projective. There is a cohomological descent spectral sequence computing the cohomology of $X$ in terms of the cohomology of the $X_n$'s. This dates back to SGA 4. This replacement is the core idea of \textit{resolution of singularities}. Deligne uses these simplicial methods to endow singular varieties with Hodge structures, so-called \textit{mixed Hodge structures} \cite{Hodge3}.
+where each $X_i$ is smooth and proper. There is a cohomological descent spectral sequence computing the cohomology of $X$ in terms of the cohomology of the $X_n$'s. This dates back to SGA 4. Deligne uses these simplicial methods to endow singular varieties with Hodge structures, so-called \textit{mixed Hodge structures} \cite{Hodge3}.
 \end{example}
 
 \begin{example} Let $A_\bullet \colon \DDelta^\op \to \Ab$ be a simplicial abelian group. Then by taking the alternating sum of the face maps, we obtain a chain complex, purely by the simplicial identities. This assignment is functorial:
@@ -877,7 +877,7 @@ By the Yoneda lemma, we have a natural bijection
 for any $X_\bullet \in \sSet$.
 \end{example}
 
-There is a functor called \textit{geometric realization}, which ``assembles'' a simplicial set into a topological space: Let $\Delta^n_\text{top}$ denote the \textit{topological} $n$-simplex\footnote{This is the locus $\Delta^n_\mathrm{top}:=\left\{ (x_0, \ldots, x_{n+1}\in \R^{n+1} \colon \sum x_i = 1,\ x_i\ge0 \right\}$.}
+There is a functor called \textit{geometric realization}, which ``assembles'' a simplicial set into a topological space: Let $\Delta^n_\text{top}$ denote the \textit{topological} $n$-simplex\footnote{This is the locus $\Delta^n_\mathrm{top}:=\left\{ (x_0, \ldots, x_{n})\in \R^{n+1} \colon \sum x_i = 1,\, x_i\ge0 \right\}$.}
 \begin{align*}
     |-| \colon \sSet &\to \Top \\
     X_\bullet &\mapsto \amalg_{n\ge0} X_n \times \Delta^n_\mathrm{top}/\sim,
@@ -911,7 +911,7 @@ This is in \cite[8.3.11]{Weibel}.
     d_i H_j^n &= \begin{cases}
     H_{j-1}^{n-1}d_i & i<j \\
     d_i H_{j-1}^n & i=j\ne 0 \\
-    d_{j+1} H_{j+1} &= i = j+1,\ j\ne n \\
+    d_{j+1} H_{j+1} & i = j+1,\ j\ne n \\
     H_{j}^{n-1} d_{i-1} & i > j+1.
     \end{cases} \\
     s_i H_j^N &= \begin{cases}
@@ -928,10 +928,10 @@ This notion makes sense for maps between simplicial objects in any category, and
 \end{remark}
 
 \begin{theorem}
-Geometric realization preserves products.
+Geometric realization preserves products (of compactly generated weakly Hausdorff spaces).
 \end{theorem}
 \begin{proof}
-By the co-Yoneda lemma, we can write any $X,Y\in \sSet$ as a colimit of representables, and since colimits in spaces $\mathcal{S}$ are universal (in particular finite products commute with finite colimits), the product $X \times Y$ distributes over the colimits, so $X \times Y$ can be written as a colimit of products of representable. Hence it suffices to restrict to the case where $X$ and $Y$ are representable. In this case, we can directly argue that the natural map
+By the co-Yoneda lemma, we can write any $X,Y\in \sSet$ as a colimit of representables, and since colimits in spaces $\mathcal{S}$ are universal, the product $X \times Y$ distributes over colimits, so $X \times Y$ can be written as a colimit of products of representables. Hence it suffices to restrict to the case where $X$ and $Y$ are representable. In this case, we can directly argue that the natural map
 \begin{align*}
     \left| \Hom_{\DDelta}(-,[m]) \times \Hom_{\DDelta}(-,[n]) \right| \to \left| \Hom_{\DDelta}(-,[m]) \right| \times \left| \Hom_{\DDelta}(-,[n]) \right|
 \end{align*}
@@ -1030,7 +1030,7 @@ so $H^1_1 = (g_{ij},\alpha_j) \colon U_{ij} \to G \times G$. The remaining relat
 \begin{align*}
     d_1 H_1^1 &= d_1 H_0^1,
 \end{align*}
-and since $d_1$ is the multiplication $G \times G \to G$, this tells us that $\alpha_i f_{ij} = g_{ij}\gamma_j$, which is the coboundary condition.
+and since $d_1$ is the multiplication $G \times G \to G$, this tells us that $\alpha_i f_{ij} = g_{ij}\alpha_j$, which is the coboundary condition.
 
 \textbf{Exercise}: Show that, as maps $U_{i_0 i_1 i_2} \to G \times G \times G$, we have
 \begin{align*}
@@ -1063,7 +1063,7 @@ Last week we asked for a universal space $BG$ so that homotopy classes of maps $
 
 Let's preview how this is going to go --- the category $\Var_k$ of $k$-varieties doesn't support a nice homotopy theory, nor does simplicial varieties $\Fun(\DDelta^\op, \Var_k)$. So what we could do instead is replace each variety by its representable presheaf. The Yoneda embedding $\Var_k \to \Fun(\Var_k^\op,\Set)$ then induces a functor
 \begin{align*}
-    \Fun(\DDelta^\op, \Var_k) \to \Fun(\DDelta^\op, \Fun(\Var_k^\op,\Set).
+    \Fun(\DDelta^\op, \Var_k) \to \Fun(\DDelta^\op, \Fun(\Var_k^\op,\Set)).
 \end{align*}
 Doing some adjoint business, we get that this latter category is equivalent to
 \begin{align*}
@@ -1100,7 +1100,7 @@ A pair of a category and a topology $(\mathscr{C},\tau)$ is called a \textit{sit
 \begin{example} An \textit{\'etale cover} is a collection of \'etale morphisms, jointly surjective.
 \end{example}
 
-\begin{example} A \textit{Nisnevich cover} is a collection of \'etale morphisms $\left\{ U_i \to U \right\}$ so that for each $x\in X$ there exists an $i$ and a $y\in U_i$ so that $y\mapsto x$ induces an isomorphism on residue fields.
+\begin{example} A \textit{Nisnevich cover} is a collection of \'etale morphisms $\left\{ U_i \to U \right\}$ so that for each $x\in U$ there exists an $i$ and a $y\in U_i$ so that $y\mapsto x$ induces an isomorphism on residue fields.
 \end{example}
 
 \begin{remark} The \textit{Nisnevich topology} first appeared in work of Nisnevich, where it was called the ``completely decomposed topology'' \cite{Nis80}, and then appeared in work of Kato and Saito \cite{KS-Global} where it was referred to as the ``henselian topology.''
@@ -1109,8 +1109,8 @@ A pair of a category and a topology $(\mathscr{C},\tau)$ is called a \textit{sit
 Here's the key property of Nisnevich covers we will use. We'll first do it in the affine case then in the general case.
 
 \begin{proposition}[{\cite[B.4.4.5]{SAG}}]
-\label{prop:Nis-cover-surj-on-sections-affine}
-Let $\Spec(R)$ be affine, and let $\left\{ \phi_\alpha \colon \Spec(R_\alpha) \to \Spec(R) \right\}_{\alpha}$ be a Nisnevich cover. Then $R$ is henselian if and only one of the $\phi_\alpha$ admits a left inverse.
+\label{prop:Nis-cover-surj-on-sections-affine} Let $R$ be a local ring.
+Then $R$ is Henselian if and only if, for every Nisnevich cover $\{\phi_\alpha \colon \Spec(R_\alpha) \to \Spec(R)\}$, some $\phi_\alpha$ admits a section.
 \end{proposition}
 
 So we have a commutative diagram
@@ -1184,7 +1184,7 @@ Let's answer this as two subquestions: when are $t$-torsors $\tau$-torsors, and 
 \subsection{Torsors in finer topologies}
 
 \begin{proposition}\label{prop:torsor-in-finer-topology-if-sheaf} 
-Let $\mathscr{C}$ be some fixed category of schemes, with topologies $t$ and $\tau$. Let $\mathcal{G}$ be a sheaf of groups in the $\tau$-topology. Let $\mathcal{F}$ be a $\mathcal{G}$-torsor in the $t$-topology. Then $\mathcal{F}$ is also a $\tau$-torsor if $\mathcal{F}$ is a $\tau$-sheaf.
+Let $\mathscr{C}$ be some fixed category of schemes, with topologies $t\le\tau$. Let $\mathcal{G}$ be a sheaf of groups in the $\tau$-topology. Let $\mathcal{F}$ be a $\mathcal{G}$-torsor in the $t$-topology. Then $\mathcal{F}$ is also a $\tau$-torsor if $\mathcal{F}$ is a $\tau$-sheaf.
 \end{proposition}
 \begin{proof} The only thing that could fail is the sheaf condition in the definition. If $\mathcal{F}$ is a $t$-torsor, then there exists a $t$-cover $\left\{ U_i \to U \right\}$ trivializing $\mathcal{F}$, and this is also a $\tau$-cover since $\tau$ refines $t$. 
 \end{proof}
@@ -1210,7 +1210,7 @@ Now we're interested in the reverse question --- when $t\le \tau$, when is a $\t
 
 We can now leverage some tools from algebraic geometry to prove this.
 
-\begin{proposition} Every smooth morphism of schemes admits a section \'etale-locally.
+\begin{proposition} Every surjective smooth morphism of schemes admits a section \'etale-locally.
 \end{proposition}
 
 \begin{corollary} If $G$ is a smooth group scheme, then there is an equivalence of categories between \'etale $G$-torsors and fppf-torsors.
@@ -1466,7 +1466,7 @@ with the $\{n+1\}$-vertex mapping to $y$, and the vertices $\left\{ 0, \ldots, n
 Technically speaking this is the space of \textit{right morphisms} but when $\mathscr{C}$ is an $\infty$-category this models the mapping space (it is canonically isomorphic in the homotopy category). As an exercise, verify that $\Map_{\mathscr{C}}(x,y)$ is indeed a Kan complex from the definition.
 \end{remark}
 
-What is $\Map_\mathscr{C}(x,y)$ intended to capture? Its 0-simplices are maps from $x$ to $y$ \textit{in the homotopy category} $h\mathscr{C}$. In other words, they are equivalence classes of zig-zags of morphisms in $\mathscr{C}$ from $x$ to $y$, where maps going the wrong way are all invertible.
+What is $\Map_\mathscr{C}(x,y)$ intended to capture? Its 0-simplices are edges $x \to y$ in $\mathscr{C}$, so $\pi_0 \Map_{\mathscr{C}}(x,y)$ should see homotopy classes of edges from $x$ to $y$.
 
 \begin{notation} If $\mathscr{C}$ is an $\infty$-category and $x,y\in\mathscr{C}$, we denote by
 \begin{align*}
@@ -1475,8 +1475,8 @@ What is $\Map_\mathscr{C}(x,y)$ intended to capture? Its 0-simplices are maps fr
 We call this \textit{homotopy classes of maps} from $x$ to $y$.
 \end{notation}
 
-\begin{warning} It is not true that $\left[ x,y \right]_\mathscr{C}$ is simply the edges from $x$ to $y$ in the quasi-category $\mathscr{C}$ modulo an equivalence relation, it is more subtle. In the presence of a model structure, we can replace $x$ and $y$ by equivalent objects $Qx$ and $Ry$ respectively, so that $\left[ x,y \right] \cong \left[ Qx,Ry \right]$, and this latter set can be literally identified with the 1-cells $Qx \to Ry$ in $\mathscr{C}$ modulo an explicit equivalence relation. We'll come back to this when we talk about sheaves.
-\end{warning}
+% \begin{warning} It is not true that $\left[ x,y \right]_\mathscr{C}$ is simply the edges from $x$ to $y$ in the quasi-category $\mathscr{C}$ modulo an equivalence relation, it is more subtle. In the presence of a model structure, we can replace $x$ and $y$ by equivalent objects $Qx$ and $Ry$ respectively, so that $\left[ x,y \right] \cong \left[ Qx,Ry \right]$, and this latter set can be literally identified with the 1-cells $Qx \to Ry$ in $\mathscr{C}$ modulo an explicit equivalence relation. We'll come back to this when we talk about sheaves.
+% \end{warning}
 
 \begin{example} If $\mathscr{C}$ is a 1-category, we can view it trivially as an $\infty$-category via the nerve construction. In this case $\Map_\mathscr{C}(x,y) = \Hom_\mathscr{C}(x,y)$ is just a set (a discrete simplicial set). The homotopy category of $\mathscr{C}$ is just $\mathscr{C}$, because there are no equivalences which aren't isomorphisms.
 \end{example}
@@ -1547,7 +1547,7 @@ In many cases a localization is given by inverting a class of morphisms in $\mat
 \begin{example} $\ $
 \begin{enumerate}
     \item The \textit{homotopy category} of spaces is obtained from the category of compactly generated weakly Hausdorff spaces by inverting all homotopy equivalences.
-    \item The \textit{derived category} of a ring is obtained from the category of chain complexes by inverting the chain homotopy equivalences.
+    \item The \textit{derived category} of a ring is obtained from the category of chain complexes by inverting quasi-isomorphisms.
     \item A group (as a one-object groupoid) is obtained from a monoid by freely inverting each morphism.
 \end{enumerate}
 \end{example}
@@ -1594,7 +1594,7 @@ We say a subcategory $I \subseteq J$ is \textit{cofinal} if for any functor $F \
 \end{aligned}
 \end{equation}
 is an isomorphism.\footnote{%
-We dually say $I \subseteq J$ is \textit{final} if the natural map $\lim_I F \to \lim_J F$ is an isomorphism for any $F$.%
+We dually say $I \subseteq J$ is \textit{final} if the natural map $\lim_J F \to \lim_I F$ is an isomorphism for any $F$.%
 }
 In other words, in order to compute a $J$-shaped colimit, it suffices to restrict to the subdiagram $I \subseteq J$.
 \end{definition}
@@ -1657,7 +1657,7 @@ is a weak homotopy equivalence \cite[4.1.3.1,~4.1.3.3]{HTT}.
 \begin{proof} The classifying space of the coequalizer diagram is $S^1$, however since $[0] \in\DDelta$ is terminal, it is initial in $\DDelta^\op$, hence $B\DDelta^\op \simeq \ast$ is contractible.
 \end{proof}
 
-\begin{remark} Removing this injectivity hypothesis is also interesting, since we include the opposite of the map $[1] \to [0]$ --- the category $\DDelta_{\le1}^\op$ is the \textit{split coequalizer} category:
+\begin{remark} Removing this injectivity hypothesis is also interesting, since we include the opposite of the map $[1] \to [0]$ --- the category $\DDelta_{\le1}^\op$ is the \textit{reflexive coequalizer} category:
 \[\begin{tikzcd}[column sep=small]
     \bullet\rar[bend right=30]\rar[bend left=30] & \bullet\lar
 \end{tikzcd} \]
@@ -1674,22 +1674,21 @@ is $1$-cofinal, however none of these inclusions are $\infty$-cofinal.
 
 In general we cannot truncate in order to obtain an $\infty$-cofinal diagram. We can, however, restrict only to face maps and throw out degeneracies:
 
-\begin{lemma} \cite[6.5.3.7]{HTT} The inclusion $\DDelta^{\inj,\op} \subseteq \DDelta$ is cofinal.
+\begin{lemma} \cite[6.5.3.7]{HTT} The inclusion $\DDelta^{\inj,\op} \subseteq \DDelta^\op$ is cofinal.
 \end{lemma}
 
-A \emph{crucial} fact we will use is the following:
 \begin{lemma}[Split augmented cosimplicial object lemma]
 \label{lem:delta-augmented-split-limit} 
-Let $F \colon \DDelta\to \mathscr{C}$ be a $\DDelta$-indexed diagram in an arbitrary $\infty$-category $\mathscr{C}$, and let $X\in \mathscr{C}$ be the vertex of a cone over $F$. Then $X$ is a limiting cone if and only if the map $X \to F(0)$ admits a retract.
+Let $F \colon \DDelta\to \mathscr{C}$ be a $\DDelta$-indexed diagram in an arbitrary $\infty$-category $\mathscr{C}$, and let $X\in \mathscr{C}$ be the vertex of a cone over $F$. Then if $X \to F$ is split, then $X$ is a limiting cone.
 \end{lemma}
 
 We will also need the following result about simplicial spaces (recall $\tau_{\le n}$ is the $n$-truncation functor on topological spaces):
 
 \begin{lemma}[Coskeleton lemma]
 \label{lem:coskeleton-lemma}
-Let $X_\bullet$ be a simplicial space. Then its truncation can be computed as
+Let $X^\bullet$ be a cosimplicial space. If $X^\bullet$ is levelwise $n$-truncated, then
 \begin{align*}
-    \tau_{\le n} \lim_{\DDelta} X_\bullet = \lim_{\DDelta_{\le (n+1)}} \tau_{\le n} X_\bullet.
+    \lim_{\DDelta} X^\bullet = \lim_{\DDelta_{\le (n+1)}} X^\bullet.
 \end{align*}
 \end{lemma}
 \begin{proof} This is \cite[6.5.3.9]{HTT}.
@@ -1718,9 +1717,9 @@ The examples above are the only interesting examples, in the following more prec
 A category $\mathscr{C}$ admits all sifted colimits if and only if it admits all filtered colimits and it admits geometric realizations (meaning $\DDelta^\op$-indexed colimits).
 \end{proposition}
 
-\begin{corollary} A 1-category admits all sifted colimits if and only if it admits all filtered colimits and it has coequalizers.
+\begin{corollary} A 1-category admits all sifted colimits if and only if it admits all filtered colimits and it has reflexive coequalizers.
 \end{corollary}
-\begin{proof} $\DDelta^\op$-indexed colimits are just coequalizers in 1-categories by \autoref{exa:1-cofinal-parallel-arrows-ddelta}.
+\begin{proof} $\DDelta^\op$-indexed colimits are just reflexive coequalizers in 1-categories by \autoref{exa:1-cofinal-parallel-arrows-ddelta}.
 \end{proof}
 
 Moreover, we may add in \emph{finite coproducts} to capture all colimits.
@@ -1773,10 +1772,10 @@ Hence every small thin category is, up to equivalence, a poset (by taking its sk
 
 
 \begin{definition}\label{def:directed-set}
-A \emph{directed set} is a poset $(\mathscr{C},\le)$ with the property that for any two objects $x,y\in \mathscr{C}$ there exists a third object $z$ with $x\le z$ and $y\le z$. In other words, we have \emph{finite joins} of objects.
+A \emph{directed set} is a nonempty poset $(\mathscr{C},\le)$ with the property that for any two objects $x,y\in \mathscr{C}$ there exists a third object $z$ with $x\le z$ and $y\le z$.\footnote{That is, every finite subset has an upper bound.}
 \end{definition}
 
-\begin{remark} If $\mathscr{C}$ is a thin small 1-category, it is directed if and only if it is filtered. This is precisely because a filtered 1-category requires finite joins, but it also requires coequalizer diagrams for parallel arrows. Since a thin category has no parallel arrows, this condition is vacuous.
+\begin{remark} If $\mathscr{C}$ is a thin small 1-category, it is directed if and only if it is filtered. This is precisely because a filtered 1-category requires the existence of cocones, but it also requires coequalizer diagrams for parallel arrows. Since a thin category has no parallel arrows, this condition is vacuous.
 \end{remark}
 
 Why is all of this important? In many settings in algebraic geometry, we deal with diagrams which are by nature thin --- often the relation we care about in a diagram is inclusion, for instance. In this case different definitions collapse into one notion (up to equivalence), so where algebraic geometers may use the phrase ``directed set'' and homotopy theorists may say ``filtered colimit'' we really mean the same thing. In fact, even when we are not thin, we can reduce to the thin case:
@@ -1820,9 +1819,9 @@ Every scheme is a sifted colimit of affine schemes along open immersions.
 
 This is a core idea in algebraic geometry --- if we want to prove a statement holds true for a scheme $X$, we can check it on all the affines covering $X$, and then try to descend the property along the colimit diagram. There are two key cases to highlight when this process becomes simpler, namely when the scheme is separated or qcqs.
 
-\begin{proposition}\label{prop:separated-colimit-affines} If $X$ is separated or quasi-compact quasi-separated, then it can be written as a $\DDelta^\op_{\le1}$-indexed colimit of affine schemes, that is, a reflexive coequalizer of affine schemes.
+\begin{proposition}\label{prop:separated-colimit-affines} If $X$ is quasi-compact and separated or quasi-separated, then it can be written as a $\DDelta^\op_{\le1}$-indexed colimit of affine schemes, that is, a reflexive coequalizer of affine schemes.
 \end{proposition}
-\begin{proof} Recall being separated is equivalent to the property that the union of any two affine open subschemes is itself affine. Thus we can take our affine cover $\left\{ U_i \to X \right\}_{i\in I}$, and write $X$ as a colimit
+\begin{proof} Recall being separated implies the intersection of any two affine open subschemes is itself affine. Thus we can take our affine cover $\left\{ U_i \to X \right\}_{i\in I}$, and write $X$ as a colimit
 \begin{align*}
     \amalg_{i,j}U_i \cap U_j \rightrightarrows \amalg_i U_i \to X.
 \end{align*}
@@ -1830,15 +1829,15 @@ This is the core idea of \v{C}ech covers on an arbitrary scheme, that intersecti
 
 If, on the other hand, $X$ is quasi-compact quasi-separated, then we can begin with a \emph{finite} affine cover $\left\{ U_i \to X \right\}_{i=1}^n$. Each $U_i$ is affine, hence quasi-compact, and we can consider the overlaps $U_{ij}: = U_i \cap U_j$. Recall that $X$ being quasi-separated implies that intersections of quasi-compact opens in $X$ are themselves quasi-compact, so we can write $U_{ij} = \cup_{k=1}^{N_{ij}} V_{ijk}$ for some affine opens. Altogether this is enough data to build $X$ out of affines, i.e. we have a colimit diagram
 \begin{align*}
-    \amalg_{i,j,k}V_{ijk} \to \amalg_i U_i \to X.
+    \amalg_{i,j,k}V_{ijk} \rightrightarrows \amalg_i U_i \to X.
 \end{align*}
 \end{proof}
 
 When $X$ has some nice properties, we can guarantee the affines do as well, for instance being finitely presented:
 \begin{proposition}\label{prop:fp-scheme-colimit-fp-affines}
-If $X$ is of finite presentation, then we can write $X$ as a split coequalizer of finitely presented affines.
+If $X$ is of finite presentation, then we can write $X$ as a reflexive coequalizer of finitely presented affines.
 \end{proposition}
-\begin{proof} If $X$ is finite presentation, it is in particular qcqs, so we can write $X$ as a filtered colimit of affines by \Cref{prop:separated-colimit-affines}. Following the proof there, we'd like to know that affine opens in $X$ are still of finite presentation, as are their overlaps. By \cite[01TU]{Stacks}, we know that an open subscheme $Y \subseteq X$ will be finitely presented if and only if it is quasi-compact. Affine opens in $X$ are quasi-compact simply because they are affine. The overlaps are not necessarily affine, but they can be refined by a finite union of affines since $X$ is a quasi-compact and quasi-separated, and these will be quasi-compact and hence finitely presented.
+\begin{proof} If $X$ is finite presentation, it is in particular qcqs, so we can write $X$ as a reflexive coequalizer of affines by \Cref{prop:separated-colimit-affines}. Following the proof there, we'd like to know that affine opens in $X$ are still of finite presentation, as are their overlaps. By \cite[01TU]{Stacks}, we know that an open subscheme $Y \subseteq X$ will be finitely presented if and only if it is quasi-compact. Affine opens in $X$ are quasi-compact simply because they are affine. The overlaps are not necessarily affine, but they can be refined by a finite union of affines since $X$ is a quasi-compact and quasi-separated, and these will be quasi-compact and hence finitely presented.
 \end{proof}
 
 Finite presentation is important since it allows for an elegant commutativity with certain filtered colimits, and is a warmup to some sheafy statements we will soon make. We'll phrase this in the general setting where we're working relative to a base scheme $S$, which currently has no assumptions. We first observe the following important result.
@@ -1850,7 +1849,7 @@ Finite presentation is important since it allows for an elegant commutativity wi
 
 \begin{proposition}[Limits are affine local on the target]
 \label{prop:limits-affine-local-on-target}
-If we have a cofiltered system $\left\{ T_i \right\}_{i\in I}$ of $S$-schemes with affine transition maps, then $\lim_i T_i =: T$ exists in $\Sch_S$. Moreover, any affine open $U \subseteq T$ ``comes from'' a $T_i$ in the sense that there exists some $i\in I$ and some affine open $U_i \subseteq T_i$ for which $U_i = \lim_{j\ge i} U_i \times_{T_i}T_j$.
+If we have a cofiltered system $\left\{ T_i \right\}_{i\in I}$ of qcqs $S$-schemes with affine transition maps, then $\lim_i T_i =: T$ exists in $\Sch_S$. Moreover, any affine open $U \subseteq T$ ``comes from'' a $T_i$ in the sense that there exists some $i\in I$ and some affine open $U_i \subseteq T_i$ for which $U = \lim_{j\ge i} U_i \times_{T_i}T_j$, that is, $U = U_i \times_{T_i} T$.
 \end{proposition}
 \begin{proof} Existence is \cite[01YW]{Stacks}, and the limit characterization of $U_i$ is \cite[01YZ]{Stacks}.
 \end{proof}
@@ -1860,31 +1859,30 @@ It's important to remember in \Cref{prop:limits-affine-local-on-target} that whe
 
 
 \begin{proposition}\label{prop:every-scheme-cofiltered-limit-of-fp-schemes}
-Every qcqs scheme $X\in \Sch_S$ is a cofiltered limit of finitely presented $S$-schemes.
+Every qcqs scheme $X\in \Sch_S$ over a qcqs base $S$ is a cofiltered limit of finitely presented $S$-schemes.
 \end{proposition}
-\begin{proof}[Sketch] Cover $X$ by finitely many affines $\Spec(A_i)$, and write each $A_i$ as a filtered colimit of its finitely generated subalgebras. Then descend the gluing data and glue.
+\begin{proof}[Sketch] Cover $X$ by finitely many affines $\Spec(A_i)$, and write each $A_i$ as a filtered colimit of finitely presented algebras. Then descend the gluing data and glue. A rigorous proof is in \cite[09MV]{Stacks}.
 \end{proof}
 
 
 \begin{proposition}\label{prop:fp-scheme-commute-filtered-colimits}
-Let $X\in\Sch_S$ be finitely presented, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of $S$-schemes with affine transition morphisms. Then the natural map
+Let $X\in\Sch_S$ be locally of finite presentation, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of qcqs $S$-schemes with affine transition morphisms. Then the natural map
 \begin{align*}
     \colim_{i\in I}\Hom_S(T_i,X) \xto{\sim} \Hom_S(\lim_{i\in I}T_i,X)
 \end{align*}
 is a bijection. In other words the representable functor $\Hom_S(-,X)$ commutes with cofiltered limits with affine transition maps.
 \end{proposition}
-\begin{proof} Since $\Hom_S(-,X)$ is a Zariski sheaf, we can try to understand $\Hom_S(T,X)$ by writing $T$ as a colimit of affines, and then gluing what happens together along these affines. A priori it's not clear that an affine $U \subseteq T$ is expressible as an $I$-indexed colimit of affines $U_i \subseteq T_i$, but this is \emph{precisely} what having affine transition maps allows us to say by \Cref{prop:limits-affine-local-on-target}. Hence we can reduce to the case $T= \Spec(A)$ and $T_i = \Spec(A_i)$.
+\begin{proof}[Proof sketch] See \cite[01ZC]{Stacks} for a rigorous proof.
+    
+Since $\Hom_S(-,X)$ is a Zariski sheaf, we can try to understand $\Hom_S(T,X)$ by writing $T$ as a colimit of affines, and then gluing what happens together along these affines. A priori it's not clear that an affine $U \subseteq T$ is expressible as an $I$-indexed limit of affines $U_i \subseteq T_i$, but this is \emph{precisely} what having affine transition maps allows us to say by \Cref{prop:limits-affine-local-on-target}. Hence we can reduce to the case $T= \Spec(A)$ and $T_i = \Spec(A_i)$.
 
-We now want to argue we can reduce to $X$ affine. By \Cref{prop:fp-scheme-colimit-fp-affines} we can write $X$ as a colimit
-\begin{align*}
-    V_1 \rightrightarrows V_2 \to X,
-\end{align*}
-where $V_i$'s are finitely presented affine $S$-schemes. Since $\Hom_S(T,-)$ commutes with colimits, it suffices to check the statement on the $V_i$'s and then glue. Hence we can restrict to the case $X = \Spec(B)$, with $B$ a finitely presented algebra.
-
-We have therefore reduced to the case where we want to know whether $\Hom(-,\Spec(B))$ commutes with cofiltered limits, or phrased differently whether $\Hom(B,-)$ commutes with filtered colimits. But this is true precisely by the statement that $B$ is finitely presented.
+Any two maps $a,b \colon T_i \to X$ that agree on $T$ will agree on some $T_{i'}$ for $i' \ge i$ since $X \to S$ is quai-separated and finitely presented closed conditions descend \cite[01ZM]{Stacks}. For surjectivity, given some $f\colon T \to X$ we can cover $X$ by finitely many affines $\{V_j\}$, and observe that the quasi-compact opens $f^{-1}(V_j)$ come from some $T_i$ by \cite[01Z4]{Stacks}. We can apply the affine case of this result, checking whether $\Hom(-,\Spec(B))$ commutes with cofiltered limits, or phrased differently whether $\Hom(B,-)$ commutes with filtered colimits. But this is true precisely by the statement that $B$ is finitely presented. We then glue using injectivity on overlaps.
 \end{proof}
 
 This is why finite presentation was important --- it is just a souped up version of the statement that finitely presented algebras are \emph{compact} in a categorical sense, i.e. they commute with filtered colimits.
+
+\begin{remark} We often want our category $\Sm_S$ of smooth $S$-schemes to only consist of finitely presented $S$-schemes. This is done in the literature either by defining $\Sm_S$ to be smooth + finitely presented, or by assuming $S$ is locally Noetherian so every smooth finite type $S$ scheme is finitely presented.
+\end{remark}
 
 % An important categorical remark is the following:
 
@@ -1996,13 +1994,13 @@ where $i$ is an open immersion, $p$ is \'etale, and $p$ restricts to an isomorph
 
 \begin{example}[Affine distinguished Nisnevich squares]
 \label{ex:affine-distinguished-nisnevich-square}
-Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $x\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
+Suppose $f: R \to S$ is an \'etale ring homomorphism, and $x\in R$ is some element for which $R/x \cong S/f(x)$ is a ring isomorphism. Then we have a distinguished Nisnevich square:
 \[ \begin{tikzcd}
     \Spec(S_{f(x)})\rar\dar\pb & \Spec(S)\dar\\
-    \Spec(R_f)\rar & \Spec(R).
+    \Spec(R_x)\rar & \Spec(R).
 \end{tikzcd} \]
 \end{example}
-\begin{proof} The right map is \'etale, the bottom is an open immersion, and the restriction of $\Spec(S) \to \Spec(R)$ to the complement of the open distinguished affine $D(f) \subseteq \Spec(R)$ is the hypyothesis that $R/x \cong S/f(x)$.
+\begin{proof} The right map is \'etale, the bottom is an open immersion, and the restriction of $\Spec(S) \to \Spec(R)$ to the complement of the open distinguished affine $D(x) \subseteq \Spec(R)$ is the hypothesis that $R/x \cong S/f(x)$.
 \end{proof}
 
 \begin{definition} We say $\mathcal{F} \in \Pre(\Sm_S)$ is a \textit{Nisnevich sheaf} if $\mathcal{F}(\emptyset)= \ast$ and $\mathcal{F}$ sends every distinguished Nisnevich square to a pullback square.
@@ -2015,7 +2013,7 @@ Suppose $f: R \to S$ is a finite \'etale ring homomorphism, and $x\in R$ is some
 
 \subsection{Sheafification and accessible localizations}
 
-\begin{definition} \cite[5.4.2.5]{HTT} We say a functor between accessible $\infty$-categories is \textit{accessible} if it is $\kappa$-continuous (i.e., preserves $\kappa$-limits by a regular cardinal $\kappa$).
+\begin{definition} \cite[5.4.2.5]{HTT} We say a functor between accessible $\infty$-categories is \textit{accessible} if it is $\kappa$-cocontinuous (i.e., preserves $\kappa$-filtered colimits for some regular cardinal $\kappa$).
 \end{definition}
 
 \begin{definition} If $\mathscr{C} \subseteq \mathscr{D}$, then we say a localization $L \colon \mathscr{D} \to \mathscr{C}$ is \textit{accessible} if and only if the composite $\mathscr{D} \xto{L} \mathscr{C} \hookto \mathscr{D}$ is accessible. If $\mathscr{D}$ is an accessible category, this is equivalent to the statement that $\mathscr{C} \subseteq \mathscr{D}$ is an accessible subcategory \cite[5.5.4.2]{HTT}.
@@ -2050,7 +2048,7 @@ Some consequences:
 \begin{enumerate}
     \item The \textit{sheafification} functor $L_\tau \colon \Pre(\mathscr{C}) \to \Shv_\tau(\mathscr{C})$ preserves all colimits (being a left adjoint) and finite limits (being left exact).
 
-    \item The inclusion functor $i \colon \Shv_\tau(\mathscr{C}) \hookto \Pre(\mathscr{C})$ preserves all limits and all filtered colimits, by the adjoint functor theorem.
+    \item The inclusion functor $i \colon \Shv_\tau(\mathscr{C}) \hookto \Pre(\mathscr{C})$ preserves all limits and all $\kappa$-filtered colimits, by the adjoint functor theorem. If the topology is given by a cd-structure, then the inclusion preserves all filtered colimits. The reason is that the sheaf condition is a family of pullback squares, and arbitrary filtered colimits of spaces commute with pullbacks.
 \end{enumerate}
 \end{corollary}
 
@@ -2097,8 +2095,6 @@ simplicial objects in set-valued presheaves naturally give rise to $\infty$-cate
 
 Here's where our discussion about cofiltered limits of schemes comes back to play an important role.
 
-
-
 \begin{definition}\label{def:continuous-sheaf}
 Let $\tau$ be any Grothendieck topology on $\Sch_S$. We say that a sheaf $F\in \Shv_\tau(\Sch_S)$ is \emph{continuous} if, for any cofiltered limit of schemes $\left\{ T_i \right\}_{i\in I}$ in $\Sch_S$, with affine transition maps and limit $T$, the induced map
 \begin{align*}
@@ -2107,30 +2103,37 @@ Let $\tau$ be any Grothendieck topology on $\Sch_S$. We say that a sheaf $F\in \
 is an equivalence.
 \end{definition}
 
-We can ask when a sheaf topos is continuous, and for the basic ones we want to talk about in motivic homotopy theory (Zariski, Nisnevich, \'etale), they are. The fppf and fpqc sites are \emph{not} continuous! This is an important distinction, and it comes from the fact that the Zariski/Nisnevich/\'etale topologies are generated by finitely presented morphisms while fppf/fpqc are not. More precisely:
+\begin{definition} For any qcqs base scheme $S$ denote by $\EssSm_S\subseteq \Sch_S$ the category of \emph{essentially smooth} $S$-schemes. That is, it is the closure of $\Sm_S$ in $\Sch_S$ under cofiltered limits with affine transition maps.
+\end{definition}
 
-\begin{theorem}\label{thm:zar-nis-etale-topoi-are-continuous} 
-The Zariski, Nisnevich, and \'etale sheaf topoi are continuous.
+
+\begin{theorem}\label{thm:zar-nis-topoi-are-continuous} Let $S$ be qcqs and let $F$ be any Zariski (resp. Nisnevich) sheaf on the category $\Sm_S$ of smooth finitely presented $S$-schemes. Then the left Kan extension of $F$ to $\EssSm_S$ is a Zariski (resp. Nisnevich sheaf), and moreover is the unique continuous extension of $F$ to $\EssSm_S$.
 \end{theorem}
-\begin{proof} Since every sheaf $F$ is the colimit of representables, we can reduce to the case of $F = h_X$, and since $X = \colim_i U_i$ is covered by affines and we are in the Zariski site or finer, we have that $h_X = \colim_i h_{U_i}$, so we can restrict to the case where $X$ is affine. Since Zariski open immersions valued in affines are finitely presented, and \'etale morphisms are finitely presented, we can find a cover of $X$ by finitely presented affine schemes $V_\alpha$, and then in the sheaf topos we have that $h_X = \colim h_{V_\alpha}$, so we can restrict to $X$ affine and finitely presented. Thus we just want to argue that the representable functor attached to a finitely presented affine scheme is continuous, and we already proved this in \Cref{prop:fp-scheme-commute-filtered-colimits}.
+\begin{proof} We first argue representables extend correctly. Let $X\in \Sm_S$ and consider the representable sheaf $h_X \colon \Sm_S^\op \to \mathcal{S}$. By \Cref{prop:fp-scheme-commute-filtered-colimits} this extends uniquely to $\EssSm_S$ - that is, its value on some $T\in \EssSm_S$ doesn't depend upon the presentation of $T$.
+
+Since open immersions and \'etale maps are finitely presented, every distinguished square (in the Zariski or Nisnevich site) over an essentially smooth $T$ is base changed from a distinguished square over some $T_i \in \Sm_S$, where $\lim_i T_i = T$ - this is by \cite[01ZM,07RP]{Stacks}.
+
+Finally, we have to check the sheaf condition passes through the colimit building the Kan extension. Indeed since filtered colimits of spaces commute with pullbacks, the Kan extension of any $F$ to $\EssSm_S$ still sends distinguished squares to pullbacks.
 \end{proof}
+
+\begin{remark} The proof above does not work for the \'etale topology, since its descent condition is a totalization not a pullback, and totalization (unlike pullbacks) need not commute with filtered colimits. It only holds if we impose some extra conditions, e.g. we truncate the \'etale sheaves or we add an assumption like finite cohomological dimension.
+\end{remark}
 
 We'll do a core example:
 
 \begin{notation}\label{nota:HenXx} 
-For any scheme $x\in X$, we denote by $\Hen_{X,x}$ the category of $f \colon (Y,y) \to (X,x)$ where $f \colon Y \to X$ is \'etale, $f(y) = x$, and $f$ induces an isomorphism $k(x) \xto{\sim} k(y)$.
+For any scheme $X$ and any point $x\in X$, we denote by $\Hen_{X,x}$ the category of $f \colon (Y,y) \to (X,x)$ where $f \colon Y \to X$ is \'etale, $f(y) = x$, and $f$ induces an isomorphism $k(x) \xto{\sim} k(y)$.
 \end{notation}
 
 \begin{proposition}\label{prop:HenXx-cofiltered} For any scheme $X$ and any point $x\in X$:
 \begin{enumerate}
     \item $\Hen_{X,x}$ is cofiltered
-    \item If we let $\Hen_{X,x}^\aff \subseteq \Hen_{X,x}$ denote the full subcategory of those $(Y,y)$ for which $Y$ is affine, we have that $\Hen_{X,x}^\aff$ is cofinal and cofiltered.
+    \item If we let $\Hen_{X,x}^\aff \subseteq \Hen_{X,x}$ denote the full subcategory of those $(Y,y)$ for which $Y$ is affine, we have that $\Hen_{X,x}^\aff$ is initial and cofiltered.
     \item The limit of $\Hen_{X,x}^\aff$ and $\Hen_{X,x}$ agree when computed in schemes.
 \end{enumerate}
 \end{proposition}
-\begin{proof} A proof of cofilteredness in the affine setting is in \cite[04GV]{Stacks}. Cofinality follows by the fact that if $Y \to X$ is \'etale, any affine open $U \subseteq Y$ is still \'etale over $X$, so we can restrict to affines by gluing. The limit statement does \emph{not} follow by cofinality since cofinality concerns colimits; it instead follows from the fact that Henselization can be computed on $\Spec(\mathcal{O}_{X,x})$, so we can restrict to affines if we like.
+\begin{proof} A proof of cofilteredness in the affine setting is in \cite[04GV]{Stacks}. The initial property follows by the fact that if $Y \to X$ is \'etale, any affine open $U \subseteq Y$ is still \'etale over $X$, so we can restrict to affines by gluing. The limit statement follows since the subcategory is initial
 \end{proof}
-
 
 \begin{definition}\label{def:henselization} For any $x\in X$, we denote by $X_x^h$ the limit
 \begin{align*}
@@ -2139,16 +2142,7 @@ For any scheme $x\in X$, we denote by $\Hen_{X,x}$ the category of $f \colon (Y,
 % This limit exists by \Cref{prop:limits-affine-local-on-target} and \Cref{prop:HenXx-cofiltered}.
 \end{definition}
 
-\begin{proposition}\label{prop:Nis-scheme-conts-henselization} Let $F$ be a Nisnevich sheaf, let $X$ be a scheme, and let $x\in X$. Then the natural map
-\begin{align*}
-    \colim_{(Y,y)\in \Hen_{X,x}} F(Y) \to F(X_x^h)
-\end{align*}
-is an equivalence.
-\end{proposition}
-\begin{proof} Since we are now taking a \emph{colimit} indexed over $\Hen_{X,x}$, it suffices to restrict to $\Hen_{X,x}^\aff$ by cofinality (\Cref{prop:HenXx-cofiltered}). Now we are asking about a colimit of values on a sheaf indexed over $\Hen_{X,x}^\aff$. This category is cofiltered, and the transition maps are now affine (since we're now only looking at affine schemes). Hence this becomes a corollary of continuity in the Nisnevich site (\Cref{thm:zar-nis-etale-topoi-are-continuous}).
-\end{proof}
-
-This becomes helpful when we discuss equivalences of sheaves and presheaves --- however we don't exactly know what kind of equivalence we want to study quite yet. 
+Let $X\in \Sm_S$, let $F$ be a Nisnevich sheaf on $\Sm_S$. Then by \Cref{thm:zar-nis-topoi-are-continuous}, $F$ extends uniquely to take values on the essentially smooth scheme $X_x^h$. This becomes helpful when we discuss equivalences of sheaves and presheaves --- however we don't exactly know what kind of equivalence we want to study quite yet. 
 
 \subsection{Nisnevich descent}
 
@@ -2188,7 +2182,8 @@ We're sweeping something under the rug, namely that there are \emph{enough} geom
 
 Let's recall that an equivalence between (pre)sheaves of spaces is checked levelwise. What this means is that if $f \colon F \to G$ is a map of (pre)sheaves, it is an equivalence if and only if for every $U$, the induced map $F(U) \to G(U)$ is an equivalence of spaces. We are working with a nice model for spaces (e.g. one in which Whitehead's theorem holds and each space is approximated by a CW complex), so this is equivalent to checking $\pi_n(F(U)) \to \pi_n(G(U))$ is an abelian group isomorphism for every $U$.\footnote{There's a subtlety here we'll see soon.} We need to pick a basepoint compatibly in $F(U)$ for every $U$, so let's first make this definition:
 
-\begin{definition} Let $\Delta^0\in \Sh_\tau(\Sm_S)$ denote the sheafification of the constant presheaf at the one-point space.\footnote{One can check that $\Delta^0$ is isomorphic to $h_S$.} This is terminal in $\Sh_\tau(\Sm_S)$, and we denote by
+\begin{definition}\label{def:terminal-sheaf}
+Let $\Delta^0\in \Sh_\tau(\Sm_S)$ denote the sheafification of the constant presheaf at the one-point space.\footnote{One can check that $\Delta^0$ is isomorphic to $h_S$.} This is terminal in $\Sh_\tau(\Sm_S)$, and we denote by
 \begin{align*}
     \Sh_\tau(\Sch_S)_\ast = \Sh_\tau(\Sch_S)_{\Delta^0 /}
 \end{align*}
@@ -2207,17 +2202,16 @@ For a pointed presheaf $F\in \PSh(\Sm_S)_{\Delta^0 /}$, we define $\pi_n(F)\in \
 where $x \colon \Delta^0 \to F(U)$ is our given basepoint.
 \end{definition}
 
-\begin{proposition}\label{prop:htpy-sheaf-of-sheaf-is-sheaf} If $F$ is a sheaf of spaces, then the homotopy presheaf defined by \Cref{eqn:homotopy-group-presheaf} is already a sheaf of sets.
+\begin{remark} Even if $F$ is a sheaf of spaces, it is not necessarily true that $\pi_n F$ will automatically be a sheaf of sets, we may again have to sheafify. For instance we can take $F = B_\Nis \Gm$, so $\pi_0 F(U) = \Pic(U)$, which need not be a sheaf.
+\end{remark}
+
+\begin{proposition} For any presheaf of pointed spaces $F$ and any point $x$ there is a natural isomorphism
+\begin{align*}
+    \pi_n(F)_x \cong \pi_n(F_x).
+\end{align*}
 \end{proposition}
-\begin{proof} It's not true that homotopy groups $\pi_n$ preserve infinite limits, but they do preserve finite ones, so it would be great if we could truncate the $\DDelta$-indexed diagram
-\begin{align*}
-    F(U) \xto{\sim} \lim_{\DDelta} \left( F(\amalg U_i) \rightrightarrows F(\amalg U_{ij}) \rightrightarrows \cdots  \right).
-\end{align*}
-However note that $\pi_n$ of a space only depends on its $n$-truncation! So we can truncate all the spaces, and use the coskeleton lemma \Cref{lem:coskeleton-lemma} to truncate the diagram. This gives
-\begin{align*}
-    \tau_{\le n} F(U) \xto{\sim} \lim_{\DDelta_{\le (n+1)}} \tau_{\le n} F(U_\ast).
-\end{align*}
-We now have that $\pi_n$ preserves this limit.
+\begin{proof} 
+Sheafification does not affect stalks, and $\pi_n$ commutes with filtered colimits of spaces.
 \end{proof}
 
 Let's check some other properties of $\pi_n$. We first need some notation:
@@ -2240,7 +2234,7 @@ Let's check some other properties of $\pi_n$. We first need some notation:
     $\pi_1$ is a sheaf of groups, and $\pi_n$ is a sheaf of abelian groups for $n\ge 2$.
 \end{enumerate}
 \end{proposition}
-\begin{proof} For (\ref{loops-on-sheaf}) we recall that $\Omega$ is a colimit, hence computed sectionwise. Thus $(\Omega F)(U) = \Omega F(U)$, so the proof reduces to the compatibility between loops and homotopy groups in spaces. Then (\ref{pi-n-sheaf-of-groups}) follows immediately.
+\begin{proof} For (\ref{loops-on-sheaf}) we recall that $\Omega$ is a limit, hence computed sectionwise. Thus $(\Omega F)(U) = \Omega F(U)$, so the proof reduces to the compatibility between loops and homotopy groups in spaces. Then (\ref{pi-n-sheaf-of-groups}) follows immediately.
 \end{proof}
 
 \begin{remark} There is a more intrinsic definition of $\pi_n$, leveraging that an $\infty$-topos is cotensored over spaces,\footnote{%
@@ -2255,7 +2249,6 @@ and considering the map $X^{S^n} \to X$ in the slice topos $\Shv_{/X}$, and defi
 \begin{definition} \cite[6.5.1.10]{HTT} Let $\mathscr{C}$ be an $\infty$-topos, and take $X\in \mathscr{C}$.
 \begin{enumerate}
     \item We say $X$ is $n$\textit{-connective} if $\pi_k(X,x) = \ast$ for every $k<n$ and for every basepoint $x$.
-
     \item We say that $X$ is \textit{connected} if it is 1-connective, meaning $\tau_{\le 0} X = \ast$.
     \item We say $X$ is $n$\textit{-truncated} if $\pi_k(X,x) = \ast$ for all $k>n$ and for every basepoint $x$.
 \end{enumerate}
@@ -2269,8 +2262,7 @@ Let $\mathscr{C}$ denote a presentable category and $\tau_{\le k} \mathscr{C} \s
 For any presentable $\infty$-category, we denote by $\mathscr{C}_{\le n}$ or $\tau_{\le n}\mathscr{C}$ the full subcategory spanned by the $n$-truncated objects.
 \end{notation}
 
-
-\noindent In particular, the collection of $n$-truncated spaces is closed under limits.
+In particular, the collection of $n$-truncated spaces is closed under limits.
 
 \begin{definition} If $(\mathscr{C},\tau)$ is any site, then the category $\tau_{\le 0}\Sh_\tau(\mathscr{C}) =: \Sh_\tau(\mathscr{C}) _{\le 0}$ is the category of sheaves of sets $\Sh_\tau(\mathscr{C};\Set)$.
 \end{definition}
@@ -2299,10 +2291,6 @@ Let $f \colon F \to G$ be a map of sheaves in the Nisnevich topos $\Shv_\Nis(\Sc
 \begin{proof} Checking $\infty$-connectivity is equivalent to checking equivalence on homotopy sheaves. Since we have enough points, this can be done at the level of henselian local schemes by \Cref{cor:morphism-nis-sheaves-of-sets-determined-by-henselian-local-schemes}.
 \end{proof}
 
-
-
-
-
 Recall the following result from topology:
 \begin{theorem}[Whitehead's theorem]
 Let $f \colon X \to Y$ be a map of CW complexes. Then $f$ is a homotopy equivalence if and only if $f \colon \pi_i(X) \to \pi_i(Y)$ is an isomorphism for each $i\ge0$.
@@ -2311,7 +2299,7 @@ Let $f \colon X \to Y$ be a map of CW complexes. Then $f$ is a homotopy equivale
 A way to say this is that ``$\infty$-connective morphisms are homotopy equivalences.'' The $\infty$-categorical analogue of this is the notion of \textit{hypercompleteness}.
 
 \begin{definition}
-An $\infty$-topos is \textit{hypercomplete} if and only if every object is $\infty$-connective.
+An $\infty$-topos is \textit{hypercomplete} if and only if every $\infty$-connective morphism is an equivalence.
 \end{definition}
 \begin{warning} The \'etale topos $\Shv_\et(\Sm_S)$ need not be hypercomplete, even for nice $S$ (reference needed).
 \end{warning}
@@ -2347,7 +2335,6 @@ The former definition implies the second, and it is still open as to whether the
 \begin{slogan} The notion of Postnikov completion in HTT should be thought of as the statement that ``Postnikov towers converge.'' In particular it should be considered as a green light for obstruction theory.
 \end{slogan}
 
-
 For $\infty$-topoi, all these notions are related via the following:
 
 \begin{proposition}\label{prop:htpy-dim-Postnikov-complete-hypercomplete} 
@@ -2364,7 +2351,7 @@ The first implication is \cite[7.2.1.10]{HTT}, the latter is basically by defini
 Our main use for the results above will be the following theorem of Voevodsky.
 
 \begin{theorem}[{\cite[3.7.7.1]{SAG}, see also~\cite[2.27]{voevodskyHomotopyTheorySimplicial2010}}]
-If $S$ is qcqs and Noetherian of finite dimension, then for any $X\in \Sm_S$, we have that $\Shv_\Nis(\Sm_S)_{/X}$ has homotopy dimension bounded above by $\dim(S)$.
+If $S$ is qcqs and Noetherian of finite dimension, then for any $X\in \Sm_S$, we have that $\Shv_\Nis(\Sm_S)_{/X}$ has homotopy dimension bounded above by $\dim(X)$.
 \end{theorem}
 
 \begin{corollary} The sheaf topos $\Shv_\Nis(\Sm_S)$ is hypercomplete, in particular Postnikov towers converge.
@@ -2374,8 +2361,8 @@ If $S$ is qcqs and Noetherian of finite dimension, then for any $X\in \Sm_S$, we
 
 This now means we can work in a hypercomplete topos without worry, and we can detect equivalences stalkwise!
 
-\begin{remark} Prior to Voevodsky's work, there were a few competing model structures on simplicial presheaves, in particular the projective and the ``local'' model structure. The projective one checked weak equivalences levelwise (we might think about it as a model structure for the $\infty$-topos) and the local model structure had stalkwise weak equivalences (a model structure for the hypercompletion of the $\infty$-topos). The theorem above, in model category language, is a Quillen equivalence between these model structures.
-\end{remark}
+% \begin{remark} Prior to Voevodsky's work, there were a few competing model structures on simplicial presheaves, in particular the projective and the ``local'' model structure. The projective one checked weak equivalences levelwise (we might think about it as a model structure for the $\infty$-topos) and the local model structure had stalkwise weak equivalences (a model structure for the hypercompletion of the $\infty$-topos). The theorem above, in model category language, is a Quillen equivalence between these model structures.
+% \end{remark}
 
 \subsection{Local equivalences}
 
@@ -2389,7 +2376,7 @@ What is the big advantage in passing from sectionwise to stalkwise equivalences?
 is an equivalence of sheaves.
 \end{definition}
 
-\begin{proposition}\label{prop:stalkwise-iff-local-equivalence} For a map of presheaves $f \colon F \to G$, the following are equivalent:
+\begin{proposition}\label{prop:stalkwise-iff-local-equivalence} For a map of presheaves $f \colon F \to G$ on $\Sm_S$, the following are equivalent:
 \begin{enumerate}
     \item $f$ is a local equivalence
     \item for every $X\in \Sch_S$ and $x\in X$, we have that the induced map
@@ -2399,12 +2386,8 @@ is an equivalence of sheaves.
     is an equivalence.
 \end{enumerate}
 \end{proposition}
-\begin{proof} For the forward direction, we use that $L_\Nis$ is a left adjoint, so we can commute it with the colimits, after which this is clearly true. For the backwards direction, suppose we know we have such equivalences on colimit diagrams over henselian neighborhoods. We want to check if $f$ is a local equivalence, so we use that $L_\Nis$ is a left adjoint again to commute with colimits, after which we apply \Cref{prop:Nis-scheme-conts-henselization} to see that $L_\Nis$ is a stalkwise equivalence. Finally by hypercompleteness, a stalkwise equivalence is equivalent to a sectionwise equivalence, so we conclude that $f$ is indeed a local equivalence.
+\begin{proof} For the forward direction, we use that $L_\Nis$ is a left adjoint, so we can commute it with the colimits, after which this is clearly true. For the backwards direction, suppose we know we have such equivalences on colimit diagrams over henselian neighborhoods. We want to check if $f$ is a local equivalence, so we use that $L_\Nis$ is a left adjoint again to commute with colimits, after which we apply continuity to see that $L_\Nis$ is a stalkwise equivalence. Finally by hypercompleteness, a stalkwise equivalence is equivalent to a sectionwise equivalence, so we conclude that $f$ is indeed a local equivalence.
 \end{proof}
-
-
-
-
 
 % \vspace{1em}\hrule
 % \begin{center}
@@ -2448,7 +2431,7 @@ is a local equivalence of presheaves.
 
 \begin{remark} (How to prove this)
 \begin{enumerate}
-    \item  One way to prove this is by identifying the sheaf topos, viewed as a simplicial model category, with the Bousfield localization of the category of simplicial presheaves, endowed with the projective model structure, at the class of hypercovers in the topology. We insist on $S$ being qcqs and Noetherian so we don't have to stress about the difference between covers and hypercovers here, although there is a more general statement over any base. This follows a body of work by Jardine, Bousfield and Kan, Dugger, Hollander, Isaksen, and others.
+    \item  One way to prove this is by identifying the sheaf topos, viewed as a simplicial model category, with the Bousfield localization of the category of simplicial presheaves, endowed with the projective model structure, at the class of \v{C}ech covers in the topology. We insist on $S$ being qcqs and Noetherian so we don't have to stress about the difference between covers and hypercovers here, although there is a more general statement over any base. This follows a body of work by Jardine, Bousfield and Kan, Dugger, Hollander, Isaksen, and others.
     \item Another direction is by formal nonsense of $\infty$-topos theory. For instance if $X\in \Sm_S$, we can apply \cite[A.5.3.1]{SAG} to the \v{C}ech nerve of a cover after pulling it back to the slice topos $\Shv_{\tau}(\Sm_S)_{/X}$.
 \end{enumerate}
 
@@ -2461,10 +2444,8 @@ What about classifying spaces $B_{\bullet}\mathcal{G}\in \Pre(\Sch_S)$? We would
 
 \begin{example} We have that $B_\et \Sigma_n = \FEt_n$, where $\Sigma_n$ is the symmetric group on $n$ elements and $\FEt_n$ is the sheaf of \'etale schemes of degree $n$ over an input scheme.
 \end{example}
-\begin{proof} We first claim there is a natural map of presheaves $B\Sigma_n \to \FEt_n$. To see this, it is helpful to think of $B\Sigma_n = [\ast/\Sigma_n]$ as the constant presheaf valued at the one-object groupoid $\Sigma_n$. On some $U$, we have a map of groupoids $B\Sigma_n \to \FEt_n$ sending the point to $U^{\times n}$ and sending a morphism to the induced permutation action on $U^{\times n}$. We claim this is a local equivalence in the \'etale topos, i.e. it becomes an equivalence of sheaves after sheafifying. To verify this, it suffices to check it is a stalkwise equivalence
+\begin{proof} We first claim there is a natural map of presheaves $B\Sigma_n \to \FEt_n$. To see this, it is helpful to think of $B\Sigma_n = [\ast/\Sigma_n]$ as the constant presheaf valued at the one-object groupoid $\Sigma_n$. On some $U$, we have a map of groupoids $B\Sigma_n \to \FEt_n$ sending the point to $\amalg_n U$ and sending a morphism to the induced permutation action on $\amalg_n U$. We claim this is a local equivalence in the \'etale topos, i.e. it becomes an equivalence of sheaves after sheafifying. To verify this, it suffices to check it is a stalkwise equivalence
 \end{proof}
-
-
 
 \begin{example}
 For any $\mathcal{G}$, we have a stack of $\mathcal{G}$-torsors, which we denote by
@@ -2474,16 +2455,13 @@ For any $\mathcal{G}$, we have a stack of $\mathcal{G}$-torsors, which we denote
 This gives rise to a sheaf $B\Tors_\tau(\mathcal{G})$ by post-composing with the nerve (\autoref{exa:tau-sheaves}).
 \end{example}
 
-
-
-
 \begin{theorem}\label{thm:BG-BTorsG} 
 \cite[2.3.2]{AHW2}
 There is a morphism of simplicial presheaves $B_\bullet \mathcal{G} \to B\Tors_\tau(\mathcal{G})$, defined on sections by sending the unique vertex of $B_\bullet \mathcal{G}(U)$ to the trivial $\mathcal{G}$-torsor over $U$. This map is a local equivalence.
 \end{theorem}
 
 \begin{corollary}\label{cor:BG-representability-sheaf-topos} 
-For any $\tau$-sheaf of groups $\mathcal{G}$, there is a natural isomorphism of sheaves of sets
+For any $\tau$-sheaf of groups $\mathcal{G}$, there is a natural isomorphism of presheaves of sets
 \begin{align*}
     [-, B_\tau \mathcal{G}]_\tau = \pi_0 \Map_{\Shv_\tau(\Sch_S)}(-,B_\tau \mathcal{G}) \cong H^1_\tau(-,\mathcal{G}).
 \end{align*}
@@ -2530,12 +2508,6 @@ Since $\pi$ admits a section, all differentials along the $p$-axis vanish. Simil
 \end{align*}
 \end{proof}
 
-
-
-
-
-
-
 % \subsection{Change of site}
 
 % todo:
@@ -2543,12 +2515,25 @@ Since $\pi$ admits a section, all differentials along the $p$-axis vanish. Simil
 %     \item explain $B_\et G$ and examples, including $\Et_\ast = B_\et \amalg_{n\ge0}B\Sigma_n$
 % \end{itemize}
 
+\subsection{On the relevant model structures}
+Let $\tau$ be a Grothendieck topology on $\Sch_S$. We have that the relevant model structures for the various categories here are:
+\begin{center}
+\begin{tabular}{|c | c | c|}
+    \hline
+    description & $\infty$-category & model structure\\
+    \hline\hline
+    presheaf category & $\PSh(\Sch_S)$ & projective model structure\\
+    sheaf topos & $\Sh_\tau(\Sch_S)$ & \v{C}ech-local model structure\\
+    hypercompletion of sheaf topos & $\Sh_\tau(\Sch_S)^\wedge$ & Jardine's local model structure\\
+    \hline
+\end{tabular}
+\end{center}
+In particular for smooth schemes over a field in the Nisnevich site, the latter two are Quillen equivalent (reference needed), which is the model-theoretic analogue of the statement that $\Shv_\Nis(\Sm_k)$ is hypercomplete.
 
 
 \section{Bonus: more category theory}
 
 \input{appendices/category-theory.tex}
-
 
 \chapter{Motivic spaces}
 \minitoc
@@ -2657,7 +2642,7 @@ by the formula
 \begin{proof}[Proof sketch]
 We want to prove for any $X\in \Sch_S$ that the projection map $\pi \colon X \times \A^1 \to X$ induces an equivalence
 \begin{align*}
-    \pi^\ast \colon (\Sing F)(X \times \A^1) \to (\Sing F)(X).
+    \pi^\ast \colon (\Sing F)(X) \to (\Sing F)(X \times \A^1).
 \end{align*}
 %
 Let $z \colon X \to X \times \A^1$ denote the zero section. Then we claim $z^\ast$ exhibits a simplicial homotopy equivalence with $\pi^\ast$. Since $\pi z = \id$, it is clear that $z^\ast \pi^\ast = \id$, so it suffices to exhibit a simplicial homotopy $\pi^\ast z^\ast \simeq \id$. Since any functor will preserve simplicial homotopies, and geometric realizations will send simplicial homotopies to honest homotopies, it suffices to exhibit a homotopy of cosimplicial simplicial varieties
@@ -2693,7 +2678,7 @@ induces an equivalence between the maps $\Sing(\eta_{(-)})$ and $\eta_{\Sing(-)}
 \end{proof}
 
 \begin{proposition}\label{prop:la1-sends-proj-to-equivalence} 
-For any $X\in \Sm_S$, we have that $X \times \A^n_S \to X$ is an equivalence after $\A^n$-localization.
+For any $X\in \Sm_S$, we have that $X \times \A^n_S \to X$ is an equivalence after $\A^1$-localization.
 \end{proposition}
 \begin{proof} For $n=1$ this is by definition of the localization, and for higher $n$ this follows from $L_{\A^1}$ preserving finite products.
 \end{proof}
@@ -2771,7 +2756,7 @@ By cofinality (\autoref{exa:even-odd-cofinal}), this is canonically equivalent t
     &\colim \left( L_\Nis \circ L_{\A^1} \to (L_\Nis \circ L_{\A^1})^{\circ 2} \to \cdots  \right) \\
     &\colim \left( L_{\A^1}\circ L_\Nis \to ( L_{\A^1} \circ L_\Nis)^{\circ 2} \to \cdots  \right).
 \end{align*}
-The former is a colimit computed in $\Shv_\Nis(\Sm_k)$, which is closed under filtered colimits by \autoref{prop:shv-and-a1-invariant-presheaves-are-accessible-subcats}, hence the resulting object is a sheaf. The latter is a colimit computed in $\Pre_{\A^1}(\Sm_k)$, which is also closed under filtered colimits (again by \autoref{prop:shv-and-a1-invariant-presheaves-are-accessible-subcats}), hence it is $\A^1$-invariant.
+The former is a colimit computed in $\Shv_\Nis(\Sm_k)$, which is closed under filtered colimits since the Nisnevich topology is finitary (todo- add proof earlier), hence the resulting object is a sheaf. The latter is a colimit computed in $\Pre_{\A^1}(\Sm_k)$, which is also closed under filtered colimits (by \autoref{prop:shv-and-a1-invariant-presheaves-are-accessible-subcats}), hence it is $\A^1$-invariant.
 \end{remark}
 
 
@@ -2818,7 +2803,7 @@ We have that $L_\mot$ is \textit{not left exact}. In particular $\Spc(k)$ is not
 \begin{proposition}\label{prop:terminal-object-motivic-spaces} 
 We have that $\Delta^0 \cong S$ in $\Spc(S)$, and moreover these are terminal, hence we will often denote them by $\ast$.
 \end{proposition}
-\begin{proof} This follows from $\Spc(S) \subseteq \Shv_\Nis(\Sm_S)$ being an accessible subcategory (hence preserving terminal objects) together with \autoref{prop:terminal-object-sheaves}.
+\begin{proof} This follows from $\Spc(S) \subseteq \Shv_\Nis(\Sm_S)$ being an accessible subcategory (hence preserving terminal objects) together with \autoref{def:terminal-sheaf}.
 \end{proof}
 
 \begin{proposition} The map to the terminal object in schemes $\A^n_S \to S$ is a motivic equivalence.
@@ -3127,7 +3112,7 @@ sending $0$ to the identity and $1$ to $M$. Since $\SL_n$ is generated by elemen
 \begin{align*}
     \left[ \Sigma^n U_+, X \right]_{\Spc(S)_\ast} \cong \left[ U_+, \Omega^n X \right]_{\Spc(S)_\ast} = \left[ U, \Omega^n X \right]_{\Spc(S)}.
 \end{align*}
-The latter is the presheaf attached to $\pi_n(X,x)$ by \autoref{prop:pi-n-loops}.
+The latter is the presheaf attached to $\pi_n(X,x)$ by \autoref{prop:properties-of-pi-n-sheaf}.
 \end{proof}
 
 \begin{proposition}\label{prop:motivic-equiv-can-be-checked-on-htpy-sheaves} 
@@ -3201,7 +3186,8 @@ Let $\mathcal{G}$ denote a Nisnevich sheaf of groups. Since $\mathcal{G}(X) = H^
 is $\A^1$-invariant.
 
 
-\begin{definition} Let $\mathcal{G}$ be a Nisnevich sheaf of groups over $S$. Then we say
+\begin{definition}\label{def:strongly-strictly}
+Let $\mathcal{G}$ be a Nisnevich sheaf of groups over $S$. Then we say
 \begin{enumerate}
     \item $\mathcal{G}$ is $\A^1$\textit{-invariant} if $H^0_\Nis(X; \mathcal{G}) \to H^0_\Nis(X \times \A^1 ; \mathcal{G})$ is an equivalence for every $X\in \Sm_S$
     \item $\mathcal{G}$ is \textit{strongly $\A^1$-invariant} if
@@ -3355,11 +3341,11 @@ This data is subject to the axioms
 \end{tikzcd} \]
 If the field extension $\kappa(v) \to \kappa(w)$ is an isomorphism then this square is cartesian.
 
-    \item[\textbf{A2}] If $X$ is irreducible with function field $F$, and $m\in M(F)$, then $m$ lies in all but a finite number of $S(\mathcal{O}_{X,x})$, where $x\in X^{(1)}$.
+    \item[\textbf{A2}] If $X$ is irreducible with function field $F$, and $m\in M(F)$, then $m$ lies in all but a finite number of $M(\mathcal{O}_{X,x})$, where $x\in X^{(1)}$.
     \item[\textbf{A3(i)}] If $(E,w) \subseteq (F,v)$ is an extension in $\mathcal{F}_k$, then the diagram commutes:
 \[ \begin{tikzcd}
-    M(\mathcal{O}_v)\dar\rar[dashed] & M(\mathcal{O}_w)\dar\\
-    M(\kappa(v))\rar & M(\kappa(w)).
+    M(\mathcal{O}_w)\dar\rar[dashed] & M(\mathcal{O}_v)\dar\\
+    M(\kappa(w))\rar & M(\kappa(v)).
 \end{tikzcd} \]
     
     \item[\textbf{A3(ii)}] If $E \subseteq F$ is an extension in $\mathcal{F}_k$ and $v$ a discrete valuation on $F$ restricting to zero on $E$, and $j \colon E \hookto \kappa(v)$ the induced field extension, then the diagram commutes
@@ -3405,7 +3391,7 @@ This defines $M$ on objects. Now if $f \colon X \to Y$ is any morphism in $\Sm_k
     X\rar[hook]\ar[dr,"f" below left] & Z\dar[two heads]\\
      & Y,
 \end{tikzcd} \]
-where the first map is a closed immersion and the latter is a smooth projection. Factoring the closed immersion as a sequence of closed immersions, each of which is codimension one, we can define $M(X) \to M(Z)$ \cite[2.13]{Morel}. To define $M(Z) \to M(Y)$, we leverage that $Z \to Y$ is smooth and define it in terms of the induced map on function fields \cite[p.~17]{Morel}.
+where the first map is a closed immersion and the latter is a smooth projection. Factoring the closed immersion as a sequence of closed immersions, each of which is codimension one, we can define $M(Z) \to M(X)$ \cite[2.13]{Morel}. To define $M(Y) \to M(Z)$, we leverage that $Z \to Y$ is smooth and define it in terms of the induced map on function fields \cite[p.~17]{Morel}.
 
 
 \begin{motivation} We'll leverage this equivalence of categories to construct certain unramified sheaves (Milnor $K$-theory, Milnor--Witt $K$-theory, Witt theory, etc.) by defining them on fields. We'll then be able to have a strong handle on cohomology with coefficients in these elements in $\HI(k)$, and we will better understand how to construct Eilenberg--MacLane spaces for them in the category of motivic spaces.
@@ -3420,7 +3406,7 @@ Let $f \colon F\to G$ be a morphism of strictly invariant sheaves on $\Sm_k$, wh
 \end{align*}
 is an equivalence for every finitely generated (separable) field extension $L/k$ (\cite[2.3,~2.8]{Morel}, c.f. \cite[2.7]{HMH}).
 \end{theorem}
-\begin{proof} By the equivalence above, we can restrict to $\mathcal{F}_k$, and continuity allows us to further restrict to finite separable field extensions.
+\begin{proof} By the equivalence above, we can restrict to $\mathcal{F}_k$, and continuity allows us to further restrict to finitely generated field extensions.
 \end{proof}
 
 \begin{corollary} Let $f \colon X \to Y$ be a map of motivic spaces in $\Spc(k)$, for $k$ perfect. Then it is an equivalence if and only if it induces an isomorphism on $\pi_0$ and $\pi_1$, and for $n\ge 2$ and every finitely generated field extension $L/k$ we have that
@@ -3457,13 +3443,13 @@ By the end of the 1960's, work on the lower algebraic $K$-groups of rings was in
 \end{itemize}
 \end{theorem}
 
-This had a wealth of applications -- chief among them is a new capacity to define abelian group homomorphisms \emph{out} of algebraic $K_2$ of a field, since we now have a presentation for it. One of the most profound was the development of the \emph{norm residue symbols} by Tate. These went from $K_2(F)$ to the Brauer group $H^2_\et(F,\mu_n^{\otimes2})$, but landed in the $n$-torsion elements, inducing a map
+This had a wealth of applications -- chief among them is a new capacity to define abelian group homomorphisms \emph{out} of algebraic $K_2$ of a field, since we now have a presentation for it. One of the most profound was the development of the \emph{norm residue symbols} by Tate. These went from $K_2(F)$ to $H^2_\et(F,\mu_n^{\otimes2})$, which gives the $n$-torsion in the Brauer group provided $\mu_n \subseteq F$. This induces a map
 \begin{equation}\label{eqn:norm-residue}
 \begin{aligned}
     K_2(F)/n \to \Br(F)[n].
 \end{aligned}
 \end{equation}
-It is now a theorem of Merkurjev-Suslin and Rost that this is an isomorphism for all fields $F$. Milnor observed that the Hasse invariant of a quadratic form\footnote{This notation $I^n(F)$ is defined in \Cref{sec:milnor-conjectures}.} $I^2(F)/I^3(F) \xto{\sim} \Br(F)$ of a quadratic form factors through Tate's mod two norm residue map in \Cref{eqn:norm-residue}, inducing an isomorphism $K_2(F)/2 \cong I^2(F)/I^3(F)$. To that end, Milnor constructed a graded ring $K_\ast^M(F)$ attached to any field $F$, and provided symbol maps $K_n^M(F)/2 \to I^n(F)/I^{n+1}(F)$ (see \Cref{eqn:milnor-mod-2-to-powers-ideal}). Milnor denoted his graded ring by $K_\ast(F)$, suggestively indicating that it might be an elegant construction of the higher $K$-groups. We now call something different $K$-theory, and denote by $K_\ast^M(F)$ the graded ring Milnor constructed for a field $F$. We call this \emph{Milnor $K$-theory}.
+It is now a theorem of Merkurjev-Suslin that this is an isomorphism for all fields $F$ in which $n$ is invertible. Milnor observed that the Hasse invariant of a quadratic form\footnote{This notation $I^n(F)$ is defined in \Cref{sec:milnor-conjectures}.} $I^2(F)/I^3(F) \xto{\sim} \Br(F)[2]$ of a quadratic form factors through Tate's mod two norm residue map in \Cref{eqn:norm-residue}, inducing an isomorphism $K_2(F)/2 \cong I^2(F)/I^3(F)$. To that end, Milnor constructed a graded ring $K_\ast^M(F)$ attached to any field $F$, and provided symbol maps $K_n^M(F)/2 \to I^n(F)/I^{n+1}(F)$ (see \Cref{eqn:milnor-mod-2-to-powers-ideal}). Milnor denoted his graded ring by $K_\ast(F)$, suggestively indicating that it might be an elegant construction of the higher $K$-groups. We now call something different $K$-theory, and denote by $K_\ast^M(F)$ the graded ring Milnor constructed for a field $F$. We call this \emph{Milnor $K$-theory}.
 
 
 \begin{definition}[{\cite{MilnorK}}]
@@ -3537,7 +3523,7 @@ We have that
     \left\{ a,-a \right\} &= 0 \\
     \left\{ a,a \right\} &= \left\{ a,-1 \right\}.
 \end{align*}
-In particular $2\left\{ a,a \right\} = 0$ for any $x$.
+In particular $2\left\{ a,a \right\} = 0$ for any $a$.
 \end{proposition}
 \begin{proof} Note for $a\ne 1$, we have that
 \begin{align*}
@@ -3601,11 +3587,11 @@ and we are done.
     0 & n=2k.
     \end{cases}
 \end{align*}
-In particular, $K_3^M(\mathbb{F}_q) = 0$ but $K_3(\mathbb{F}_q) = \Z/(q-1)$.
+In particular, $K_3^M(\mathbb{F}_q) = 0$ but $K_3(\mathbb{F}_q) = \Z/(q^2-1)$.
 \end{remark}
 
 \begin{example} \cite[III.7.2]{Kbook}
-If $F = \bar{F}$ is algebraically closed, then $K_n^M(F)$ is uniquely divisible for $n\ge1$. In particular $K_n^M(F)/\ell = 0$ for any $n\ge 1$ and any $\ell\ne 0$.
+If $F = \bar{F}$ is algebraically closed, then $K_n^M(F)$ is divisible for $n\ge1$ (and uniquely divisible for $n\ge 2$). In particular $K_n^M(F)/\ell = 0$ for any $n\ge 1$ and any $\ell\ne 0$.
 \end{example}
 
 \subsection{Residue and specialization homomorphisms for Milnor $K$-theory}
@@ -3932,7 +3918,7 @@ That is, Milnor $K$-theory is obtained from Milnor--Witt $K$-theory by killing $
 
 \begin{proposition} $\GW(F)$ is generated by rank one forms
 \begin{align*}
-    \left\langle a \right\rangle \colon k \times k &\to k \\
+    \left\langle a \right\rangle \colon F \times F &\to F \\
     (x,y) &\mapsto axy,
 \end{align*}
 modulo the relations
@@ -3954,8 +3940,8 @@ for any $a\in F^\times$. This is sometimes taken as a relation, but it is implie
 
 \begin{notation} We often save space and write
 \begin{align*}
-    \left\{ a_1, \ldots, a_n \right\} &:= \left\{ a_1 \right\}\cdots \left\{ a_n \right\}\in K_n^\MW(F) \\
-    \left[ a_1, \ldots, a_n \right] &:= \left[ a_1 \right]\cdots \left[ a_n \right]\in K_n^M(F) \\
+    \left\{ a_1, \ldots, a_n \right\} &:= \left\{ a_1 \right\}\cdots \left\{ a_n \right\}\in K_n^M(F) \\
+    \left[ a_1, \ldots, a_n \right] &:= \left[ a_1 \right]\cdots \left[ a_n \right]\in K_n^\MW(F) \\
     \left\langle a_1, \ldots, a_n \right\rangle &:= \left\langle a_1 \right\rangle + \ldots + \left\langle a_n \right\rangle\in \GW(F).
 \end{align*}
 \end{notation}
@@ -4026,7 +4012,7 @@ This extends to a pullback of unramified sheaves of groups.
 
 \begin{proposition} $\ $
 \begin{enumerate}
-    \item The fundamental ideal is equivalently the kernel of the rank homomorphism $\GW(F) \to \Z(F)$, which we denote by $\hat{I}(F)$. Explicitly, there is an isomorphism
+    \item The fundamental ideal is equivalently the kernel of the rank homomorphism $\GW(F) \to \Z$, which we denote by $\hat{I}(F)$. Explicitly, there is an isomorphism
 \[ \begin{tikzcd}
     \hat{I}(F)\rar\dar["\cong" left] & \GW(F)\rar\dar\pb & \Z\dar\\
     I(F) \rar & W(F)\rar & \Z/2.
@@ -4158,23 +4144,22 @@ We'll note by $\DK$ this composite:
 
 \begin{definition} For any $A\in \Ab_\Nis(k)$ we denote by
 \begin{align*}
-    K(A,n) \in \PSh(\Sm_k)
+    K(A,n) \in \Sh_\Nis(\Sm_k)
 \end{align*}
-the space $K(A,n):= \DK(A[n])$ given by applying the Dold--Kan construction to the chain complex with $A$ concentrated in degree $n$.
+the space $K(A,n):= L_\Nis\DK(A[n])$ given by applying the Dold--Kan construction to the chain complex with $A$ concentrated in degree $n$, then Nisnevich-sheafifying.
 \end{definition}
 
 \begin{proposition}[Properties of $K(A,n)$] \,
 \begin{enumerate}
-    \item We have that $K(A,n)$ is already an object in the sheaf topos $\Shv_\Nis(\Sm_k)$
     \item We have that
     \begin{align*}
         \pi_i K(A,n) = \begin{cases} A & i=n \\ 0 & \text{else} \end{cases}
     \end{align*}
-\end{enumerate}
 \item There is a natural identification
 \begin{align*}
     \pi_0 \Map_{\Shv_\Nis}(-,K(A,n)) \cong H^n_\Nis(-,A).
 \end{align*}
+\end{enumerate}
 \end{proposition}
 \begin{proof}[Proof references] The classical way to approach this is using explicit model structures on simplicial presheaves and chain complexes of sheaves of abelian groups, and arguing that the construction of an Eilenberg--MacLane object preserves fibrancy, which is implies that $K(A,n)$ is a sheaf in the local model structure.  See \cite[Chapter~6]{Morel} or \cite[pp.56---59]{MV} for this approach. The high-level perspective on Eilenberg--MacLane objects in a general $\infty$-topos is in \cite[\S7.2.2]{HTT}, from which these properties are formal.
 \end{proof}
@@ -4188,23 +4173,23 @@ With Eilenberg-MacLane spaces in hand in the sheaf topos, we can reframe our def
 \begin{proposition}\label{prop:strongly-strictly-redefined} 
 Let $\mathcal{G}$ be a sheaf of groups and $\mathcal{A}$ a sheaf of abelian groups. Then
 \begin{enumerate}
-    \item $\mathcal{G}$ is strongly invariant if and only if $B_\Nis \mathcal{G}$ is $\A^1$-local
-    \item $\mathcal{A}$ is strictly invariant if and only if $K(\mathcal{A},n)$ is $\A^1$-local for every $n\ge0$ (see \cite[6.2.2]{Morel-connectivity}).
+    \item $\mathcal{G}$ is strongly invariant (in the sense of \Cref{def:strongly-strictly}) if and only if $B_\Nis \mathcal{G}$ is $\A^1$-local
+    \item $\mathcal{A}$ is strictly invariant (in the sense of \Cref{def:strongly-strictly}) if and only if $K(\mathcal{A},n)$ is $\A^1$-local for every $n\ge0$ (see \cite[6.2.2]{Morel-connectivity}).
 \end{enumerate}
 \end{proposition}
-\begin{proof} The backwards direction is immediate by representability of cohomology. The forwards direction needs a nontrivial argument, see \cite[1.5]{bachmannstrongly}.
+\begin{proof} The backwards direction is immediate by representability of cohomology. The forwards direction needs a nontrivial argument, following \cite[1.5]{bachmannstrongly}.
 For the forwards direction, we want to see that
 \begin{align*}
     (B_\Nis G)(X) \to (B_\Nis G)(X \times \A^1)
 \end{align*}
-is an equivalence of spaces. Each space is 1-truncated and we have an isomorphism on $\pi_0$ since $H^0(-,G)$ is $\A^1$ invariant. So we just want to show an isomorphism on $\pi_1$ for each choice of basepoint $x\in X$. Since the presheaf
+is an equivalence of spaces. Each space is 1-truncated and we have an isomorphism on $\pi_0$ since $H^1(-,G)$ is $\A^1$ invariant. So we just want to show an isomorphism on $\pi_1$ for each choice of basepoint $x\in X$. Since the presheaf
 \begin{align*}
     (\Sm_k)_{/X} &\to \Grp\\
     Y &\mapsto \pi_1 \left( (B_\Nis G)(Y), x \right)
 \end{align*}
-is a Nisnevich sheaf (equivalent to $\Omega_x (B_\Nis G)_{|X}$), we can check it is $\A^1$-invariant locally. Locally $x$ is a trivial torsor, in which case the presheaf above is $H^0-,G)$ which we assumed $\A^1$-invariant.
+is a Nisnevich sheaf (equivalent to $\Omega_x (B_\Nis G)_{|X}$), we claim it is $\A^1$-invariant locally. More precisely, we have that $\pi_1((B_\Nis G)(X),x) = G_P(X)$, where $G_P$ is the inner twist of $G$ by the torsor $P$ classified by $x$. We can pick a cover $\{U_i \to X\}$ trivializing $P$. A section $s\in G_P(X\times \A^1)$ restricts to sections $s_i \in G_P(U_i \times \A^1)$ which comes from $U_i$ by $\A^1$-invariance of $H^0(-,G)$, and they glue because $G_P(U_i) \to G_P(U_i\times \A^1)$ is injective.
 
-An analogous argument works for the forward direction of $K(\mathcal{A},n)$.
+For $\mathcal{A}$ abelian, we have that $\pi_i(K(\mathcal{A},n)(X),x) = H^{n-i}(X,\mathcal{A})$ for every basepoint. So $K(\mathcal{A},n)$ is $\A^1$-local for all $n\ge 0$ if and only if $H^j(-,\mathcal{A})$ is $\A^1$-invarnant for all $j$.
 \end{proof}
 
 We now have a list of nice properties that homotopy sheaves satisfy. For $\mathcal{A} \in \HI(k)$ we have that
@@ -4397,7 +4382,7 @@ The Zariski (or Nisnevich) cohomological dimension of a Noetherian scheme $X$ is
     \begin{align*}
         \pi_n \Omega^{1,1}K(A,n) = A_{-1},
     \end{align*}
-    and the higher homotopy groups vanish. To check that $\pi_i \Omega^{1,1} K(A,n) = 0$ for $i<n$, it suffices to see that $H^i(\mathbb{G}_m(F), A) = 0$ for all $i<n$. This is clear for $i\ge 2$ since $\mathbb{G}_m$ has Krull dimension one, and the case $i=1$ follows by the proof of \autoref{lem:loops-KG1}.
+    and the higher homotopy groups vanish. In particular $(\pi_i \Omega^{1,1}K(A,n))(F)$ is the summand in $H^{n-i}(\Gm,A)$ complementary to $H^{n-i}(\Spec F, A)$. Thus it suffices to see that $H^j(\mathbb{G}_m(F), A) = 0$ for all $1\le j\le n$. This is clear for $j\ge 2$ since $\mathbb{G}_m$ has Krull dimension one, and the case $j=1$ follows by the proof of \autoref{lem:loops-KG1}.
 \end{enumerate}
 \end{proof}
 
@@ -4438,14 +4423,14 @@ We have that
 \end{corollary}
 \begin{proof} It suffices to check on fields. Take another exact sequence almost identical to the Milnor one, but without the valuation at zero.
 \[ \begin{tikzcd}
-    K_n^\MW(F \times \mathbb{G}_m)\rar & K_n^\MW(F(t))\rar & \oplus_{x\ne 0} K_{n-1}^\MW(\kappa(x))\\
-    K_n^\MW(F)\uar\rar & K_n^\MW(F(t))\uar[equal]\rar &\oplus_{x} K_{n-1}^\MW(\kappa(x)) \\
+    0\rar & K_n^\MW(F[t,t^{-1}])\rar & K_n^\MW(F(t))\rar & \oplus_{x\ne 0} K_{n-1}^\MW(\kappa(x))&\to 0\\
+    & K_n^\MW(F)\uar\rar & K_n^\MW(F(t))\uar[equal]\rar &\oplus_{x} K_{n-1}^\MW(\kappa(x)) \\
 \end{tikzcd} \]
 Since all these sequences are split exact, we get
 \begin{align*}
     K_n^\MW(F \times \mathbb{G}_m) = K_n^\MW(F) \oplus K_{n-1}^\MW(F),
 \end{align*}
-where the latter is the target of the residue map at zero. Since the contraction $F_{-1}(U)$ is alternatively described as a summand in $F_{-1}(\mathbb{G}_m \times U)$ complementary to $F_{-1}(U)$, the result follows.
+where the latter is the target of the residue map at zero. Since for any $M$ the contraction $M_{-1}(U)$ is alternatively described as a summand in $M(\mathbb{G}_m \times U)$ complementary to $M(U)$, the result follows.
 \end{proof}
 
 \begin{corollary} We have that
@@ -4619,7 +4604,7 @@ defined by the property that
 \end{proposition}
 \begin{proof} The gluing maps
 \begin{align*}
-    (\sigma_\infty M)_n \to \left( (\sigma^\infty M)_n \right)_{-1}
+    (\sigma_\infty M)_{n-1} \to \left( (\sigma^\infty M)_n \right)_{-1}
 \end{align*}
 are defined to be mates to the natural equivalences
 \begin{align*}
@@ -4634,7 +4619,7 @@ are defined to be mates to the natural equivalences
 We're going to leverage the symmetric monoidal structure on $\HI(k)$ to induce one on $\HM(k)$, via a standard trick.
 
 
-\begin{definition} An object $X\in \mathscr{C}$ in a symmetric monoidal 1-category (resp. $\infty$-category) is called \textit{cyclic} if some permutation of $X^{\otimes n}$ is equal to (resp. homotopic to) the identity.
+\begin{definition} An object $X\in \mathscr{C}$ in a symmetric monoidal 1-category (resp. $\infty$-category) is called \textit{cyclic} if the cyclic permutation of $X^{\otimes n}$ is equal to (resp. homotopic to) the identity for some $n\ge 2$.
 \end{definition}
 
 We'll phrase this in two settings. The $\infty$-categorical one will come in use later.
@@ -4762,11 +4747,11 @@ of modules over Milnor $K$-theory (or modules over $\KMW_\ast$ on which $\eta$ a
 since a contraction of $K_0^M$ is trivial. Note that $K_1^M(\kappa(x)) = \kappa(x)^\times$ and $K_0^M(\kappa(x)) = \Z$. This differential can precisely be identified with the divisor function in the definition of Chow groups. The result follows immediately.
 \end{proof}
 
-\begin{corollary}\label{cor:gersten_conj} We have that
+\begin{corollary}\label{cor:blochs-formula} We have that
 \begin{align*}
     H^n(X,\KM_n) = H^n(X, \mathbf{K}^Q_n) = \CH^n(X).
 \end{align*}
-This is the so-called \textit{Gersten conjecture}.
+This is called \emph{Bloch's formula}.
 \end{corollary}
 
 
@@ -4866,20 +4851,42 @@ We first show the claim for $n=1$. We claim that the map factors
     \KMW_{-1}\rar[dashed] & \mathbf{W},
 \end{tikzcd} \]
 where the bottom map sends $\eta \left\langle a \right\rangle$ to $\left\langle a \right\rangle$.
-We have to check this is well-defined, i.e. that if we have $\alpha,\beta\in \GW(k)$, and $\eta \alpha = \eta\beta$ is it true that $\alpha \equiv \beta \pmod{h}$. This is clear since $\eta$ will kill any hyerbolic elements. From this it is also clear it is bijective. To see it for $n > 1$, we observe that multiplication by $\eta$ induces an isomorphism $\KMW_{-n}\xto{\sim} \KMW_{-n-1}$.
+We have to check this is well-defined, i.e. that if we have $\alpha,\beta\in \GW(k)$, and $\eta \alpha = \eta\beta$ is it true that $\alpha \equiv \beta \pmod{h}$?
+
+As in \cite[\S3.2]{Morel}, define $J_\ast$ to be the graded ring defined by
+\begin{align*}
+    J_n = \begin{cases}
+        I^n(F) & n\ge 0 \\
+        W(F) & n<0.
+    \end{cases}
+\end{align*}
+Let $\overline{\eta} \in J_{-1}$ be the element $1\in W(F)$, and consider the inclusion $I^{n+1} \subseteq I^n$ as multiplication by $\overline{\eta}$. We can define a map
+\begin{align*}
+    \Theta \colon \KMW_\ast &\to J_\ast \\
+    [a] &\mapsto \langle a\rangle -1 \\
+    \eta &\mapsto \overline{\eta},
+\end{align*}
+and we see that it is well-defined as MW1-MW4 are satisfied (todo-write this out). In degree 0, $\Theta$ sends $\langle a\rangle \in \GW(k)$ to $\langle a\rangle \in W(k)$, so it is the quotient by the hyperbolic element. In particular if $\eta \alpha = \eta \beta$, then $\Theta(\eta\alpha) = \alpha \pmod{h}$, and $\Theta(\eta \beta) = \beta \pmod{h}$ must be equal. This gives us well-defined-ness.
+
+In fact it also gives us bijectivity -- we can write down an inverse
+\begin{align*}
+    W(F) &\to \KMW_{-1}(F) \\
+    \alpha &\mapsto \eta \alpha,
+\end{align*}
+which is inverse to $\Theta_{-1}$.
+
+To see the proposition statement for $n > 1$, we observe that multiplication by $\eta$ induces an isomorphism $\KMW_{-n}\xto{\sim} \KMW_{-n-1}$.
 \end{proof}
 
 \begin{corollary} We have that $\mathbf{I}_{-1} = \mathbf{W}$.
 \end{corollary}
 
 
-\begin{corollary} For $j<n$ we have that
+\begin{corollary} For $j+1<n$ we have that
 \begin{align*}
     H^n(X, \mathbf{I}^{j+1}) \cong H^n(X, \KMW_j).
 \end{align*}
 \end{corollary}
-
-
 
 \section{The fundamental group of \texorpdfstring{$\P^1$}{P\^{}1}}
 
@@ -4924,7 +4931,7 @@ compatibly with suspension homomorphisms.
 \begin{align*}
     \left[ S,G \right]_\ast \cong \left[ S, \Omega^n K(G,n) \right] \cong \left[ \Sigma^n S, K(G,n) \right].
 \end{align*}
-Since $K(G,n)$ is $n$-connected, any map factors through its $n$-truncation $\tau_{\le n} \Sigma^n S$, which is equal to $K(\pi_n(\Sigma^n S),n)$ since $\Sigma^n S$ is $n$-connected. Therefore by taking $\pi_n$ we get a bijection
+Since $K(G,n)$ is $n$-truncated, any map to it factors through the $n$-truncation of the domain $\tau_{\le n} \Sigma^n S$, which is equal to $K(\pi_n(\Sigma^n S),n)$ since $\Sigma^n S$ is $(n-1)$-connected. Therefore by taking $\pi_n$ we get a bijection
 \begin{align*}
     \left[ \Sigma^n S, K(G,n) \right] \cong \left[ K(\pi_n \Sigma^n S , n), K(G,n) \right] = \Hom_{\Shv(\Grp)} \left( \pi_n(\Sigma^n S), G) \right).
 \end{align*}
@@ -5090,7 +5097,7 @@ There is a canonical isomorphism
     \End(F_{\A^1}(1)) \cong F_{\A^1}(1)_{-1}(k).
 \end{align*}
 \end{proposition}
-\begin{proof} Since $F_{\A^1}(1)$ is by definition the free pointed sheaf of abelian groups on $\mathbb{G}_m$, there is a canonical isomorphism
+\begin{proof} Since $F_{\A^1}(1)$ is by definition the free strongly invariant sheaf of groups on $\mathbb{G}_m$, there is a canonical isomorphism
 \begin{align*}
     \Hom_{\Shv(\Grp)} \left( F_{\A^1}(1), F_{\A^1}(1) \right) &\cong \Hom_{\Shv_\ast} \left( \mathbb{G}_m, F_{\A^1}(1) \right).
 \end{align*}
@@ -5173,7 +5180,7 @@ Altogether we get the following result.
 
 \begin{remark} \textit{(On \autoref{thm:unstable-deg-p1})}
 \begin{enumerate}
-    \item Morel writes $(k^\times)/\pm1$ instead of $(k^\times)^2$ in his book, which I believe is an error?
+    \item Note that Morel writes $(k^\times)/\pm1$ instead of $(k^\times)^2$ in his book --- this is because we think about the surjective squaring map $k^\times \to (k^{\times})^2$ as having kernel $\{\pm1\}$.
     \item The short exact sequence above can alternatively be repackaged as a pullback diagram (the sequence is obtained by taking horizontal fibers):
     \[ \begin{tikzcd}
     {\left[ \P^1,\P^1 \right]_\ast}\rar\dar\pb & \GW(k)\dar\\
@@ -5225,15 +5232,15 @@ This is called the \textit{B\'ezoutian}, and we denote by $\Bez(f/g)$ the $n \ti
 
 \begin{theorem}[{\cite{Cazanave-thesis}}] The B\'{e}zoutian is a symmetric bilinear matrix, equal to the $\A^1$-degree of $f/g$, and the bijection
 \begin{align*}
-    \left[ \P^1,\P^1 \right]_\ast &\to \GW(k) \times_{k^\times / \left( k^\times \right)^2} k^\times \\
+    \left[ \P^1,\P^1 \right]_N &\to \GW(k) \times_{k^\times / \left( k^\times \right)^2} k^\times \\
     (f/g) &\mapsto \left( \Bez(f/g), (-1)^{\frac{n(n-1)}{2}} \det \Bez(f/g) \right)
 \end{align*}
-is an isomorphism of abelian groups.
+is a group completion.
 \end{theorem}
 
 \begin{example} Consider $f(x) = x^2$ and $g(x) = 1$. Then we have that
 \begin{align*}
-    \frac{f(X)g(Y) -f(Y)g(X)}{X-Y} = \frac{X^2 - Y^2}{X-Y} = X + Y = \begin{pmatrix} X & Y \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} X \\ Y \end{pmatrix} 
+    \frac{f(X)g(Y) -f(Y)g(X)}{X-Y} = \frac{X^2 - Y^2}{X-Y} = X + Y = \begin{pmatrix} 1 & X \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ Y \end{pmatrix} 
 \end{align*}
 Hence
 \begin{align*}
@@ -5376,7 +5383,7 @@ As a particular example, we have seen that $\left[ \P^1,\P^1 \right]_\ast$ is an
 \begin{align*}
     \left[ \P^1,\P^1 \right]_N \to \left[ \P^1,\P^1 \right]_{\A^1}
 \end{align*}
-is a group completion.\footnote{Interesting, this seems to be special to $\P^1$. Such a statement is never true for punctured affine space, for instance (see \cite{BrazeltonHornslien}).}
+is a group completion.\footnote{Interesting, this seems to be special to $\P^1$. Such a statement is never true for punctured affine space, for instance (see \cite{brazeltonConcerningMonoidStructures2025}).}
 \end{theorem}
 
 Cazanave's monoidal structure is defined explicitly in terms of rational maps.
@@ -5498,11 +5505,12 @@ By our hypotheses on $M$, the EM space $K(M,n)$ is $\A^1$-local, hence any map $
 \end{align*}
 has $2n$-connected fibers.\footnote{Note that Morel initially assumed $n \ge 2$, but this hypothesis is removed in \cite{ABH-nilpotent}.}
 \end{theorem}
-\begin{proof} Let $F$ be the fiber, computed in the sheaf topos
-\begin{align*}
-    F \to X \to \Omega \Sigma X.
-\end{align*}
-Since $L_\mot$ preserves this fiber sequence, and the middle and rightmost spaces were already local, then $F$ is local as well. Since $F$ is already $2n$-connected in the sheaf topos by classical connectivity results, we have by unstable connectivity (\autoref{thm:unstable-connectivity}) that $L_\mot F$ is as well.
+\begin{proof} todo
+% Let $F$ be the fiber, computed in the sheaf topos
+% \begin{align*}
+%     F \to X \to \Omega \Sigma X.
+% \end{align*}
+% Since $L_\mot$ preserves this fiber sequence, and the middle and rightmost spaces were already local, then $F$ is local as well. Since $F$ is already $2n$-connected in the sheaf topos by classical connectivity results, we have by unstable connectivity (\autoref{thm:unstable-connectivity}) that $L_\mot F$ is as well.
 \end{proof}
 
 \begin{corollary} If $X$ is $\A^1$-$n$-connected, then the suspension morphisms
@@ -5520,9 +5528,9 @@ Considering $\mathbb{G}_m^{\smashprod n}$ as a sheaf of pointed sets, it is disc
 \end{align*}
 by Freudenthal. Note that we already sort of knew this (modulo the black boxing we've been doing), since we identified the free strongly invariant sheaf of abelian groups on a sheaf of pointed sets $S$ with $\pi_n(\Sigma^n S)$ for any $n \ge 2$. Identifying this with Milnor--Witt $K$-theory allows us to conclude that
 \begin{align*}
-    \pi_{n,n}\mathbb{S}\cong \KMW_n
+    \pi_{n,n}\mathbb{S}\cong \KMW_{-n}
 \end{align*}
-for $n\le 0$. We'll offer a slightly different perspective.
+for all $n$. We'll offer a slightly different perspective.
 
 \begin{intuition} In classical homotopy theory, the Freudenthal suspension theorem, together with the Hurewicz theorem, identifies the first nonvanishing homotopy group of $S^n$ with the \textit{free discrete abelian group} on $S^0$:
 \begin{align*}
@@ -5557,7 +5565,7 @@ sending the basepoint to the basepoint $1\in \mathbb{G}_m$, and the other point 
     (x,y) &\mapsto \left[ x:y \right].
 \end{align*}
 %
-This is a map $S^{3,2} \to S^{2,1}$, so it occurs in bidegree $\pi_{-1,-1} \mathbbm{1}$.
+This is a map $S^{3,2} \to S^{2,1}$, so it occurs in bidegree $\pi_{1,1} \mathbbm{1}$.
 
 \begin{proposition} The following diagram commutes in $\Sm_k$:
 \[\begin{tikzcd}
@@ -5633,7 +5641,7 @@ We say that the comultiplication is \textit{cocommutative} if the diagram commut
 \begin{align*}
     S^n \to S^n \vee S^n,
 \end{align*}
-defined by collapsing a great circle containing the basepoint, define a coassociative comultiplication co-$H$-space structure on the $n$-sphere. For $n\ge2$ this operation is cocommutative.
+defined by collapsing an equatorial $S^{n-1}$ containing the basepoint, define a coassociative comultiplication co-$H$-space structure on the $n$-sphere. For $n\ge2$ this operation is cocommutative.
 \end{example}
 
 The comultiplication on $S^n$ defines a group structure on $\left[ S^n,X \right]_\ast$, and the cocommutative property is exactly the statement that $\pi_n(X)$ is abelian for $n\ge 2$.
@@ -5659,22 +5667,20 @@ Suppose we have a cofiber sequence in $\Spc(k)_\ast$
 \end{align*}
 and suppose that $j$ is split after suspension -- in other words there exists some map $f \colon \Sigma B \to \Sigma A$ so that the following diagram commutes up to homotopy
 \[ \begin{tikzcd}
-    \Sigma A\ar[dr,"\id" below left]\rar & \Sigma B\dar["f" right]\\
+    \Sigma A\ar[dr,"\id" below left]\rar["\Sigma j" above] & \Sigma B\dar["f" right]\\
      & \Sigma A.
 \end{tikzcd} \]
 Applying $\left[ -,X \right]_\ast$, we get a sequence of groups, which turns out to be short exact
 \begin{align*}
-    1 \to \left[ \Sigma(B/A),X \right]_\ast \to \left[ \Sigma B, X \right]_\ast \to \left[ \Sigma A, X \right]_\ast.
+    1 \to \left[ \Sigma(B/A),X \right]_\ast \xto{-\circ \Sigma p} \left[ \Sigma B, X \right]_\ast \xto{-\circ \Sigma j} \left[ \Sigma A, X \right]_\ast.
 \end{align*}
 This is not necessarily split exact -- if $f$ were a suspension of a map, then it would be a map of $H$-spaces and induce a splitting, but the best we can say here is that the sequence is exact.
 
 \textbf{Case}: Let's take $X = \Sigma B$. Then we get a short exact sequence
 \begin{align*}
-    0 \to \left[ \Sigma(B/A), \Sigma B \right] \to \left[ \Sigma B, \Sigma B \right] \to \left[ \Sigma A, \Sigma B \right].
+    0 \to \left[ \Sigma(B/A), \Sigma B \right] \xto{-\circ \Sigma p} \left[ \Sigma B, \Sigma B \right] \xto{-\circ \Sigma j}\left[ \Sigma A, \Sigma B \right].
 \end{align*}
-Note that since $\id_{\Sigma B} = (\Sigma j) f$, the map $\id_{\Sigma B} - (\Sigma j)f$ is in the kernel of the rightmost map, hence is uniquely in the image of $\left[ \Sigma(B/A), \Sigma B \right]$.
-
-Let $\chi \colon \Sigma (B/A) \to \Sigma B$ be the unique map sent to $\id_{\Sigma B} - (\Sigma j)f$.
+Note that since $f(\Sigma j) = \id_{\Sigma A}$, the map $\id_{\Sigma B} - (\Sigma j)f$ is in the kernel of the rightmost map, hence is uniquely in the image of $\left[ \Sigma(B/A), \Sigma B \right]$. Let's therefore denote by $\chi \colon \Sigma (B/A) \to \Sigma B$ the unique map sent to $\id_{\Sigma B} - (\Sigma j)f$.
 
 \begin{lemma} \cite[A.3]{DI-Hopf} We have that the diagram commutes
 \[ \begin{tikzcd}
@@ -5886,7 +5892,7 @@ We should technically be a lot more careful about composition versus smash produ
 
 We've now argued that there is an isomorphism of graded algebras 
 \begin{align*}
-    \oplus_{n\in \Z}\pi_{n,n} \mathbbm{1} = \oplus_{n\in \Z} K^\MW_n(k).
+    \oplus_{n\in \Z}\pi_{n,n} \mathbbm{1} = \oplus_{n\in \Z} K^\MW_{-n}(k).
 \end{align*}
 %
 Recall the Nishida nilpotence theorem in classical homotopy theory.
@@ -6003,7 +6009,7 @@ where the maps in the limit are given by looping and using the structure maps
 \begin{example} The classical category of spectra $\Sp$ is the category of spectrum objects in $\mathcal{S}$.
 \end{example}
 
-Given our category of presheaves $\PSh(\Sm_k)$, we can stabilize it and we obtain $\Fun(\Sm_k^\op, \Sp)$, i.e. presheaves of spectra. It turns out the descent properties descent through stabilization, in other words the stabilization of $\PSh(\Sm_k)$ is exactly Nisnevich sheaves of spectra. We denote this by
+Given our category of presheaves $\PSh(\Sm_k)$, we can stabilize it and we obtain $\Fun(\Sm_k^\op, \Sp)$, i.e. presheaves of spectra. It turns out the descent properties descend through stabilization, in other words the stabilization of $\Sh_\Nis(\Sm_k)$ is exactly Nisnevich sheaves of spectra. We denote this by
 %
 \begin{align*}
     \Sp(k) := \Sp \left( \Shv_\Nis(\Sm_k) \right) = \Shv_\Nis(\Sm_k; \Sp).
@@ -6019,7 +6025,7 @@ A sequence of objects in the sheaf category give rise to a spectrum if they delo
 \begin{proposition}\label{prop:cohom-representable-in-sheaves-of-spectra} 
 Cohomology is representable in the sense that for any $X \in \Sm_k$ and any sheaf of abelian groups $A$ we have that
 \begin{align*}
-    H^n_\Nis(X,A) = \left[ \Sigma^\infty \Sigma^n X_+, \HA \right]_{\Sp(k)}.
+    H^n_\Nis(X,A) = \left[ \Sigma^\infty X_+, \Sigma^n\HA \right]_{\Sp(k)}.
 \end{align*}
 \end{proposition}
 
@@ -6041,7 +6047,7 @@ We can define $\pi_n$ of a spectrum $E$ to be the sheafification of the presheaf
 
 \begin{definition} We say that $E \in \Sp(k)$ is $\A^1$\textit{-invariant} if for every $X \in \Sm_k$ the projection $X \times \A^1 \to X$ induces an equivalence
 \begin{align*}
-    E(X \times \A^1) \xto{\sim} E(X).
+     E(X)\xto{\sim} E(X \times \A^1).
 \end{align*}
 \end{definition}
 
@@ -6096,9 +6102,8 @@ This correspondence identifies the heart of the homotopy $t$-structure on motivi
 
 By a completely analogous argument to \autoref{prop:cohom-representable-in-sheaves-of-spectra}, we have for any $X\in \Sm_k$ and $A \in \HM(k)$:
 \begin{align*}
-    H^n_\Nis(X, A_{-k}) &= \left[ \Sigma^\infty \Sigma^{n+k,k}X_+, \HA \right]_{\SH(k)}.
+    H^n_\Nis(X, A_{-k}) &= \left[ \Sigma^{k,k}\Sigma^\infty X_+, \Sigma^n\HA \right]_{\SH(k)}.
 \end{align*}
-%
 Similarly we can define stable homotopy groups which are bigraded via the following definition.
 
 \begin{definition} For $a,b\in \Z$ and $E \in \SH(k)$, we define $\pi_{a,b}(E)$ to be the sheaf attached to the presheaf
@@ -6178,7 +6183,7 @@ which can be studied at the level of homology \cite{McDuffSegal,Nikolaus-gp}.
 \begin{definition} Take a collection of generators for $\pi_0 M$, and denote by $M_\infty$ the colimit of multiplying by finite subsets of the generators infinitely many times. In nice settings, this is precisely $M \left[ \pi_0(M)^{-1} \right]$.
 \end{definition}
 
-Since every element in $\pi_0(M)$ is invertible in $B\Omega M$, the universal map factors as
+Since every element in $\pi_0(M)$ is invertible in $\Omega B M$, the universal map factors as
 \[ \begin{tikzcd}
     M\ar[rr]\ar[dr] &  & \Omega B M\\
      & M_\infty\ar[ur] & 
@@ -6278,7 +6283,7 @@ Quillen first defined $K$-theory for schemes by considering the algebraic $K$-th
 les complexes parfaits sont ``aussi bon'' que les Modules localement libres, dont ils constituent la g\'en\'eralisation naturelle. Ils forment d'ailleurs une ``sous-cat\'egorie triangul\'ee'' de la cat\'egorie d\'eriv\'ee $D(Y)$.}{\cite[p.~6]{SGA6}}
 
 
-\begin{definition} \cite[p.~11]{SGA6} If $X$ is a scheme, we say a chain complex of $\mathcal{O}_X$-modules is \textit{perfect} if it is quasi-isomorphic to a bounded chain complex in $D(X)$. We denote by $\Perf(X)$ the category of perfect complexes over $X$.
+\begin{definition} \cite[p.~11]{SGA6} If $X$ is a scheme, we say a chain complex of $\mathcal{O}_X$-modules is \textit{perfect} if it is locally quasi-isomorphic to a bounded complex of finite locally free modules. We denote by $\Perf(X)$ the category of perfect complexes over $X$.
 \end{definition}
 
 The modern perspective is that $\Perf(X)$ is a stable $\infty$-category --- this admits an underlying triangulated structure which is what was leveraged to investigate the $K$-theory of schemes in \cite{TT}. We will want to know some descent properties of $\Perf(-)$ which follow from the following theorem.
@@ -6291,9 +6296,6 @@ The assignment
 \end{align*}
 is an fpqc sheaf, Kan extending to an fpqc sheaf on all schemes.\footnote{This can be promoted to a sheaf on \textit{derived} affine schemes, see for instance Adeel Khan's lecture notes on descent in algebraic $K$-theory for a proof.} A proof in the 1-categorical setting is in \cite[04Q7]{Stacks}, and the full $\infty$-categorical statement can be found in \cite[D.6.3.1]{SAG}, for instance.
 \end{theorem}
-
-
-
 
 \subsection{Algebraic $K$-theory as a Nisnevich sheaf}
 
@@ -6321,7 +6323,7 @@ This is an fppf sheaf (reference needed). In particular we get a pullback square
 \end{tikzcd} \]
 We want to say that $K(-)$ preserves this pullback square. To make this more clear, we look at the cofibers of the induced maps.
 
-\begin{notation} If $U \hookto X$ is an open immersion with closed complement $Z$, we denote by $\Perf(Z\text{ on }X)$ the cofiber
+\begin{notation} If $U \hookto X$ is an open immersion with closed complement $Z$, we denote by $\Perf(Z\text{ on }X)$ the fiber
 \begin{align*}
     \Perf(Z\text{ on }X) \to \Perf(X) \to \Perf(U),
 \end{align*}
@@ -6338,7 +6340,7 @@ where the former is $f$-torsion modules on $R$.
 So altogether we get a diagram
 \[ \begin{tikzcd}
     \Perf(X\text{ on }Z)\rar\dar["\cong" left] & \Perf(X)\rar\dar\pb & \Perf(U)\dar\\
-    \Perf(W\text{ on Z})\rar & \Perf(V)\rar & \Perf(W).
+    \Perf(V\text{ on Z})\rar & \Perf(V)\rar & \Perf(W).
 \end{tikzcd} \]
 To show $K$ preserves the pullback square, it suffices to show that it preserves cofiber sequences (modulo some subtlety about what precisely that is). This follows from algebraic $K$-theory, viewed as a functor
 \begin{align*}
@@ -6380,7 +6382,7 @@ for $2\le i\le n-1$.\footnote{todo - reorder this result so we don't have forwar
 \end{corollary}
 \begin{proof} We have an $\A^1$-fiber sequence \Cref{eqn:fiber-stabilization-BGLr}, hence we get a long exact sequence of homotopy sheaves
 \begin{align*}
-    \cdots \to \pi_i(S^{2r-1,r}) \to \pi_i(\BGL_{r-1}) \to \pi_i (\BGL_r) \to \pi_{i+1}(S^{2r-1,r}) \to \cdots 
+    \cdots \to \pi_i(S^{2r-1,r}) \to \pi_i(\BGL_{r-1}) \to \pi_i (\BGL_r) \to \pi_{i-1}(S^{2r-1,r}) \to \cdots 
 \end{align*}
 Since $S^{2r-1,r}$ is $\A^1$-$(r-2)$-connected, the suspension map $\pi_i(\BGL_{r-1}) \to \pi_{i}(\BGL_{r})$ is an isomorphism for $i\le r-2$. Letting $n = r-1$, we see that if $i\le n-1$, we have that
 \begin{align*}
@@ -6410,7 +6412,7 @@ and as we are working over a field, the sheaf topos is hypercomplete, meaning
     K(\pi_{n+1} X, n+1) \to \tau_{\le n+1} X \xto{f_n} \tau_{\le n} X.
 \end{align*}
 \end{proposition}
-\begin{proof} By \autoref{eqn:truncation-connectivity-fiber-seq}, we can apply the truncation fiber sequence to $\tau_{\le n+1} X$, and we get
+\begin{proof} We can apply the truncation fiber sequence to $\tau_{\le n+1} X$, and we get
 \begin{align*}
     \tau_{\ge n+1} \tau_{\le n+1}X \to \tau_{\le n+1} X \to \tau_{\le n} \tau_{\le n+1} X,
 \end{align*}
@@ -6450,7 +6452,7 @@ If $G$ is a sheaf of groups and $M$ is a sheaf of $G$-modules, we define the \te
 This latter map is called a $k$\textit{-invariant}.
 
 
-\begin{example} Suppose we're trying to cook up a map $X \to Y$. Then we can inductively define maps $X \to \tau_{\ge n}Y$, and show they lift along the $f_n$'s. In particular, we get a unique lift
+\begin{example} Suppose we're trying to cook up a map $X \to Y$. Then we can inductively define maps $X \to \tau_{\le n}Y$, and show they lift along the $f_n$'s. In particular, we get a (not necessarily unique) lift
 \[ \begin{tikzcd}
      & \tau_{\le n+1}Y\dar["f_n" right]\\
     X\rar\ar[ur,dashed] & \tau_{\le n}Y
@@ -6467,9 +6469,13 @@ vanishes. In other words, we get \textit{obstructions to lifting} lying in
 
 
 \begin{theorem}\label{thm:krull-dim-postnikov-truncation} 
-If $X$ has Krull dimension $d$, then any map $X \to Y$ is uniquely determined by $X \to \tau_{\le d-1}Y$.
+If $X$ has Krull dimension $d$, then any map $X \to Y$ is uniquely determined by $X \to \tau_{\le d}Y$.
 \end{theorem}
-\begin{proof} The Nisnevich cohomological dimension is bounded above by the Krull dimension (\autoref{thm:cd-krull-dim-inequality}), so $H^{k}(X,A) = 0$ for any $k>d$ and any sheaf of abelian groups $A$. In particular, $k_{d-1}$ and higher are trivial, so any map $X \to \tau_{\le d-1} Y$ lifts to $\tau_{\le d} Y$, and then all the way to $Y$.
+\begin{proof} The Nisnevich cohomological dimension is bounded above by the Krull dimension (\autoref{thm:cd-krull-dim-inequality}), so $H^{k}(X,A) = 0$ for any $k>d$ and any sheaf of abelian groups $A$. In particular, the $k$-invariants $k_n \in H^{n+2}(X, \pi_{n+1}(Y)(\pi_1(Y)))$ vanish for $n \ge d-1$. This gives us a surjection 
+\begin{align*}
+    [X,Y]\tto [X,\tau_{\le d}Y].
+\end{align*}    
+We want to argue uniqueness. The possible lifts from $\tau_{\le n}Y$ to $\tau_{\le n+1} Y$ form a torsor under $H^{n+1}(X,\pi_{n+1}(Y)(\pi_1(Y)))$, which vanishes for $n \ge d$. Thus all relevant lifts from $\tau_{\le d} Y$ up to $Y$ are unobstructed and unique.
 \end{proof}
 
 
@@ -6637,7 +6643,7 @@ Then the $k$-invariants are valued in
 \end{align*}
 Hence $k_t$ vanishes for $t+2 \ge d+1$, i.e. $t\ge d-1$. Alternatively, we note that $\pi_t F = 0$ for $t \le N-r-1$. So we obtain vanishing outside of the range
 \begin{align*}
-    d-1 \le t \le N-r-1.
+    N-r-1 \le t \le d-2.
 \end{align*}
 If $N \ge r+d$, then all the $k$-invariants vanish, and there are no obstructions to lifting!
 \end{proof}
@@ -6699,7 +6705,7 @@ Via the fiber sequence \autoref{eqn:fiber-stabilization-BGLr}, the $k$-invariant
 \end{align*}
 These vanish for $t+1\le r-2$ via the $\A^1$-connectivity of $S^{2r-1,r}$ (\autoref{exa:connectivity-punctured-affine-space}), and the $k$-invariants also vanish for $t+2 \ge d+1$ by consideration of the cohomological dimension of $X$. Combining these bounds, we see that the $k$-invariants vanish outside the range
 \begin{align*}
-    d-1 \le t \le r-2.
+    r-2 \le t \le d-2.
 \end{align*}
 Hence if $r>d$ then all the $k$-invariants vanish and there is no obstruction to splitting.
 \end{proof}
