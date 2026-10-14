@@ -1866,7 +1866,7 @@ Every qcqs scheme $X\in \Sch_S$ over a qcqs base $S$ is a cofiltered limit of fi
 
 
 \begin{proposition}\label{prop:fp-scheme-commute-filtered-colimits}
-Let $X\in\Sch_S$ be locally of finite presentation, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of qcqs $S$-schemes with affine transition morphisms. Then the natural map
+Let $X\in\Sch_S$ be finitely presented, and let $\left\{ T_i \right\}_{i\in I}$ be a cofiltered diagram of qcqs $S$-schemes with affine transition morphisms. Then the natural map
 \begin{align*}
     \colim_{i\in I}\Hom_S(T_i,X) \xto{\sim} \Hom_S(\lim_{i\in I}T_i,X)
 \end{align*}
@@ -1876,7 +1876,7 @@ is a bijection. In other words the representable functor $\Hom_S(-,X)$ commutes 
     
 Since $\Hom_S(-,X)$ is a Zariski sheaf, we can try to understand $\Hom_S(T,X)$ by writing $T$ as a colimit of affines, and then gluing what happens together along these affines. A priori it's not clear that an affine $U \subseteq T$ is expressible as an $I$-indexed limit of affines $U_i \subseteq T_i$, but this is \emph{precisely} what having affine transition maps allows us to say by \Cref{prop:limits-affine-local-on-target}. Hence we can reduce to the case $T= \Spec(A)$ and $T_i = \Spec(A_i)$.
 
-Any two maps $a,b \colon T_i \to X$ that agree on $T$ will agree on some $T_{i'}$ for $i' \ge i$ since $X \to S$ is quai-separated and finitely presented closed conditions descend \cite[01ZM]{Stacks}. For surjectivity, given some $f\colon T \to X$ we can cover $X$ by finitely many affines $\{V_j\}$, and observe that the quasi-compact opens $f^{-1}(V_j)$ come from some $T_i$ by \cite[01Z4]{Stacks}. We can apply the affine case of this result, checking whether $\Hom(-,\Spec(B))$ commutes with cofiltered limits, or phrased differently whether $\Hom(B,-)$ commutes with filtered colimits. But this is true precisely by the statement that $B$ is finitely presented. We then glue using injectivity on overlaps.
+Any two maps $a,b \colon T_i \to X$ that agree on $T$ will agree on some $T_{i'}$ for $i' \ge i$ since $X \to S$ is quasi-separated and finitely presented closed conditions descend \cite[01ZM]{Stacks}. For surjectivity, given some $f\colon T \to X$ we can cover $X$ by finitely many affines $\{V_j\}$, and observe that the quasi-compact opens $f^{-1}(V_j)$ come from some $T_i$ by \cite[01Z4]{Stacks}. We can apply the affine case of this result, checking whether $\Hom(-,\Spec(B))$ commutes with cofiltered limits, or phrased differently whether $\Hom(B,-)$ commutes with filtered colimits. But this is true precisely by the statement that $B$ is finitely presented. We then glue using injectivity on overlaps.
 \end{proof}
 
 This is why finite presentation was important --- it is just a souped up version of the statement that finitely presented algebras are \emph{compact} in a categorical sense, i.e. they commute with filtered colimits.
@@ -2095,19 +2095,21 @@ simplicial objects in set-valued presheaves naturally give rise to $\infty$-cate
 
 Here's where our discussion about cofiltered limits of schemes comes back to play an important role.
 
+\begin{definition} For any qcqs base scheme $S$ denote by $\EssSm_S\subseteq \Sch_S$ the category of \emph{essentially smooth} $S$-schemes. That is, it is the closure of $\Sm_S$ in $\Sch_S$ under cofiltered limits with affine transition maps.
+\end{definition}
+
 \begin{definition}\label{def:continuous-sheaf}
-Let $\tau$ be any Grothendieck topology on $\Sch_S$. We say that a sheaf $F\in \Shv_\tau(\Sch_S)$ is \emph{continuous} if, for any cofiltered limit of schemes $\left\{ T_i \right\}_{i\in I}$ in $\Sch_S$, with affine transition maps and limit $T$, the induced map
+Let $\tau$ be any Grothendieck topology on $\EssSm_S$. We say that a sheaf $F\in \Shv_\tau(\Sch_S)$ is \emph{continuous} if, for any cofiltered limit of schemes $\left\{ T_i \right\}_{i\in I}$ in $\Sm_S$, with affine transition maps and limit $T$, the induced map
 \begin{align*}
-    F(T) \to \colim_i F(T_i)
+    \colim_i F(T_i)\to F(T)
 \end{align*}
 is an equivalence.
 \end{definition}
 
-\begin{definition} For any qcqs base scheme $S$ denote by $\EssSm_S\subseteq \Sch_S$ the category of \emph{essentially smooth} $S$-schemes. That is, it is the closure of $\Sm_S$ in $\Sch_S$ under cofiltered limits with affine transition maps.
-\end{definition}
 
 
-\begin{theorem}\label{thm:zar-nis-topoi-are-continuous} Let $S$ be qcqs and let $F$ be any Zariski (resp. Nisnevich) sheaf on the category $\Sm_S$ of smooth finitely presented $S$-schemes. Then the left Kan extension of $F$ to $\EssSm_S$ is a Zariski (resp. Nisnevich sheaf), and moreover is the unique continuous extension of $F$ to $\EssSm_S$.
+
+\begin{theorem}\label{thm:zar-nis-topoi-are-continuous} Let $S$ be qcqs and let $F$ be any Zariski (resp. Nisnevich) sheaf on the category $\Sm_S$ of smooth finitely presented $S$-schemes. Then the left Kan extension of $F$ to $\EssSm_S$ is a Zariski (resp. Nisnevich) sheaf, and moreover is the unique continuous extension of $F$ to $\EssSm_S$.
 \end{theorem}
 \begin{proof} We first argue representables extend correctly. Let $X\in \Sm_S$ and consider the representable sheaf $h_X \colon \Sm_S^\op \to \mathcal{S}$. By \Cref{prop:fp-scheme-commute-filtered-colimits} this extends uniquely to $\EssSm_S$ - that is, its value on some $T\in \EssSm_S$ doesn't depend upon the presentation of $T$.
 
@@ -4189,7 +4191,7 @@ is an equivalence of spaces. Each space is 1-truncated and we have an isomorphis
 \end{align*}
 is a Nisnevich sheaf (equivalent to $\Omega_x (B_\Nis G)_{|X}$), we claim it is $\A^1$-invariant locally. More precisely, we have that $\pi_1((B_\Nis G)(X),x) = G_P(X)$, where $G_P$ is the inner twist of $G$ by the torsor $P$ classified by $x$. We can pick a cover $\{U_i \to X\}$ trivializing $P$. A section $s\in G_P(X\times \A^1)$ restricts to sections $s_i \in G_P(U_i \times \A^1)$ which comes from $U_i$ by $\A^1$-invariance of $H^0(-,G)$, and they glue because $G_P(U_i) \to G_P(U_i\times \A^1)$ is injective.
 
-For $\mathcal{A}$ abelian, we have that $\pi_i(K(\mathcal{A},n)(X),x) = H^{n-i}(X,\mathcal{A})$ for every basepoint. So $K(\mathcal{A},n)$ is $\A^1$-local for all $n\ge 0$ if and only if $H^j(-,\mathcal{A})$ is $\A^1$-invarnant for all $j$.
+For $\mathcal{A}$ abelian, we have that $\pi_i(K(\mathcal{A},n)(X),x) = H^{n-i}(X,\mathcal{A})$ for every basepoint. So $K(\mathcal{A},n)$ is $\A^1$-local for all $n\ge 0$ if and only if $H^j(-,\mathcal{A})$ is $\A^1$-invariant for all $j$.
 \end{proof}
 
 We now have a list of nice properties that homotopy sheaves satisfy. For $\mathcal{A} \in \HI(k)$ we have that
